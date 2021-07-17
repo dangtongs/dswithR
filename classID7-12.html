@@ -1,0 +1,2101 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 9 부동산 정보 데이터 처리 및 시각화 | R로 배우는 데이터과학</title>
+  <meta name="description" content="Chapter 9 부동산 정보 데이터 처리 및 시각화 | R로 배우는 데이터과학" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 9 부동산 정보 데이터 처리 및 시각화 | R로 배우는 데이터과학" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 9 부동산 정보 데이터 처리 및 시각화 | R로 배우는 데이터과학" />
+  
+  
+  
+
+<meta name="author" content="Dangtnog Byun" />
+
+
+<meta name="date" content="2021-01-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-transpormation-2.html"/>
+<link rel="next" href="ggplot-visualization.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="fontawesome.min.css" type="text/css" />
+<link rel="stylesheet" href="bigdata.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R로 배우는 데이터과학</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Index</a></li>
+<li class="chapter" data-level="2" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html"><i class="fa fa-check"></i><b>2</b> Data Type and Structure</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-0"><i class="fa fa-check"></i><b>2.1</b> R을 사용하기 위한 기본 지식 정리</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-0-1"><i class="fa fa-check"></i><b>2.1.1</b> 작업디렉토리 설정</a></li>
+<li class="chapter" data-level="2.1.2" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-0-2"><i class="fa fa-check"></i><b>2.1.2</b> 패키지 설치 및 사용</a></li>
+<li class="chapter" data-level="2.1.3" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-0-3"><i class="fa fa-check"></i><b>2.1.3</b> 도움말 사용</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-1"><i class="fa fa-check"></i><b>2.2</b> 변수(Variable)</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-2"><i class="fa fa-check"></i><b>2.2.1</b> 숫자(Numeric)</a></li>
+<li class="chapter" data-level="2.2.2" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-3"><i class="fa fa-check"></i><b>2.2.2</b> 문자()</a></li>
+<li class="chapter" data-level="2.2.3" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-4"><i class="fa fa-check"></i><b>2.2.3</b> 팩터 (factor)</a></li>
+<li class="chapter" data-level="2.2.4" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-5"><i class="fa fa-check"></i><b>2.2.4</b> 논리형(Logical)</a></li>
+<li class="chapter" data-level="2.2.5" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-6"><i class="fa fa-check"></i><b>2.2.5</b> 날짜타입(Date and Datetime)</a></li>
+<li class="chapter" data-level="2.2.6" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-7"><i class="fa fa-check"></i><b>2.2.6</b> NA/NaN/Inf 확인 및 처리</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-8"><i class="fa fa-check"></i><b>2.3</b> 데이터 구조(Data Structure)</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-9"><i class="fa fa-check"></i><b>2.3.1</b> 벡터 (Vector)</a></li>
+<li class="chapter" data-level="2.3.2" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-10"><i class="fa fa-check"></i><b>2.3.2</b> 리스트(List)</a></li>
+<li class="chapter" data-level="2.3.3" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-11"><i class="fa fa-check"></i><b>2.3.3</b> 행렬(Matrix)</a></li>
+<li class="chapter" data-level="2.3.4" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-12"><i class="fa fa-check"></i><b>2.3.4</b> 데이타프레임(Data Frame)</a></li>
+<li class="chapter" data-level="2.3.5" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-14"><i class="fa fa-check"></i><b>2.3.5</b> 데이터 변환</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="flow-control.html"><a href="flow-control.html"><i class="fa fa-check"></i><b>3</b> Flow-control</a><ul>
+<li class="chapter" data-level="3.1" data-path="flow-control.html"><a href="flow-control.html#ClassID2-2"><i class="fa fa-check"></i><b>3.1</b> 흐름제어</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="flow-control.html"><a href="flow-control.html#ClassID2-3"><i class="fa fa-check"></i><b>3.1.1</b> if문</a></li>
+<li class="chapter" data-level="3.1.2" data-path="flow-control.html"><a href="flow-control.html#ClassID2-4"><i class="fa fa-check"></i><b>3.1.2</b> ifelse문</a></li>
+<li class="chapter" data-level="3.1.3" data-path="flow-control.html"><a href="flow-control.html#ClassID2-5"><i class="fa fa-check"></i><b>3.1.3</b> else if문</a></li>
+<li class="chapter" data-level="3.1.4" data-path="flow-control.html"><a href="flow-control.html#ClassID2-6"><i class="fa fa-check"></i><b>3.1.4</b> 연습문제</a></li>
+<li class="chapter" data-level="3.1.5" data-path="flow-control.html"><a href="flow-control.html#for문"><i class="fa fa-check"></i><b>3.1.5</b> for문</a></li>
+<li class="chapter" data-level="3.1.6" data-path="flow-control.html"><a href="flow-control.html#ClassID2-7"><i class="fa fa-check"></i><b>3.1.6</b> while 문</a></li>
+<li class="chapter" data-level="3.1.7" data-path="flow-control.html"><a href="flow-control.html#ClassID2-8"><i class="fa fa-check"></i><b>3.1.7</b> while-next 문</a></li>
+<li class="chapter" data-level="3.1.8" data-path="flow-control.html"><a href="flow-control.html#ClassID2-9"><i class="fa fa-check"></i><b>3.1.8</b> repeat 문</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="flow-control.html"><a href="flow-control.html#ClassID2-10"><i class="fa fa-check"></i><b>3.2</b> 연산자</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="function.html"><a href="function.html"><i class="fa fa-check"></i><b>4</b> Function</a><ul>
+<li class="chapter" data-level="4.1" data-path="function.html"><a href="function.html#classID3-1"><i class="fa fa-check"></i><b>4.1</b> 함수</a></li>
+<li class="chapter" data-level="4.2" data-path="function.html"><a href="function.html#classID30-2"><i class="fa fa-check"></i><b>4.2</b> 함수의 호출 특성</a></li>
+<li class="chapter" data-level="4.3" data-path="function.html"><a href="function.html#classID30-3"><i class="fa fa-check"></i><b>4.3</b> 변수의 스코프(Scope)</a></li>
+<li class="chapter" data-level="4.4" data-path="function.html"><a href="function.html#연습문제-2"><i class="fa fa-check"></i><b>4.4</b> [연습문제 #2]</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="classID4-1.html"><a href="classID4-1.html"><i class="fa fa-check"></i><b>5</b> Input and Output</a><ul>
+<li class="chapter" data-level="5.1" data-path="classID4-1.html"><a href="classID4-1.html#classID4-2"><i class="fa fa-check"></i><b>5.1</b> Excel 파일 다루기</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="classID4-1.html"><a href="classID4-1.html#classID4-3"><i class="fa fa-check"></i><b>5.1.1</b> Excel 읽기</a></li>
+<li class="chapter" data-level="5.1.2" data-path="classID4-1.html"><a href="classID4-1.html#classID4-4"><i class="fa fa-check"></i><b>5.1.2</b> Excel Sheet 지정 하여 읽기</a></li>
+<li class="chapter" data-level="5.1.3" data-path="classID4-1.html"><a href="classID4-1.html#classID4-5"><i class="fa fa-check"></i><b>5.1.3</b> Excel 의 다양한 읽기 형태</a></li>
+<li class="chapter" data-level="5.1.4" data-path="classID4-1.html"><a href="classID4-1.html#classID4-6"><i class="fa fa-check"></i><b>5.1.4</b> CSV, TEXT 파일 읽기</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="classID5-1.html"><a href="classID5-1.html"><i class="fa fa-check"></i><b>6</b> 기초 통계량</a><ul>
+<li class="chapter" data-level="6.1" data-path="classID5-1.html"><a href="classID5-1.html#classID5-2"><i class="fa fa-check"></i><b>6.1</b> 정형화된 데이터의 종류</a></li>
+<li class="chapter" data-level="6.2" data-path="classID5-1.html"><a href="classID5-1.html#classID5-3"><i class="fa fa-check"></i><b>6.2</b> 위치 추정</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="classID5-1.html"><a href="classID5-1.html#classID5-4"><i class="fa fa-check"></i><b>6.2.1</b> 평균</a></li>
+<li class="chapter" data-level="6.2.2" data-path="classID5-1.html"><a href="classID5-1.html#classID5-5"><i class="fa fa-check"></i><b>6.2.2</b> 절사평균</a></li>
+<li class="chapter" data-level="6.2.3" data-path="classID5-1.html"><a href="classID5-1.html#classID5-6"><i class="fa fa-check"></i><b>6.2.3</b> 중앙값</a></li>
+<li class="chapter" data-level="6.2.4" data-path="classID5-1.html"><a href="classID5-1.html#classID5-7"><i class="fa fa-check"></i><b>6.2.4</b> 가중평균</a></li>
+<li class="chapter" data-level="6.2.5" data-path="classID5-1.html"><a href="classID5-1.html#classID5-8"><i class="fa fa-check"></i><b>6.2.5</b> 가중 중앙값</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="classID5-1.html"><a href="classID5-1.html#classID5-9"><i class="fa fa-check"></i><b>6.3</b> 변위 추정</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="classID5-1.html"><a href="classID5-1.html#classID5-10"><i class="fa fa-check"></i><b>6.3.1</b> 표준편차(Standard Deviation)</a></li>
+<li class="chapter" data-level="6.3.2" data-path="classID5-1.html"><a href="classID5-1.html#classID5-11"><i class="fa fa-check"></i><b>6.3.2</b> 사분위범위(IRQ)</a></li>
+<li class="chapter" data-level="6.3.3" data-path="classID5-1.html"><a href="classID5-1.html#classID5-12"><i class="fa fa-check"></i><b>6.3.3</b> 중위절대편차(MAD)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="classID5-1.html"><a href="classID5-1.html#classID5-13"><i class="fa fa-check"></i><b>6.4</b> 데이터분포</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="classID5-1.html"><a href="classID5-1.html#classID5-14"><i class="fa fa-check"></i><b>6.4.1</b> 사분위수(Quantile)</a></li>
+<li class="chapter" data-level="6.4.2" data-path="classID5-1.html"><a href="classID5-1.html#classID5-15"><i class="fa fa-check"></i><b>6.4.2</b> 상자그림(Boxplot)</a></li>
+<li class="chapter" data-level="6.4.3" data-path="classID5-1.html"><a href="classID5-1.html#classID5-16"><i class="fa fa-check"></i><b>6.4.3</b> 도수 분포표(Frequency Table)</a></li>
+<li class="chapter" data-level="6.4.4" data-path="classID5-1.html"><a href="classID5-1.html#classID5-17"><i class="fa fa-check"></i><b>6.4.4</b> 히스토 그램</a></li>
+<li class="chapter" data-level="6.4.5" data-path="classID5-1.html"><a href="classID5-1.html#classID5-18"><i class="fa fa-check"></i><b>6.4.5</b> 밀도추정(부드러운 히스토그램)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="data-transformation-1.html"><a href="data-transformation-1.html"><i class="fa fa-check"></i><b>7</b> Data transformation 1</a><ul>
+<li class="chapter" data-level="7.1" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-1"><i class="fa fa-check"></i><b>7.1</b> plyr 패키지와 dplyr 패키지 성능 차이</a></li>
+<li class="chapter" data-level="7.2" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-2"><i class="fa fa-check"></i><b>7.2</b> Data 변환 전에</a></li>
+<li class="chapter" data-level="7.3" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-3"><i class="fa fa-check"></i><b>7.3</b> apply 계열의 함수들</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-4"><i class="fa fa-check"></i><b>7.3.1</b> apply( )</a></li>
+<li class="chapter" data-level="7.3.2" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-5"><i class="fa fa-check"></i><b>7.3.2</b> 행 또는 열의 합 또는 평균 계산 함수</a></li>
+<li class="chapter" data-level="7.3.3" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-6"><i class="fa fa-check"></i><b>7.3.3</b> lapply( )함수</a></li>
+<li class="chapter" data-level="7.3.4" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-7"><i class="fa fa-check"></i><b>7.3.4</b> unlist 함수</a></li>
+<li class="chapter" data-level="7.3.5" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-8"><i class="fa fa-check"></i><b>7.3.5</b> do.call 함수</a></li>
+<li class="chapter" data-level="7.3.6" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-9"><i class="fa fa-check"></i><b>7.3.6</b> sapply 함수</a></li>
+<li class="chapter" data-level="7.3.7" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-10"><i class="fa fa-check"></i><b>7.3.7</b> tapply 함수</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-11"><i class="fa fa-check"></i><b>7.4</b> dplyr 패키지</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-12"><i class="fa fa-check"></i><b>7.4.1</b> flights 데이터셋의 간략한 설명</a></li>
+<li class="chapter" data-level="7.4.2" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-13"><i class="fa fa-check"></i><b>7.4.2</b> Filter 사용하기</a></li>
+<li class="chapter" data-level="7.4.3" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-14"><i class="fa fa-check"></i><b>7.4.3</b> Logical 연산자</a></li>
+<li class="chapter" data-level="7.4.4" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-15"><i class="fa fa-check"></i><b>7.4.4</b> arrange 를 이용한 정렬</a></li>
+<li class="chapter" data-level="7.4.5" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-17"><i class="fa fa-check"></i><b>7.4.5</b> select 를 이용한 데이터 선택</a></li>
+<li class="chapter" data-level="7.4.6" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-19"><i class="fa fa-check"></i><b>7.4.6</b> year 와 day 사이에 있는 컬럼 제외</a></li>
+<li class="chapter" data-level="7.4.7" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-20"><i class="fa fa-check"></i><b>7.4.7</b> mutate 로 데이터 생성 및 수정</a></li>
+<li class="chapter" data-level="7.4.8" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-25"><i class="fa fa-check"></i><b>7.4.8</b> summarize 로 집계 하기</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-26"><i class="fa fa-check"></i><b>7.5</b> SQL 이용한 관계형 데이터 처리</a></li>
+<li class="chapter" data-level="7.6" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-27"><i class="fa fa-check"></i><b>7.6</b> mutating 조인을 이용한 관계형 데이터 처리</a><ul>
+<li class="chapter" data-level="7.6.1" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-28"><i class="fa fa-check"></i><b>7.6.1</b> 데이터 살펴보기</a></li>
+<li class="chapter" data-level="7.6.2" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-29"><i class="fa fa-check"></i><b>7.6.2</b> Key</a></li>
+<li class="chapter" data-level="7.6.3" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-30"><i class="fa fa-check"></i><b>7.6.3</b> 조인 실습을 위한 작은 데이터셋 만들기</a></li>
+<li class="chapter" data-level="7.6.4" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-31"><i class="fa fa-check"></i><b>7.6.4</b> Mutating Join ? 왜?</a></li>
+<li class="chapter" data-level="7.6.5" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-33"><i class="fa fa-check"></i><b>7.6.5</b> Join 이해하기</a></li>
+<li class="chapter" data-level="7.6.6" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-34"><i class="fa fa-check"></i><b>7.6.6</b> Inner Join (내부조인)</a></li>
+<li class="chapter" data-level="7.6.7" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-35"><i class="fa fa-check"></i><b>7.6.7</b> Outer Join (외부조인)</a></li>
+<li class="chapter" data-level="7.6.8" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-36"><i class="fa fa-check"></i><b>7.6.8</b> 중복키</a></li>
+<li class="chapter" data-level="7.6.9" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-37"><i class="fa fa-check"></i><b>7.6.9</b> Join키 정의 하기</a></li>
+<li class="chapter" data-level="7.6.10" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-38"><i class="fa fa-check"></i><b>7.6.10</b> flights 테이블 조인 실습 하기1</a></li>
+<li class="chapter" data-level="7.6.11" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-39"><i class="fa fa-check"></i><b>7.6.11</b> 필터링 조인 (세미조인 &amp; 안티조인)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html"><i class="fa fa-check"></i><b>8</b> Data Transpormation 2</a><ul>
+<li class="chapter" data-level="8.1" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-1"><i class="fa fa-check"></i><b>8.1</b> tidy 데이터</a></li>
+<li class="chapter" data-level="8.2" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-2"><i class="fa fa-check"></i><b>8.2</b> gather 로 데이터 모으기</a></li>
+<li class="chapter" data-level="8.3" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-3"><i class="fa fa-check"></i><b>8.3</b> spread 로 데이터 펼치기</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-4"><i class="fa fa-check"></i><b>8.3.1</b> gather 와 spread 가 조금 다른 이유</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-5"><i class="fa fa-check"></i><b>8.4</b> Seperate와 Unite</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-6"><i class="fa fa-check"></i><b>8.4.1</b> seperate 로 나누기</a></li>
+<li class="chapter" data-level="8.4.2" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-7"><i class="fa fa-check"></i><b>8.4.2</b> unite 로 합치기</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-9"><i class="fa fa-check"></i><b>8.5</b> NA(결측값) 처리하기</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-10"><i class="fa fa-check"></i><b>8.5.1</b> 결측 처리 기본</a></li>
+<li class="chapter" data-level="8.5.2" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-11"><i class="fa fa-check"></i><b>8.5.2</b> NA(결측) 처리 자동화</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="classID7-12.html"><a href="classID7-12.html"><i class="fa fa-check"></i><b>9</b> 부동산 정보 데이터 처리 및 시각화</a><ul>
+<li class="chapter" data-level="9.1" data-path="classID7-12.html"><a href="classID7-12.html#classID7-13"><i class="fa fa-check"></i><b>9.1</b> 공공데이터 포털 가입 하고 API 키 얻기</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="classID7-12.html"><a href="classID7-12.html#classID7-14"><i class="fa fa-check"></i><b>9.1.1</b> 회원 가입</a></li>
+<li class="chapter" data-level="9.1.2" data-path="classID7-12.html"><a href="classID7-12.html#classID7-15"><i class="fa fa-check"></i><b>9.1.2</b> 일반회원으로 가입</a></li>
+<li class="chapter" data-level="9.1.3" data-path="classID7-12.html"><a href="classID7-12.html#classID7-16"><i class="fa fa-check"></i><b>9.1.3</b> 회원가입을 위한 정보 입력</a></li>
+<li class="chapter" data-level="9.1.4" data-path="classID7-12.html"><a href="classID7-12.html#classID7-17"><i class="fa fa-check"></i><b>9.1.4</b> 이용약관 동의</a></li>
+<li class="chapter" data-level="9.1.5" data-path="classID7-12.html"><a href="classID7-12.html#classID7-18"><i class="fa fa-check"></i><b>9.1.5</b> 정보입력</a></li>
+<li class="chapter" data-level="9.1.6" data-path="classID7-12.html"><a href="classID7-12.html#classID7-19"><i class="fa fa-check"></i><b>9.1.6</b> 회원가입 완료</a></li>
+<li class="chapter" data-level="9.1.7" data-path="classID7-12.html"><a href="classID7-12.html#classID7-20"><i class="fa fa-check"></i><b>9.1.7</b> “국토부 실거래가”" 로 API 검색</a></li>
+<li class="chapter" data-level="9.1.8" data-path="classID7-12.html"><a href="classID7-12.html#classID7-21"><i class="fa fa-check"></i><b>9.1.8</b> “아파트매매 실거래 상세 자료” -&gt; 활용신청</a></li>
+<li class="chapter" data-level="9.1.9" data-path="classID7-12.html"><a href="classID7-12.html#classID7-22"><i class="fa fa-check"></i><b>9.1.9</b> 활용신청 상세</a></li>
+<li class="chapter" data-level="9.1.10" data-path="classID7-12.html"><a href="classID7-12.html#classID7-23"><i class="fa fa-check"></i><b>9.1.10</b> 신청현황 / 결과</a></li>
+<li class="chapter" data-level="9.1.11" data-path="classID7-12.html"><a href="classID7-12.html#classID7-24"><i class="fa fa-check"></i><b>9.1.11</b> API 정보 확인</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="classID7-12.html"><a href="classID7-12.html#classID7-25"><i class="fa fa-check"></i><b>9.2</b> API를 이용해 국토부 아파트매매 실거래가 가져오기</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="classID7-12.html"><a href="classID7-12.html#classID7-26"><i class="fa fa-check"></i><b>9.2.1</b> 전체 코드</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="classID7-12.html"><a href="classID7-12.html#classID7-28"><i class="fa fa-check"></i><b>9.3</b> shiny</a></li>
+<li class="chapter" data-level="9.4" data-path="classID7-12.html"><a href="classID7-12.html#classID7-29"><i class="fa fa-check"></i><b>9.4</b> API를 이용한 국토부 실거래가 조회2</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="classID7-12.html"><a href="classID7-12.html#classID7-30"><i class="fa fa-check"></i><b>9.4.1</b> 파일 불러오기</a></li>
+<li class="chapter" data-level="9.4.2" data-path="classID7-12.html"><a href="classID7-12.html#classID7-31"><i class="fa fa-check"></i><b>9.4.2</b> 특정 구의 시군구 코드 알아내기</a></li>
+<li class="chapter" data-level="9.4.3" data-path="classID7-12.html"><a href="classID7-12.html#classID7-32"><i class="fa fa-check"></i><b>9.4.3</b> 구군 명을 넣으면 구군코드를 반환하는 함수 만들기</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="classID7-12.html"><a href="classID7-12.html#google-지도를-이용한-부동산-정보-시각화"><i class="fa fa-check"></i><b>9.5</b> Google 지도를 이용한 부동산 정보 시각화</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html"><i class="fa fa-check"></i><b>10</b> ggplot visualization</a><ul>
+<li class="chapter" data-level="10.1" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#ggplot-옵션-익히기"><i class="fa fa-check"></i><b>10.1</b> ggplot 옵션 익히기</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#mpg-데이터"><i class="fa fa-check"></i><b>10.1.1</b> mpg 데이터</a></li>
+<li class="chapter" data-level="10.1.2" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#ClassID"><i class="fa fa-check"></i><b>10.1.2</b> 기본 그래프 생성 문법</a></li>
+<li class="chapter" data-level="10.1.3" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-2"><i class="fa fa-check"></i><b>10.1.3</b> ggplot 문법 기본</a></li>
+<li class="chapter" data-level="10.1.4" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-3"><i class="fa fa-check"></i><b>10.1.4</b> 간단한 그래프 그리기</a></li>
+<li class="chapter" data-level="10.1.5" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-4"><i class="fa fa-check"></i><b>10.1.5</b> 선그래프 추가하기</a></li>
+<li class="chapter" data-level="10.1.6" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-5"><i class="fa fa-check"></i><b>10.1.6</b> X, Y 각 축에 값 제한 하기</a></li>
+<li class="chapter" data-level="10.1.7" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-6"><i class="fa fa-check"></i><b>10.1.7</b> 그래프 확대 하기</a></li>
+<li class="chapter" data-level="10.1.8" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-8"><i class="fa fa-check"></i><b>10.1.8</b> 타이틀 및 축라벨 변경</a></li>
+<li class="chapter" data-level="10.1.9" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-9"><i class="fa fa-check"></i><b>10.1.9</b> 색상과 점의 크기 조정</a></li>
+<li class="chapter" data-level="10.1.10" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-10"><i class="fa fa-check"></i><b>10.1.10</b> 조건기반 색상 표시</a></li>
+<li class="chapter" data-level="10.1.11" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-11"><i class="fa fa-check"></i><b>10.1.11</b> 그룹별로 색상 표시하기</a></li>
+<li class="chapter" data-level="10.1.12" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-12"><i class="fa fa-check"></i><b>10.1.12</b> col 인자에 명기 하는 경우</a></li>
+<li class="chapter" data-level="10.1.13" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-14"><i class="fa fa-check"></i><b>10.1.13</b> Mark 의 모양 변경</a></li>
+<li class="chapter" data-level="10.1.14" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-15"><i class="fa fa-check"></i><b>10.1.14</b> Legend 없애기</a></li>
+<li class="chapter" data-level="10.1.15" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-16"><i class="fa fa-check"></i><b>10.1.15</b> Legend 테마 변경하기</a></li>
+<li class="chapter" data-level="10.1.16" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-17"><i class="fa fa-check"></i><b>10.1.16</b> 색상 팔레트 종류</a></li>
+<li class="chapter" data-level="10.1.17" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-18"><i class="fa fa-check"></i><b>10.1.17</b> 축간격 조정 하기</a></li>
+<li class="chapter" data-level="10.1.18" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-19"><i class="fa fa-check"></i><b>10.1.18</b> X축 역변환 하기</a></li>
+<li class="chapter" data-level="10.1.19" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-20"><i class="fa fa-check"></i><b>10.1.19</b> 축라벨에 커스터마이징</a></li>
+<li class="chapter" data-level="10.1.20" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-21"><i class="fa fa-check"></i><b>10.1.20</b> 테마를 사용해서 한번에 변경</a></li>
+<li class="chapter" data-level="10.1.21" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#scatter-plot산점도"><i class="fa fa-check"></i><b>10.1.21</b> Scatter Plot(산점도)</a></li>
+<li class="chapter" data-level="10.1.22" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#jitter-plot"><i class="fa fa-check"></i><b>10.1.22</b> jitter plot</a></li>
+<li class="chapter" data-level="10.1.23" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#count-plot"><i class="fa fa-check"></i><b>10.1.23</b> Count Plot</a></li>
+<li class="chapter" data-level="10.1.24" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-22"><i class="fa fa-check"></i><b>10.1.24</b> 가장자리 분포 그래프 추가</a></li>
+<li class="chapter" data-level="10.1.25" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#correlogram"><i class="fa fa-check"></i><b>10.1.25</b> Correlogram</a></li>
+<li class="chapter" data-level="10.1.26" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-23"><i class="fa fa-check"></i><b>10.1.26</b> Bar 그래프</a></li>
+<li class="chapter" data-level="10.1.27" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#stacked-bar-plot-누적-막대-그래프"><i class="fa fa-check"></i><b>10.1.27</b> Stacked Bar Plot (누적 막대 그래프)</a></li>
+<li class="chapter" data-level="10.1.28" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#facet"><i class="fa fa-check"></i><b>10.1.28</b> Facet</a></li>
+<li class="chapter" data-level="10.1.29" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-25"><i class="fa fa-check"></i><b>10.1.29</b> Position 조정</a></li>
+<li class="chapter" data-level="10.1.30" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-26"><i class="fa fa-check"></i><b>10.1.30</b> Pie 차트</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-29"><i class="fa fa-check"></i><b>10.2</b> kaggle 데이터를 이용한 EDA 실습</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-30"><i class="fa fa-check"></i><b>10.2.1</b> bike sharing demand 데이터셋 설명</a></li>
+<li class="chapter" data-level="10.2.2" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-31"><i class="fa fa-check"></i><b>10.2.2</b> 기본 그래프 생성</a></li>
+<li class="chapter" data-level="10.2.3" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-32"><i class="fa fa-check"></i><b>10.2.3</b> ggthemr 적용하기</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-34"><i class="fa fa-check"></i><b>10.3</b> correlation 그래프 생성</a></li>
+<li class="chapter" data-level="10.4" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-35"><i class="fa fa-check"></i><b>10.4</b> plot.ly 이용해서 interactive 그래프 그리기</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="modeling.html"><a href="modeling.html"><i class="fa fa-check"></i><b>11</b> Modeling</a><ul>
+<li class="chapter" data-level="11.1" data-path="modeling.html"><a href="modeling.html#ClassID10-1"><i class="fa fa-check"></i><b>11.1</b> Regression Model (회귀모형)</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="modeling.html"><a href="modeling.html#ClassID10-2"><i class="fa fa-check"></i><b>11.1.1</b> Univariate Linear Regression (단변량 선형회기모형)</a></li>
+<li class="chapter" data-level="11.1.2" data-path="modeling.html"><a href="modeling.html#ClassID10-3"><i class="fa fa-check"></i><b>11.1.2</b> Multivariate Linear Regression (다변량 선형회기모형)</a></li>
+<li class="chapter" data-level="11.1.3" data-path="modeling.html"><a href="modeling.html#ClassID10-4"><i class="fa fa-check"></i><b>11.1.3</b> Polynomial Regression (다항 선형회기모형)</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="modeling.html"><a href="modeling.html#ClassID10-9"><i class="fa fa-check"></i><b>11.2</b> Classification Model (분류모형)</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="modeling.html"><a href="modeling.html#ClassID10-10"><i class="fa fa-check"></i><b>11.2.1</b> Logistic Regression</a></li>
+<li class="chapter" data-level="11.2.2" data-path="modeling.html"><a href="modeling.html#ClassID10-17"><i class="fa fa-check"></i><b>11.2.2</b> K-Nearest Neighbors(K-NN)</a></li>
+<li class="chapter" data-level="11.2.3" data-path="modeling.html"><a href="modeling.html#ClassID10-25"><i class="fa fa-check"></i><b>11.2.3</b> Support Vector Machine(SVM)</a></li>
+<li class="chapter" data-level="11.2.4" data-path="modeling.html"><a href="modeling.html#ClassID10-32"><i class="fa fa-check"></i><b>11.2.4</b> Decision Tree Classification</a></li>
+<li class="chapter" data-level="11.2.5" data-path="modeling.html"><a href="modeling.html#ClassID10-36"><i class="fa fa-check"></i><b>11.2.5</b> Random Forrest Classfication</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="modeling.html"><a href="modeling.html#ClassID10-40"><i class="fa fa-check"></i><b>11.3</b> Clustering 군집 모델</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="modeling.html"><a href="modeling.html#ClassID10-41"><i class="fa fa-check"></i><b>11.3.1</b> K-Means Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="modeling.html"><a href="modeling.html#ClassID10-43"><i class="fa fa-check"></i><b>11.4</b> Gradient Boosting 실습</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="modeling.html"><a href="modeling.html#ClassID10-44"><i class="fa fa-check"></i><b>11.4.1</b> 데이터 및 패키지 로딩</a></li>
+<li class="chapter" data-level="11.4.2" data-path="modeling.html"><a href="modeling.html#ClassID10-45"><i class="fa fa-check"></i><b>11.4.2</b> 레이블 변환</a></li>
+<li class="chapter" data-level="11.4.3" data-path="modeling.html"><a href="modeling.html#ClassID10-46"><i class="fa fa-check"></i><b>11.4.3</b> 훈련 및 테스트 데이터 분할</a></li>
+<li class="chapter" data-level="11.4.4" data-path="modeling.html"><a href="modeling.html#ClassID10-47"><i class="fa fa-check"></i><b>11.4.4</b> xgb.DMatrix 오브젝트로 변환</a></li>
+<li class="chapter" data-level="11.4.5" data-path="modeling.html"><a href="modeling.html#ClassID10-48"><i class="fa fa-check"></i><b>11.4.5</b> 주요 파라메터 설정</a></li>
+<li class="chapter" data-level="11.4.6" data-path="modeling.html"><a href="modeling.html#ClassID10-49"><i class="fa fa-check"></i><b>11.4.6</b> 모델 훈련 시키기</a></li>
+<li class="chapter" data-level="11.4.7" data-path="modeling.html"><a href="modeling.html#ClassID10-50"><i class="fa fa-check"></i><b>11.4.7</b> 테스트 데이터로 스코어링</a></li>
+<li class="chapter" data-level="11.4.8" data-path="modeling.html"><a href="modeling.html#ClassID10-51"><i class="fa fa-check"></i><b>11.4.8</b> Identify the class with the highest probability for each prediction</a></li>
+<li class="chapter" data-level="11.4.9" data-path="modeling.html"><a href="modeling.html#ClassID10-52"><i class="fa fa-check"></i><b>11.4.9</b> 모델 성능 측정</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/dangtong76" target="blank">Dangtong Github Pages</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R로 배우는 데이터과학</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="classID7-12" class="section level1">
+<h1><span class="header-section-number">Chapter 9</span> 부동산 정보 데이터 처리 및 시각화</h1>
+<div id="classID7-13" class="section level2">
+<h2><span class="header-section-number">9.1</span> 공공데이터 포털 가입 하고 API 키 얻기</h2>
+<p>데이터는 파일, 데이터베이스, 인터넷 등 다양한 경로를 통해 수집 할 수 있습니다.
+기업의 많은 데이터를 분석위해 공공기관에서 제공 하는 데이터와 조합하여 분석하는 경우가 많습니다.
+우리 나라는 세계에서 손꼽을 정도로 공공 데이터 공개가 고도로 발달되어 있습니다. 공공데이터를 어덯게 가져 오기 위해서는 <strong>공공 데이터 포털</strong>에 가입해야 합니다.</p>
+<div id="classID7-14" class="section level3">
+<h3><span class="header-section-number">9.1.1</span> 회원 가입</h3>
+<p><img src="images/data_go_1.png" width="1295" style="background-color: #9ecff7; border: 1px solid gray;" /></p>
+</div>
+<div id="classID7-15" class="section level3">
+<h3><span class="header-section-number">9.1.2</span> 일반회원으로 가입</h3>
+<p><img src="images/data_go_2.png" width="1194" style="background-color: #9ecff7; border: 1px solid gray;" /></p>
+</div>
+<div id="classID7-16" class="section level3">
+<h3><span class="header-section-number">9.1.3</span> 회원가입을 위한 정보 입력</h3>
+<p><img src="images/data_go_3.png" width="1143" style="background-color: #9ecff7; border: 1px solid gray;" /></p>
+</div>
+<div id="classID7-17" class="section level3">
+<h3><span class="header-section-number">9.1.4</span> 이용약관 동의</h3>
+<p><img src="images/data_go_5.png" width="1036" style="background-color: #9ecff7; border: 1px solid gray;" /></p>
+</div>
+<div id="classID7-18" class="section level3">
+<h3><span class="header-section-number">9.1.5</span> 정보입력</h3>
+<p><img src="images/data_go_6.png" width="1029" style="background-color: #9ecff7; border: 1px solid gray;" /></p>
+</div>
+<div id="classID7-19" class="section level3">
+<h3><span class="header-section-number">9.1.6</span> 회원가입 완료</h3>
+<p><img src="images/data_go_7.png" width="1159" style="background-color: #9ecff7; border: 1px solid gray;" /></p>
+</div>
+<div id="classID7-20" class="section level3">
+<h3><span class="header-section-number">9.1.7</span> “국토부 실거래가”" 로 API 검색</h3>
+<p><img src="images/data_go_9.png" width="1025" style="background-color: #9ecff7; border: 1px solid gray;" /></p>
+</div>
+<div id="classID7-21" class="section level3">
+<h3><span class="header-section-number">9.1.8</span> “아파트매매 실거래 상세 자료” -&gt; 활용신청</h3>
+<p><img src="images/data_go_10.png" width="1148" style="background-color: #9ecff7; border: 1px solid gray;" /></p>
+</div>
+<div id="classID7-22" class="section level3">
+<h3><span class="header-section-number">9.1.9</span> 활용신청 상세</h3>
+<p><img src="images/data_go_11.png" width="1030" style="background-color: #9ecff7; border: 1px solid gray;" /></p>
+</div>
+<div id="classID7-23" class="section level3">
+<h3><span class="header-section-number">9.1.10</span> 신청현황 / 결과</h3>
+<p><img src="images/data_go_12.png" width="1183" style="background-color: #9ecff7; border: 1px solid gray;" /></p>
+</div>
+<div id="classID7-24" class="section level3">
+<h3><span class="header-section-number">9.1.11</span> API 정보 확인</h3>
+<p><img src="images/data_go_14.png" width="1199" style="background-color: #9ecff7; border: 1px solid gray;" /></p>
+</div>
+</div>
+<div id="classID7-25" class="section level2">
+<h2><span class="header-section-number">9.2</span> API를 이용해 국토부 아파트매매 실거래가 가져오기</h2>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="classID7-12.html#cb88-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;triebeard&quot;</span>)</span>
+<span id="cb88-2"><a href="classID7-12.html#cb88-2"></a><span class="kw">install.packages</span>(<span class="st">&quot;urltools&quot;</span>)</span>
+<span id="cb88-3"><a href="classID7-12.html#cb88-3"></a><span class="kw">install.packages</span>(<span class="st">&quot;httr&quot;</span>)</span>
+<span id="cb88-4"><a href="classID7-12.html#cb88-4"></a><span class="kw">install.packages</span>(<span class="st">&quot;jsonlite&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: package &#39;httr&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## Warning: package &#39;urltools&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## Warning: package &#39;jsonlite&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## 
+## Attaching package: &#39;jsonlite&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     flatten</code></pre>
+<pre><code>## Warning: package &#39;triebeard&#39; was built under R version 4.0.2</code></pre>
+<ul>
+<li>호출 URL 및 제공받은 API 를 입력 합니다.</li>
+</ul>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="classID7-12.html#cb95-1"></a>path &lt;-<span class="st"> &quot;http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?&quot;</span></span>
+<span id="cb95-2"><a href="classID7-12.html#cb95-2"></a>key &lt;-<span class="st"> &quot;&lt;공공 데이터 포털에서 받은 키를 입력 하세요&gt;&quot;</span></span></code></pre></div>
+<ul>
+<li>URLencode 함수는 URL 방식을 이용하여 데이터를 전송하고자 할때 URL 양식으로 데이터를 변환 해줍니다.</li>
+</ul>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="classID7-12.html#cb96-1"></a>service_key &lt;-<span class="st"> </span>utf8<span class="op">::</span><span class="kw">utf8_encode</span>(<span class="kw">URLencode</span>(key))</span></code></pre></div>
+<ul>
+<li><p>httr 패키지의 GET 함수를 이용해서 *아파트 실거래가 조회" API를 호출 합니다.</p></li>
+<li><p>호출 할때 API 에서 요구하는 법정동코드, 거래월, 서비스키, 조회목록 개수 를 입력 합니다.</p></li>
+<li><p>상세한 호출 정보는 API 문서에 있고, 샘플 코드도 있습니다.</p>
+<ol style="list-style-type: decimal">
+<li>개발 가이드</li>
+</ol></li>
+</ul>
+<p><img src="images/data_go_15.png" width="408" style="background-color: #9ecff7; border: 1px solid gray;" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>개발 가이드 내용 중 입력 파라메터 부분</li>
+</ol>
+<p><img src="images/data_go_16.png" width="410" style="background-color: #9ecff7; border: 1px solid gray;" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>개발 가이드 내의 샘플 코드</li>
+</ol>
+<p><img src="images/data_go_17.png" width="409" style="background-color: #9ecff7; border: 1px solid gray;" /></p>
+<ul>
+<li>GET 함수에 입력값을 이용해 API를 호출 합니다.</li>
+</ul>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="classID7-12.html#cb97-1"></a>request &lt;-<span class="st"> </span><span class="kw">paste</span>(path,</span>
+<span id="cb97-2"><a href="classID7-12.html#cb97-2"></a>                 <span class="st">&quot;LAWD_CD&quot;</span>,<span class="st">&quot;=&quot;</span>,<span class="dv">11710</span>,<span class="st">&quot;&amp;&quot;</span>,</span>
+<span id="cb97-3"><a href="classID7-12.html#cb97-3"></a>                 <span class="st">&quot;DEAL_YMD&quot;</span>,<span class="st">&quot;=&quot;</span>,<span class="dv">201904</span>,<span class="st">&quot;&amp;&quot;</span>,</span>
+<span id="cb97-4"><a href="classID7-12.html#cb97-4"></a>                 <span class="st">&quot;serviceKey&quot;</span>,<span class="st">&quot;=&quot;</span>,service_key,</span>
+<span id="cb97-5"><a href="classID7-12.html#cb97-5"></a>                 <span class="dt">sep=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb97-6"><a href="classID7-12.html#cb97-6"></a>response &lt;-<span class="st"> </span><span class="kw">GET</span>(request)</span>
+<span id="cb97-7"><a href="classID7-12.html#cb97-7"></a><span class="co">#response &lt;- GET(url = path, </span></span>
+<span id="cb97-8"><a href="classID7-12.html#cb97-8"></a><span class="co">#               query = list(LAWD_CD =&quot;11710&quot;, DEAL_YMD=&quot;201804&quot;,</span></span>
+<span id="cb97-9"><a href="classID7-12.html#cb97-9"></a><span class="co">#                            serviceKey=service_key, numOfRows=&quot;100&quot;)</span></span>
+<span id="cb97-10"><a href="classID7-12.html#cb97-10"></a><span class="co">#              )</span></span></code></pre></div>
+<ul>
+<li>응답 결과를 검사 합니다.</li>
+<li>응답 결과를 보면 Size 가 61.6kb 의 json 문서가 포함되어 있습니다.</li>
+</ul>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="classID7-12.html#cb98-1"></a>response</span></code></pre></div>
+<pre><code>## Response [http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?LAWD_CD=11710&amp;DEAL_YMD=201904&amp;serviceKey=%2F9qD%2FPbjCfTTM33R%2FzWiOuX5MBKgkrrwi62FHsQx%2B5YlpUFzvtVuxH8ehLKhuFzf53TQvU6OYF2SGI2Mx9SwHA%3D%3D]
+##   Date: 2021-01-06 13:57
+##   Status: 200
+##   Content-Type: application/json
+##   Size: 6.25 kB</code></pre>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="classID7-12.html#cb100-1"></a><span class="kw">http_status</span>(response)</span></code></pre></div>
+<pre><code>## $category
+## [1] &quot;Success&quot;
+## 
+## $reason
+## [1] &quot;OK&quot;
+## 
+## $message
+## [1] &quot;Success: (200) OK&quot;</code></pre>
+<ul>
+<li>응답받은 결과를 UTF-8 로 인코딩 하고 JSON 에서 R개체로 변환 합니다.</li>
+<li>fromJSON 함수는 json 양식을 R 객체로 바꿔줍니다.</li>
+</ul>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="classID7-12.html#cb102-1"></a>content &lt;-<span class="st"> </span><span class="kw">content</span>(response, <span class="st">&quot;text&quot;</span>,<span class="dt">encoding =</span> <span class="st">&quot;UTF-8&quot;</span>)</span>
+<span id="cb102-2"><a href="classID7-12.html#cb102-2"></a>res &lt;-<span class="st"> </span><span class="kw">fromJSON</span>(content)</span></code></pre></div>
+<ul>
+<li><strong>res</strong> 의 속성을 확인해보니 List 입니다. 이제 리스트를 부석을 위해 데이터 프레임으로 바꿔야 합니다.</li>
+<li>출력 결과를 보면 List 구조 안에 items 라는 데이터프레임이 들어 있습니다.</li>
+</ul>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="classID7-12.html#cb103-1"></a><span class="kw">str</span>(res)</span></code></pre></div>
+<pre><code>## List of 1
+##  $ response:List of 2
+##   ..$ header:List of 2
+##   .. ..$ resultCode: chr &quot;00&quot;
+##   .. ..$ resultMsg : chr &quot;NORMAL SERVICE.&quot;
+##   ..$ body  :List of 4
+##   .. ..$ items     :List of 1
+##   .. .. ..$ item:&#39;data.frame&#39;:   10 obs. of  24 variables:
+##   .. .. .. ..$ 거래금액            : chr [1:10] &quot;   185,000&quot; &quot;    74,000&quot; &quot;   150,000&quot; &quot;   168,000&quot; ...
+##   .. .. .. ..$ 건축년도            : int [1:10] 2006 2008 2007 2005 2008 2005 2008 2007 2005 2007
+##   .. .. .. ..$ 년                  : int [1:10] 2019 2019 2019 2019 2019 2019 2019 2019 2019 2019
+##   .. .. .. ..$ 도로명              : chr [1:10] &quot;잠실로&quot; &quot;올림픽로&quot; &quot;잠실로&quot; &quot;올림픽로&quot; ...
+##   .. .. .. ..$ 도로명건물본번호코드: chr [1:10] &quot;00088&quot; &quot;00135&quot; &quot;00062&quot; &quot;00212&quot; ...
+##   .. .. .. ..$ 도로명건물부번호코드: chr [1:10] &quot;00000&quot; &quot;00000&quot; &quot;00000&quot; &quot;00000&quot; ...
+##   .. .. .. ..$ 도로명시군구코드    : int [1:10] 11710 11710 11710 11710 11710 11710 11710 11710 11710 11710
+##   .. .. .. ..$ 도로명일련번호코드  : chr [1:10] &quot;01&quot; &quot;01&quot; &quot;01&quot; &quot;01&quot; ...
+##   .. .. .. ..$ 도로명지상지하코드  : int [1:10] 0 0 0 0 0 0 0 0 0 0
+##   .. .. .. ..$ 도로명코드          : int [1:10] 3123015 3123023 3123015 3123023 3123023 3123023 3123023 3123015 3123023 3123015
+##   .. .. .. ..$ 법정동              : chr [1:10] &quot; 잠실동&quot; &quot; 잠실동&quot; &quot; 잠실동&quot; &quot; 잠실동&quot; ...
+##   .. .. .. ..$ 법정동본번코드      : chr [1:10] &quot;0044&quot; &quot;0022&quot; &quot;0035&quot; &quot;0040&quot; ...
+##   .. .. .. ..$ 법정동부번코드      : chr [1:10] &quot;0000&quot; &quot;0000&quot; &quot;0000&quot; &quot;0000&quot; ...
+##   .. .. .. ..$ 법정동시군구코드    : int [1:10] 11710 11710 11710 11710 11710 11710 11710 11710 11710 11710
+##   .. .. .. ..$ 법정동읍면동코드    : int [1:10] 10100 10100 10100 10100 10100 10100 10100 10100 10100 10100
+##   .. .. .. ..$ 법정동지번코드      : int [1:10] 1 1 1 1 1 1 1 1 1 1
+##   .. .. .. ..$ 아파트              : chr [1:10] &quot;레이크팰리스&quot; &quot;리센츠&quot; &quot;트리지움&quot; &quot;갤러리아팰리스&quot; ...
+##   .. .. .. ..$ 월                  : int [1:10] 4 4 4 4 4 4 4 4 4 4
+##   .. .. .. ..$ 일                  : int [1:10] 3 3 3 4 4 5 5 5 6 6
+##   .. .. .. ..$ 일련번호            : chr [1:10] &quot;11710-5957&quot; &quot;11710-6249&quot; &quot;11710-6028&quot; &quot;11710-281&quot; ...
+##   .. .. .. ..$ 전용면적            : num [1:10] 135.8 27.7 84.8 151.2 84.8 ...
+##   .. .. .. ..$ 지번                : int [1:10] 44 22 35 40 19 40 19 35 40 35
+##   .. .. .. ..$ 지역코드            : int [1:10] 11710 11710 11710 11710 11710 11710 11710 11710 11710 11710
+##   .. .. .. ..$ 층                  : int [1:10] 21 19 29 36 30 4 10 21 18 1
+##   .. ..$ numOfRows : int 10
+##   .. ..$ pageNo    : int 1
+##   .. ..$ totalCount: int 284</code></pre>
+<ul>
+<li>리스트 구조를 잘 살펴서 우리가 원하는 정보의 위치를 찾아 출력해봅니다.</li>
+</ul>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="classID7-12.html#cb105-1"></a><span class="kw">str</span>(res<span class="op">$</span>response<span class="op">$</span>body<span class="op">$</span>items<span class="op">$</span>item)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    10 obs. of  24 variables:
+##  $ 거래금액            : chr  &quot;   185,000&quot; &quot;    74,000&quot; &quot;   150,000&quot; &quot;   168,000&quot; ...
+##  $ 건축년도            : int  2006 2008 2007 2005 2008 2005 2008 2007 2005 2007
+##  $ 년                  : int  2019 2019 2019 2019 2019 2019 2019 2019 2019 2019
+##  $ 도로명              : chr  &quot;잠실로&quot; &quot;올림픽로&quot; &quot;잠실로&quot; &quot;올림픽로&quot; ...
+##  $ 도로명건물본번호코드: chr  &quot;00088&quot; &quot;00135&quot; &quot;00062&quot; &quot;00212&quot; ...
+##  $ 도로명건물부번호코드: chr  &quot;00000&quot; &quot;00000&quot; &quot;00000&quot; &quot;00000&quot; ...
+##  $ 도로명시군구코드    : int  11710 11710 11710 11710 11710 11710 11710 11710 11710 11710
+##  $ 도로명일련번호코드  : chr  &quot;01&quot; &quot;01&quot; &quot;01&quot; &quot;01&quot; ...
+##  $ 도로명지상지하코드  : int  0 0 0 0 0 0 0 0 0 0
+##  $ 도로명코드          : int  3123015 3123023 3123015 3123023 3123023 3123023 3123023 3123015 3123023 3123015
+##  $ 법정동              : chr  &quot; 잠실동&quot; &quot; 잠실동&quot; &quot; 잠실동&quot; &quot; 잠실동&quot; ...
+##  $ 법정동본번코드      : chr  &quot;0044&quot; &quot;0022&quot; &quot;0035&quot; &quot;0040&quot; ...
+##  $ 법정동부번코드      : chr  &quot;0000&quot; &quot;0000&quot; &quot;0000&quot; &quot;0000&quot; ...
+##  $ 법정동시군구코드    : int  11710 11710 11710 11710 11710 11710 11710 11710 11710 11710
+##  $ 법정동읍면동코드    : int  10100 10100 10100 10100 10100 10100 10100 10100 10100 10100
+##  $ 법정동지번코드      : int  1 1 1 1 1 1 1 1 1 1
+##  $ 아파트              : chr  &quot;레이크팰리스&quot; &quot;리센츠&quot; &quot;트리지움&quot; &quot;갤러리아팰리스&quot; ...
+##  $ 월                  : int  4 4 4 4 4 4 4 4 4 4
+##  $ 일                  : int  3 3 3 4 4 5 5 5 6 6
+##  $ 일련번호            : chr  &quot;11710-5957&quot; &quot;11710-6249&quot; &quot;11710-6028&quot; &quot;11710-281&quot; ...
+##  $ 전용면적            : num  135.8 27.7 84.8 151.2 84.8 ...
+##  $ 지번                : int  44 22 35 40 19 40 19 35 40 35
+##  $ 지역코드            : int  11710 11710 11710 11710 11710 11710 11710 11710 11710 11710
+##  $ 층                  : int  21 19 29 36 30 4 10 21 18 1</code></pre>
+<ul>
+<li>items 라는 데이터 프레임만 꺼내서 apt 에 저장합니다.</li>
+</ul>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="classID7-12.html#cb107-1"></a>apt =<span class="st"> </span>res<span class="op">$</span>response<span class="op">$</span>body<span class="op">$</span>items<span class="op">$</span>item</span>
+<span id="cb107-2"><a href="classID7-12.html#cb107-2"></a><span class="kw">str</span>(apt)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    10 obs. of  24 variables:
+##  $ 거래금액            : chr  &quot;   185,000&quot; &quot;    74,000&quot; &quot;   150,000&quot; &quot;   168,000&quot; ...
+##  $ 건축년도            : int  2006 2008 2007 2005 2008 2005 2008 2007 2005 2007
+##  $ 년                  : int  2019 2019 2019 2019 2019 2019 2019 2019 2019 2019
+##  $ 도로명              : chr  &quot;잠실로&quot; &quot;올림픽로&quot; &quot;잠실로&quot; &quot;올림픽로&quot; ...
+##  $ 도로명건물본번호코드: chr  &quot;00088&quot; &quot;00135&quot; &quot;00062&quot; &quot;00212&quot; ...
+##  $ 도로명건물부번호코드: chr  &quot;00000&quot; &quot;00000&quot; &quot;00000&quot; &quot;00000&quot; ...
+##  $ 도로명시군구코드    : int  11710 11710 11710 11710 11710 11710 11710 11710 11710 11710
+##  $ 도로명일련번호코드  : chr  &quot;01&quot; &quot;01&quot; &quot;01&quot; &quot;01&quot; ...
+##  $ 도로명지상지하코드  : int  0 0 0 0 0 0 0 0 0 0
+##  $ 도로명코드          : int  3123015 3123023 3123015 3123023 3123023 3123023 3123023 3123015 3123023 3123015
+##  $ 법정동              : chr  &quot; 잠실동&quot; &quot; 잠실동&quot; &quot; 잠실동&quot; &quot; 잠실동&quot; ...
+##  $ 법정동본번코드      : chr  &quot;0044&quot; &quot;0022&quot; &quot;0035&quot; &quot;0040&quot; ...
+##  $ 법정동부번코드      : chr  &quot;0000&quot; &quot;0000&quot; &quot;0000&quot; &quot;0000&quot; ...
+##  $ 법정동시군구코드    : int  11710 11710 11710 11710 11710 11710 11710 11710 11710 11710
+##  $ 법정동읍면동코드    : int  10100 10100 10100 10100 10100 10100 10100 10100 10100 10100
+##  $ 법정동지번코드      : int  1 1 1 1 1 1 1 1 1 1
+##  $ 아파트              : chr  &quot;레이크팰리스&quot; &quot;리센츠&quot; &quot;트리지움&quot; &quot;갤러리아팰리스&quot; ...
+##  $ 월                  : int  4 4 4 4 4 4 4 4 4 4
+##  $ 일                  : int  3 3 3 4 4 5 5 5 6 6
+##  $ 일련번호            : chr  &quot;11710-5957&quot; &quot;11710-6249&quot; &quot;11710-6028&quot; &quot;11710-281&quot; ...
+##  $ 전용면적            : num  135.8 27.7 84.8 151.2 84.8 ...
+##  $ 지번                : int  44 22 35 40 19 40 19 35 40 35
+##  $ 지역코드            : int  11710 11710 11710 11710 11710 11710 11710 11710 11710 11710
+##  $ 층                  : int  21 19 29 36 30 4 10 21 18 1</code></pre>
+<ul>
+<li>apt 데이터 프레임의 컬럼 이름들을 확인 해봅니다.</li>
+</ul>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="classID7-12.html#cb109-1"></a><span class="kw">colnames</span>(apt)</span></code></pre></div>
+<pre><code>##  [1] &quot;거래금액&quot;             &quot;건축년도&quot;             &quot;년&quot;                  
+##  [4] &quot;도로명&quot;               &quot;도로명건물본번호코드&quot; &quot;도로명건물부번호코드&quot;
+##  [7] &quot;도로명시군구코드&quot;     &quot;도로명일련번호코드&quot;   &quot;도로명지상지하코드&quot;  
+## [10] &quot;도로명코드&quot;           &quot;법정동&quot;               &quot;법정동본번코드&quot;      
+## [13] &quot;법정동부번코드&quot;       &quot;법정동시군구코드&quot;     &quot;법정동읍면동코드&quot;    
+## [16] &quot;법정동지번코드&quot;       &quot;아파트&quot;               &quot;월&quot;                  
+## [19] &quot;일&quot;                   &quot;일련번호&quot;             &quot;전용면적&quot;            
+## [22] &quot;지번&quot;                 &quot;지역코드&quot;             &quot;층&quot;</code></pre>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="classID7-12.html#cb111-1"></a><span class="kw">str</span>(<span class="kw">colnames</span>(apt))</span></code></pre></div>
+<pre><code>##  chr [1:24] &quot;거래금액&quot; &quot;건축년도&quot; &quot;년&quot; &quot;도로명&quot; &quot;도로명건물본번호코드&quot; ...</code></pre>
+<ul>
+<li>분석을 위해 필요한 라이브러리를 로드합니다.</li>
+</ul>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="classID7-12.html#cb113-1"></a><span class="kw">library</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
+<ul>
+<li>컬럼명들을 영문으로 변경 합니다.</li>
+</ul>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="classID7-12.html#cb114-1"></a><span class="kw">colnames</span>(apt) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;price&quot;</span>, <span class="st">&quot;build_year&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;road_name&quot;</span>, <span class="st">&quot;bon&quot;</span>, <span class="st">&quot;bu&quot;</span>, <span class="st">&quot;gungu&quot;</span>, <span class="st">&quot;serial&quot;</span>, <span class="st">&quot;gr_code&quot;</span>,</span>
+<span id="cb114-2"><a href="classID7-12.html#cb114-2"></a>                   <span class="st">&quot;road_code&quot;</span>, <span class="st">&quot;bgd&quot;</span>,<span class="st">&quot;bgd_bon&quot;</span>, <span class="st">&quot;bgd_bu&quot;</span>,<span class="st">&quot;bgd_sigungu&quot;</span>,<span class="st">&quot;bgd_emd&quot;</span>, <span class="st">&quot;bgd_gibun&quot;</span>,<span class="st">&quot;apt_name&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>, <span class="st">&quot;serial2&quot;</span>, <span class="st">&quot;size&quot;</span>, <span class="st">&quot;gibun&quot;</span>, <span class="st">&quot;area_code&quot;</span>, <span class="st">&quot;floor&quot;</span>)</span></code></pre></div>
+<ul>
+<li>아파트 가격에 ‘,’ 가 들어가 있어 연산이 불가능 합니다. ‘,’ 을 제거 하겠습니다.</li>
+</ul>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="classID7-12.html#cb115-1"></a><span class="kw">as_tibble</span>(apt)</span></code></pre></div>
+<pre><code>## # A tibble: 10 x 24
+##    price build_year  year road_name bon   bu    gungu serial gr_code road_code
+##    &lt;chr&gt;      &lt;int&gt; &lt;int&gt; &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;chr&gt;    &lt;int&gt;     &lt;int&gt;
+##  1 &quot;   …       2006  2019 잠실로    00088 00000 11710 01           0   3123015
+##  2 &quot;   …       2008  2019 올림픽로  00135 00000 11710 01           0   3123023
+##  3 &quot;   …       2007  2019 잠실로    00062 00000 11710 01           0   3123015
+##  4 &quot;   …       2005  2019 올림픽로  00212 00000 11710 01           0   3123023
+##  5 &quot;   …       2008  2019 올림픽로  00099 00000 11710 01           0   3123023
+##  6 &quot;   …       2005  2019 올림픽로  00212 00000 11710 01           0   3123023
+##  7 &quot;   …       2008  2019 올림픽로  00099 00000 11710 01           0   3123023
+##  8 &quot;   …       2007  2019 잠실로    00062 00000 11710 01           0   3123015
+##  9 &quot;   …       2005  2019 올림픽로  00212 00000 11710 01           0   3123023
+## 10 &quot;   …       2007  2019 잠실로    00062 00000 11710 01           0   3123015
+## # … with 14 more variables: bgd &lt;chr&gt;, bgd_bon &lt;chr&gt;, bgd_bu &lt;chr&gt;,
+## #   bgd_sigungu &lt;int&gt;, bgd_emd &lt;int&gt;, bgd_gibun &lt;int&gt;, apt_name &lt;chr&gt;,
+## #   month &lt;int&gt;, day &lt;int&gt;, serial2 &lt;chr&gt;, size &lt;dbl&gt;, gibun &lt;int&gt;,
+## #   area_code &lt;int&gt;, floor &lt;int&gt;</code></pre>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="classID7-12.html#cb117-1"></a>apt<span class="op">$</span>price &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">gsub</span>(<span class="st">&#39;[$,]&#39;</span>, <span class="st">&#39;&#39;</span>, apt<span class="op">$</span>price))</span>
+<span id="cb117-2"><a href="classID7-12.html#cb117-2"></a><span class="kw">head</span>(apt,<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##    price build_year year road_name   bon    bu gungu serial gr_code road_code
+## 1 185000       2006 2019    잠실로 00088 00000 11710     01       0   3123015
+## 2  74000       2008 2019  올림픽로 00135 00000 11710     01       0   3123023
+## 3 150000       2007 2019    잠실로 00062 00000 11710     01       0   3123015
+##       bgd bgd_bon bgd_bu bgd_sigungu bgd_emd bgd_gibun     apt_name month day
+## 1  잠실동    0044   0000       11710   10100         1 레이크팰리스     4   3
+## 2  잠실동    0022   0000       11710   10100         1       리센츠     4   3
+## 3  잠실동    0035   0000       11710   10100         1     트리지움     4   3
+##      serial2   size gibun area_code floor
+## 1 11710-5957 135.82    44     11710    21
+## 2 11710-6249  27.68    22     11710    19
+## 3 11710-6028  84.83    35     11710    29</code></pre>
+<ul>
+<li>평당 가격 컬럼을 새로 생성 합니다.</li>
+<li>1평은 3.3 제곱 미터 이기 때문에 평당가격 = 매매가 / (크기 / 3.3)</li>
+</ul>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="classID7-12.html#cb119-1"></a>apt &lt;-<span class="st"> </span><span class="kw">mutate</span>(apt, <span class="dt">price_by_area =</span> apt<span class="op">$</span>price <span class="op">/</span><span class="st"> </span>(size <span class="op">/</span><span class="st"> </span><span class="fl">3.3</span>))</span>
+<span id="cb119-2"><a href="classID7-12.html#cb119-2"></a><span class="kw">head</span>(apt,<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##    price build_year year road_name   bon    bu gungu serial gr_code road_code
+## 1 185000       2006 2019    잠실로 00088 00000 11710     01       0   3123015
+## 2  74000       2008 2019  올림픽로 00135 00000 11710     01       0   3123023
+## 3 150000       2007 2019    잠실로 00062 00000 11710     01       0   3123015
+##       bgd bgd_bon bgd_bu bgd_sigungu bgd_emd bgd_gibun     apt_name month day
+## 1  잠실동    0044   0000       11710   10100         1 레이크팰리스     4   3
+## 2  잠실동    0022   0000       11710   10100         1       리센츠     4   3
+## 3  잠실동    0035   0000       11710   10100         1     트리지움     4   3
+##      serial2   size gibun area_code floor price_by_area
+## 1 11710-5957 135.82    44     11710    21      4494.920
+## 2 11710-6249  27.68    22     11710    19      8822.254
+## 3 11710-6028  84.83    35     11710    29      5835.200</code></pre>
+<ul>
+<li>아파트 이름과 도로명 주소는 utf-8 로 인코딩 하여 다시 저장합니다.</li>
+</ul>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="classID7-12.html#cb121-1"></a>apt<span class="op">$</span>road_name =<span class="st"> </span>utf8<span class="op">::</span><span class="kw">utf8_encode</span>(apt<span class="op">$</span>road_name)</span>
+<span id="cb121-2"><a href="classID7-12.html#cb121-2"></a>apt<span class="op">$</span>apt_name =<span class="st"> </span>utf8<span class="op">::</span><span class="kw">utf8_encode</span>(apt<span class="op">$</span>apt_name)</span>
+<span id="cb121-3"><a href="classID7-12.html#cb121-3"></a><span class="co"># 맥에서 폰트가 없을경우 한글이 깨집니다. 맥에 있는 폰트로 지정 하면 됩니다.</span></span>
+<span id="cb121-4"><a href="classID7-12.html#cb121-4"></a><span class="kw">theme_set</span>(<span class="kw">theme_gray</span>(<span class="dt">base_family=</span><span class="st">&quot;AppleGothic&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="classID7-12.html#cb122-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>apt, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x=</span>build_year, <span class="dt">y=</span>price_by_area)) <span class="op">+</span></span>
+<span id="cb122-2"><a href="classID7-12.html#cb122-2"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">color=</span>apt_name)) <span class="op">+</span></span>
+<span id="cb122-3"><a href="classID7-12.html#cb122-3"></a><span class="st">    </span><span class="kw">geom_smooth</span>() <span class="op">+</span></span>
+<span id="cb122-4"><a href="classID7-12.html#cb122-4"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
+## parametric, : pseudoinverse used at 2005</code></pre>
+<pre><code>## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
+## parametric, : neighborhood radius 2.015</code></pre>
+<pre><code>## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
+## parametric, : reciprocal condition number 0</code></pre>
+<pre><code>## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
+## parametric, : There are other near singularities as well. 4.0602</code></pre>
+<pre><code>## Warning in predLoess(object$y, object$x, newx = if
+## (is.null(newdata)) object$x else if (is.data.frame(newdata))
+## as.matrix(model.frame(delete.response(terms(object)), : pseudoinverse used at
+## 2005</code></pre>
+<pre><code>## Warning in predLoess(object$y, object$x, newx = if
+## (is.null(newdata)) object$x else if (is.data.frame(newdata))
+## as.matrix(model.frame(delete.response(terms(object)), : neighborhood radius
+## 2.015</code></pre>
+<pre><code>## Warning in predLoess(object$y, object$x, newx = if
+## (is.null(newdata)) object$x else if (is.data.frame(newdata))
+## as.matrix(model.frame(delete.response(terms(object)), : reciprocal condition
+## number 0</code></pre>
+<pre><code>## Warning in predLoess(object$y, object$x, newx = if
+## (is.null(newdata)) object$x else if (is.data.frame(newdata))
+## as.matrix(model.frame(delete.response(terms(object)), : There are other near
+## singularities as well. 4.0602</code></pre>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<ul>
+<li>건축 년도가 오래 될수록 아파트 평당 가격은 어떨까요?</li>
+</ul>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="classID7-12.html#cb132-1"></a><span class="co">#apt_build_year &lt;- arrange(apt, build_year)</span></span>
+<span id="cb132-2"><a href="classID7-12.html#cb132-2"></a><span class="kw">head</span>(apt,<span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##    price build_year year road_name   bon    bu gungu serial gr_code road_code
+## 1 185000       2006 2019    잠실로 00088 00000 11710     01       0   3123015
+## 2  74000       2008 2019  올림픽로 00135 00000 11710     01       0   3123023
+## 3 150000       2007 2019    잠실로 00062 00000 11710     01       0   3123015
+## 4 168000       2005 2019  올림픽로 00212 00000 11710     01       0   3123023
+## 5 162000       2008 2019  올림픽로 00099 00000 11710     01       0   3123023
+##       bgd bgd_bon bgd_bu bgd_sigungu bgd_emd bgd_gibun       apt_name month day
+## 1  잠실동    0044   0000       11710   10100         1   레이크팰리스     4   3
+## 2  잠실동    0022   0000       11710   10100         1         리센츠     4   3
+## 3  잠실동    0035   0000       11710   10100         1       트리지움     4   3
+## 4  잠실동    0040   0000       11710   10100         1 갤러리아팰리스     4   4
+## 5  잠실동    0019   0000       11710   10100         1       잠실엘스     4   4
+##      serial2    size gibun area_code floor price_by_area
+## 1 11710-5957 135.820    44     11710    21      4494.920
+## 2 11710-6249  27.680    22     11710    19      8822.254
+## 3 11710-6028  84.830    35     11710    29      5835.200
+## 4  11710-281 151.189    40     11710    36      3666.933
+## 5 11710-6346  84.800    19     11710    30      6304.245</code></pre>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="classID7-12.html#cb134-1"></a>by_apt_name &lt;-<span class="st"> </span><span class="kw">group_by</span>(apt, apt_name, build_year)</span>
+<span id="cb134-2"><a href="classID7-12.html#cb134-2"></a>apt2 &lt;-<span class="st"> </span><span class="kw">summarise</span>(by_apt_name, <span class="dt">mean_apt_price_by_size =</span> <span class="kw">mean</span>(price_by_area, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span></code></pre></div>
+<pre><code>## `summarise()` regrouping output by &#39;apt_name&#39; (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="classID7-12.html#cb136-1"></a>apt2</span></code></pre></div>
+<pre><code>## # A tibble: 5 x 3
+## # Groups:   apt_name [5]
+##   apt_name       build_year mean_apt_price_by_size
+##   &lt;chr&gt;               &lt;int&gt;                  &lt;dbl&gt;
+## 1 갤러리아팰리스       2005                  3643.
+## 2 레이크팰리스         2006                  4495.
+## 3 리센츠               2008                  8822.
+## 4 잠실엘스             2008                  6204.
+## 5 트리지움             2007                  6154.</code></pre>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="classID7-12.html#cb138-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> apt2, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(apt_name, build_year), <span class="dt">y =</span>mean_apt_price_by_size )) <span class="op">+</span></span>
+<span id="cb138-2"><a href="classID7-12.html#cb138-2"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>,<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">fill =</span> build_year)) <span class="op">+</span></span>
+<span id="cb138-3"><a href="classID7-12.html#cb138-3"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x=</span><span class="kw">element_text</span>(<span class="dt">angle =</span><span class="dv">90</span>, <span class="dt">vjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
+<div id="classID7-26" class="section level3">
+<h3><span class="header-section-number">9.2.1</span> 전체 코드</h3>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="classID7-12.html#cb139-1"></a><span class="kw">library</span>(<span class="st">&#39;httr&#39;</span>)</span>
+<span id="cb139-2"><a href="classID7-12.html#cb139-2"></a><span class="kw">library</span>(<span class="st">&#39;urltools&#39;</span>)</span>
+<span id="cb139-3"><a href="classID7-12.html#cb139-3"></a><span class="kw">library</span>(<span class="st">&#39;jsonlite&#39;</span>)</span>
+<span id="cb139-4"><a href="classID7-12.html#cb139-4"></a><span class="kw">library</span>(<span class="st">&#39;ggplot2&#39;</span>)</span>
+<span id="cb139-5"><a href="classID7-12.html#cb139-5"></a><span class="kw">library</span>(<span class="st">&quot;tidyverse&quot;</span>)</span>
+<span id="cb139-6"><a href="classID7-12.html#cb139-6"></a></span>
+<span id="cb139-7"><a href="classID7-12.html#cb139-7"></a>path &lt;-<span class="st"> &quot;http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?&quot;</span></span>
+<span id="cb139-8"><a href="classID7-12.html#cb139-8"></a>key &lt;-<span class="st"> &quot;%2F9qD%2FPbjCfTTM33R%2FzWiOuX5MBKgkrrwi62FHsQx%2B5YlpUFzvtVuxH8ehLKhuFzf53TQvU6OYF2SGI2Mx9SwHA%3D%3D&quot;</span></span>
+<span id="cb139-9"><a href="classID7-12.html#cb139-9"></a>service_key &lt;-<span class="st"> </span>utf8<span class="op">::</span><span class="kw">utf8_encode</span>(<span class="kw">URLencode</span>(key))</span>
+<span id="cb139-10"><a href="classID7-12.html#cb139-10"></a></span>
+<span id="cb139-11"><a href="classID7-12.html#cb139-11"></a>request &lt;-<span class="st"> </span><span class="kw">paste</span>(path,</span>
+<span id="cb139-12"><a href="classID7-12.html#cb139-12"></a>                 <span class="st">&quot;LAWD_CD&quot;</span>,<span class="st">&quot;=&quot;</span>,<span class="dv">11710</span>,<span class="st">&quot;&amp;&quot;</span>,</span>
+<span id="cb139-13"><a href="classID7-12.html#cb139-13"></a>                 <span class="st">&quot;DEAL_YMD&quot;</span>,<span class="st">&quot;=&quot;</span>,<span class="dv">201904</span>,<span class="st">&quot;&amp;&quot;</span>,</span>
+<span id="cb139-14"><a href="classID7-12.html#cb139-14"></a>                 <span class="st">&quot;serviceKey&quot;</span>,<span class="st">&quot;=&quot;</span>,service_key,</span>
+<span id="cb139-15"><a href="classID7-12.html#cb139-15"></a>                 <span class="dt">sep=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb139-16"><a href="classID7-12.html#cb139-16"></a>response &lt;-<span class="st"> </span><span class="kw">GET</span>(request)</span>
+<span id="cb139-17"><a href="classID7-12.html#cb139-17"></a></span>
+<span id="cb139-18"><a href="classID7-12.html#cb139-18"></a><span class="kw">http_status</span>(response)</span>
+<span id="cb139-19"><a href="classID7-12.html#cb139-19"></a></span>
+<span id="cb139-20"><a href="classID7-12.html#cb139-20"></a>content &lt;-<span class="st"> </span><span class="kw">content</span>(response, <span class="st">&quot;text&quot;</span>,<span class="dt">encoding =</span> <span class="st">&quot;UTF-8&quot;</span>)</span>
+<span id="cb139-21"><a href="classID7-12.html#cb139-21"></a>res &lt;-<span class="st"> </span><span class="kw">fromJSON</span>(content)</span>
+<span id="cb139-22"><a href="classID7-12.html#cb139-22"></a></span>
+<span id="cb139-23"><a href="classID7-12.html#cb139-23"></a><span class="kw">str</span>(res<span class="op">$</span>response<span class="op">$</span>body<span class="op">$</span>items<span class="op">$</span>item)</span>
+<span id="cb139-24"><a href="classID7-12.html#cb139-24"></a></span>
+<span id="cb139-25"><a href="classID7-12.html#cb139-25"></a>apt =<span class="st"> </span>res<span class="op">$</span>response<span class="op">$</span>body<span class="op">$</span>items<span class="op">$</span>item</span>
+<span id="cb139-26"><a href="classID7-12.html#cb139-26"></a><span class="kw">str</span>(apt)</span>
+<span id="cb139-27"><a href="classID7-12.html#cb139-27"></a></span>
+<span id="cb139-28"><a href="classID7-12.html#cb139-28"></a><span class="kw">colnames</span>(apt)</span>
+<span id="cb139-29"><a href="classID7-12.html#cb139-29"></a></span>
+<span id="cb139-30"><a href="classID7-12.html#cb139-30"></a><span class="kw">colnames</span>(apt) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;price&quot;</span>, <span class="st">&quot;build_year&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;road_name&quot;</span>, <span class="st">&quot;bon&quot;</span>, <span class="st">&quot;bu&quot;</span>, <span class="st">&quot;gungu&quot;</span>, <span class="st">&quot;serial&quot;</span>, <span class="st">&quot;gr_code&quot;</span>,</span>
+<span id="cb139-31"><a href="classID7-12.html#cb139-31"></a>                   <span class="st">&quot;road_code&quot;</span>, <span class="st">&quot;bgd&quot;</span>,<span class="st">&quot;bgd_bon&quot;</span>, <span class="st">&quot;bgd_bu&quot;</span>,<span class="st">&quot;bgd_sigungu&quot;</span>,<span class="st">&quot;bgd_emd&quot;</span>, <span class="st">&quot;bgd_gibun&quot;</span>,<span class="st">&quot;apt_name&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>, <span class="st">&quot;serial2&quot;</span>, <span class="st">&quot;size&quot;</span>, <span class="st">&quot;gibun&quot;</span>, <span class="st">&quot;area_code&quot;</span>, <span class="st">&quot;floor&quot;</span>)</span>
+<span id="cb139-32"><a href="classID7-12.html#cb139-32"></a></span>
+<span id="cb139-33"><a href="classID7-12.html#cb139-33"></a><span class="kw">as_tibble</span>(apt)</span>
+<span id="cb139-34"><a href="classID7-12.html#cb139-34"></a>apt<span class="op">$</span>price &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">gsub</span>(<span class="st">&#39;[$,]&#39;</span>, <span class="st">&#39;&#39;</span>, apt<span class="op">$</span>price))</span>
+<span id="cb139-35"><a href="classID7-12.html#cb139-35"></a>apt &lt;-<span class="st"> </span><span class="kw">mutate</span>(apt, <span class="dt">price_by_area =</span> apt<span class="op">$</span>price <span class="op">/</span><span class="st"> </span>(size <span class="op">/</span><span class="st"> </span><span class="fl">3.3</span>))</span>
+<span id="cb139-36"><a href="classID7-12.html#cb139-36"></a></span>
+<span id="cb139-37"><a href="classID7-12.html#cb139-37"></a>apt<span class="op">$</span>road_name =<span class="st"> </span>utf8<span class="op">::</span><span class="kw">utf8_encode</span>(apt<span class="op">$</span>road_name)</span>
+<span id="cb139-38"><a href="classID7-12.html#cb139-38"></a>apt<span class="op">$</span>apt_name =<span class="st"> </span>utf8<span class="op">::</span><span class="kw">utf8_encode</span>(apt<span class="op">$</span>apt_name)</span>
+<span id="cb139-39"><a href="classID7-12.html#cb139-39"></a></span>
+<span id="cb139-40"><a href="classID7-12.html#cb139-40"></a><span class="co"># 데이터셋 저장</span></span>
+<span id="cb139-41"><a href="classID7-12.html#cb139-41"></a><span class="kw">write_rds</span>(apt, <span class="dt">path=</span><span class="st">&quot;apt.rds&quot;</span>)</span>
+<span id="cb139-42"><a href="classID7-12.html#cb139-42"></a></span>
+<span id="cb139-43"><a href="classID7-12.html#cb139-43"></a><span class="kw">theme_set</span>(<span class="kw">theme_gray</span>(<span class="dt">base_family=</span><span class="st">&quot;AppleGothic&quot;</span>))</span>
+<span id="cb139-44"><a href="classID7-12.html#cb139-44"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>apt, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x=</span>build_year, <span class="dt">y=</span>price_by_area)) <span class="op">+</span></span>
+<span id="cb139-45"><a href="classID7-12.html#cb139-45"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">color=</span>apt_name)) <span class="op">+</span></span>
+<span id="cb139-46"><a href="classID7-12.html#cb139-46"></a><span class="st">    </span><span class="kw">geom_smooth</span>() <span class="op">+</span></span>
+<span id="cb139-47"><a href="classID7-12.html#cb139-47"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="classID7-12.html#cb140-1"></a>by_apt_name &lt;-<span class="st"> </span><span class="kw">group_by</span>(apt, apt_name, build_year)</span>
+<span id="cb140-2"><a href="classID7-12.html#cb140-2"></a>apt2 &lt;-<span class="st"> </span><span class="kw">summarise</span>(by_apt_name, <span class="dt">mean_apt_price_by_size =</span> <span class="kw">mean</span>(price_by_area, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb140-3"><a href="classID7-12.html#cb140-3"></a>apt2</span>
+<span id="cb140-4"><a href="classID7-12.html#cb140-4"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> apt2, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(apt_name, build_year), <span class="dt">y =</span>mean_apt_price_by_size )) <span class="op">+</span></span>
+<span id="cb140-5"><a href="classID7-12.html#cb140-5"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>,<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">fill =</span> build_year)) <span class="op">+</span></span>
+<span id="cb140-6"><a href="classID7-12.html#cb140-6"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x=</span><span class="kw">element_text</span>(<span class="dt">angle =</span><span class="dv">90</span>, <span class="dt">vjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-59-2.png" width="672" /></p>
+</div>
+</div>
+<div id="classID7-28" class="section level2">
+<h2><span class="header-section-number">9.3</span> shiny</h2>
+<p>shiny 라이브러리 이용해서 동적 그래프를 생성할 수 있습니다.</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="classID7-12.html#cb141-1"></a><span class="kw">library</span>(shiny)</span></code></pre></div>
+<pre><code>## Warning: package &#39;shiny&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## 
+## Attaching package: &#39;shiny&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:jsonlite&#39;:
+## 
+##     validate</code></pre>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="classID7-12.html#cb145-1"></a><span class="co"># Define UI for application that draws a histogram</span></span>
+<span id="cb145-2"><a href="classID7-12.html#cb145-2"></a>bike &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;bikeshare.csv&#39;</span>)</span></code></pre></div>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   datetime = col_datetime(format = &quot;&quot;),
+##   season = col_double(),
+##   holiday = col_double(),
+##   workingday = col_double(),
+##   weather = col_double(),
+##   temp = col_double(),
+##   atemp = col_double(),
+##   humidity = col_double(),
+##   windspeed = col_double(),
+##   casual = col_double(),
+##   registered = col_double(),
+##   count = col_double()
+## )</code></pre>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="classID7-12.html#cb147-1"></a>bike_add_time &lt;-<span class="st"> </span>bike <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">hour =</span> <span class="kw">format</span>(datetime, <span class="st">&quot;%H&quot;</span>))</span>
+<span id="cb147-2"><a href="classID7-12.html#cb147-2"></a>datetime_info &lt;-<span class="st"> </span>bike_add_time <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">distinct</span>(hour) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(hour) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(hour)</span>
+<span id="cb147-3"><a href="classID7-12.html#cb147-3"></a></span>
+<span id="cb147-4"><a href="classID7-12.html#cb147-4"></a>ui &lt;-<span class="st"> </span><span class="kw">fluidPage</span>(</span>
+<span id="cb147-5"><a href="classID7-12.html#cb147-5"></a>   </span>
+<span id="cb147-6"><a href="classID7-12.html#cb147-6"></a>   <span class="co"># Application title</span></span>
+<span id="cb147-7"><a href="classID7-12.html#cb147-7"></a>   <span class="kw">titlePanel</span>(<span class="st">&quot;Old Faithful Geyser Data&quot;</span>),</span>
+<span id="cb147-8"><a href="classID7-12.html#cb147-8"></a>   </span>
+<span id="cb147-9"><a href="classID7-12.html#cb147-9"></a>   <span class="co"># Sidebar with a slider input for number of bins </span></span>
+<span id="cb147-10"><a href="classID7-12.html#cb147-10"></a>   <span class="kw">sidebarLayout</span>(</span>
+<span id="cb147-11"><a href="classID7-12.html#cb147-11"></a>      <span class="kw">sidebarPanel</span>(</span>
+<span id="cb147-12"><a href="classID7-12.html#cb147-12"></a>          <span class="kw">selectInput</span>(<span class="st">&quot;dataSelect&quot;</span>,<span class="st">&quot; :&quot;</span>, <span class="dt">choices=</span>datetime_info)</span>
+<span id="cb147-13"><a href="classID7-12.html#cb147-13"></a>      ),</span>
+<span id="cb147-14"><a href="classID7-12.html#cb147-14"></a>      </span>
+<span id="cb147-15"><a href="classID7-12.html#cb147-15"></a>      <span class="co"># Show a plot of the generated distribution</span></span>
+<span id="cb147-16"><a href="classID7-12.html#cb147-16"></a>      <span class="kw">mainPanel</span>(</span>
+<span id="cb147-17"><a href="classID7-12.html#cb147-17"></a>         <span class="kw">plotOutput</span>(<span class="st">&quot;distPlot&quot;</span>)</span>
+<span id="cb147-18"><a href="classID7-12.html#cb147-18"></a>      )</span>
+<span id="cb147-19"><a href="classID7-12.html#cb147-19"></a>   )</span>
+<span id="cb147-20"><a href="classID7-12.html#cb147-20"></a>)</span>
+<span id="cb147-21"><a href="classID7-12.html#cb147-21"></a></span>
+<span id="cb147-22"><a href="classID7-12.html#cb147-22"></a><span class="co"># Define server logic required to draw a histogram</span></span>
+<span id="cb147-23"><a href="classID7-12.html#cb147-23"></a>server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {</span>
+<span id="cb147-24"><a href="classID7-12.html#cb147-24"></a>   </span>
+<span id="cb147-25"><a href="classID7-12.html#cb147-25"></a>   output<span class="op">$</span>distPlot &lt;-<span class="st"> </span><span class="kw">renderPlot</span>({</span>
+<span id="cb147-26"><a href="classID7-12.html#cb147-26"></a>     bike &lt;-<span class="st"> </span>bike_add_time <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(hour <span class="op">==</span><span class="st"> </span>input<span class="op">$</span>dataSelect)</span>
+<span id="cb147-27"><a href="classID7-12.html#cb147-27"></a>     </span>
+<span id="cb147-28"><a href="classID7-12.html#cb147-28"></a>     <span class="kw">ggplot</span>(<span class="kw">filter</span>(bike, workingday<span class="op">==</span><span class="dv">1</span>), <span class="kw">aes</span>(<span class="dt">x=</span>hour, <span class="dt">y=</span>count)) <span class="op">+</span></span>
+<span id="cb147-29"><a href="classID7-12.html#cb147-29"></a><span class="st">     </span><span class="kw">geom_point</span>()</span>
+<span id="cb147-30"><a href="classID7-12.html#cb147-30"></a>   })</span>
+<span id="cb147-31"><a href="classID7-12.html#cb147-31"></a>}</span>
+<span id="cb147-32"><a href="classID7-12.html#cb147-32"></a></span>
+<span id="cb147-33"><a href="classID7-12.html#cb147-33"></a><span class="co"># Run the application </span></span>
+<span id="cb147-34"><a href="classID7-12.html#cb147-34"></a><span class="kw">shinyApp</span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> server)</span></code></pre></div>
+<div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div>
+</div>
+<div id="classID7-29" class="section level2">
+<h2><span class="header-section-number">9.4</span> API를 이용한 국토부 실거래가 조회2</h2>
+<div id="classID7-30" class="section level3">
+<h3><span class="header-section-number">9.4.1</span> 파일 불러오기</h3>
+<ul>
+<li>텍스트 파일 불러오기</li>
+</ul>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="classID7-12.html#cb148-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb148-2"><a href="classID7-12.html#cb148-2"></a><span class="kw">library</span>(triebeard)</span>
+<span id="cb148-3"><a href="classID7-12.html#cb148-3"></a><span class="kw">library</span>(urltools)</span>
+<span id="cb148-4"><a href="classID7-12.html#cb148-4"></a><span class="kw">library</span>(httr)</span>
+<span id="cb148-5"><a href="classID7-12.html#cb148-5"></a><span class="kw">library</span>(lubridate)</span></code></pre></div>
+<pre><code>## Warning: package &#39;lubridate&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## 
+## Attaching package: &#39;lubridate&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     date, intersect, setdiff, union</code></pre>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="classID7-12.html#cb152-1"></a><span class="kw">library</span>(zoo)</span></code></pre></div>
+<pre><code>## Warning: package &#39;zoo&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## 
+## Attaching package: &#39;zoo&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     as.Date, as.Date.numeric</code></pre>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="classID7-12.html#cb156-1"></a><span class="kw">library</span>(jsonlite)</span>
+<span id="cb156-2"><a href="classID7-12.html#cb156-2"></a><span class="kw">library</span>(showtext)</span></code></pre></div>
+<pre><code>## Warning: package &#39;showtext&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## Loading required package: sysfonts</code></pre>
+<pre><code>## Warning: package &#39;sysfonts&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## Loading required package: showtextdb</code></pre>
+<pre><code>## Warning: package &#39;showtextdb&#39; was built under R version 4.0.2</code></pre>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="classID7-12.html#cb162-1"></a>bgd =<span class="st"> </span><span class="kw">read_csv</span>(<span class="dt">file =</span> <span class="st">&#39;./data/bgd2.txt&#39;</span>, </span>
+<span id="cb162-2"><a href="classID7-12.html#cb162-2"></a>               <span class="dt">col_types =</span> <span class="kw">list</span>(</span>
+<span id="cb162-3"><a href="classID7-12.html#cb162-3"></a>                                   <span class="dt">code =</span> <span class="kw">col_character</span>(),</span>
+<span id="cb162-4"><a href="classID7-12.html#cb162-4"></a>                                   <span class="dt">name =</span> <span class="kw">col_character</span>(),</span>
+<span id="cb162-5"><a href="classID7-12.html#cb162-5"></a>                                   <span class="dt">exist =</span> <span class="kw">col_character</span>()</span>
+<span id="cb162-6"><a href="classID7-12.html#cb162-6"></a>                ),</span>
+<span id="cb162-7"><a href="classID7-12.html#cb162-7"></a><span class="dt">col_names =</span> <span class="ot">TRUE</span></span>
+<span id="cb162-8"><a href="classID7-12.html#cb162-8"></a>)</span>
+<span id="cb162-9"><a href="classID7-12.html#cb162-9"></a></span>
+<span id="cb162-10"><a href="classID7-12.html#cb162-10"></a><span class="co"># 컬럼명을 영문으로 변경</span></span>
+<span id="cb162-11"><a href="classID7-12.html#cb162-11"></a><span class="kw">colnames</span>(bgd) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;code&#39;</span>,<span class="st">&#39;name&#39;</span>,<span class="st">&#39;exist&#39;</span>)</span>
+<span id="cb162-12"><a href="classID7-12.html#cb162-12"></a></span>
+<span id="cb162-13"><a href="classID7-12.html#cb162-13"></a><span class="co"># 현재 존재하는 법정동만 따로 저장</span></span>
+<span id="cb162-14"><a href="classID7-12.html#cb162-14"></a>exist_bgd =<span class="st"> </span><span class="kw">filter</span>(bgd, exist <span class="op">==</span><span class="st"> &#39;존재&#39;</span>)</span>
+<span id="cb162-15"><a href="classID7-12.html#cb162-15"></a></span>
+<span id="cb162-16"><a href="classID7-12.html#cb162-16"></a><span class="co"># 시도 코드와 읍면동 코드 분리 (시도코드는 5째자리, 이후는 읍면동 코드)</span></span>
+<span id="cb162-17"><a href="classID7-12.html#cb162-17"></a>bgd<span class="op">$</span>sido &lt;-<span class="st"> </span><span class="kw">substr</span>(bgd<span class="op">$</span>code, <span class="dv">1</span>,<span class="dv">5</span>)</span>
+<span id="cb162-18"><a href="classID7-12.html#cb162-18"></a></span>
+<span id="cb162-19"><a href="classID7-12.html#cb162-19"></a>bgd<span class="op">$</span>eupMyunDong &lt;-<span class="st"> </span><span class="kw">substr</span>(bgd<span class="op">$</span>code, <span class="dv">6</span>,<span class="dv">100</span>)</span></code></pre></div>
+</div>
+<div id="classID7-31" class="section level3">
+<h3><span class="header-section-number">9.4.2</span> 특정 구의 시군구 코드 알아내기</h3>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="classID7-12.html#cb163-1"></a>sido_code &lt;-<span class="st"> </span>bgd <span class="op">%&gt;%</span></span>
+<span id="cb163-2"><a href="classID7-12.html#cb163-2"></a><span class="kw">filter</span>(<span class="kw">grepl</span>(<span class="st">&quot;송파구&quot;</span>, name, <span class="dt">fixed =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb163-3"><a href="classID7-12.html#cb163-3"></a><span class="kw">filter</span>(eupMyunDong <span class="op">==</span><span class="st"> &#39;00000&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb163-4"><a href="classID7-12.html#cb163-4"></a><span class="kw">select</span>(sido)</span>
+<span id="cb163-5"><a href="classID7-12.html#cb163-5"></a></span>
+<span id="cb163-6"><a href="classID7-12.html#cb163-6"></a>sido_code</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 1
+##   sido 
+##   &lt;chr&gt;
+## 1 11710</code></pre>
+</div>
+<div id="classID7-32" class="section level3">
+<h3><span class="header-section-number">9.4.3</span> 구군 명을 넣으면 구군코드를 반환하는 함수 만들기</h3>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="classID7-12.html#cb165-1"></a>getGuGunCode &lt;-<span class="st"> </span><span class="cf">function</span>(gugun){</span>
+<span id="cb165-2"><a href="classID7-12.html#cb165-2"></a>    bgd =<span class="st"> </span><span class="kw">read_csv</span>(</span>
+<span id="cb165-3"><a href="classID7-12.html#cb165-3"></a>        <span class="dt">file =</span> <span class="st">&#39;./data/bgd2.txt&#39;</span>, </span>
+<span id="cb165-4"><a href="classID7-12.html#cb165-4"></a>        <span class="dt">col_types =</span> <span class="kw">list</span>(</span>
+<span id="cb165-5"><a href="classID7-12.html#cb165-5"></a>            <span class="dt">code =</span> <span class="kw">col_character</span>(),</span>
+<span id="cb165-6"><a href="classID7-12.html#cb165-6"></a>            <span class="dt">name =</span> <span class="kw">col_character</span>(),</span>
+<span id="cb165-7"><a href="classID7-12.html#cb165-7"></a>            <span class="dt">exist =</span> <span class="kw">col_character</span>()</span>
+<span id="cb165-8"><a href="classID7-12.html#cb165-8"></a>        ),</span>
+<span id="cb165-9"><a href="classID7-12.html#cb165-9"></a>        <span class="dt">col_names =</span> <span class="ot">TRUE</span></span>
+<span id="cb165-10"><a href="classID7-12.html#cb165-10"></a>    )</span>
+<span id="cb165-11"><a href="classID7-12.html#cb165-11"></a>    <span class="kw">colnames</span>(bgd) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;code&#39;</span>,<span class="st">&#39;name&#39;</span>,<span class="st">&#39;exist&#39;</span>)</span>
+<span id="cb165-12"><a href="classID7-12.html#cb165-12"></a>    bgd<span class="op">$</span>sido &lt;-<span class="st"> </span><span class="kw">substr</span>(bgd<span class="op">$</span>code, <span class="dv">1</span>,<span class="dv">5</span>)</span>
+<span id="cb165-13"><a href="classID7-12.html#cb165-13"></a>    bgd<span class="op">$</span>eupMyunDong &lt;-<span class="st"> </span><span class="kw">substr</span>(bgd<span class="op">$</span>code, <span class="dv">6</span>,<span class="dv">100</span>)</span>
+<span id="cb165-14"><a href="classID7-12.html#cb165-14"></a>    </span>
+<span id="cb165-15"><a href="classID7-12.html#cb165-15"></a>    bgd <span class="op">%&gt;%</span></span>
+<span id="cb165-16"><a href="classID7-12.html#cb165-16"></a><span class="st">    </span><span class="kw">filter</span>(eupMyunDong <span class="op">==</span><span class="st"> &#39;00000&#39;</span>)</span>
+<span id="cb165-17"><a href="classID7-12.html#cb165-17"></a>    </span>
+<span id="cb165-18"><a href="classID7-12.html#cb165-18"></a>    sido_code &lt;-<span class="st"> </span>bgd <span class="op">%&gt;%</span></span>
+<span id="cb165-19"><a href="classID7-12.html#cb165-19"></a><span class="st">    </span><span class="kw">filter</span>(<span class="kw">grepl</span>(gugun, name, <span class="dt">fixed =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb165-20"><a href="classID7-12.html#cb165-20"></a><span class="st">    </span><span class="kw">filter</span>(eupMyunDong <span class="op">==</span><span class="st"> &#39;00000&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb165-21"><a href="classID7-12.html#cb165-21"></a><span class="st">    </span><span class="kw">select</span>(sido)</span>
+<span id="cb165-22"><a href="classID7-12.html#cb165-22"></a>    <span class="kw">return</span> (sido_code<span class="op">$</span>sido)</span>
+<span id="cb165-23"><a href="classID7-12.html#cb165-23"></a>}</span></code></pre></div>
+<ul>
+<li>테스트 해보기</li>
+</ul>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="classID7-12.html#cb166-1"></a>(code &lt;-<span class="st"> </span><span class="kw">getGuGunCode</span>(<span class="st">&#39;구로구&#39;</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;11530&quot;</code></pre>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="classID7-12.html#cb168-1"></a>(code &lt;-<span class="st"> </span><span class="kw">getGuGunCode</span>(<span class="st">&#39;거창군&#39;</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;48880&quot;</code></pre>
+<ul>
+<li>서비스키 등록</li>
+</ul>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="classID7-12.html#cb170-1"></a>path &lt;-<span class="st"> &quot;http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?&quot;</span></span>
+<span id="cb170-2"><a href="classID7-12.html#cb170-2"></a>key &lt;-<span class="st"> &quot;%2F9qD%2FPbjCfTTM33R%2FzWiOuX5MBKgkrrwi62FHsQx%2B5YlpUFzvtVuxH8ehLKhuFzf53TQvU6OYF2SGI2Mx9SwHA%3D%3D&quot;</span></span>
+<span id="cb170-3"><a href="classID7-12.html#cb170-3"></a>service_key &lt;-<span class="st"> </span>utf8<span class="op">::</span><span class="kw">utf8_encode</span>(<span class="kw">URLencode</span>(key))</span></code></pre></div>
+<ul>
+<li>월 더하는 함수</li>
+</ul>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="classID7-12.html#cb171-1"></a>addmonth &lt;-<span class="st"> </span><span class="cf">function</span>(yearMonth){</span>
+<span id="cb171-2"><a href="classID7-12.html#cb171-2"></a>    post_fix &lt;-<span class="st"> &#39;01&#39;</span></span>
+<span id="cb171-3"><a href="classID7-12.html#cb171-3"></a>    da &lt;-<span class="st"> </span><span class="kw">paste</span>(yearMonth , post_fix)</span>
+<span id="cb171-4"><a href="classID7-12.html#cb171-4"></a>    da2&lt;-<span class="kw">substr</span>(<span class="kw">ymd</span>(da) <span class="op">%m+%</span><span class="st"> </span><span class="kw">months</span>(<span class="dv">1</span>),<span class="dv">1</span>,<span class="dv">7</span>)</span>
+<span id="cb171-5"><a href="classID7-12.html#cb171-5"></a>    <span class="kw">gsub</span>(<span class="st">&quot;-&quot;</span>, <span class="st">&quot;&quot;</span>, da2)</span>
+<span id="cb171-6"><a href="classID7-12.html#cb171-6"></a>}</span></code></pre></div>
+<ul>
+<li>시작월 부터 끝월 사이 벡터로 구하기</li>
+</ul>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="classID7-12.html#cb172-1"></a>startEndMonth &lt;-<span class="st"> </span><span class="cf">function</span>(start, end){</span>
+<span id="cb172-2"><a href="classID7-12.html#cb172-2"></a>    current &lt;-<span class="st"> </span>start</span>
+<span id="cb172-3"><a href="classID7-12.html#cb172-3"></a>    vector &lt;-<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb172-4"><a href="classID7-12.html#cb172-4"></a>    <span class="cf">while</span>(current <span class="op">&lt;=</span><span class="st"> </span>end){</span>
+<span id="cb172-5"><a href="classID7-12.html#cb172-5"></a>        vector &lt;-<span class="st"> </span><span class="kw">c</span>(vector, current)</span>
+<span id="cb172-6"><a href="classID7-12.html#cb172-6"></a>        current &lt;-<span class="st"> </span><span class="kw">addmonth</span>(current)</span>
+<span id="cb172-7"><a href="classID7-12.html#cb172-7"></a>    }</span>
+<span id="cb172-8"><a href="classID7-12.html#cb172-8"></a>    <span class="kw">return</span>(vector)</span>
+<span id="cb172-9"><a href="classID7-12.html#cb172-9"></a>}</span></code></pre></div>
+<ul>
+<li>테스트 해보기</li>
+</ul>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="classID7-12.html#cb173-1"></a><span class="kw">startEndMonth</span>(<span class="st">&#39;201901&#39;</span>,<span class="st">&#39;201906&#39;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;201901&quot; &quot;201902&quot; &quot;201903&quot; &quot;201904&quot; &quot;201905&quot; &quot;201906&quot;</code></pre>
+<ul>
+<li>실거래 response 를 받아서 Tibble 로 반환하는 함수</li>
+</ul>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="classID7-12.html#cb175-1"></a>resAsTibble &lt;-<span class="st"> </span><span class="cf">function</span>(yearMonth, guGunCode){</span>
+<span id="cb175-2"><a href="classID7-12.html#cb175-2"></a>    request &lt;-<span class="st"> </span><span class="kw">paste</span>(path,</span>
+<span id="cb175-3"><a href="classID7-12.html#cb175-3"></a>                   <span class="st">&quot;LAWD_CD&quot;</span>,<span class="st">&quot;=&quot;</span>,guGunCode,<span class="st">&quot;&amp;&quot;</span>,</span>
+<span id="cb175-4"><a href="classID7-12.html#cb175-4"></a>                   <span class="st">&quot;DEAL_YMD&quot;</span>,<span class="st">&quot;=&quot;</span>,yearMonth,<span class="st">&quot;&amp;&quot;</span>,</span>
+<span id="cb175-5"><a href="classID7-12.html#cb175-5"></a>                   <span class="st">&quot;serviceKey&quot;</span>,<span class="st">&quot;=&quot;</span>,service_key,</span>
+<span id="cb175-6"><a href="classID7-12.html#cb175-6"></a>                   <span class="dt">sep=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb175-7"><a href="classID7-12.html#cb175-7"></a>    response &lt;-<span class="st"> </span><span class="kw">GET</span>(request)</span>
+<span id="cb175-8"><a href="classID7-12.html#cb175-8"></a></span>
+<span id="cb175-9"><a href="classID7-12.html#cb175-9"></a>            </span>
+<span id="cb175-10"><a href="classID7-12.html#cb175-10"></a>    content &lt;-<span class="st"> </span><span class="kw">content</span>(response, <span class="st">&quot;text&quot;</span>,<span class="dt">encoding =</span> <span class="st">&quot;UTF-8&quot;</span>)</span>
+<span id="cb175-11"><a href="classID7-12.html#cb175-11"></a>    res &lt;-<span class="st"> </span><span class="kw">fromJSON</span>(content)</span>
+<span id="cb175-12"><a href="classID7-12.html#cb175-12"></a>    apt =<span class="st"> </span>res<span class="op">$</span>response<span class="op">$</span>body<span class="op">$</span>items<span class="op">$</span>item</span>
+<span id="cb175-13"><a href="classID7-12.html#cb175-13"></a>    </span>
+<span id="cb175-14"><a href="classID7-12.html#cb175-14"></a>    <span class="co"># 컬럼명을 영문으로 변경</span></span>
+<span id="cb175-15"><a href="classID7-12.html#cb175-15"></a>    <span class="kw">colnames</span>(apt) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;price&quot;</span>, <span class="st">&quot;build_year&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;road_name&quot;</span>, <span class="st">&quot;bon&quot;</span>, <span class="st">&quot;bu&quot;</span>, <span class="st">&quot;gungu&quot;</span>, <span class="st">&quot;serial&quot;</span>, <span class="st">&quot;gr_code&quot;</span>,</span>
+<span id="cb175-16"><a href="classID7-12.html#cb175-16"></a>                       <span class="st">&quot;road_code&quot;</span>, <span class="st">&quot;bgd&quot;</span>,<span class="st">&quot;bgd_bon&quot;</span>, <span class="st">&quot;bgd_bu&quot;</span>,<span class="st">&quot;bgd_sigungu&quot;</span>,<span class="st">&quot;bgd_emd&quot;</span>, <span class="st">&quot;bgd_gibun&quot;</span>,<span class="st">&quot;apt_name&quot;</span>, </span>
+<span id="cb175-17"><a href="classID7-12.html#cb175-17"></a>                       <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>, <span class="st">&quot;serial2&quot;</span>, <span class="st">&quot;size&quot;</span>, <span class="st">&quot;gibun&quot;</span>, <span class="st">&quot;area_code&quot;</span>, <span class="st">&quot;floor&quot;</span>)</span>
+<span id="cb175-18"><a href="classID7-12.html#cb175-18"></a>    <span class="kw">as.tibble</span>(apt)</span>
+<span id="cb175-19"><a href="classID7-12.html#cb175-19"></a>    </span>
+<span id="cb175-20"><a href="classID7-12.html#cb175-20"></a>    <span class="co">#아파트 가격에서 &#39;,&#39; 를 빼고 숫자로 변환</span></span>
+<span id="cb175-21"><a href="classID7-12.html#cb175-21"></a>    apt<span class="op">$</span>price &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">gsub</span>(<span class="st">&#39;[$,]&#39;</span>, <span class="st">&#39;&#39;</span>, apt<span class="op">$</span>price))</span>
+<span id="cb175-22"><a href="classID7-12.html#cb175-22"></a>    <span class="co"># str(apt)</span></span>
+<span id="cb175-23"><a href="classID7-12.html#cb175-23"></a>    </span>
+<span id="cb175-24"><a href="classID7-12.html#cb175-24"></a>    <span class="co">#평단가 계산</span></span>
+<span id="cb175-25"><a href="classID7-12.html#cb175-25"></a>    apt &lt;-<span class="st"> </span><span class="kw">mutate</span>(apt, <span class="dt">price_by_area =</span> apt<span class="op">$</span>price <span class="op">/</span><span class="st"> </span>(<span class="kw">as.double</span>(apt<span class="op">$</span>size) <span class="op">/</span><span class="st"> </span><span class="fl">3.3</span>))</span>
+<span id="cb175-26"><a href="classID7-12.html#cb175-26"></a>    apt &lt;-<span class="st"> </span><span class="kw">mutate</span>(apt, <span class="dt">deal_ymd =</span> <span class="kw">as.Date</span>( <span class="kw">paste</span>(apt<span class="op">$</span>year, apt<span class="op">$</span>month, apt<span class="op">$</span>day,<span class="dt">sep=</span><span class="st">&quot;-&quot;</span>),<span class="st">&quot;%Y-%m-%d&quot;</span>) )</span>
+<span id="cb175-27"><a href="classID7-12.html#cb175-27"></a>    </span>
+<span id="cb175-28"><a href="classID7-12.html#cb175-28"></a>    <span class="co">#한글 값들을 utf-8 로 수정</span></span>
+<span id="cb175-29"><a href="classID7-12.html#cb175-29"></a>    apt<span class="op">$</span>road_name =<span class="st"> </span>utf8<span class="op">::</span><span class="kw">utf8_encode</span>(apt<span class="op">$</span>road_name)</span>
+<span id="cb175-30"><a href="classID7-12.html#cb175-30"></a>    apt<span class="op">$</span>apt_name =<span class="st"> </span>utf8<span class="op">::</span><span class="kw">utf8_encode</span>(apt<span class="op">$</span>apt_name)</span>
+<span id="cb175-31"><a href="classID7-12.html#cb175-31"></a>    apt[,<span class="st">&#39;build_year&#39;</span>] =<span class="st"> </span><span class="kw">floor</span>(apt[,<span class="st">&#39;build_year&#39;</span>])</span>
+<span id="cb175-32"><a href="classID7-12.html#cb175-32"></a>    </span>
+<span id="cb175-33"><a href="classID7-12.html#cb175-33"></a>    </span>
+<span id="cb175-34"><a href="classID7-12.html#cb175-34"></a>    <span class="kw">return</span>(apt)</span>
+<span id="cb175-35"><a href="classID7-12.html#cb175-35"></a>}</span></code></pre></div>
+<ul>
+<li>테스트 해보기</li>
+</ul>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="classID7-12.html#cb176-1"></a>test &lt;-<span class="st"> </span><span class="kw">resAsTibble</span>(<span class="st">&#39;201904&#39;</span>,<span class="st">&#39;11530&#39;</span>)</span></code></pre></div>
+<pre><code>## Warning: `as.tibble()` is deprecated as of tibble 2.0.0.
+## Please use `as_tibble()` instead.
+## The signature and semantics have changed, see `?as_tibble`.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="classID7-12.html#cb178-1"></a><span class="kw">head</span>(test)</span></code></pre></div>
+<pre><code>##    price build_year year      road_name   bon    bu gungu serial gr_code
+## 1 265000       2011 2019         경인로 00662 00000 11530     01       0
+## 2  30800       1987 2019 신도림로11가길 00036 00000 11530     01       0
+## 3  51000       2006 2019         경인로 00584 00000 11530     01       0
+## 4  80000       2003 2019       신도림로 00032 00000 11530     01       0
+## 5  83000       2000 2019         경인로 00643 00000 11530     01       0
+## 6 108500       2011 2019         경인로 00662 00000 11530     01       0
+##   road_code       bgd bgd_bon bgd_bu bgd_sigungu bgd_emd bgd_gibun
+## 1   3000028  신도림동    0692   0000       11530   10100         1
+## 2   4148391  신도림동    0290   0000       11530   10100         1
+## 3   3000028  신도림동    0412   0003       11530   10100         1
+## 4   3116008  신도림동    0647   0000       11530   10100         1
+## 5   3000028  신도림동    0644   0000       11530   10100         1
+## 6   3000028  신도림동    0692   0000       11530   10100         1
+##          apt_name month day    serial2    size gibun area_code floor
+## 1      디큐브시티     4   1 11530-3480 199.790   692     11530    51
+## 2            미성     4   4  11530-133  37.910   290     11530     4
+## 3  신도림팰러티움     4   8 11530-3233  84.950 412-3     11530    21
+## 4 대림e-편한세상5     4  13  11530-150  84.789   647     11530    17
+## 5           동아2     4  14  11530-131  84.908   644     11530    25
+## 6      디큐브시티     4  15 11530-3480 125.360   692     11530    11
+##   price_by_area   deal_ymd
+## 1      4377.096 2019-04-01
+## 2      2681.087 2019-04-04
+## 3      1981.165 2019-04-08
+## 4      3113.611 2019-04-13
+## 5      3225.844 2019-04-14
+## 6      2856.174 2019-04-15</code></pre>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="classID7-12.html#cb180-1"></a>getRealPrice &lt;-<span class="st"> </span><span class="cf">function</span>(start, end, <span class="dt">guGunName=</span><span class="st">&#39;송파구&#39;</span>){</span>
+<span id="cb180-2"><a href="classID7-12.html#cb180-2"></a>    </span>
+<span id="cb180-3"><a href="classID7-12.html#cb180-3"></a>    <span class="co"># 한글 구군명을 통해 구군코드 얻기</span></span>
+<span id="cb180-4"><a href="classID7-12.html#cb180-4"></a>    guGunCode =<span class="st"> </span><span class="kw">getGuGunCode</span>(guGunName)</span>
+<span id="cb180-5"><a href="classID7-12.html#cb180-5"></a></span>
+<span id="cb180-6"><a href="classID7-12.html#cb180-6"></a>    <span class="co"># 시작월 부터 종료월 까지의 각각의 월 리스트 </span></span>
+<span id="cb180-7"><a href="classID7-12.html#cb180-7"></a>    monthList &lt;-<span class="st"> </span><span class="kw">startEndMonth</span>(start, end)</span>
+<span id="cb180-8"><a href="classID7-12.html#cb180-8"></a>    <span class="co">#print(monthList)</span></span>
+<span id="cb180-9"><a href="classID7-12.html#cb180-9"></a>    <span class="co"># 반환할 객체 초기화</span></span>
+<span id="cb180-10"><a href="classID7-12.html#cb180-10"></a>    </span>
+<span id="cb180-11"><a href="classID7-12.html#cb180-11"></a>    </span>
+<span id="cb180-12"><a href="classID7-12.html#cb180-12"></a>    monthList</span>
+<span id="cb180-13"><a href="classID7-12.html#cb180-13"></a>    datalist =<span class="st"> </span><span class="kw">list</span>()</span>
+<span id="cb180-14"><a href="classID7-12.html#cb180-14"></a>    </span>
+<span id="cb180-15"><a href="classID7-12.html#cb180-15"></a>    </span>
+<span id="cb180-16"><a href="classID7-12.html#cb180-16"></a>    <span class="co"># 각 월별로 실거래가 조회 해서 데이터프레임 합치기</span></span>
+<span id="cb180-17"><a href="classID7-12.html#cb180-17"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(monthList)){</span>
+<span id="cb180-18"><a href="classID7-12.html#cb180-18"></a>        temp_list &lt;-<span class="st"> </span><span class="kw">resAsTibble</span>(monthList[i], guGunCode)</span>
+<span id="cb180-19"><a href="classID7-12.html#cb180-19"></a>        </span>
+<span id="cb180-20"><a href="classID7-12.html#cb180-20"></a>        datalist[[i]] &lt;-<span class="st"> </span>temp_list</span>
+<span id="cb180-21"><a href="classID7-12.html#cb180-21"></a>        </span>
+<span id="cb180-22"><a href="classID7-12.html#cb180-22"></a>        <span class="co"># datalist</span></span>
+<span id="cb180-23"><a href="classID7-12.html#cb180-23"></a>    }</span>
+<span id="cb180-24"><a href="classID7-12.html#cb180-24"></a>    </span>
+<span id="cb180-25"><a href="classID7-12.html#cb180-25"></a>    return_data =<span class="st"> </span><span class="kw">do.call</span>(rbind, datalist)</span>
+<span id="cb180-26"><a href="classID7-12.html#cb180-26"></a>    </span>
+<span id="cb180-27"><a href="classID7-12.html#cb180-27"></a>    <span class="kw">print</span>(<span class="st">&quot;1번&quot;)</span></span>
+<span id="cb180-28"><a href="classID7-12.html#cb180-28"></a><span class="st">    print(head(return_data))</span></span>
+<span id="cb180-29"><a href="classID7-12.html#cb180-29"></a><span class="st">    str(return_data)</span></span>
+<span id="cb180-30"><a href="classID7-12.html#cb180-30"></a><span class="st">    return(as.tibble(return_data))</span></span>
+<span id="cb180-31"><a href="classID7-12.html#cb180-31"></a><span class="st">    #return datalist</span></span>
+<span id="cb180-32"><a href="classID7-12.html#cb180-32"></a><span class="st">}</span></span></code></pre></div>
+<ul>
+<li>테스트 해보기</li>
+</ul>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="classID7-12.html#cb181-1"></a>test &lt;-<span class="st"> </span><span class="kw">getRealPrice</span>(<span class="st">&#39;201801&#39;</span>,<span class="st">&#39;201905&#39;</span>,<span class="st">&#39;송파구&#39;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;1번&quot;
+##    price build_year year road_name   bon    bu gungu serial gr_code road_code
+## 1 140500       2006 2018    잠실로 00088 00000 11710     01       0   3123015
+## 2 147000       2008 2018  올림픽로 00135 00000 11710     01       0   3123023
+## 3 140000       2007 2018    잠실로 00062 00000 11710     01       0   3123015
+## 4 138000       2007 2018    잠실로 00062 00000 11710     01       0   3123015
+## 5 173000       1978 2018  송파대로 00567 00000 11710     01       0   2005011
+## 6 200000       2008 2018  올림픽로 00099 00000 11710     01       0   3123023
+##       bgd bgd_bon bgd_bu bgd_sigungu bgd_emd bgd_gibun         apt_name month
+## 1  잠실동    0044   0000       11710   10100         1     레이크팰리스     1
+## 2  잠실동    0022   0000       11710   10100         1           리센츠     1
+## 3  잠실동    0035   0000       11710   10100         1         트리지움     1
+## 4  잠실동    0035   0000       11710   10100         1         트리지움     1
+## 5  잠실동    0027   0000       11710   10100         1 주공아파트 5단지     1
+## 6  잠실동    0019   0000       11710   10100         1         잠실엘스     1
+##   day    serial2   size gibun area_code floor price_by_area   deal_ymd
+## 1   2 11710-5957  84.82    44     11710    19      5466.282 2018-01-02
+## 2   2 11710-6249  84.99    22     11710    20      5707.730 2018-01-02
+## 3   2 11710-6028  84.95    35     11710    10      5438.493 2018-01-02
+## 4   2 11710-6028  84.95    35     11710    19      5360.800 2018-01-02
+## 5   3  11710-164  76.50    27     11710     1      7462.745 2018-01-03
+## 6   3 11710-6346 119.93    19     11710    23      5503.210 2018-01-03
+## &#39;data.frame&#39;:    170 obs. of  26 variables:
+##  $ price        : num  140500 147000 140000 138000 173000 ...
+##  $ build_year   : num  2006 2008 2007 2007 1978 ...
+##  $ year         : int  2018 2018 2018 2018 2018 2018 2018 2018 2018 2018 ...
+##  $ road_name    : chr  &quot;잠실로&quot; &quot;올림픽로&quot; &quot;잠실로&quot; &quot;잠실로&quot; ...
+##  $ bon          : chr  &quot;00088&quot; &quot;00135&quot; &quot;00062&quot; &quot;00062&quot; ...
+##  $ bu           : chr  &quot;00000&quot; &quot;00000&quot; &quot;00000&quot; &quot;00000&quot; ...
+##  $ gungu        : int  11710 11710 11710 11710 11710 11710 11710 11710 11710 11710 ...
+##  $ serial       : chr  &quot;01&quot; &quot;01&quot; &quot;01&quot; &quot;01&quot; ...
+##  $ gr_code      : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ road_code    : int  3123015 3123023 3123015 3123015 2005011 3123023 3123023 3123023 3123015 3123015 ...
+##  $ bgd          : chr  &quot; 잠실동&quot; &quot; 잠실동&quot; &quot; 잠실동&quot; &quot; 잠실동&quot; ...
+##  $ bgd_bon      : chr  &quot;0044&quot; &quot;0022&quot; &quot;0035&quot; &quot;0035&quot; ...
+##  $ bgd_bu       : chr  &quot;0000&quot; &quot;0000&quot; &quot;0000&quot; &quot;0000&quot; ...
+##  $ bgd_sigungu  : int  11710 11710 11710 11710 11710 11710 11710 11710 11710 11710 ...
+##  $ bgd_emd      : int  10100 10100 10100 10100 10100 10100 10100 10100 10100 10100 ...
+##  $ bgd_gibun    : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ apt_name     : chr  &quot;레이크팰리스&quot; &quot;리센츠&quot; &quot;트리지움&quot; &quot;트리지움&quot; ...
+##  $ month        : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ day          : int  2 2 2 2 3 3 3 3 3 3 ...
+##  $ serial2      : chr  &quot;11710-5957&quot; &quot;11710-6249&quot; &quot;11710-6028&quot; &quot;11710-6028&quot; ...
+##  $ size         : num  84.8 85 85 85 76.5 ...
+##  $ gibun        : chr  &quot;44&quot; &quot;22&quot; &quot;35&quot; &quot;35&quot; ...
+##  $ area_code    : int  11710 11710 11710 11710 11710 11710 11710 11710 11710 11710 ...
+##  $ floor        : int  19 20 10 19 1 23 9 16 21 23 ...
+##  $ price_by_area: num  5466 5708 5438 5361 7463 ...
+##  $ deal_ymd     : Date, format: &quot;2018-01-02&quot; &quot;2018-01-02&quot; ...</code></pre>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="classID7-12.html#cb183-1"></a><span class="kw">print</span>(<span class="st">&quot;2번&quot;)</span></span></code></pre></div>
+<pre><code>## [1] &quot;2번&quot;</code></pre>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="classID7-12.html#cb185-1"></a><span class="kw">print</span>(<span class="kw">head</span>(test))</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 26
+##    price build_year  year road_name bon   bu    gungu serial gr_code road_code
+##    &lt;dbl&gt;      &lt;dbl&gt; &lt;int&gt; &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;chr&gt;    &lt;int&gt;     &lt;int&gt;
+## 1 140500       2006  2018 잠실로    00088 00000 11710 01           0   3123015
+## 2 147000       2008  2018 올림픽로  00135 00000 11710 01           0   3123023
+## 3 140000       2007  2018 잠실로    00062 00000 11710 01           0   3123015
+## 4 138000       2007  2018 잠실로    00062 00000 11710 01           0   3123015
+## 5 173000       1978  2018 송파대로  00567 00000 11710 01           0   2005011
+## 6 200000       2008  2018 올림픽로  00099 00000 11710 01           0   3123023
+## # … with 16 more variables: bgd &lt;chr&gt;, bgd_bon &lt;chr&gt;, bgd_bu &lt;chr&gt;,
+## #   bgd_sigungu &lt;int&gt;, bgd_emd &lt;int&gt;, bgd_gibun &lt;int&gt;, apt_name &lt;chr&gt;,
+## #   month &lt;int&gt;, day &lt;int&gt;, serial2 &lt;chr&gt;, size &lt;dbl&gt;, gibun &lt;chr&gt;,
+## #   area_code &lt;int&gt;, floor &lt;int&gt;, price_by_area &lt;dbl&gt;, deal_ymd &lt;date&gt;</code></pre>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="classID7-12.html#cb187-1"></a><span class="kw">str</span>(test)</span></code></pre></div>
+<pre><code>## tibble [170 × 26] (S3: tbl_df/tbl/data.frame)
+##  $ price        : num [1:170] 140500 147000 140000 138000 173000 ...
+##  $ build_year   : num [1:170] 2006 2008 2007 2007 1978 ...
+##  $ year         : int [1:170] 2018 2018 2018 2018 2018 2018 2018 2018 2018 2018 ...
+##  $ road_name    : chr [1:170] &quot;잠실로&quot; &quot;올림픽로&quot; &quot;잠실로&quot; &quot;잠실로&quot; ...
+##  $ bon          : chr [1:170] &quot;00088&quot; &quot;00135&quot; &quot;00062&quot; &quot;00062&quot; ...
+##  $ bu           : chr [1:170] &quot;00000&quot; &quot;00000&quot; &quot;00000&quot; &quot;00000&quot; ...
+##  $ gungu        : int [1:170] 11710 11710 11710 11710 11710 11710 11710 11710 11710 11710 ...
+##  $ serial       : chr [1:170] &quot;01&quot; &quot;01&quot; &quot;01&quot; &quot;01&quot; ...
+##  $ gr_code      : int [1:170] 0 0 0 0 0 0 0 0 0 0 ...
+##  $ road_code    : int [1:170] 3123015 3123023 3123015 3123015 2005011 3123023 3123023 3123023 3123015 3123015 ...
+##  $ bgd          : chr [1:170] &quot; 잠실동&quot; &quot; 잠실동&quot; &quot; 잠실동&quot; &quot; 잠실동&quot; ...
+##  $ bgd_bon      : chr [1:170] &quot;0044&quot; &quot;0022&quot; &quot;0035&quot; &quot;0035&quot; ...
+##  $ bgd_bu       : chr [1:170] &quot;0000&quot; &quot;0000&quot; &quot;0000&quot; &quot;0000&quot; ...
+##  $ bgd_sigungu  : int [1:170] 11710 11710 11710 11710 11710 11710 11710 11710 11710 11710 ...
+##  $ bgd_emd      : int [1:170] 10100 10100 10100 10100 10100 10100 10100 10100 10100 10100 ...
+##  $ bgd_gibun    : int [1:170] 1 1 1 1 1 1 1 1 1 1 ...
+##  $ apt_name     : chr [1:170] &quot;레이크팰리스&quot; &quot;리센츠&quot; &quot;트리지움&quot; &quot;트리지움&quot; ...
+##  $ month        : int [1:170] 1 1 1 1 1 1 1 1 1 1 ...
+##  $ day          : int [1:170] 2 2 2 2 3 3 3 3 3 3 ...
+##  $ serial2      : chr [1:170] &quot;11710-5957&quot; &quot;11710-6249&quot; &quot;11710-6028&quot; &quot;11710-6028&quot; ...
+##  $ size         : num [1:170] 84.8 85 85 85 76.5 ...
+##  $ gibun        : chr [1:170] &quot;44&quot; &quot;22&quot; &quot;35&quot; &quot;35&quot; ...
+##  $ area_code    : int [1:170] 11710 11710 11710 11710 11710 11710 11710 11710 11710 11710 ...
+##  $ floor        : int [1:170] 19 20 10 19 1 23 9 16 21 23 ...
+##  $ price_by_area: num [1:170] 5466 5708 5438 5361 7463 ...
+##  $ deal_ymd     : Date[1:170], format: &quot;2018-01-02&quot; &quot;2018-01-02&quot; ...</code></pre>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="classID7-12.html#cb189-1"></a><span class="kw">theme_set</span>(<span class="kw">theme_gray</span>(<span class="dt">base_family=</span><span class="st">&quot;AppleGothic&quot;</span>))</span></code></pre></div>
+<ul>
+<li>데이터 확인하기</li>
+</ul>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="classID7-12.html#cb190-1"></a><span class="kw">nrow</span>(test)</span></code></pre></div>
+<pre><code>## [1] 170</code></pre>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="classID7-12.html#cb192-1"></a><span class="kw">summary</span>(test)</span></code></pre></div>
+<pre><code>##      price          build_year        year       road_name        
+##  Min.   : 65000   Min.   :1978   Min.   :2018   Length:170        
+##  1st Qu.:140000   1st Qu.:2005   1st Qu.:2018   Class :character  
+##  Median :158000   Median :2007   Median :2018   Mode  :character  
+##  Mean   :157854   Mean   :2002   Mean   :2018                     
+##  3rd Qu.:169925   3rd Qu.:2008   3rd Qu.:2019                     
+##  Max.   :320000   Max.   :2008   Max.   :2019                     
+##      bon                 bu                gungu          serial         
+##  Length:170         Length:170         Min.   :11710   Length:170        
+##  Class :character   Class :character   1st Qu.:11710   Class :character  
+##  Mode  :character   Mode  :character   Median :11710   Mode  :character  
+##                                        Mean   :11710                     
+##                                        3rd Qu.:11710                     
+##                                        Max.   :11710                     
+##     gr_code    road_code           bgd              bgd_bon         
+##  Min.   :0   Min.   :2005011   Length:170         Length:170        
+##  1st Qu.:0   1st Qu.:3123015   Class :character   Class :character  
+##  Median :0   Median :3123023   Mode  :character   Mode  :character  
+##  Mean   :0   Mean   :3134744                                        
+##  3rd Qu.:0   3rd Qu.:3123023                                        
+##  Max.   :0   Max.   :4169439                                        
+##     bgd_bu           bgd_sigungu       bgd_emd        bgd_gibun
+##  Length:170         Min.   :11710   Min.   :10100   Min.   :1  
+##  Class :character   1st Qu.:11710   1st Qu.:10100   1st Qu.:1  
+##  Mode  :character   Median :11710   Median :10100   Median :1  
+##                     Mean   :11710   Mean   :10100   Mean   :1  
+##                     3rd Qu.:11710   3rd Qu.:10100   3rd Qu.:1  
+##                     Max.   :11710   Max.   :10100   Max.   :1  
+##    apt_name             month             day           serial2         
+##  Length:170         Min.   : 1.000   Min.   : 1.000   Length:170        
+##  Class :character   1st Qu.: 3.000   1st Qu.: 2.000   Class :character  
+##  Mode  :character   Median : 5.000   Median : 5.000   Mode  :character  
+##                     Mean   : 5.471   Mean   : 6.424                     
+##                     3rd Qu.: 8.000   3rd Qu.: 9.000                     
+##                     Max.   :12.000   Max.   :24.000                     
+##       size           gibun             area_code         floor      
+##  Min.   : 27.68   Length:170         Min.   :11710   Min.   : 1.00  
+##  1st Qu.: 76.50   Class :character   1st Qu.:11710   1st Qu.: 8.00  
+##  Median : 84.83   Mode  :character   Median :11710   Median :13.00  
+##  Mean   : 88.72                      Mean   :11710   Mean   :14.39  
+##  3rd Qu.: 84.99                      3rd Qu.:11710   3rd Qu.:20.00  
+##  Max.   :244.73                      Max.   :11710   Max.   :46.00  
+##  price_by_area      deal_ymd         
+##  Min.   : 2860   Min.   :2018-01-02  
+##  1st Qu.: 5513   1st Qu.:2018-05-04  
+##  Median : 6171   Median :2018-09-01  
+##  Mean   : 6193   Mean   :2018-09-05  
+##  3rd Qu.: 7052   3rd Qu.:2019-01-10  
+##  Max.   :10718   Max.   :2019-05-03</code></pre>
+<ul>
+<li>잠실엘스 가격만 고르기</li>
+</ul>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="classID7-12.html#cb194-1"></a>munjung &lt;-<span class="st"> </span><span class="kw">filter</span>(test, <span class="kw">grepl</span>(<span class="st">&quot;잠실엘스&quot;</span>, apt_name, <span class="dt">fixed =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb194-2"><a href="classID7-12.html#cb194-2"></a><span class="kw">NROW</span>(munjung)</span></code></pre></div>
+<pre><code>## [1] 34</code></pre>
+<ul>
+<li>그래프 그리기</li>
+</ul>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="classID7-12.html#cb196-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>munjung, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x=</span>deal_ymd, <span class="dt">y=</span>price_by_area, <span class="dt">group =</span> size)) <span class="op">+</span></span>
+<span id="cb196-2"><a href="classID7-12.html#cb196-2"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>,<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">color=</span>size)) <span class="op">+</span></span>
+<span id="cb196-3"><a href="classID7-12.html#cb196-3"></a><span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
+<span id="cb196-4"><a href="classID7-12.html#cb196-4"></a><span class="st">    </span><span class="kw">scale_x_date</span>(<span class="dt">date_breaks =</span> <span class="st">&quot;1 month&quot;</span>, <span class="dt">date_labels =</span><span class="st">&quot;%Y-%m&quot;</span>) <span class="op">+</span></span>
+<span id="cb196-5"><a href="classID7-12.html#cb196-5"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>size, <span class="dt">dir=</span><span class="st">&quot;v&quot;</span>, <span class="dt">nrow =</span> <span class="dv">5</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb196-6"><a href="classID7-12.html#cb196-6"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x=</span><span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">90</span>, <span class="dt">hjust=</span><span class="dv">1</span>, <span class="dt">vjust=</span><span class="dv">1</span>))</span></code></pre></div>
+<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust
+## the group aesthetic?</code></pre>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="classID7-12.html#cb198-1"></a>    <span class="kw">theme_bw</span>() </span></code></pre></div>
+<pre><code>## List of 93
+##  $ line                      :List of 6
+##   ..$ colour       : chr &quot;black&quot;
+##   ..$ size         : num 0.5
+##   ..$ linetype     : num 1
+##   ..$ lineend      : chr &quot;butt&quot;
+##   ..$ arrow        : logi FALSE
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_line&quot; &quot;element&quot;
+##  $ rect                      :List of 5
+##   ..$ fill         : chr &quot;white&quot;
+##   ..$ colour       : chr &quot;black&quot;
+##   ..$ size         : num 0.5
+##   ..$ linetype     : num 1
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_rect&quot; &quot;element&quot;
+##  $ text                      :List of 11
+##   ..$ family       : chr &quot;&quot;
+##   ..$ face         : chr &quot;plain&quot;
+##   ..$ colour       : chr &quot;black&quot;
+##   ..$ size         : num 11
+##   ..$ hjust        : num 0.5
+##   ..$ vjust        : num 0.5
+##   ..$ angle        : num 0
+##   ..$ lineheight   : num 0.9
+##   ..$ margin       : &#39;margin&#39; num [1:4] 0points 0points 0points 0points
+##   .. ..- attr(*, &quot;unit&quot;)= int 8
+##   ..$ debug        : logi FALSE
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ title                     : NULL
+##  $ aspect.ratio              : NULL
+##  $ axis.title                : NULL
+##  $ axis.title.x              :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : num 1
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : &#39;margin&#39; num [1:4] 2.75points 0points 0points 0points
+##   .. ..- attr(*, &quot;unit&quot;)= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ axis.title.x.top          :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : num 0
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : &#39;margin&#39; num [1:4] 0points 0points 2.75points 0points
+##   .. ..- attr(*, &quot;unit&quot;)= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ axis.title.x.bottom       : NULL
+##  $ axis.title.y              :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : num 1
+##   ..$ angle        : num 90
+##   ..$ lineheight   : NULL
+##   ..$ margin       : &#39;margin&#39; num [1:4] 0points 2.75points 0points 0points
+##   .. ..- attr(*, &quot;unit&quot;)= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ axis.title.y.left         : NULL
+##  $ axis.title.y.right        :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : num 0
+##   ..$ angle        : num -90
+##   ..$ lineheight   : NULL
+##   ..$ margin       : &#39;margin&#39; num [1:4] 0points 0points 0points 2.75points
+##   .. ..- attr(*, &quot;unit&quot;)= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ axis.text                 :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : chr &quot;grey30&quot;
+##   ..$ size         : &#39;rel&#39; num 0.8
+##   ..$ hjust        : NULL
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ axis.text.x               :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : num 1
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : &#39;margin&#39; num [1:4] 2.2points 0points 0points 0points
+##   .. ..- attr(*, &quot;unit&quot;)= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ axis.text.x.top           :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : num 0
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : &#39;margin&#39; num [1:4] 0points 0points 2.2points 0points
+##   .. ..- attr(*, &quot;unit&quot;)= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ axis.text.x.bottom        : NULL
+##  $ axis.text.y               :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : num 1
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : &#39;margin&#39; num [1:4] 0points 2.2points 0points 0points
+##   .. ..- attr(*, &quot;unit&quot;)= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ axis.text.y.left          : NULL
+##  $ axis.text.y.right         :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : num 0
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : &#39;margin&#39; num [1:4] 0points 0points 0points 2.2points
+##   .. ..- attr(*, &quot;unit&quot;)= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ axis.ticks                :List of 6
+##   ..$ colour       : chr &quot;grey20&quot;
+##   ..$ size         : NULL
+##   ..$ linetype     : NULL
+##   ..$ lineend      : NULL
+##   ..$ arrow        : logi FALSE
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_line&quot; &quot;element&quot;
+##  $ axis.ticks.x              : NULL
+##  $ axis.ticks.x.top          : NULL
+##  $ axis.ticks.x.bottom       : NULL
+##  $ axis.ticks.y              : NULL
+##  $ axis.ticks.y.left         : NULL
+##  $ axis.ticks.y.right        : NULL
+##  $ axis.ticks.length         : &#39;simpleUnit&#39; num 2.75points
+##   ..- attr(*, &quot;unit&quot;)= int 8
+##  $ axis.ticks.length.x       : NULL
+##  $ axis.ticks.length.x.top   : NULL
+##  $ axis.ticks.length.x.bottom: NULL
+##  $ axis.ticks.length.y       : NULL
+##  $ axis.ticks.length.y.left  : NULL
+##  $ axis.ticks.length.y.right : NULL
+##  $ axis.line                 : list()
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_blank&quot; &quot;element&quot;
+##  $ axis.line.x               : NULL
+##  $ axis.line.x.top           : NULL
+##  $ axis.line.x.bottom        : NULL
+##  $ axis.line.y               : NULL
+##  $ axis.line.y.left          : NULL
+##  $ axis.line.y.right         : NULL
+##  $ legend.background         :List of 5
+##   ..$ fill         : NULL
+##   ..$ colour       : logi NA
+##   ..$ size         : NULL
+##   ..$ linetype     : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_rect&quot; &quot;element&quot;
+##  $ legend.margin             : &#39;margin&#39; num [1:4] 5.5points 5.5points 5.5points 5.5points
+##   ..- attr(*, &quot;unit&quot;)= int 8
+##  $ legend.spacing            : &#39;simpleUnit&#39; num 11points
+##   ..- attr(*, &quot;unit&quot;)= int 8
+##  $ legend.spacing.x          : NULL
+##  $ legend.spacing.y          : NULL
+##  $ legend.key                :List of 5
+##   ..$ fill         : chr &quot;white&quot;
+##   ..$ colour       : logi NA
+##   ..$ size         : NULL
+##   ..$ linetype     : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_rect&quot; &quot;element&quot;
+##  $ legend.key.size           : &#39;simpleUnit&#39; num 1.2lines
+##   ..- attr(*, &quot;unit&quot;)= int 3
+##  $ legend.key.height         : NULL
+##  $ legend.key.width          : NULL
+##  $ legend.text               :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : &#39;rel&#39; num 0.8
+##   ..$ hjust        : NULL
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ legend.text.align         : NULL
+##  $ legend.title              :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : num 0
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ legend.title.align        : NULL
+##  $ legend.position           : chr &quot;right&quot;
+##  $ legend.direction          : NULL
+##  $ legend.justification      : chr &quot;center&quot;
+##  $ legend.box                : NULL
+##  $ legend.box.just           : NULL
+##  $ legend.box.margin         : &#39;margin&#39; num [1:4] 0cm 0cm 0cm 0cm
+##   ..- attr(*, &quot;unit&quot;)= int 1
+##  $ legend.box.background     : list()
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_blank&quot; &quot;element&quot;
+##  $ legend.box.spacing        : &#39;simpleUnit&#39; num 11points
+##   ..- attr(*, &quot;unit&quot;)= int 8
+##  $ panel.background          :List of 5
+##   ..$ fill         : chr &quot;white&quot;
+##   ..$ colour       : logi NA
+##   ..$ size         : NULL
+##   ..$ linetype     : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_rect&quot; &quot;element&quot;
+##  $ panel.border              :List of 5
+##   ..$ fill         : logi NA
+##   ..$ colour       : chr &quot;grey20&quot;
+##   ..$ size         : NULL
+##   ..$ linetype     : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_rect&quot; &quot;element&quot;
+##  $ panel.spacing             : &#39;simpleUnit&#39; num 5.5points
+##   ..- attr(*, &quot;unit&quot;)= int 8
+##  $ panel.spacing.x           : NULL
+##  $ panel.spacing.y           : NULL
+##  $ panel.grid                :List of 6
+##   ..$ colour       : chr &quot;grey92&quot;
+##   ..$ size         : NULL
+##   ..$ linetype     : NULL
+##   ..$ lineend      : NULL
+##   ..$ arrow        : logi FALSE
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_line&quot; &quot;element&quot;
+##  $ panel.grid.major          : NULL
+##  $ panel.grid.minor          :List of 6
+##   ..$ colour       : NULL
+##   ..$ size         : &#39;rel&#39; num 0.5
+##   ..$ linetype     : NULL
+##   ..$ lineend      : NULL
+##   ..$ arrow        : logi FALSE
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_line&quot; &quot;element&quot;
+##  $ panel.grid.major.x        : NULL
+##  $ panel.grid.major.y        : NULL
+##  $ panel.grid.minor.x        : NULL
+##  $ panel.grid.minor.y        : NULL
+##  $ panel.ontop               : logi FALSE
+##  $ plot.background           :List of 5
+##   ..$ fill         : NULL
+##   ..$ colour       : chr &quot;white&quot;
+##   ..$ size         : NULL
+##   ..$ linetype     : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_rect&quot; &quot;element&quot;
+##  $ plot.title                :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : &#39;rel&#39; num 1.2
+##   ..$ hjust        : num 0
+##   ..$ vjust        : num 1
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : &#39;margin&#39; num [1:4] 0points 0points 5.5points 0points
+##   .. ..- attr(*, &quot;unit&quot;)= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ plot.title.position       : chr &quot;panel&quot;
+##  $ plot.subtitle             :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : num 0
+##   ..$ vjust        : num 1
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : &#39;margin&#39; num [1:4] 0points 0points 5.5points 0points
+##   .. ..- attr(*, &quot;unit&quot;)= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ plot.caption              :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : &#39;rel&#39; num 0.8
+##   ..$ hjust        : num 1
+##   ..$ vjust        : num 1
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : &#39;margin&#39; num [1:4] 5.5points 0points 0points 0points
+##   .. ..- attr(*, &quot;unit&quot;)= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ plot.caption.position     : chr &quot;panel&quot;
+##  $ plot.tag                  :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : &#39;rel&#39; num 1.2
+##   ..$ hjust        : num 0.5
+##   ..$ vjust        : num 0.5
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ plot.tag.position         : chr &quot;topleft&quot;
+##  $ plot.margin               : &#39;margin&#39; num [1:4] 5.5points 5.5points 5.5points 5.5points
+##   ..- attr(*, &quot;unit&quot;)= int 8
+##  $ strip.background          :List of 5
+##   ..$ fill         : chr &quot;grey85&quot;
+##   ..$ colour       : chr &quot;grey20&quot;
+##   ..$ size         : NULL
+##   ..$ linetype     : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_rect&quot; &quot;element&quot;
+##  $ strip.background.x        : NULL
+##  $ strip.background.y        : NULL
+##  $ strip.placement           : chr &quot;inside&quot;
+##  $ strip.text                :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : chr &quot;grey10&quot;
+##   ..$ size         : &#39;rel&#39; num 0.8
+##   ..$ hjust        : NULL
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : &#39;margin&#39; num [1:4] 4.4points 4.4points 4.4points 4.4points
+##   .. ..- attr(*, &quot;unit&quot;)= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ strip.text.x              : NULL
+##  $ strip.text.y              :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : NULL
+##   ..$ angle        : num -90
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ strip.switch.pad.grid     : &#39;simpleUnit&#39; num 2.75points
+##   ..- attr(*, &quot;unit&quot;)= int 8
+##  $ strip.switch.pad.wrap     : &#39;simpleUnit&#39; num 2.75points
+##   ..- attr(*, &quot;unit&quot;)= int 8
+##  $ strip.text.y.left         :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : NULL
+##   ..$ angle        : num 90
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  - attr(*, &quot;class&quot;)= chr [1:2] &quot;theme&quot; &quot;gg&quot;
+##  - attr(*, &quot;complete&quot;)= logi TRUE
+##  - attr(*, &quot;validate&quot;)= logi TRUE</code></pre>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="classID7-12.html#cb200-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>munjung, <span class="kw">aes</span>(<span class="dt">x =</span> size, <span class="dt">y =</span> price_by_area, <span class="dt">group =</span> size)) <span class="op">+</span></span>
+<span id="cb200-2"><a href="classID7-12.html#cb200-2"></a><span class="st">    </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="dv">0</span>) <span class="op">+</span></span>
+<span id="cb200-3"><a href="classID7-12.html#cb200-3"></a><span class="st">    </span><span class="kw">geom_jitter</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>, <span class="dt">color =</span> <span class="st">&quot;tomato&quot;</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
+</div>
+</div>
+<div id="google-지도를-이용한-부동산-정보-시각화" class="section level2">
+<h2><span class="header-section-number">9.5</span> Google 지도를 이용한 부동산 정보 시각화</h2>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="classID7-12.html#cb201-1"></a>aptList &lt;-<span class="st"> </span><span class="kw">getRealPrice</span>(<span class="st">&#39;201801&#39;</span>,<span class="st">&#39;201812&#39;</span>,<span class="st">&#39;송파구&#39;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;1번&quot;
+##    price build_year year road_name   bon    bu gungu serial gr_code road_code
+## 1 140500       2006 2018    잠실로 00088 00000 11710     01       0   3123015
+## 2 147000       2008 2018  올림픽로 00135 00000 11710     01       0   3123023
+## 3 140000       2007 2018    잠실로 00062 00000 11710     01       0   3123015
+## 4 138000       2007 2018    잠실로 00062 00000 11710     01       0   3123015
+## 5 173000       1978 2018  송파대로 00567 00000 11710     01       0   2005011
+## 6 200000       2008 2018  올림픽로 00099 00000 11710     01       0   3123023
+##       bgd bgd_bon bgd_bu bgd_sigungu bgd_emd bgd_gibun         apt_name month
+## 1  잠실동    0044   0000       11710   10100         1     레이크팰리스     1
+## 2  잠실동    0022   0000       11710   10100         1           리센츠     1
+## 3  잠실동    0035   0000       11710   10100         1         트리지움     1
+## 4  잠실동    0035   0000       11710   10100         1         트리지움     1
+## 5  잠실동    0027   0000       11710   10100         1 주공아파트 5단지     1
+## 6  잠실동    0019   0000       11710   10100         1         잠실엘스     1
+##   day    serial2   size gibun area_code floor price_by_area   deal_ymd
+## 1   2 11710-5957  84.82    44     11710    19      5466.282 2018-01-02
+## 2   2 11710-6249  84.99    22     11710    20      5707.730 2018-01-02
+## 3   2 11710-6028  84.95    35     11710    10      5438.493 2018-01-02
+## 4   2 11710-6028  84.95    35     11710    19      5360.800 2018-01-02
+## 5   3  11710-164  76.50    27     11710     1      7462.745 2018-01-03
+## 6   3 11710-6346 119.93    19     11710    23      5503.210 2018-01-03
+## &#39;data.frame&#39;:    120 obs. of  26 variables:
+##  $ price        : num  140500 147000 140000 138000 173000 ...
+##  $ build_year   : num  2006 2008 2007 2007 1978 ...
+##  $ year         : int  2018 2018 2018 2018 2018 2018 2018 2018 2018 2018 ...
+##  $ road_name    : chr  &quot;잠실로&quot; &quot;올림픽로&quot; &quot;잠실로&quot; &quot;잠실로&quot; ...
+##  $ bon          : chr  &quot;00088&quot; &quot;00135&quot; &quot;00062&quot; &quot;00062&quot; ...
+##  $ bu           : chr  &quot;00000&quot; &quot;00000&quot; &quot;00000&quot; &quot;00000&quot; ...
+##  $ gungu        : int  11710 11710 11710 11710 11710 11710 11710 11710 11710 11710 ...
+##  $ serial       : chr  &quot;01&quot; &quot;01&quot; &quot;01&quot; &quot;01&quot; ...
+##  $ gr_code      : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ road_code    : int  3123015 3123023 3123015 3123015 2005011 3123023 3123023 3123023 3123015 3123015 ...
+##  $ bgd          : chr  &quot; 잠실동&quot; &quot; 잠실동&quot; &quot; 잠실동&quot; &quot; 잠실동&quot; ...
+##  $ bgd_bon      : chr  &quot;0044&quot; &quot;0022&quot; &quot;0035&quot; &quot;0035&quot; ...
+##  $ bgd_bu       : chr  &quot;0000&quot; &quot;0000&quot; &quot;0000&quot; &quot;0000&quot; ...
+##  $ bgd_sigungu  : int  11710 11710 11710 11710 11710 11710 11710 11710 11710 11710 ...
+##  $ bgd_emd      : int  10100 10100 10100 10100 10100 10100 10100 10100 10100 10100 ...
+##  $ bgd_gibun    : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ apt_name     : chr  &quot;레이크팰리스&quot; &quot;리센츠&quot; &quot;트리지움&quot; &quot;트리지움&quot; ...
+##  $ month        : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ day          : int  2 2 2 2 3 3 3 3 3 3 ...
+##  $ serial2      : chr  &quot;11710-5957&quot; &quot;11710-6249&quot; &quot;11710-6028&quot; &quot;11710-6028&quot; ...
+##  $ size         : num  84.8 85 85 85 76.5 ...
+##  $ gibun        : chr  &quot;44&quot; &quot;22&quot; &quot;35&quot; &quot;35&quot; ...
+##  $ area_code    : int  11710 11710 11710 11710 11710 11710 11710 11710 11710 11710 ...
+##  $ floor        : int  19 20 10 19 1 23 9 16 21 23 ...
+##  $ price_by_area: num  5466 5708 5438 5361 7463 ...
+##  $ deal_ymd     : Date, format: &quot;2018-01-02&quot; &quot;2018-01-02&quot; ...</code></pre>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="classID7-12.html#cb203-1"></a>by_apt_name &lt;-<span class="st"> </span><span class="kw">group_by</span>(aptList, bgd, apt_name)</span>
+<span id="cb203-2"><a href="classID7-12.html#cb203-2"></a>aptListDealCount &lt;-<span class="st"> </span><span class="kw">summarise</span>(by_apt_name, <span class="dt">deal_count =</span><span class="kw">n</span>())</span></code></pre></div>
+<pre><code>## `summarise()` regrouping output by &#39;bgd&#39; (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="classID7-12.html#cb205-1"></a>aptListDealCount</span></code></pre></div>
+<pre><code>## # A tibble: 11 x 3
+## # Groups:   bgd [1]
+##    bgd       apt_name           deal_count
+##    &lt;chr&gt;     &lt;chr&gt;                   &lt;int&gt;
+##  1 &quot; 잠실동&quot; 갤러리아팰리스              5
+##  2 &quot; 잠실동&quot; 레이크팰리스                9
+##  3 &quot; 잠실동&quot; 리센츠                     31
+##  4 &quot; 잠실동&quot; 아시아선수촌아파트          7
+##  5 &quot; 잠실동&quot; 우성아파트                  7
+##  6 &quot; 잠실동&quot; 잠실엘스                   24
+##  7 &quot; 잠실동&quot; 잠실월드메르디앙            1
+##  8 &quot; 잠실동&quot; 주공아파트 5단지           10
+##  9 &quot; 잠실동&quot; 트리지움                   22
+## 10 &quot; 잠실동&quot; 포스코더샵                  1
+## 11 &quot; 잠실동&quot; 현대                        3</code></pre>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="classID7-12.html#cb207-1"></a>aptListDealCount &lt;-<span class="st"> </span>aptListDealCount <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb207-2"><a href="classID7-12.html#cb207-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">address =</span> <span class="kw">paste</span>(bgd,apt_name))</span>
+<span id="cb207-3"><a href="classID7-12.html#cb207-3"></a></span>
+<span id="cb207-4"><a href="classID7-12.html#cb207-4"></a>aptListDealCount</span></code></pre></div>
+<pre><code>## # A tibble: 11 x 4
+## # Groups:   bgd [1]
+##    bgd       apt_name           deal_count address                     
+##    &lt;chr&gt;     &lt;chr&gt;                   &lt;int&gt; &lt;chr&gt;                       
+##  1 &quot; 잠실동&quot; 갤러리아팰리스              5 &quot; 잠실동 갤러리아팰리스&quot;    
+##  2 &quot; 잠실동&quot; 레이크팰리스                9 &quot; 잠실동 레이크팰리스&quot;      
+##  3 &quot; 잠실동&quot; 리센츠                     31 &quot; 잠실동 리센츠&quot;            
+##  4 &quot; 잠실동&quot; 아시아선수촌아파트          7 &quot; 잠실동 아시아선수촌아파트&quot;
+##  5 &quot; 잠실동&quot; 우성아파트                  7 &quot; 잠실동 우성아파트&quot;        
+##  6 &quot; 잠실동&quot; 잠실엘스                   24 &quot; 잠실동 잠실엘스&quot;          
+##  7 &quot; 잠실동&quot; 잠실월드메르디앙            1 &quot; 잠실동 잠실월드메르디앙&quot;  
+##  8 &quot; 잠실동&quot; 주공아파트 5단지           10 &quot; 잠실동 주공아파트 5단지&quot;  
+##  9 &quot; 잠실동&quot; 트리지움                   22 &quot; 잠실동 트리지움&quot;          
+## 10 &quot; 잠실동&quot; 포스코더샵                  1 &quot; 잠실동 포스코더샵&quot;        
+## 11 &quot; 잠실동&quot; 현대                        3 &quot; 잠실동 현대&quot;</code></pre>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="classID7-12.html#cb209-1"></a><span class="kw">library</span>(<span class="st">&quot;ggmap&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: package &#39;ggmap&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## Google&#39;s Terms of Service: https://cloud.google.com/maps-platform/terms/.</code></pre>
+<pre><code>## Please cite ggmap if you use it! See citation(&quot;ggmap&quot;) for details.</code></pre>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="classID7-12.html#cb213-1"></a><span class="kw">register_google</span>(<span class="dt">key =</span> <span class="st">&#39;AIzaSyAeIGqiB-ti8UqdZ0WeduKjQt4lkFPpSU4&#39;</span>)</span>
+<span id="cb213-2"><a href="classID7-12.html#cb213-2"></a></span>
+<span id="cb213-3"><a href="classID7-12.html#cb213-3"></a></span>
+<span id="cb213-4"><a href="classID7-12.html#cb213-4"></a></span>
+<span id="cb213-5"><a href="classID7-12.html#cb213-5"></a>aptListDealCount2 &lt;-<span class="st"> </span>aptListDealCount <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb213-6"><a href="classID7-12.html#cb213-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">lon =</span> <span class="kw">as.numeric</span>(<span class="kw">geocode</span>(<span class="dt">location =</span> <span class="kw">enc2utf8</span>(<span class="dt">x =</span> <span class="kw">paste</span>(address, <span class="st">&#39;&amp;language=ko&#39;</span>)) ,<span class="dt">output =</span> <span class="st">&#39;latlona&#39;</span>,<span class="dt">source =</span> <span class="st">&#39;google&#39;</span>)[<span class="dv">1</span>,<span class="dv">1</span>]) ) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb213-7"><a href="classID7-12.html#cb213-7"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">lat =</span> <span class="kw">as.numeric</span>(<span class="kw">geocode</span>(<span class="dt">location =</span> <span class="kw">enc2utf8</span>(<span class="dt">x =</span> <span class="kw">paste</span>(address, <span class="st">&#39;&amp;language=ko&#39;</span>)) ,<span class="dt">output =</span> <span class="st">&#39;latlona&#39;</span>,<span class="dt">source =</span> <span class="st">&#39;google&#39;</span>)[<span class="dv">1</span>,<span class="dv">2</span>]) )</span></code></pre></div>
+<pre><code>## Source : https://maps.googleapis.com/maps/api/geocode/json?address=%EC%9E%A0%EC%8B%A4%EB%8F%99+%EA%B0%A4%EB%9F%AC%EB%A6%AC%EC%95%84%ED%8C%B0%EB%A6%AC%EC%8A%A4+&amp;language=ko&amp;key=xxx-ti8UqdZ0WeduKjQt4lkFPpSU4</code></pre>
+<pre><code>## Warning: Problem with `mutate()` input `lon`.
+## ℹ Geocoding &quot; 잠실동 갤러리아팰리스 &amp;lan...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started
+## 
+## ℹ Input `lon` is `as.numeric(...)`.
+## ℹ The error occurred in group 1: bgd = &quot; 잠실동&quot;.</code></pre>
+<pre><code>## Warning: Geocoding &quot; 잠실동 갤러리아팰리스 &amp;lan...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started</code></pre>
+<pre><code>## Source : https://maps.googleapis.com/maps/api/geocode/json?address=%EC%9E%A0%EC%8B%A4%EB%8F%99+%EB%A0%88%EC%9D%B4%ED%81%AC%ED%8C%B0%EB%A6%AC%EC%8A%A4+&amp;language=ko&amp;key=xxx-ti8UqdZ0WeduKjQt4lkFPpSU4</code></pre>
+<pre><code>## Warning: Problem with `mutate()` input `lon`.
+## ℹ Geocoding &quot; 잠실동 레이크팰리스 &amp;lang...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started
+## 
+## ℹ Input `lon` is `as.numeric(...)`.
+## ℹ The error occurred in group 1: bgd = &quot; 잠실동&quot;.</code></pre>
+<pre><code>## Warning: Geocoding &quot; 잠실동 레이크팰리스 &amp;lang...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started</code></pre>
+<pre><code>## Source : https://maps.googleapis.com/maps/api/geocode/json?address=%EC%9E%A0%EC%8B%A4%EB%8F%99+%EB%A6%AC%EC%84%BC%EC%B8%A0+&amp;language=ko&amp;key=xxx-ti8UqdZ0WeduKjQt4lkFPpSU4</code></pre>
+<pre><code>## Warning: Problem with `mutate()` input `lon`.
+## ℹ Geocoding &quot; 잠실동 리센츠 &amp;languag...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started
+## 
+## ℹ Input `lon` is `as.numeric(...)`.
+## ℹ The error occurred in group 1: bgd = &quot; 잠실동&quot;.</code></pre>
+<pre><code>## Warning: Geocoding &quot; 잠실동 리센츠 &amp;languag...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started</code></pre>
+<pre><code>## Source : https://maps.googleapis.com/maps/api/geocode/json?address=%EC%9E%A0%EC%8B%A4%EB%8F%99+%EC%95%84%EC%8B%9C%EC%95%84%EC%84%A0%EC%88%98%EC%B4%8C%EC%95%84%ED%8C%8C%ED%8A%B8+&amp;language=ko&amp;key=xxx-ti8UqdZ0WeduKjQt4lkFPpSU4</code></pre>
+<pre><code>## Warning: Problem with `mutate()` input `lon`.
+## ℹ Geocoding &quot; 잠실동 아시아선수촌아파트 &amp;l...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started
+## 
+## ℹ Input `lon` is `as.numeric(...)`.
+## ℹ The error occurred in group 1: bgd = &quot; 잠실동&quot;.</code></pre>
+<pre><code>## Warning: Geocoding &quot; 잠실동 아시아선수촌아파트 &amp;l...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started</code></pre>
+<pre><code>## Source : https://maps.googleapis.com/maps/api/geocode/json?address=%EC%9E%A0%EC%8B%A4%EB%8F%99+%EC%9A%B0%EC%84%B1%EC%95%84%ED%8C%8C%ED%8A%B8+&amp;language=ko&amp;key=xxx-ti8UqdZ0WeduKjQt4lkFPpSU4</code></pre>
+<pre><code>## Warning: Problem with `mutate()` input `lon`.
+## ℹ Geocoding &quot; 잠실동 우성아파트 &amp;langu...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started
+## 
+## ℹ Input `lon` is `as.numeric(...)`.
+## ℹ The error occurred in group 1: bgd = &quot; 잠실동&quot;.</code></pre>
+<pre><code>## Warning: Geocoding &quot; 잠실동 우성아파트 &amp;langu...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started</code></pre>
+<pre><code>## Source : https://maps.googleapis.com/maps/api/geocode/json?address=%EC%9E%A0%EC%8B%A4%EB%8F%99+%EC%9E%A0%EC%8B%A4%EC%97%98%EC%8A%A4+&amp;language=ko&amp;key=xxx-ti8UqdZ0WeduKjQt4lkFPpSU4</code></pre>
+<pre><code>## Warning: Problem with `mutate()` input `lon`.
+## ℹ Geocoding &quot; 잠실동 잠실엘스 &amp;langua...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started
+## 
+## ℹ Input `lon` is `as.numeric(...)`.
+## ℹ The error occurred in group 1: bgd = &quot; 잠실동&quot;.</code></pre>
+<pre><code>## Warning: Geocoding &quot; 잠실동 잠실엘스 &amp;langua...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started</code></pre>
+<pre><code>## Source : https://maps.googleapis.com/maps/api/geocode/json?address=%EC%9E%A0%EC%8B%A4%EB%8F%99+%EC%9E%A0%EC%8B%A4%EC%9B%94%EB%93%9C%EB%A9%94%EB%A5%B4%EB%94%94%EC%95%99+&amp;language=ko&amp;key=xxx-ti8UqdZ0WeduKjQt4lkFPpSU4</code></pre>
+<pre><code>## Warning: Problem with `mutate()` input `lon`.
+## ℹ Geocoding &quot; 잠실동 잠실월드메르디앙 &amp;la...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started
+## 
+## ℹ Input `lon` is `as.numeric(...)`.
+## ℹ The error occurred in group 1: bgd = &quot; 잠실동&quot;.</code></pre>
+<pre><code>## Warning: Geocoding &quot; 잠실동 잠실월드메르디앙 &amp;la...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started</code></pre>
+<pre><code>## Source : https://maps.googleapis.com/maps/api/geocode/json?address=%EC%9E%A0%EC%8B%A4%EB%8F%99+%EC%A3%BC%EA%B3%B5%EC%95%84%ED%8C%8C%ED%8A%B8+5%EB%8B%A8%EC%A7%80+&amp;language=ko&amp;key=xxx-ti8UqdZ0WeduKjQt4lkFPpSU4</code></pre>
+<pre><code>## Warning: Problem with `mutate()` input `lon`.
+## ℹ Geocoding &quot; 잠실동 주공아파트 5단지 &amp;l...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started
+## 
+## ℹ Input `lon` is `as.numeric(...)`.
+## ℹ The error occurred in group 1: bgd = &quot; 잠실동&quot;.</code></pre>
+<pre><code>## Warning: Geocoding &quot; 잠실동 주공아파트 5단지 &amp;l...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started</code></pre>
+<pre><code>## Source : https://maps.googleapis.com/maps/api/geocode/json?address=%EC%9E%A0%EC%8B%A4%EB%8F%99+%ED%8A%B8%EB%A6%AC%EC%A7%80%EC%9B%80+&amp;language=ko&amp;key=xxx-ti8UqdZ0WeduKjQt4lkFPpSU4</code></pre>
+<pre><code>## Warning: Problem with `mutate()` input `lon`.
+## ℹ Geocoding &quot; 잠실동 트리지움 &amp;langua...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started
+## 
+## ℹ Input `lon` is `as.numeric(...)`.
+## ℹ The error occurred in group 1: bgd = &quot; 잠실동&quot;.</code></pre>
+<pre><code>## Warning: Geocoding &quot; 잠실동 트리지움 &amp;langua...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started</code></pre>
+<pre><code>## Source : https://maps.googleapis.com/maps/api/geocode/json?address=%EC%9E%A0%EC%8B%A4%EB%8F%99+%ED%8F%AC%EC%8A%A4%EC%BD%94%EB%8D%94%EC%83%B5+&amp;language=ko&amp;key=xxx-ti8UqdZ0WeduKjQt4lkFPpSU4</code></pre>
+<pre><code>## Warning: Problem with `mutate()` input `lon`.
+## ℹ Geocoding &quot; 잠실동 포스코더샵 &amp;langu...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started
+## 
+## ℹ Input `lon` is `as.numeric(...)`.
+## ℹ The error occurred in group 1: bgd = &quot; 잠실동&quot;.</code></pre>
+<pre><code>## Warning: Geocoding &quot; 잠실동 포스코더샵 &amp;langu...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started</code></pre>
+<pre><code>## Source : https://maps.googleapis.com/maps/api/geocode/json?address=%EC%9E%A0%EC%8B%A4%EB%8F%99+%ED%98%84%EB%8C%80+&amp;language=ko&amp;key=xxx-ti8UqdZ0WeduKjQt4lkFPpSU4</code></pre>
+<pre><code>## Warning: Problem with `mutate()` input `lon`.
+## ℹ Geocoding &quot; 잠실동 현대 &amp;language=ko&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started
+## 
+## ℹ Input `lon` is `as.numeric(...)`.
+## ℹ The error occurred in group 1: bgd = &quot; 잠실동&quot;.</code></pre>
+<pre><code>## Warning: Geocoding &quot; 잠실동 현대 &amp;language=ko&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started</code></pre>
+<pre><code>## Source : https://maps.googleapis.com/maps/api/geocode/json?address=%EC%9E%A0%EC%8B%A4%EB%8F%99+%EA%B0%A4%EB%9F%AC%EB%A6%AC%EC%95%84%ED%8C%B0%EB%A6%AC%EC%8A%A4+&amp;language=ko&amp;key=xxx-ti8UqdZ0WeduKjQt4lkFPpSU4</code></pre>
+<pre><code>## Warning: Problem with `mutate()` input `lat`.
+## ℹ Geocoding &quot; 잠실동 갤러리아팰리스 &amp;lan...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started
+## 
+## ℹ Input `lat` is `as.numeric(...)`.
+## ℹ The error occurred in group 1: bgd = &quot; 잠실동&quot;.</code></pre>
+<pre><code>## Warning: Geocoding &quot; 잠실동 갤러리아팰리스 &amp;lan...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started</code></pre>
+<pre><code>## Source : https://maps.googleapis.com/maps/api/geocode/json?address=%EC%9E%A0%EC%8B%A4%EB%8F%99+%EB%A0%88%EC%9D%B4%ED%81%AC%ED%8C%B0%EB%A6%AC%EC%8A%A4+&amp;language=ko&amp;key=xxx-ti8UqdZ0WeduKjQt4lkFPpSU4</code></pre>
+<pre><code>## Warning: Problem with `mutate()` input `lat`.
+## ℹ Geocoding &quot; 잠실동 레이크팰리스 &amp;lang...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started
+## 
+## ℹ Input `lat` is `as.numeric(...)`.
+## ℹ The error occurred in group 1: bgd = &quot; 잠실동&quot;.</code></pre>
+<pre><code>## Warning: Geocoding &quot; 잠실동 레이크팰리스 &amp;lang...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started</code></pre>
+<pre><code>## Source : https://maps.googleapis.com/maps/api/geocode/json?address=%EC%9E%A0%EC%8B%A4%EB%8F%99+%EB%A6%AC%EC%84%BC%EC%B8%A0+&amp;language=ko&amp;key=xxx-ti8UqdZ0WeduKjQt4lkFPpSU4</code></pre>
+<pre><code>## Warning: Problem with `mutate()` input `lat`.
+## ℹ Geocoding &quot; 잠실동 리센츠 &amp;languag...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started
+## 
+## ℹ Input `lat` is `as.numeric(...)`.
+## ℹ The error occurred in group 1: bgd = &quot; 잠실동&quot;.</code></pre>
+<pre><code>## Warning: Geocoding &quot; 잠실동 리센츠 &amp;languag...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started</code></pre>
+<pre><code>## Source : https://maps.googleapis.com/maps/api/geocode/json?address=%EC%9E%A0%EC%8B%A4%EB%8F%99+%EC%95%84%EC%8B%9C%EC%95%84%EC%84%A0%EC%88%98%EC%B4%8C%EC%95%84%ED%8C%8C%ED%8A%B8+&amp;language=ko&amp;key=xxx-ti8UqdZ0WeduKjQt4lkFPpSU4</code></pre>
+<pre><code>## Warning: Problem with `mutate()` input `lat`.
+## ℹ Geocoding &quot; 잠실동 아시아선수촌아파트 &amp;l...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started
+## 
+## ℹ Input `lat` is `as.numeric(...)`.
+## ℹ The error occurred in group 1: bgd = &quot; 잠실동&quot;.</code></pre>
+<pre><code>## Warning: Geocoding &quot; 잠실동 아시아선수촌아파트 &amp;l...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started</code></pre>
+<pre><code>## Source : https://maps.googleapis.com/maps/api/geocode/json?address=%EC%9E%A0%EC%8B%A4%EB%8F%99+%EC%9A%B0%EC%84%B1%EC%95%84%ED%8C%8C%ED%8A%B8+&amp;language=ko&amp;key=xxx-ti8UqdZ0WeduKjQt4lkFPpSU4</code></pre>
+<pre><code>## Warning: Problem with `mutate()` input `lat`.
+## ℹ Geocoding &quot; 잠실동 우성아파트 &amp;langu...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started
+## 
+## ℹ Input `lat` is `as.numeric(...)`.
+## ℹ The error occurred in group 1: bgd = &quot; 잠실동&quot;.</code></pre>
+<pre><code>## Warning: Geocoding &quot; 잠실동 우성아파트 &amp;langu...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started</code></pre>
+<pre><code>## Source : https://maps.googleapis.com/maps/api/geocode/json?address=%EC%9E%A0%EC%8B%A4%EB%8F%99+%EC%9E%A0%EC%8B%A4%EC%97%98%EC%8A%A4+&amp;language=ko&amp;key=xxx-ti8UqdZ0WeduKjQt4lkFPpSU4</code></pre>
+<pre><code>## Warning: Problem with `mutate()` input `lat`.
+## ℹ Geocoding &quot; 잠실동 잠실엘스 &amp;langua...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started
+## 
+## ℹ Input `lat` is `as.numeric(...)`.
+## ℹ The error occurred in group 1: bgd = &quot; 잠실동&quot;.</code></pre>
+<pre><code>## Warning: Geocoding &quot; 잠실동 잠실엘스 &amp;langua...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started</code></pre>
+<pre><code>## Source : https://maps.googleapis.com/maps/api/geocode/json?address=%EC%9E%A0%EC%8B%A4%EB%8F%99+%EC%9E%A0%EC%8B%A4%EC%9B%94%EB%93%9C%EB%A9%94%EB%A5%B4%EB%94%94%EC%95%99+&amp;language=ko&amp;key=xxx-ti8UqdZ0WeduKjQt4lkFPpSU4</code></pre>
+<pre><code>## Warning: Problem with `mutate()` input `lat`.
+## ℹ Geocoding &quot; 잠실동 잠실월드메르디앙 &amp;la...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started
+## 
+## ℹ Input `lat` is `as.numeric(...)`.
+## ℹ The error occurred in group 1: bgd = &quot; 잠실동&quot;.</code></pre>
+<pre><code>## Warning: Geocoding &quot; 잠실동 잠실월드메르디앙 &amp;la...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started</code></pre>
+<pre><code>## Source : https://maps.googleapis.com/maps/api/geocode/json?address=%EC%9E%A0%EC%8B%A4%EB%8F%99+%EC%A3%BC%EA%B3%B5%EC%95%84%ED%8C%8C%ED%8A%B8+5%EB%8B%A8%EC%A7%80+&amp;language=ko&amp;key=xxx-ti8UqdZ0WeduKjQt4lkFPpSU4</code></pre>
+<pre><code>## Warning: Problem with `mutate()` input `lat`.
+## ℹ Geocoding &quot; 잠실동 주공아파트 5단지 &amp;l...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started
+## 
+## ℹ Input `lat` is `as.numeric(...)`.
+## ℹ The error occurred in group 1: bgd = &quot; 잠실동&quot;.</code></pre>
+<pre><code>## Warning: Geocoding &quot; 잠실동 주공아파트 5단지 &amp;l...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started</code></pre>
+<pre><code>## Source : https://maps.googleapis.com/maps/api/geocode/json?address=%EC%9E%A0%EC%8B%A4%EB%8F%99+%ED%8A%B8%EB%A6%AC%EC%A7%80%EC%9B%80+&amp;language=ko&amp;key=xxx-ti8UqdZ0WeduKjQt4lkFPpSU4</code></pre>
+<pre><code>## Warning: Problem with `mutate()` input `lat`.
+## ℹ Geocoding &quot; 잠실동 트리지움 &amp;langua...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started
+## 
+## ℹ Input `lat` is `as.numeric(...)`.
+## ℹ The error occurred in group 1: bgd = &quot; 잠실동&quot;.</code></pre>
+<pre><code>## Warning: Geocoding &quot; 잠실동 트리지움 &amp;langua...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started</code></pre>
+<pre><code>## Source : https://maps.googleapis.com/maps/api/geocode/json?address=%EC%9E%A0%EC%8B%A4%EB%8F%99+%ED%8F%AC%EC%8A%A4%EC%BD%94%EB%8D%94%EC%83%B5+&amp;language=ko&amp;key=xxx-ti8UqdZ0WeduKjQt4lkFPpSU4</code></pre>
+<pre><code>## Warning: Problem with `mutate()` input `lat`.
+## ℹ Geocoding &quot; 잠실동 포스코더샵 &amp;langu...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started
+## 
+## ℹ Input `lat` is `as.numeric(...)`.
+## ℹ The error occurred in group 1: bgd = &quot; 잠실동&quot;.</code></pre>
+<pre><code>## Warning: Geocoding &quot; 잠실동 포스코더샵 &amp;langu...&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started</code></pre>
+<pre><code>## Source : https://maps.googleapis.com/maps/api/geocode/json?address=%EC%9E%A0%EC%8B%A4%EB%8F%99+%ED%98%84%EB%8C%80+&amp;language=ko&amp;key=xxx-ti8UqdZ0WeduKjQt4lkFPpSU4</code></pre>
+<pre><code>## Warning: Problem with `mutate()` input `lat`.
+## ℹ Geocoding &quot; 잠실동 현대 &amp;language=ko&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started
+## 
+## ℹ Input `lat` is `as.numeric(...)`.
+## ℹ The error occurred in group 1: bgd = &quot; 잠실동&quot;.</code></pre>
+<pre><code>## Warning: Geocoding &quot; 잠실동 현대 &amp;language=ko&quot; failed with error:
+## You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started</code></pre>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="classID7-12.html#cb280-1"></a>aptListDealCount2</span></code></pre></div>
+<pre><code>## # A tibble: 11 x 6
+## # Groups:   bgd [1]
+##    bgd       apt_name          deal_count address                      lon   lat
+##    &lt;chr&gt;     &lt;chr&gt;                  &lt;int&gt; &lt;chr&gt;                      &lt;dbl&gt; &lt;dbl&gt;
+##  1 &quot; 잠실동&quot; 갤러리아팰리스             5 &quot; 잠실동 갤러리아팰리스&quot;      NA    NA
+##  2 &quot; 잠실동&quot; 레이크팰리스               9 &quot; 잠실동 레이크팰리스&quot;        NA    NA
+##  3 &quot; 잠실동&quot; 리센츠                    31 &quot; 잠실동 리센츠&quot;              NA    NA
+##  4 &quot; 잠실동&quot; 아시아선수촌아파트…          7 &quot; 잠실동 아시아선수촌아파트&quot;…    NA    NA
+##  5 &quot; 잠실동&quot; 우성아파트                 7 &quot; 잠실동 우성아파트&quot;          NA    NA
+##  6 &quot; 잠실동&quot; 잠실엘스                  24 &quot; 잠실동 잠실엘스&quot;            NA    NA
+##  7 &quot; 잠실동&quot; 잠실월드메르디앙           1 &quot; 잠실동 잠실월드메르디앙&quot;    NA    NA
+##  8 &quot; 잠실동&quot; 주공아파트 5단지          10 &quot; 잠실동 주공아파트 5단지&quot;    NA    NA
+##  9 &quot; 잠실동&quot; 트리지움                  22 &quot; 잠실동 트리지움&quot;            NA    NA
+## 10 &quot; 잠실동&quot; 포스코더샵                 1 &quot; 잠실동 포스코더샵&quot;          NA    NA
+## 11 &quot; 잠실동&quot; 현대                       3 &quot; 잠실동 현대&quot;                NA    NA</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-transpormation-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ggplot-visualization.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["dsWithR.pdf", "dsWithR.epub"],
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true,
+"fontsettings": null,
+"theme": "white",
+"family": "sans",
+"size": 1
+}
+});
+});
+</script>
+
+</body>
+
+</html>

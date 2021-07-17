@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 9 ggplot visualization | R로 배우는 데이터과학</title>
+  <meta name="description" content="Chapter 9 ggplot visualization | R로 배우는 데이터과학" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 9 ggplot visualization | R로 배우는 데이터과학" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 9 ggplot visualization | R로 배우는 데이터과학" />
+  
+  
+  
+
+<meta name="author" content="Dangtnog Byun" />
+
+
+<meta name="date" content="2021-01-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-transpormation-2.html"/>
+<link rel="next" href="classID9-33.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="fontawesome.min.css" type="text/css" />
+<link rel="stylesheet" href="bigdata.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R로 배우는 데이터과학</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Index</a></li>
+<li class="chapter" data-level="2" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html"><i class="fa fa-check"></i><b>2</b> Data Type and Structure</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-0"><i class="fa fa-check"></i><b>2.1</b> R을 사용하기 위한 기본 지식 정리</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-0-1"><i class="fa fa-check"></i><b>2.1.1</b> 작업디렉토리 설정</a></li>
+<li class="chapter" data-level="2.1.2" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-0-2"><i class="fa fa-check"></i><b>2.1.2</b> 패키지 설치 및 사용</a></li>
+<li class="chapter" data-level="2.1.3" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-0-3"><i class="fa fa-check"></i><b>2.1.3</b> 도움말 사용</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-1"><i class="fa fa-check"></i><b>2.2</b> 변수(Variable)</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-2"><i class="fa fa-check"></i><b>2.2.1</b> 숫자(Numeric)</a></li>
+<li class="chapter" data-level="2.2.2" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-3"><i class="fa fa-check"></i><b>2.2.2</b> 문자()</a></li>
+<li class="chapter" data-level="2.2.3" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-4"><i class="fa fa-check"></i><b>2.2.3</b> 팩터 (factor)</a></li>
+<li class="chapter" data-level="2.2.4" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-5"><i class="fa fa-check"></i><b>2.2.4</b> 논리형(Logical)</a></li>
+<li class="chapter" data-level="2.2.5" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-6"><i class="fa fa-check"></i><b>2.2.5</b> 날짜타입(Date and Datetime)</a></li>
+<li class="chapter" data-level="2.2.6" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-7"><i class="fa fa-check"></i><b>2.2.6</b> NA/NaN/Inf 확인 및 처리</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-8"><i class="fa fa-check"></i><b>2.3</b> 데이터 구조(Data Structure)</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-9"><i class="fa fa-check"></i><b>2.3.1</b> 벡터 (Vector)</a></li>
+<li class="chapter" data-level="2.3.2" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-10"><i class="fa fa-check"></i><b>2.3.2</b> 리스트(List)</a></li>
+<li class="chapter" data-level="2.3.3" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-11"><i class="fa fa-check"></i><b>2.3.3</b> 행렬(Matrix)</a></li>
+<li class="chapter" data-level="2.3.4" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-12"><i class="fa fa-check"></i><b>2.3.4</b> 데이타프레임(Data Frame)</a></li>
+<li class="chapter" data-level="2.3.5" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-14"><i class="fa fa-check"></i><b>2.3.5</b> 데이터 변환</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="flow-control.html"><a href="flow-control.html"><i class="fa fa-check"></i><b>3</b> Flow-control</a><ul>
+<li class="chapter" data-level="3.1" data-path="flow-control.html"><a href="flow-control.html#ClassID2-2"><i class="fa fa-check"></i><b>3.1</b> 흐름제어</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="flow-control.html"><a href="flow-control.html#ClassID2-3"><i class="fa fa-check"></i><b>3.1.1</b> if문</a></li>
+<li class="chapter" data-level="3.1.2" data-path="flow-control.html"><a href="flow-control.html#ClassID2-4"><i class="fa fa-check"></i><b>3.1.2</b> ifelse문</a></li>
+<li class="chapter" data-level="3.1.3" data-path="flow-control.html"><a href="flow-control.html#ClassID2-5"><i class="fa fa-check"></i><b>3.1.3</b> else if문</a></li>
+<li class="chapter" data-level="3.1.4" data-path="flow-control.html"><a href="flow-control.html#ClassID2-6"><i class="fa fa-check"></i><b>3.1.4</b> 연습문제</a></li>
+<li class="chapter" data-level="3.1.5" data-path="flow-control.html"><a href="flow-control.html#for문"><i class="fa fa-check"></i><b>3.1.5</b> for문</a></li>
+<li class="chapter" data-level="3.1.6" data-path="flow-control.html"><a href="flow-control.html#ClassID2-7"><i class="fa fa-check"></i><b>3.1.6</b> while 문</a></li>
+<li class="chapter" data-level="3.1.7" data-path="flow-control.html"><a href="flow-control.html#ClassID2-8"><i class="fa fa-check"></i><b>3.1.7</b> while-next 문</a></li>
+<li class="chapter" data-level="3.1.8" data-path="flow-control.html"><a href="flow-control.html#ClassID2-9"><i class="fa fa-check"></i><b>3.1.8</b> repeat 문</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="flow-control.html"><a href="flow-control.html#ClassID2-10"><i class="fa fa-check"></i><b>3.2</b> 연산자</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="function.html"><a href="function.html"><i class="fa fa-check"></i><b>4</b> Function</a><ul>
+<li class="chapter" data-level="4.1" data-path="function.html"><a href="function.html#classID3-1"><i class="fa fa-check"></i><b>4.1</b> 함수</a></li>
+<li class="chapter" data-level="4.2" data-path="function.html"><a href="function.html#classID3-2"><i class="fa fa-check"></i><b>4.2</b> 함수의 호출 특성</a></li>
+<li class="chapter" data-level="4.3" data-path="function.html"><a href="function.html#classID3-3"><i class="fa fa-check"></i><b>4.3</b> 변수의 스코프(Scope)</a></li>
+<li class="chapter" data-level="4.4" data-path="function.html"><a href="function.html#연습문제-2"><i class="fa fa-check"></i><b>4.4</b> [연습문제 #2]</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="classID4-1.html"><a href="classID4-1.html"><i class="fa fa-check"></i><b>5</b> Input and Output</a><ul>
+<li class="chapter" data-level="5.1" data-path="classID4-1.html"><a href="classID4-1.html#classID4-2"><i class="fa fa-check"></i><b>5.1</b> Excel 파일 다루기</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="classID4-1.html"><a href="classID4-1.html#classID4-3"><i class="fa fa-check"></i><b>5.1.1</b> Excel 읽기</a></li>
+<li class="chapter" data-level="5.1.2" data-path="classID4-1.html"><a href="classID4-1.html#classID4-4"><i class="fa fa-check"></i><b>5.1.2</b> Excel Sheet 지정 하여 읽기</a></li>
+<li class="chapter" data-level="5.1.3" data-path="classID4-1.html"><a href="classID4-1.html#classID4-5"><i class="fa fa-check"></i><b>5.1.3</b> Excel 의 다양한 읽기 형태</a></li>
+<li class="chapter" data-level="5.1.4" data-path="classID4-1.html"><a href="classID4-1.html#classID4-6"><i class="fa fa-check"></i><b>5.1.4</b> CSV, TEXT 파일 읽기</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="classID5-1.html"><a href="classID5-1.html"><i class="fa fa-check"></i><b>6</b> 기초 통계량</a><ul>
+<li class="chapter" data-level="6.1" data-path="classID5-1.html"><a href="classID5-1.html#classID5-2"><i class="fa fa-check"></i><b>6.1</b> 정형화된 데이터의 종류</a></li>
+<li class="chapter" data-level="6.2" data-path="classID5-1.html"><a href="classID5-1.html#classID5-3"><i class="fa fa-check"></i><b>6.2</b> 위치 추정</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="classID5-1.html"><a href="classID5-1.html#classID5-4"><i class="fa fa-check"></i><b>6.2.1</b> 평균</a></li>
+<li class="chapter" data-level="6.2.2" data-path="classID5-1.html"><a href="classID5-1.html#classID5-5"><i class="fa fa-check"></i><b>6.2.2</b> 절사평균</a></li>
+<li class="chapter" data-level="6.2.3" data-path="classID5-1.html"><a href="classID5-1.html#classID5-6"><i class="fa fa-check"></i><b>6.2.3</b> 중앙값</a></li>
+<li class="chapter" data-level="6.2.4" data-path="classID5-1.html"><a href="classID5-1.html#classID5-7"><i class="fa fa-check"></i><b>6.2.4</b> 가중평균</a></li>
+<li class="chapter" data-level="6.2.5" data-path="classID5-1.html"><a href="classID5-1.html#classID5-8"><i class="fa fa-check"></i><b>6.2.5</b> 가중 중앙값</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="classID5-1.html"><a href="classID5-1.html#classID5-9"><i class="fa fa-check"></i><b>6.3</b> 변위 추정</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="classID5-1.html"><a href="classID5-1.html#classID5-10"><i class="fa fa-check"></i><b>6.3.1</b> 표준편차(Standard Deviation)</a></li>
+<li class="chapter" data-level="6.3.2" data-path="classID5-1.html"><a href="classID5-1.html#classID5-11"><i class="fa fa-check"></i><b>6.3.2</b> 사분위범위(IRQ)</a></li>
+<li class="chapter" data-level="6.3.3" data-path="classID5-1.html"><a href="classID5-1.html#classID5-12"><i class="fa fa-check"></i><b>6.3.3</b> 중위절대편차(MAD)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="classID5-1.html"><a href="classID5-1.html#classID5-13"><i class="fa fa-check"></i><b>6.4</b> 데이터분포</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="classID5-1.html"><a href="classID5-1.html#classID5-14"><i class="fa fa-check"></i><b>6.4.1</b> 사분위수(Quantile)</a></li>
+<li class="chapter" data-level="6.4.2" data-path="classID5-1.html"><a href="classID5-1.html#classID5-15"><i class="fa fa-check"></i><b>6.4.2</b> 상자그림(Boxplot)</a></li>
+<li class="chapter" data-level="6.4.3" data-path="classID5-1.html"><a href="classID5-1.html#classID5-16"><i class="fa fa-check"></i><b>6.4.3</b> 도수 분포표(Frequency Table)</a></li>
+<li class="chapter" data-level="6.4.4" data-path="classID5-1.html"><a href="classID5-1.html#classID5-17"><i class="fa fa-check"></i><b>6.4.4</b> 히스토 그램</a></li>
+<li class="chapter" data-level="6.4.5" data-path="classID5-1.html"><a href="classID5-1.html#classID5-18"><i class="fa fa-check"></i><b>6.4.5</b> 밀도추정(부드러운 히스토그램)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="data-transformation-1.html"><a href="data-transformation-1.html"><i class="fa fa-check"></i><b>7</b> Data transformation 1</a><ul>
+<li class="chapter" data-level="7.1" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-1"><i class="fa fa-check"></i><b>7.1</b> plyr 패키지와 dplyr 패키지 성능 차이</a></li>
+<li class="chapter" data-level="7.2" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-2"><i class="fa fa-check"></i><b>7.2</b> Data 변환 전에</a></li>
+<li class="chapter" data-level="7.3" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-3"><i class="fa fa-check"></i><b>7.3</b> apply 계열의 함수들</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-4"><i class="fa fa-check"></i><b>7.3.1</b> apply( )</a></li>
+<li class="chapter" data-level="7.3.2" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-5"><i class="fa fa-check"></i><b>7.3.2</b> 행 또는 열의 합 또는 평균 계산 함수</a></li>
+<li class="chapter" data-level="7.3.3" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-6"><i class="fa fa-check"></i><b>7.3.3</b> lapply( )함수</a></li>
+<li class="chapter" data-level="7.3.4" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-7"><i class="fa fa-check"></i><b>7.3.4</b> unlist 함수</a></li>
+<li class="chapter" data-level="7.3.5" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-8"><i class="fa fa-check"></i><b>7.3.5</b> do.call 함수</a></li>
+<li class="chapter" data-level="7.3.6" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-9"><i class="fa fa-check"></i><b>7.3.6</b> sapply 함수</a></li>
+<li class="chapter" data-level="7.3.7" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-10"><i class="fa fa-check"></i><b>7.3.7</b> tapply 함수</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-11"><i class="fa fa-check"></i><b>7.4</b> dplyr 패키지</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-12"><i class="fa fa-check"></i><b>7.4.1</b> flights 데이터셋의 간략한 설명</a></li>
+<li class="chapter" data-level="7.4.2" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-13"><i class="fa fa-check"></i><b>7.4.2</b> Filter 사용하기</a></li>
+<li class="chapter" data-level="7.4.3" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-14"><i class="fa fa-check"></i><b>7.4.3</b> Logical 연산자</a></li>
+<li class="chapter" data-level="7.4.4" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-15"><i class="fa fa-check"></i><b>7.4.4</b> arrange 를 이용한 정렬</a></li>
+<li class="chapter" data-level="7.4.5" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-17"><i class="fa fa-check"></i><b>7.4.5</b> select 를 이용한 데이터 선택</a></li>
+<li class="chapter" data-level="7.4.6" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-19"><i class="fa fa-check"></i><b>7.4.6</b> year 와 day 사이에 있는 컬럼 제외</a></li>
+<li class="chapter" data-level="7.4.7" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-20"><i class="fa fa-check"></i><b>7.4.7</b> mutate 로 데이터 생성 및 수정</a></li>
+<li class="chapter" data-level="7.4.8" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-25"><i class="fa fa-check"></i><b>7.4.8</b> summarize 로 집계 하기</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-26"><i class="fa fa-check"></i><b>7.5</b> SQL 이용한 관계형 데이터 처리</a></li>
+<li class="chapter" data-level="7.6" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-27"><i class="fa fa-check"></i><b>7.6</b> mutating 조인을 이용한 관계형 데이터 처리</a><ul>
+<li class="chapter" data-level="7.6.1" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-28"><i class="fa fa-check"></i><b>7.6.1</b> 데이터 살펴보기</a></li>
+<li class="chapter" data-level="7.6.2" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-29"><i class="fa fa-check"></i><b>7.6.2</b> Key</a></li>
+<li class="chapter" data-level="7.6.3" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-30"><i class="fa fa-check"></i><b>7.6.3</b> 조인 실습을 위한 작은 데이터셋 만들기</a></li>
+<li class="chapter" data-level="7.6.4" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-31"><i class="fa fa-check"></i><b>7.6.4</b> Mutating Join ? 왜?</a></li>
+<li class="chapter" data-level="7.6.5" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-33"><i class="fa fa-check"></i><b>7.6.5</b> Join 이해하기</a></li>
+<li class="chapter" data-level="7.6.6" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-34"><i class="fa fa-check"></i><b>7.6.6</b> Inner Join (내부조인)</a></li>
+<li class="chapter" data-level="7.6.7" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-35"><i class="fa fa-check"></i><b>7.6.7</b> Outer Join (외부조인)</a></li>
+<li class="chapter" data-level="7.6.8" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-36"><i class="fa fa-check"></i><b>7.6.8</b> 중복키</a></li>
+<li class="chapter" data-level="7.6.9" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-37"><i class="fa fa-check"></i><b>7.6.9</b> Join키 정의 하기</a></li>
+<li class="chapter" data-level="7.6.10" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-38"><i class="fa fa-check"></i><b>7.6.10</b> flights 테이블 조인 실습 하기1</a></li>
+<li class="chapter" data-level="7.6.11" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-39"><i class="fa fa-check"></i><b>7.6.11</b> 필터링 조인 (세미조인 &amp; 안티조인)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html"><i class="fa fa-check"></i><b>8</b> Data Transpormation 2</a><ul>
+<li class="chapter" data-level="8.1" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-1"><i class="fa fa-check"></i><b>8.1</b> tidy 데이터</a></li>
+<li class="chapter" data-level="8.2" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-2"><i class="fa fa-check"></i><b>8.2</b> gather 로 데이터 모으기</a></li>
+<li class="chapter" data-level="8.3" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-3"><i class="fa fa-check"></i><b>8.3</b> spread 로 데이터 펼치기</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-4"><i class="fa fa-check"></i><b>8.3.1</b> gather 와 spread 가 조금 다른 이유</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-5"><i class="fa fa-check"></i><b>8.4</b> Seperate와 Unite</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-6"><i class="fa fa-check"></i><b>8.4.1</b> seperate 로 나누기</a></li>
+<li class="chapter" data-level="8.4.2" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-7"><i class="fa fa-check"></i><b>8.4.2</b> unite 로 합치기</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-9"><i class="fa fa-check"></i><b>8.5</b> NA(결측값) 처리하기</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-10"><i class="fa fa-check"></i><b>8.5.1</b> 결측 처리 기본</a></li>
+<li class="chapter" data-level="8.5.2" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-11"><i class="fa fa-check"></i><b>8.5.2</b> NA(결측) 처리 자동화</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-13"><i class="fa fa-check"></i><b>8.6</b> 공공데이터 포털 가입 하고 API 키 얻기</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-14"><i class="fa fa-check"></i><b>8.6.1</b> 회원 가입</a></li>
+<li class="chapter" data-level="8.6.2" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-15"><i class="fa fa-check"></i><b>8.6.2</b> 일반회원으로 가입</a></li>
+<li class="chapter" data-level="8.6.3" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-16"><i class="fa fa-check"></i><b>8.6.3</b> 회원가입을 위한 정보 입력</a></li>
+<li class="chapter" data-level="8.6.4" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-17"><i class="fa fa-check"></i><b>8.6.4</b> 이용약관 동의</a></li>
+<li class="chapter" data-level="8.6.5" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-18"><i class="fa fa-check"></i><b>8.6.5</b> 정보입력</a></li>
+<li class="chapter" data-level="8.6.6" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-19"><i class="fa fa-check"></i><b>8.6.6</b> 회원가입 완료</a></li>
+<li class="chapter" data-level="8.6.7" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-20"><i class="fa fa-check"></i><b>8.6.7</b> “국토부 실거래가”" 로 API 검색</a></li>
+<li class="chapter" data-level="8.6.8" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-21"><i class="fa fa-check"></i><b>8.6.8</b> “아파트매매 실거래 상세 자료” -&gt; 활용신청</a></li>
+<li class="chapter" data-level="8.6.9" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-22"><i class="fa fa-check"></i><b>8.6.9</b> 활용신청 상세</a></li>
+<li class="chapter" data-level="8.6.10" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-23"><i class="fa fa-check"></i><b>8.6.10</b> 신청현황 / 결과</a></li>
+<li class="chapter" data-level="8.6.11" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-24"><i class="fa fa-check"></i><b>8.6.11</b> API 정보 확인</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-25"><i class="fa fa-check"></i><b>8.7</b> API를 이용해 국토부 아파트매매 실거래가 가져오기</a><ul>
+<li class="chapter" data-level="8.7.1" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-26"><i class="fa fa-check"></i><b>8.7.1</b> 전체 코드</a></li>
+</ul></li>
+<li class="chapter" data-level="8.8" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-28"><i class="fa fa-check"></i><b>8.8</b> shiny</a></li>
+<li class="chapter" data-level="8.9" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-29"><i class="fa fa-check"></i><b>8.9</b> API를 이용한 국토부 실거래가 조회2</a><ul>
+<li class="chapter" data-level="8.9.1" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-30"><i class="fa fa-check"></i><b>8.9.1</b> 파일 불러오기</a></li>
+<li class="chapter" data-level="8.9.2" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-31"><i class="fa fa-check"></i><b>8.9.2</b> 특정 구의 시군구 코드 알아내기</a></li>
+<li class="chapter" data-level="8.9.3" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-32"><i class="fa fa-check"></i><b>8.9.3</b> 구군 명을 넣으면 구군코드를 반환하는 함수 만들기</a></li>
+</ul></li>
+<li class="chapter" data-level="8.10" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#google-지도를-이용한-부동산-정보-시각화"><i class="fa fa-check"></i><b>8.10</b> Google 지도를 이용한 부동산 정보 시각화</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html"><i class="fa fa-check"></i><b>9</b> ggplot visualization</a><ul>
+<li class="chapter" data-level="9.1" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#ggplot-옵션-익히기"><i class="fa fa-check"></i><b>9.1</b> ggplot 옵션 익히기</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#mpg-데이터"><i class="fa fa-check"></i><b>9.1.1</b> mpg 데이터</a></li>
+<li class="chapter" data-level="9.1.2" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#ClassID"><i class="fa fa-check"></i><b>9.1.2</b> 기본 그래프 생성 문법</a></li>
+<li class="chapter" data-level="9.1.3" data-path="function.html"><a href="function.html#classID3-2"><i class="fa fa-check"></i><b>9.1.3</b> ggplot 문법 기본</a></li>
+<li class="chapter" data-level="9.1.4" data-path="function.html"><a href="function.html#classID3-3"><i class="fa fa-check"></i><b>9.1.4</b> 간단한 그래프 그리기</a></li>
+<li class="chapter" data-level="9.1.5" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-4"><i class="fa fa-check"></i><b>9.1.5</b> 선그래프 추가하기</a></li>
+<li class="chapter" data-level="9.1.6" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-5"><i class="fa fa-check"></i><b>9.1.6</b> X, Y 각 축에 값 제한 하기</a></li>
+<li class="chapter" data-level="9.1.7" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-6"><i class="fa fa-check"></i><b>9.1.7</b> 그래프 확대 하기</a></li>
+<li class="chapter" data-level="9.1.8" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-8"><i class="fa fa-check"></i><b>9.1.8</b> 타이틀 및 축라벨 변경</a></li>
+<li class="chapter" data-level="9.1.9" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-9"><i class="fa fa-check"></i><b>9.1.9</b> 색상과 점의 크기 조정</a></li>
+<li class="chapter" data-level="9.1.10" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-10"><i class="fa fa-check"></i><b>9.1.10</b> 조건기반 색상 표시</a></li>
+<li class="chapter" data-level="9.1.11" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-11"><i class="fa fa-check"></i><b>9.1.11</b> 그룹별로 색상 표시하기</a></li>
+<li class="chapter" data-level="9.1.12" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-12"><i class="fa fa-check"></i><b>9.1.12</b> col 인자에 명기 하는 경우</a></li>
+<li class="chapter" data-level="9.1.13" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-14"><i class="fa fa-check"></i><b>9.1.13</b> Mark 의 모양 변경</a></li>
+<li class="chapter" data-level="9.1.14" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-15"><i class="fa fa-check"></i><b>9.1.14</b> Legend 없애기</a></li>
+<li class="chapter" data-level="9.1.15" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-16"><i class="fa fa-check"></i><b>9.1.15</b> Legend 테마 변경하기</a></li>
+<li class="chapter" data-level="9.1.16" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-17"><i class="fa fa-check"></i><b>9.1.16</b> 색상 팔레트 종류</a></li>
+<li class="chapter" data-level="9.1.17" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-18"><i class="fa fa-check"></i><b>9.1.17</b> 축간격 조정 하기</a></li>
+<li class="chapter" data-level="9.1.18" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-19"><i class="fa fa-check"></i><b>9.1.18</b> X축 역변환 하기</a></li>
+<li class="chapter" data-level="9.1.19" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-20"><i class="fa fa-check"></i><b>9.1.19</b> 축라벨에 커스터마이징</a></li>
+<li class="chapter" data-level="9.1.20" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-21"><i class="fa fa-check"></i><b>9.1.20</b> 테마를 사용해서 한번에 변경</a></li>
+<li class="chapter" data-level="9.1.21" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#scatter-plot산점도"><i class="fa fa-check"></i><b>9.1.21</b> Scatter Plot(산점도)</a></li>
+<li class="chapter" data-level="9.1.22" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#jitter-plot"><i class="fa fa-check"></i><b>9.1.22</b> jitter plot</a></li>
+<li class="chapter" data-level="9.1.23" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#count-plot"><i class="fa fa-check"></i><b>9.1.23</b> Count Plot</a></li>
+<li class="chapter" data-level="9.1.24" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-22"><i class="fa fa-check"></i><b>9.1.24</b> 가장자리 분포 그래프 추가</a></li>
+<li class="chapter" data-level="9.1.25" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#correlogram"><i class="fa fa-check"></i><b>9.1.25</b> Correlogram</a></li>
+<li class="chapter" data-level="9.1.26" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-23"><i class="fa fa-check"></i><b>9.1.26</b> Bar 그래프</a></li>
+<li class="chapter" data-level="9.1.27" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#stacked-bar-plot-누적-막대-그래프"><i class="fa fa-check"></i><b>9.1.27</b> Stacked Bar Plot (누적 막대 그래프)</a></li>
+<li class="chapter" data-level="9.1.28" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#facet"><i class="fa fa-check"></i><b>9.1.28</b> Facet</a></li>
+<li class="chapter" data-level="9.1.29" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-25"><i class="fa fa-check"></i><b>9.1.29</b> Position 조정</a></li>
+<li class="chapter" data-level="9.1.30" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-26"><i class="fa fa-check"></i><b>9.1.30</b> Pie 차트</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-29"><i class="fa fa-check"></i><b>9.2</b> kaggle 데이터를 이용한 EDA 실습</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-30"><i class="fa fa-check"></i><b>9.2.1</b> bike sharing demand 데이터셋 설명</a></li>
+<li class="chapter" data-level="9.2.2" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-31"><i class="fa fa-check"></i><b>9.2.2</b> 기본 그래프 생성</a></li>
+<li class="chapter" data-level="9.2.3" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-32"><i class="fa fa-check"></i><b>9.2.3</b> ggthemr 적용하기</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="classID9-33.html"><a href="classID9-33.html"><i class="fa fa-check"></i><b>10</b> Time-Series 데이터 시각화</a><ul>
+<li class="chapter" data-level="10.1" data-path="classID9-33.html"><a href="classID9-33.html#classID9-34"><i class="fa fa-check"></i><b>10.1</b> correlation 그래프 생성</a></li>
+<li class="chapter" data-level="10.2" data-path="classID9-33.html"><a href="classID9-33.html#classID9-35"><i class="fa fa-check"></i><b>10.2</b> plot.ly 이용해서 interactive 그래프 그리기</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="modeling.html"><a href="modeling.html"><i class="fa fa-check"></i><b>11</b> Modeling</a><ul>
+<li class="chapter" data-level="11.1" data-path="modeling.html"><a href="modeling.html#ClassID10-1"><i class="fa fa-check"></i><b>11.1</b> Regression Model (회귀모형)</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="modeling.html"><a href="modeling.html#ClassID10-2"><i class="fa fa-check"></i><b>11.1.1</b> Univariate Linear Regression (단변량 선형회기모형)</a></li>
+<li class="chapter" data-level="11.1.2" data-path="modeling.html"><a href="modeling.html#ClassID10-3"><i class="fa fa-check"></i><b>11.1.2</b> Multivariate Linear Regression (다변량 선형회기모형)</a></li>
+<li class="chapter" data-level="11.1.3" data-path="modeling.html"><a href="modeling.html#ClassID10-4"><i class="fa fa-check"></i><b>11.1.3</b> Polynomial Regression (다항 선형회기모형)</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="modeling.html"><a href="modeling.html#ClassID10-9"><i class="fa fa-check"></i><b>11.2</b> Classification Model (분류모형)</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="modeling.html"><a href="modeling.html#ClassID10-10"><i class="fa fa-check"></i><b>11.2.1</b> Logistic Regression</a></li>
+<li class="chapter" data-level="11.2.2" data-path="modeling.html"><a href="modeling.html#ClassID10-17"><i class="fa fa-check"></i><b>11.2.2</b> K-Nearest Neighbors(K-NN)</a></li>
+<li class="chapter" data-level="11.2.3" data-path="modeling.html"><a href="modeling.html#ClassID10-25"><i class="fa fa-check"></i><b>11.2.3</b> Support Vector Machine(SVM)</a></li>
+<li class="chapter" data-level="11.2.4" data-path="modeling.html"><a href="modeling.html#ClassID10-32"><i class="fa fa-check"></i><b>11.2.4</b> Decision Tree Classification</a></li>
+<li class="chapter" data-level="11.2.5" data-path="modeling.html"><a href="modeling.html#ClassID10-36"><i class="fa fa-check"></i><b>11.2.5</b> Random Forrest Classfication</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="modeling.html"><a href="modeling.html#ClassID10-40"><i class="fa fa-check"></i><b>11.3</b> Clustering 군집 모델</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="modeling.html"><a href="modeling.html#ClassID10-41"><i class="fa fa-check"></i><b>11.3.1</b> K-Means Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="modeling.html"><a href="modeling.html#ClassID10-43"><i class="fa fa-check"></i><b>11.4</b> Gradient Boosting 실습</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="modeling.html"><a href="modeling.html#ClassID10-44"><i class="fa fa-check"></i><b>11.4.1</b> 데이터 및 패키지 로딩</a></li>
+<li class="chapter" data-level="11.4.2" data-path="modeling.html"><a href="modeling.html#ClassID10-45"><i class="fa fa-check"></i><b>11.4.2</b> 레이블 변환</a></li>
+<li class="chapter" data-level="11.4.3" data-path="modeling.html"><a href="modeling.html#ClassID10-46"><i class="fa fa-check"></i><b>11.4.3</b> 훈련 및 테스트 데이터 분할</a></li>
+<li class="chapter" data-level="11.4.4" data-path="modeling.html"><a href="modeling.html#ClassID10-47"><i class="fa fa-check"></i><b>11.4.4</b> xgb.DMatrix 오브젝트로 변환</a></li>
+<li class="chapter" data-level="11.4.5" data-path="modeling.html"><a href="modeling.html#ClassID10-48"><i class="fa fa-check"></i><b>11.4.5</b> 주요 파라메터 설정</a></li>
+<li class="chapter" data-level="11.4.6" data-path="modeling.html"><a href="modeling.html#ClassID10-49"><i class="fa fa-check"></i><b>11.4.6</b> 모델 훈련 시키기</a></li>
+<li class="chapter" data-level="11.4.7" data-path="modeling.html"><a href="modeling.html#ClassID10-50"><i class="fa fa-check"></i><b>11.4.7</b> 테스트 데이터로 스코어링</a></li>
+<li class="chapter" data-level="11.4.8" data-path="modeling.html"><a href="modeling.html#ClassID10-51"><i class="fa fa-check"></i><b>11.4.8</b> Identify the class with the highest probability for each prediction</a></li>
+<li class="chapter" data-level="11.4.9" data-path="modeling.html"><a href="modeling.html#ClassID10-52"><i class="fa fa-check"></i><b>11.4.9</b> 모델 성능 측정</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/dangtong76" target="blank">Dangtong Github Pages</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R로 배우는 데이터과학</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ggplot-visualization" class="section level1">
+<h1><span class="header-section-number">Chapter 9</span> ggplot visualization</h1>
+<div id="ggplot-옵션-익히기" class="section level2">
+<h2><span class="header-section-number">9.1</span> ggplot 옵션 익히기</h2>
+<div id="mpg-데이터" class="section level3">
+<h3><span class="header-section-number">9.1.1</span> mpg 데이터</h3>
+<script>
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('left', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<p>자동차 모델별 기술스팩 정보를 가지고 있는 데이터셋</p>
+<table>
+<thead>
+<tr class="header">
+<th>항목</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>manufacturer</td>
+<td>자동차 제조사</td>
+</tr>
+<tr class="even">
+<td>model</td>
+<td>모델이름</td>
+</tr>
+<tr class="odd">
+<td>displ</td>
+<td>리터당 배기량</td>
+</tr>
+<tr class="even">
+<td>year</td>
+<td>생산연도</td>
+</tr>
+<tr class="odd">
+<td>cyl</td>
+<td>실린더 개수</td>
+</tr>
+<tr class="even">
+<td>trans</td>
+<td>자동/수동 기어 정보</td>
+</tr>
+<tr class="odd">
+<td>drv</td>
+<td>f:전륜구동, r=후륜구동, 4=4wd</td>
+</tr>
+<tr class="even">
+<td>cty</td>
+<td>갤런당 시내주행 연비</td>
+</tr>
+<tr class="odd">
+<td>hwy</td>
+<td>겔런당 고속도로 연비</td>
+</tr>
+<tr class="even">
+<td>fl</td>
+<td>연료타입</td>
+</tr>
+<tr class="odd">
+<td>class</td>
+<td>자동차 타입</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="ClassID" class="section level3">
+<h3><span class="header-section-number">9.1.2</span> 기본 그래프 생성 문법</h3>
+<pre><code>ggplot(data = &lt;DATA&gt;) + 
+  &lt;GEOM_FUNCTION&gt;(mapping = aes(&lt;MAPPINGS&gt;))</code></pre>
+<ul>
+<li>이번장에 사용될 패키지 설치</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="ggplot-visualization.html#cb2-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;plotly&quot;</span>)</span>
+<span id="cb2-2"><a href="ggplot-visualization.html#cb2-2"></a><span class="kw">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
+<ul>
+<li>파이프 라인 연산처럼 ggplot은 ‘+’ 연산을 통해 그래프 객체 및 옵션 등을 추 가 할 수 있습니다.</li>
+<li>mpg 데이터셋의 각 컬럼별 의미를 확인해 봅시다.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="ggplot-visualization.html#cb3-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## Warning: package &#39;tibble&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## Warning: package &#39;tidyr&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## Warning: package &#39;readr&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.0.2</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="ggplot-visualization.html#cb9-1"></a>mpg</span></code></pre></div>
+<pre><code>## # A tibble: 234 x 11
+##    manufacturer model    displ  year   cyl trans   drv     cty   hwy fl    class
+##    &lt;chr&gt;        &lt;chr&gt;    &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;   &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+##  1 audi         a4         1.8  1999     4 auto(l… f        18    29 p     comp…
+##  2 audi         a4         1.8  1999     4 manual… f        21    29 p     comp…
+##  3 audi         a4         2    2008     4 manual… f        20    31 p     comp…
+##  4 audi         a4         2    2008     4 auto(a… f        21    30 p     comp…
+##  5 audi         a4         2.8  1999     6 auto(l… f        16    26 p     comp…
+##  6 audi         a4         2.8  1999     6 manual… f        18    26 p     comp…
+##  7 audi         a4         3.1  2008     6 auto(a… f        18    27 p     comp…
+##  8 audi         a4 quat…   1.8  1999     4 manual… 4        18    26 p     comp…
+##  9 audi         a4 quat…   1.8  1999     4 auto(l… 4        16    25 p     comp…
+## 10 audi         a4 quat…   2    2008     4 manual… 4        20    28 p     comp…
+## # … with 224 more rows</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="ggplot-visualization.html#cb11-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st">  </span><span class="co"># 데이터 </span></span>
+<span id="cb11-2"><a href="ggplot-visualization.html#cb11-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="co"># 산점도 및 축 설정</span></span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="classID3-2" class="section level3">
+<h3><span class="header-section-number">9.1.3</span> ggplot 문법 기본</h3>
+<ul>
+<li>scipen 은 지수형 숫자 표기식 설정 입니다. default 값은 ‘0’ 이며 전체 세션에 영향을 미칩 니다. scipen = x 에서 x를 큰숫자로 입력할 경우 지수형 숫자 표기가 disable 됩니다.</li>
+<li>scipen 은 전체 세션에 영향을 미치는 반면, format(변수명, scientific = FALSE) 은 해당 그래프에서 지수형 숫자 표기를 disable 합니다.</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="ggplot-visualization.html#cb12-1"></a><span class="co">#Setup</span></span>
+<span id="cb12-2"><a href="ggplot-visualization.html#cb12-2"></a><span class="kw">options</span>(<span class="dt">scipen=</span><span class="dv">999</span>)  <span class="co"># 숫자표현시 지수 표기법을 끕니다.(예 : 1e+08)</span></span>
+<span id="cb12-3"><a href="ggplot-visualization.html#cb12-3"></a>midwest &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;http://goo.gl/G1K41K&quot;</span>) <span class="co"># 데이터를 읽습니다.</span></span>
+<span id="cb12-4"><a href="ggplot-visualization.html#cb12-4"></a><span class="kw">ggplot</span>(midwest, <span class="kw">aes</span>(<span class="dt">x=</span>area, <span class="dt">y=</span>poptotal))  <span class="co"># 그래프는 그리지 않고 축을 참조해서 캔버스만 만듭니다.</span></span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="classID3-3" class="section level3">
+<h3><span class="header-section-number">9.1.4</span> 간단한 그래프 그리기</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="ggplot-visualization.html#cb13-1"></a>midwest <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>area, <span class="dt">y=</span>poptotal)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb13-2"><a href="ggplot-visualization.html#cb13-2"></a><span class="st">  </span><span class="kw">geom_point</span>() </span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="classID3-4" class="section level3">
+<h3><span class="header-section-number">9.1.5</span> 선그래프 추가하기</h3>
+<ul>
+<li>method 의 종류</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>method</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>lm</td>
+<td>선형 모형(linear model)</td>
+</tr>
+<tr class="even">
+<td>glm</td>
+<td>일반화 선형 모형(generalized linear model)</td>
+</tr>
+<tr class="odd">
+<td>gam</td>
+<td>일반화 가법 모형(generalized additive model)</td>
+</tr>
+<tr class="even">
+<td>rlm</td>
+<td>robust linear model</td>
+</tr>
+<tr class="odd">
+<td>loess</td>
+<td>비모수회귀 모형</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="ggplot-visualization.html#cb14-1"></a>midwest <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>area, <span class="dt">y=</span>poptotal)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb14-2"><a href="ggplot-visualization.html#cb14-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb14-3"><a href="ggplot-visualization.html#cb14-3"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>) </span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="classID3-5" class="section level3">
+<h3><span class="header-section-number">9.1.6</span> X, Y 각 축에 값 제한 하기</h3>
+<ul>
+<li>xlim, ylim 함수를 이용해서 축의 값 범위를 제한 할 수 있다.</li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="ggplot-visualization.html#cb16-1"></a>midwest <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>area, <span class="dt">y=</span>poptotal)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb16-2"><a href="ggplot-visualization.html#cb16-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb16-3"><a href="ggplot-visualization.html#cb16-3"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>) <span class="op">+</span></span>
+<span id="cb16-4"><a href="ggplot-visualization.html#cb16-4"></a><span class="st">  </span><span class="kw">xlim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1000000</span>))   <span class="co"># limit 을 벗엇난 값은 삭제함</span></span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="classID3-6" class="section level3">
+<h3><span class="header-section-number">9.1.7</span> 그래프 확대 하기</h3>
+<ul>
+<li>coord_cartesian 의 매개변수로 xlim,ylim 을 사용하지만 limit 을 넘어가는 실제 데이터는 삭제하지 않습니다.</li>
+<li>단순히 xlim, ylim 에 선언된 대로 확대만 합니다.</li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="ggplot-visualization.html#cb18-1"></a>midwest <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>area, <span class="dt">y=</span>poptotal)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb18-2"><a href="ggplot-visualization.html#cb18-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb18-3"><a href="ggplot-visualization.html#cb18-3"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>) <span class="op">+</span></span>
+<span id="cb18-4"><a href="ggplot-visualization.html#cb18-4"></a><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.1</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2000000</span>)) <span class="co"># 값은 삭제하지 않고 유지. 화면에만 보이지 않음.</span></span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+<div id="classID3-8" class="section level3">
+<h3><span class="header-section-number">9.1.8</span> 타이틀 및 축라벨 변경</h3>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="ggplot-visualization.html#cb20-1"></a>midwest <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>area, <span class="dt">y=</span>poptotal)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb20-2"><a href="ggplot-visualization.html#cb20-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb20-3"><a href="ggplot-visualization.html#cb20-3"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>) <span class="op">+</span></span>
+<span id="cb20-4"><a href="ggplot-visualization.html#cb20-4"></a><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.1</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1000000</span>)) <span class="op">+</span></span>
+<span id="cb20-5"><a href="ggplot-visualization.html#cb20-5"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Area Vs Population&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;From midwest dataset&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Population&quot;</span>, <span class="dt">x=</span><span class="st">&quot;Area&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Midwest Demographics&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+<div id="classID3-9" class="section level3">
+<h3><span class="header-section-number">9.1.9</span> 색상과 점의 크기 조정</h3>
+<ul>
+<li>labs 함수로 제목/소제목/축레이블/캡션을 지정 할 수 있습니다.</li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="ggplot-visualization.html#cb22-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb22-2"><a href="ggplot-visualization.html#cb22-2"></a><span class="kw">ggplot</span>(midwest, <span class="kw">aes</span>(<span class="dt">x=</span>area, <span class="dt">y=</span>poptotal)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb22-3"><a href="ggplot-visualization.html#cb22-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">col=</span><span class="st">&quot;steelblue&quot;</span>, <span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span><span class="st">   </span><span class="co"># 점에대해 크기와 색상을 지정</span></span>
+<span id="cb22-4"><a href="ggplot-visualization.html#cb22-4"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">col=</span><span class="st">&quot;firebrick&quot;</span>) <span class="op">+</span><span class="st">  </span><span class="co"># 선의 색상을 변경</span></span>
+<span id="cb22-5"><a href="ggplot-visualization.html#cb22-5"></a><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1000000</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb22-6"><a href="ggplot-visualization.html#cb22-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Area Vs Population&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;From midwest dataset&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Population&quot;</span>, <span class="dt">x=</span><span class="st">&quot;Area&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Midwest Demographics&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+<div id="classID3-10" class="section level3">
+<h3><span class="header-section-number">9.1.10</span> 조건기반 색상 표시</h3>
+<ul>
+<li>col 인자에 조건식을 사용하여 색상을 지정할 수 있습니다.</li>
+<li>주의 할 점은 col 컬럼의 조건식에서 <strong>컬럼명을 테이블$컬럼명</strong>으로 명기 해야함.</li>
+</ul>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="ggplot-visualization.html#cb24-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb24-2"><a href="ggplot-visualization.html#cb24-2"></a>midwest <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>area, <span class="dt">y=</span>poptotal)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb24-3"><a href="ggplot-visualization.html#cb24-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>, <span class="dt">col =</span> <span class="kw">ifelse</span>(midwest<span class="op">$</span>poptotal <span class="op">&gt;</span><span class="st"> </span><span class="dv">500000</span>,<span class="st">&#39;red&#39;</span>,<span class="st">&#39;green&#39;</span>)) <span class="op">+</span><span class="st">   </span><span class="co"># 점에대해 크기와 색상을 지정</span></span>
+<span id="cb24-4"><a href="ggplot-visualization.html#cb24-4"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">col =</span> <span class="st">&#39;firebrick&#39;</span>) <span class="op">+</span><span class="st">  </span><span class="co"># 선의 색상을 변경</span></span>
+<span id="cb24-5"><a href="ggplot-visualization.html#cb24-5"></a><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1000000</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb24-6"><a href="ggplot-visualization.html#cb24-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Area Vs Population&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;From midwest dataset&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Population&quot;</span>, <span class="dt">x=</span><span class="st">&quot;Area&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Midwest Demographics&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+<div id="classID3-11" class="section level3">
+<h3><span class="header-section-number">9.1.11</span> 그룹별로 색상 표시하기</h3>
+<ul>
+<li>aes 함수의 col 인자에 그룹핑 할 컬럼명을 선언하면 됩니다. =&gt; geom 함수에서 사용 할 경우</li>
+<li>color 인자에 그룹핑 할 컬럼을 명기 해도 됩니다. =&gt; ggplot 함수에서 사용할 경우</li>
+</ul>
+</div>
+<div id="classID3-12" class="section level3">
+<h3><span class="header-section-number">9.1.12</span> col 인자에 명기 하는 경우</h3>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="ggplot-visualization.html#cb26-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb26-2"><a href="ggplot-visualization.html#cb26-2"></a>midwest <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>area, <span class="dt">y=</span>poptotal)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb26-3"><a href="ggplot-visualization.html#cb26-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">col=</span>state), <span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb26-4"><a href="ggplot-visualization.html#cb26-4"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">col=</span><span class="st">&quot;firebrick&quot;</span>, <span class="dt">size=</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb26-5"><a href="ggplot-visualization.html#cb26-5"></a><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1000000</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb26-6"><a href="ggplot-visualization.html#cb26-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Area Vs Population&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;From midwest dataset&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Population&quot;</span>, <span class="dt">x=</span><span class="st">&quot;Area&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Midwest Demographics&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<div id="classID3-13" class="section level4">
+<h4><span class="header-section-number">9.1.12.1</span> class 인자에 명기하는 경우</h4>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="ggplot-visualization.html#cb28-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb28-2"><a href="ggplot-visualization.html#cb28-2"></a>midwest <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>area, <span class="dt">y=</span>poptotal, <span class="dt">color =</span> state)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb28-3"><a href="ggplot-visualization.html#cb28-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb28-4"><a href="ggplot-visualization.html#cb28-4"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">col=</span><span class="st">&quot;firebrick&quot;</span>, <span class="dt">size=</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb28-5"><a href="ggplot-visualization.html#cb28-5"></a><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1000000</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb28-6"><a href="ggplot-visualization.html#cb28-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Area Vs Population&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;From midwest dataset&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Population&quot;</span>, <span class="dt">x=</span><span class="st">&quot;Area&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Midwest Demographics&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+</div>
+</div>
+<div id="classID9-14" class="section level3">
+<h3><span class="header-section-number">9.1.13</span> Mark 의 모양 변경</h3>
+<ul>
+<li>shape 인자를 ggplot 함수의 인자에 넣고 변수명을 맵핑 하면 됩니다.</li>
+</ul>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="ggplot-visualization.html#cb30-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb30-2"><a href="ggplot-visualization.html#cb30-2"></a></span>
+<span id="cb30-3"><a href="ggplot-visualization.html#cb30-3"></a>midwest <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>area, <span class="dt">y=</span>poptotal, <span class="dt">shape =</span> state, <span class="dt">color =</span> state)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb30-4"><a href="ggplot-visualization.html#cb30-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb30-5"><a href="ggplot-visualization.html#cb30-5"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">inherit.aes =</span> <span class="ot">TRUE</span>,<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">col=</span><span class="st">&quot;firebrick&quot;</span>, <span class="dt">size=</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb30-6"><a href="ggplot-visualization.html#cb30-6"></a><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1000000</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb30-7"><a href="ggplot-visualization.html#cb30-7"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Area Vs Population&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;From midwest dataset&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Population&quot;</span>, <span class="dt">x=</span><span class="st">&quot;Area&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Midwest Demographics&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+</div>
+<div id="classID9-15" class="section level3">
+<h3><span class="header-section-number">9.1.14</span> Legend 없애기</h3>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="ggplot-visualization.html#cb32-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb32-2"><a href="ggplot-visualization.html#cb32-2"></a>midwest <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>area, <span class="dt">y=</span>poptotal)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb32-3"><a href="ggplot-visualization.html#cb32-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">col=</span>state), <span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb32-4"><a href="ggplot-visualization.html#cb32-4"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">col=</span><span class="st">&quot;firebrick&quot;</span>, <span class="dt">size=</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb32-5"><a href="ggplot-visualization.html#cb32-5"></a><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1000000</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb32-6"><a href="ggplot-visualization.html#cb32-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Area Vs Population&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;From midwest dataset&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Population&quot;</span>, <span class="dt">x=</span><span class="st">&quot;Area&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Midwest Demographics&quot;</span>) <span class="op">+</span></span>
+<span id="cb32-7"><a href="ggplot-visualization.html#cb32-7"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;None&quot;</span>) </span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+</div>
+<div id="classID9-16" class="section level3">
+<h3><span class="header-section-number">9.1.15</span> Legend 테마 변경하기</h3>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="ggplot-visualization.html#cb34-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb34-2"><a href="ggplot-visualization.html#cb34-2"></a>midwest <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>area, <span class="dt">y=</span>poptotal)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb34-3"><a href="ggplot-visualization.html#cb34-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">col=</span>state), <span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb34-4"><a href="ggplot-visualization.html#cb34-4"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">col=</span><span class="st">&quot;firebrick&quot;</span>, <span class="dt">size=</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb34-5"><a href="ggplot-visualization.html#cb34-5"></a><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1000000</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb34-6"><a href="ggplot-visualization.html#cb34-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Area Vs Population&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;From midwest dataset&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Population&quot;</span>, <span class="dt">x=</span><span class="st">&quot;Area&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Midwest Demographics&quot;</span>) <span class="op">+</span></span>
+<span id="cb34-7"><a href="ggplot-visualization.html#cb34-7"></a><span class="st">  </span><span class="kw">scale_colour_brewer</span>(<span class="dt">palette =</span> <span class="st">&quot;Set1&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
+<div id="classID9-17" class="section level3">
+<h3><span class="header-section-number">9.1.16</span> 색상 팔레트 종류</h3>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="ggplot-visualization.html#cb36-1"></a><span class="kw">library</span>(RColorBrewer)</span>
+<span id="cb36-2"><a href="ggplot-visualization.html#cb36-2"></a><span class="kw">head</span>(brewer.pal.info, <span class="dv">10</span>) </span></code></pre></div>
+<pre><code>##          maxcolors category colorblind
+## BrBG            11      div       TRUE
+## PiYG            11      div       TRUE
+## PRGn            11      div       TRUE
+## PuOr            11      div       TRUE
+## RdBu            11      div       TRUE
+## RdGy            11      div      FALSE
+## RdYlBu          11      div       TRUE
+## RdYlGn          11      div      FALSE
+## Spectral        11      div      FALSE
+## Accent           8     qual      FALSE</code></pre>
+</div>
+<div id="classID9-18" class="section level3">
+<h3><span class="header-section-number">9.1.17</span> 축간격 조정 하기</h3>
+<ul>
+<li>scale_x_continuous 함수를 사용하여 축간격을 조정 할 수 있습니다.</li>
+<li>사용법 : scale_x_continuous(시작값, 종료값, 간격)</li>
+</ul>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="ggplot-visualization.html#cb38-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb38-2"><a href="ggplot-visualization.html#cb38-2"></a>midwest <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>area, <span class="dt">y=</span>poptotal)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb38-3"><a href="ggplot-visualization.html#cb38-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">col=</span>state), <span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb38-4"><a href="ggplot-visualization.html#cb38-4"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">col=</span><span class="st">&quot;firebrick&quot;</span>, <span class="dt">size=</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb38-5"><a href="ggplot-visualization.html#cb38-5"></a><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1000000</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb38-6"><a href="ggplot-visualization.html#cb38-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Area Vs Population&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;From midwest dataset&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Population&quot;</span>, <span class="dt">x=</span><span class="st">&quot;Area&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Midwest Demographics&quot;</span>) <span class="op">+</span></span>
+<span id="cb38-7"><a href="ggplot-visualization.html#cb38-7"></a><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.01</span>))</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+</div>
+<div id="classID9-19" class="section level3">
+<h3><span class="header-section-number">9.1.18</span> X축 역변환 하기</h3>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="ggplot-visualization.html#cb40-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb40-2"><a href="ggplot-visualization.html#cb40-2"></a>midwest <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>area, <span class="dt">y=</span>poptotal)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb40-3"><a href="ggplot-visualization.html#cb40-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">col=</span>state), <span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb40-4"><a href="ggplot-visualization.html#cb40-4"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">col=</span><span class="st">&quot;firebrick&quot;</span>, <span class="dt">size=</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb40-5"><a href="ggplot-visualization.html#cb40-5"></a><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1000000</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb40-6"><a href="ggplot-visualization.html#cb40-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Area Vs Population&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;From midwest dataset&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Population&quot;</span>, <span class="dt">x=</span><span class="st">&quot;Area&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Midwest Demographics&quot;</span>) <span class="op">+</span></span>
+<span id="cb40-7"><a href="ggplot-visualization.html#cb40-7"></a><span class="st">  </span><span class="kw">scale_x_reverse</span>()</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+</div>
+<div id="classID9-20" class="section level3">
+<h3><span class="header-section-number">9.1.19</span> 축라벨에 커스터마이징</h3>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="ggplot-visualization.html#cb42-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb42-2"><a href="ggplot-visualization.html#cb42-2"></a>midwest <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>area, <span class="dt">y=</span>poptotal)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb42-3"><a href="ggplot-visualization.html#cb42-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">col=</span>state), <span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb42-4"><a href="ggplot-visualization.html#cb42-4"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">col=</span><span class="st">&quot;firebrick&quot;</span>, <span class="dt">size=</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb42-5"><a href="ggplot-visualization.html#cb42-5"></a><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1000000</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb42-6"><a href="ggplot-visualization.html#cb42-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Area Vs Population&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;From midwest dataset&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Population&quot;</span>, <span class="dt">x=</span><span class="st">&quot;Area&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Midwest Demographics&quot;</span>) <span class="op">+</span></span>
+<span id="cb42-7"><a href="ggplot-visualization.html#cb42-7"></a><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.01</span>), <span class="dt">labels =</span> <span class="kw">sprintf</span>(<span class="st">&quot;%.2f%%&quot;</span>, <span class="kw">seq</span>(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.01</span>))) <span class="op">+</span></span>
+<span id="cb42-8"><a href="ggplot-visualization.html#cb42-8"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1000000</span>, <span class="dv">200000</span>), <span class="dt">labels =</span> <span class="cf">function</span>(x){<span class="kw">paste0</span>(x<span class="op">/</span><span class="dv">1000</span>, <span class="st">&#39;K&#39;</span>)})</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+</div>
+<div id="classID9-21" class="section level3">
+<h3><span class="header-section-number">9.1.20</span> 테마를 사용해서 한번에 변경</h3>
+<ul>
+<li>theme_set() 함수를 사용해서 테마를 설정 할 수 있습니다.</li>
+<li>내장 테마 종류</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>테마명</th>
+<th>테마설명</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>theme_gray()</td>
+<td>ggplot2 의 기본 테마</td>
+</tr>
+<tr class="even">
+<td>theme_bw()</td>
+<td>dark on light 테마</td>
+</tr>
+<tr class="odd">
+<td>theme_linedraw()</td>
+<td>하얀 바탕에 검정 라인을 사용한 테마</td>
+</tr>
+<tr class="even">
+<td>theme_light()</td>
+<td>linedraw 와 유사하지만, Gray 스케일 사용</td>
+</tr>
+<tr class="odd">
+<td>theme_dark()</td>
+<td>배경색을 어둡게 한 테마</td>
+</tr>
+<tr class="even">
+<td>theme_minimal()</td>
+<td>최소한의 배경을 사용하고 까끔한 테마</td>
+</tr>
+<tr class="odd">
+<td>theme_classic()</td>
+<td>그리드 라인이 없는 테마</td>
+</tr>
+<tr class="even">
+<td>theme_void</td>
+<td>테마적용하지 않음</td>
+</tr>
+</tbody>
+</table>
+<div id="bw-theme" class="section level4">
+<h4><span class="header-section-number">9.1.20.1</span> BW Theme</h4>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="ggplot-visualization.html#cb44-1"></a>midwest <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>area, <span class="dt">y=</span>poptotal)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb44-2"><a href="ggplot-visualization.html#cb44-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">col=</span>state), <span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb44-3"><a href="ggplot-visualization.html#cb44-3"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">col=</span><span class="st">&quot;firebrick&quot;</span>, <span class="dt">size=</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb44-4"><a href="ggplot-visualization.html#cb44-4"></a><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1000000</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb44-5"><a href="ggplot-visualization.html#cb44-5"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Area Vs Population&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;From midwest dataset&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Population&quot;</span>, <span class="dt">x=</span><span class="st">&quot;Area&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Midwest Demographics&quot;</span>) <span class="op">+</span></span>
+<span id="cb44-6"><a href="ggplot-visualization.html#cb44-6"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">subtitle=</span><span class="st">&quot;BW Theme&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+</div>
+<div id="classic-theme" class="section level4">
+<h4><span class="header-section-number">9.1.20.2</span> Classic Theme</h4>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="ggplot-visualization.html#cb46-1"></a>midwest <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>area, <span class="dt">y=</span>poptotal)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb46-2"><a href="ggplot-visualization.html#cb46-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">col=</span>state), <span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb46-3"><a href="ggplot-visualization.html#cb46-3"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">col=</span><span class="st">&quot;firebrick&quot;</span>, <span class="dt">size=</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb46-4"><a href="ggplot-visualization.html#cb46-4"></a><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1000000</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb46-5"><a href="ggplot-visualization.html#cb46-5"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Area Vs Population&quot;</span>, <span class="dt">subtitle=</span><span class="st">&quot;From midwest dataset&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Population&quot;</span>, <span class="dt">x=</span><span class="st">&quot;Area&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Midwest Demographics&quot;</span>) <span class="op">+</span></span>
+<span id="cb46-6"><a href="ggplot-visualization.html#cb46-6"></a><span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">subtitle=</span><span class="st">&quot;Classic Theme&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+</div>
+</div>
+<div id="scatter-plot산점도" class="section level3">
+<h3><span class="header-section-number">9.1.21</span> Scatter Plot(산점도)</h3>
+<ul>
+<li>기본적인 산점도 차트</li>
+</ul>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="ggplot-visualization.html#cb48-1"></a>midwest <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>area, <span class="dt">y=</span>poptotal)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb48-2"><a href="ggplot-visualization.html#cb48-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">col=</span>state, <span class="dt">size=</span>popdensity)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb48-3"><a href="ggplot-visualization.html#cb48-3"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;loess&quot;</span>, <span class="dt">se=</span>F) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb48-4"><a href="ggplot-visualization.html#cb48-4"></a><span class="st">  </span><span class="kw">xlim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb48-5"><a href="ggplot-visualization.html#cb48-5"></a><span class="st">  </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">500000</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb48-6"><a href="ggplot-visualization.html#cb48-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">subtitle=</span><span class="st">&quot;Area Vs Population&quot;</span>, </span>
+<span id="cb48-7"><a href="ggplot-visualization.html#cb48-7"></a>       <span class="dt">y=</span><span class="st">&quot;Population&quot;</span>, </span>
+<span id="cb48-8"><a href="ggplot-visualization.html#cb48-8"></a>       <span class="dt">x=</span><span class="st">&quot;Area&quot;</span>, </span>
+<span id="cb48-9"><a href="ggplot-visualization.html#cb48-9"></a>       <span class="dt">title=</span><span class="st">&quot;Scatterplot&quot;</span>, </span>
+<span id="cb48-10"><a href="ggplot-visualization.html#cb48-10"></a>       <span class="dt">caption =</span> <span class="st">&quot;Source: midwest&quot;</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<ul>
+<li>산점도 차트에 선택된 데이터 표시하기</li>
+</ul>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="ggplot-visualization.html#cb49-1"></a><span class="co">#install.packages(&quot;ggalt&quot;)</span></span>
+<span id="cb49-2"><a href="ggplot-visualization.html#cb49-2"></a><span class="kw">library</span>(ggalt)</span>
+<span id="cb49-3"><a href="ggplot-visualization.html#cb49-3"></a>midwest_select &lt;-<span class="st"> </span>midwest <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(poptotal <span class="op">&gt;</span><span class="st"> </span><span class="dv">350000</span> <span class="op">&amp;</span><span class="st"> </span></span>
+<span id="cb49-4"><a href="ggplot-visualization.html#cb49-4"></a><span class="st">                                     </span>poptotal <span class="op">&lt;=</span><span class="st"> </span><span class="dv">500000</span> <span class="op">&amp;</span><span class="st"> </span></span>
+<span id="cb49-5"><a href="ggplot-visualization.html#cb49-5"></a><span class="st">                                     </span>midwest<span class="op">$</span>area <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.01</span> <span class="op">&amp;</span><span class="st">  </span></span>
+<span id="cb49-6"><a href="ggplot-visualization.html#cb49-6"></a><span class="st">                                     </span>midwest<span class="op">$</span>area <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.1</span></span>
+<span id="cb49-7"><a href="ggplot-visualization.html#cb49-7"></a>                                     )  </span>
+<span id="cb49-8"><a href="ggplot-visualization.html#cb49-8"></a></span>
+<span id="cb49-9"><a href="ggplot-visualization.html#cb49-9"></a><span class="co"># Plot</span></span>
+<span id="cb49-10"><a href="ggplot-visualization.html#cb49-10"></a>midwest <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>area, <span class="dt">y=</span>poptotal)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb49-11"><a href="ggplot-visualization.html#cb49-11"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">col=</span>state, <span class="dt">size=</span>popdensity)) <span class="op">+</span><span class="st">   </span><span class="co"># 산점도 그래프 </span></span>
+<span id="cb49-12"><a href="ggplot-visualization.html#cb49-12"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;loess&quot;</span>, <span class="dt">se=</span>F) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb49-13"><a href="ggplot-visualization.html#cb49-13"></a><span class="st">  </span><span class="kw">xlim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb49-14"><a href="ggplot-visualization.html#cb49-14"></a><span class="st">  </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">500000</span>)) <span class="op">+</span><span class="st">   </span><span class="co"># 라인그래프 추가</span></span>
+<span id="cb49-15"><a href="ggplot-visualization.html#cb49-15"></a><span class="st">  </span><span class="kw">geom_encircle</span>(<span class="kw">aes</span>(<span class="dt">x=</span>area, <span class="dt">y=</span>poptotal), </span>
+<span id="cb49-16"><a href="ggplot-visualization.html#cb49-16"></a>                <span class="dt">data=</span>midwest_select, </span>
+<span id="cb49-17"><a href="ggplot-visualization.html#cb49-17"></a>                <span class="dt">color=</span><span class="st">&quot;red&quot;</span>, </span>
+<span id="cb49-18"><a href="ggplot-visualization.html#cb49-18"></a>                <span class="dt">size=</span><span class="dv">2</span>, </span>
+<span id="cb49-19"><a href="ggplot-visualization.html#cb49-19"></a>                <span class="dt">expand=</span><span class="fl">0.08</span>) <span class="op">+</span><span class="st">   </span><span class="co"># 각종 제목 및 설명 추가</span></span>
+<span id="cb49-20"><a href="ggplot-visualization.html#cb49-20"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">subtitle=</span><span class="st">&quot;Area Vs Population&quot;</span>, </span>
+<span id="cb49-21"><a href="ggplot-visualization.html#cb49-21"></a>       <span class="dt">y=</span><span class="st">&quot;Population&quot;</span>, </span>
+<span id="cb49-22"><a href="ggplot-visualization.html#cb49-22"></a>       <span class="dt">x=</span><span class="st">&quot;Area&quot;</span>, </span>
+<span id="cb49-23"><a href="ggplot-visualization.html#cb49-23"></a>       <span class="dt">title=</span><span class="st">&quot;Scatterplot + Encircle&quot;</span>, </span>
+<span id="cb49-24"><a href="ggplot-visualization.html#cb49-24"></a>       <span class="dt">caption=</span><span class="st">&quot;Source: midwest&quot;</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+</div>
+<div id="jitter-plot" class="section level3">
+<h3><span class="header-section-number">9.1.22</span> jitter plot</h3>
+<ul>
+<li>산점도로 그래프를 그릴때 데이터가 많아 겹치는 점이 생길수 있습니다. 이럴경우 전체적인 데이터의 분포를 확인 할 수는 없습니다.</li>
+<li>좀더 데이터의 분포를 정확하게 확인하기 위해 jiiter plot 을 사용 합니다.</li>
+<li>jitter plot 은 무작위적인 노이즈를 추가해서 동일한 위치점 점들을 살짝 비틀어 표시합니다.</li>
+</ul>
+<blockquote>
+<p>산점도와 비교해서 그래프를 출력해보세요 geom_jitter 를 geom_point 로 바꾸면 됩니다.</p>
+</blockquote>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="ggplot-visualization.html#cb50-1"></a><span class="co"># load package and data</span></span>
+<span id="cb50-2"><a href="ggplot-visualization.html#cb50-2"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb50-3"><a href="ggplot-visualization.html#cb50-3"></a><span class="co">#data(mpg, package=&quot;ggplot2&quot;)</span></span>
+<span id="cb50-4"><a href="ggplot-visualization.html#cb50-4"></a><span class="co"># mpg &lt;- read.csv(&quot;http://goo.gl/uEeRGu&quot;)</span></span>
+<span id="cb50-5"><a href="ggplot-visualization.html#cb50-5"></a></span>
+<span id="cb50-6"><a href="ggplot-visualization.html#cb50-6"></a><span class="co"># Scatterplot</span></span>
+<span id="cb50-7"><a href="ggplot-visualization.html#cb50-7"></a><span class="kw">theme_set</span>(<span class="kw">theme_bw</span>())  <span class="co"># pre-set the bw theme.</span></span>
+<span id="cb50-8"><a href="ggplot-visualization.html#cb50-8"></a>g &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(cty, hwy))</span>
+<span id="cb50-9"><a href="ggplot-visualization.html#cb50-9"></a>g <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="fl">.5</span>, <span class="dt">size=</span><span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb50-10"><a href="ggplot-visualization.html#cb50-10"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">subtitle=</span><span class="st">&quot;mpg: city vs highway mileage&quot;</span>, </span>
+<span id="cb50-11"><a href="ggplot-visualization.html#cb50-11"></a>       <span class="dt">y=</span><span class="st">&quot;hwy&quot;</span>, </span>
+<span id="cb50-12"><a href="ggplot-visualization.html#cb50-12"></a>       <span class="dt">x=</span><span class="st">&quot;cty&quot;</span>, </span>
+<span id="cb50-13"><a href="ggplot-visualization.html#cb50-13"></a>       <span class="dt">title=</span><span class="st">&quot;Jittered Points&quot;</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+</div>
+<div id="count-plot" class="section level3">
+<h3><span class="header-section-number">9.1.23</span> Count Plot</h3>
+<ul>
+<li>산점도의 데이터 분포를 정확하게 확인 하기 위한 방법으로 jitter plot 외에 Count Plot 이 있습니다.</li>
+<li>분포 집중도에 따라 점의 크기가 달라 집니다.</li>
+</ul>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="ggplot-visualization.html#cb51-1"></a><span class="kw">theme_set</span>(<span class="kw">theme_bw</span>()) <span class="co"># 테마 설정</span></span>
+<span id="cb51-2"><a href="ggplot-visualization.html#cb51-2"></a></span>
+<span id="cb51-3"><a href="ggplot-visualization.html#cb51-3"></a>mpg <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(cty, hwy)) <span class="op">+</span></span>
+<span id="cb51-4"><a href="ggplot-visualization.html#cb51-4"></a><span class="st">  </span><span class="kw">geom_count</span>(<span class="dt">col=</span><span class="st">&quot;tomato3&quot;</span>, <span class="dt">show.legend=</span>F) <span class="op">+</span></span>
+<span id="cb51-5"><a href="ggplot-visualization.html#cb51-5"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">subtitle=</span><span class="st">&quot;mpg: city vs highway mileage&quot;</span>, </span>
+<span id="cb51-6"><a href="ggplot-visualization.html#cb51-6"></a>       <span class="dt">y=</span><span class="st">&quot;hwy&quot;</span>, </span>
+<span id="cb51-7"><a href="ggplot-visualization.html#cb51-7"></a>       <span class="dt">x=</span><span class="st">&quot;cty&quot;</span>, </span>
+<span id="cb51-8"><a href="ggplot-visualization.html#cb51-8"></a>       <span class="dt">title=</span><span class="st">&quot;Counts Plot&quot;</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+</div>
+<div id="classID9-22" class="section level3">
+<h3><span class="header-section-number">9.1.24</span> 가장자리 분포 그래프 추가</h3>
+<ul>
+<li>데이터의 분포를 좀더 정확하게 확인 하기 위해 각축의 데이터의 분포를 <strong>Histogram</strong> 이나 <strong>Bixplot</strong> 으로 표시 할 수 있습니다.</li>
+</ul>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="ggplot-visualization.html#cb52-1"></a><span class="co">#install.packages(&quot;ggExtra&quot;)</span></span>
+<span id="cb52-2"><a href="ggplot-visualization.html#cb52-2"></a><span class="kw">library</span>(ggExtra)</span></code></pre></div>
+<pre><code>## Warning: package &#39;ggExtra&#39; was built under R version 4.0.2</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="ggplot-visualization.html#cb54-1"></a><span class="kw">library</span>(grid)</span>
+<span id="cb54-2"><a href="ggplot-visualization.html#cb54-2"></a></span>
+<span id="cb54-3"><a href="ggplot-visualization.html#cb54-3"></a><span class="kw">theme_set</span>(<span class="kw">theme_bw</span>())  </span>
+<span id="cb54-4"><a href="ggplot-visualization.html#cb54-4"></a></span>
+<span id="cb54-5"><a href="ggplot-visualization.html#cb54-5"></a>mpg_select &lt;-<span class="st"> </span>mpg[mpg<span class="op">$</span>hwy <span class="op">&gt;=</span><span class="st"> </span><span class="dv">35</span> <span class="op">&amp;</span><span class="st"> </span>mpg<span class="op">$</span>cty <span class="op">&gt;</span><span class="st"> </span><span class="dv">27</span>, ]</span>
+<span id="cb54-6"><a href="ggplot-visualization.html#cb54-6"></a>g &lt;-<span class="st"> </span>mpg <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(cty, hwy)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb54-7"><a href="ggplot-visualization.html#cb54-7"></a><span class="st">  </span><span class="kw">geom_count</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb54-8"><a href="ggplot-visualization.html#cb54-8"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span>F) </span>
+<span id="cb54-9"><a href="ggplot-visualization.html#cb54-9"></a></span>
+<span id="cb54-10"><a href="ggplot-visualization.html#cb54-10"></a><span class="kw">ggMarginal</span>(g, <span class="dt">type =</span> <span class="st">&quot;histogram&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;transparent&quot;</span>) </span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;
+## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="ggplot-visualization.html#cb56-1"></a><span class="kw">ggMarginal</span>(g, <span class="dt">type =</span> <span class="st">&quot;boxplot&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;transparent&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;
+## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+</div>
+<div id="correlogram" class="section level3">
+<h3><span class="header-section-number">9.1.25</span> Correlogram</h3>
+<ul>
+<li>correlogram plot 은 모든 변수관의 상관 관걔를 한눈에 확인 할수 있는 그래프 입니다.</li>
+<li>scale_colour_gradientn 함수를 이용해 팔레트를 지정합니다.</li>
+<li></li>
+</ul>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="ggplot-visualization.html#cb58-1"></a><span class="co">#devtools::install_github(&quot;kassambara/ggcorrplot&quot;)</span></span>
+<span id="cb58-2"><a href="ggplot-visualization.html#cb58-2"></a><span class="co">#install.packages(&#39;extrafont&#39;)</span></span>
+<span id="cb58-3"><a href="ggplot-visualization.html#cb58-3"></a></span>
+<span id="cb58-4"><a href="ggplot-visualization.html#cb58-4"></a><span class="kw">library</span>(ggcorrplot)</span></code></pre></div>
+<pre><code>## Warning: package &#39;ggcorrplot&#39; was built under R version 4.0.2</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="ggplot-visualization.html#cb60-1"></a><span class="co"># Correlation 연산한 결과를 corr 에 저장 합니다.</span></span>
+<span id="cb60-2"><a href="ggplot-visualization.html#cb60-2"></a><span class="kw">data</span>(mtcars)</span>
+<span id="cb60-3"><a href="ggplot-visualization.html#cb60-3"></a>corr &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">cor</span>(mtcars), <span class="dv">1</span>)</span>
+<span id="cb60-4"><a href="ggplot-visualization.html#cb60-4"></a></span>
+<span id="cb60-5"><a href="ggplot-visualization.html#cb60-5"></a>corr</span></code></pre></div>
+<pre><code>##       mpg  cyl disp   hp drat   wt qsec   vs   am gear carb
+## mpg   1.0 -0.9 -0.8 -0.8  0.7 -0.9  0.4  0.7  0.6  0.5 -0.6
+## cyl  -0.9  1.0  0.9  0.8 -0.7  0.8 -0.6 -0.8 -0.5 -0.5  0.5
+## disp -0.8  0.9  1.0  0.8 -0.7  0.9 -0.4 -0.7 -0.6 -0.6  0.4
+## hp   -0.8  0.8  0.8  1.0 -0.4  0.7 -0.7 -0.7 -0.2 -0.1  0.7
+## drat  0.7 -0.7 -0.7 -0.4  1.0 -0.7  0.1  0.4  0.7  0.7 -0.1
+## wt   -0.9  0.8  0.9  0.7 -0.7  1.0 -0.2 -0.6 -0.7 -0.6  0.4
+## qsec  0.4 -0.6 -0.4 -0.7  0.1 -0.2  1.0  0.7 -0.2 -0.2 -0.7
+## vs    0.7 -0.8 -0.7 -0.7  0.4 -0.6  0.7  1.0  0.2  0.2 -0.6
+## am    0.6 -0.5 -0.6 -0.2  0.7 -0.7 -0.2  0.2  1.0  0.8  0.1
+## gear  0.5 -0.5 -0.6 -0.1  0.7 -0.6 -0.2  0.2  0.8  1.0  0.3
+## carb -0.6  0.5  0.4  0.7 -0.1  0.4 -0.7 -0.6  0.1  0.3  1.0</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="ggplot-visualization.html#cb62-1"></a><span class="co"># 그래프 그리기 (팔레트 이용)</span></span>
+<span id="cb62-2"><a href="ggplot-visualization.html#cb62-2"></a><span class="kw">ggcorrplot</span>(corr, <span class="dt">hc.order =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb62-3"><a href="ggplot-visualization.html#cb62-3"></a>           <span class="dt">type =</span> <span class="st">&quot;lower&quot;</span>, </span>
+<span id="cb62-4"><a href="ggplot-visualization.html#cb62-4"></a>           <span class="dt">lab =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb62-5"><a href="ggplot-visualization.html#cb62-5"></a>           <span class="dt">lab_size =</span> <span class="dv">3</span>, </span>
+<span id="cb62-6"><a href="ggplot-visualization.html#cb62-6"></a>           <span class="dt">method=</span><span class="st">&quot;circle&quot;</span>, </span>
+<span id="cb62-7"><a href="ggplot-visualization.html#cb62-7"></a>           <span class="dt">title=</span><span class="st">&quot;변수상관관계&quot;</span>, </span>
+<span id="cb62-8"><a href="ggplot-visualization.html#cb62-8"></a>           <span class="dt">ggtheme=</span>theme_bw) <span class="op">+</span></span>
+<span id="cb62-9"><a href="ggplot-visualization.html#cb62-9"></a><span class="st">  </span><span class="kw">scale_colour_gradientn</span>(<span class="dt">colours=</span><span class="kw">rainbow</span>(<span class="dv">4</span>))</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+</div>
+<div id="classID9-23" class="section level3">
+<h3><span class="header-section-number">9.1.26</span> Bar 그래프</h3>
+<ul>
+<li>mpg 데이터 셋에서 해당 자동차 제조회사 소속의 모든 자동자 에 대한 평균 시내주행 연비를 비교</li>
+</ul>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="ggplot-visualization.html#cb63-1"></a>cty_mpg &lt;-<span class="st"> </span>mpg <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb63-2"><a href="ggplot-visualization.html#cb63-2"></a><span class="st">  </span><span class="kw">group_by</span>(manufacturer) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># 제조사별 그룹핑</span></span>
+<span id="cb63-3"><a href="ggplot-visualization.html#cb63-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">delay =</span> <span class="kw">mean</span>(cty,<span class="dt">na.rm=</span><span class="ot">TRUE</span>)) <span class="co"># 평균 시내주행 연비 계산</span></span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="ggplot-visualization.html#cb65-1"></a><span class="kw">colnames</span>(cty_mpg) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;make&quot;</span>, <span class="st">&quot;mileage&quot;</span>)  <span class="co"># 컬럼 이름 변경</span></span>
+<span id="cb65-2"><a href="ggplot-visualization.html#cb65-2"></a>cty_mpg &lt;-<span class="st">  </span><span class="kw">arrange</span>(cty_mpg, mileage) <span class="co"># 정렬</span></span>
+<span id="cb65-3"><a href="ggplot-visualization.html#cb65-3"></a> <span class="co"># 제조사를 factor 로 지정 (정렬을 하고 factor 레벨을 정하면 그것이 곧 순서가 됨)</span></span>
+<span id="cb65-4"><a href="ggplot-visualization.html#cb65-4"></a> <span class="co"># factor 를 지정한 이후에 정렬을 하게 되면 그래프가 어떻게 바뀌는지 테스트 해보세요</span></span>
+<span id="cb65-5"><a href="ggplot-visualization.html#cb65-5"></a> <span class="co"># reorder 함수를 사용해서 ggplot 함수내에서 정렬도 가능 합니다.</span></span>
+<span id="cb65-6"><a href="ggplot-visualization.html#cb65-6"></a></span>
+<span id="cb65-7"><a href="ggplot-visualization.html#cb65-7"></a>cty_mpg<span class="op">$</span>make &lt;-<span class="st"> </span><span class="kw">factor</span>(cty_mpg<span class="op">$</span>make, <span class="dt">levels =</span> cty_mpg<span class="op">$</span>make) </span>
+<span id="cb65-8"><a href="ggplot-visualization.html#cb65-8"></a></span>
+<span id="cb65-9"><a href="ggplot-visualization.html#cb65-9"></a><span class="kw">head</span>(cty_mpg, <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 4 x 2
+##   make       mileage
+##   &lt;fct&gt;        &lt;dbl&gt;
+## 1 lincoln       11.3
+## 2 land rover    11.5
+## 3 dodge         13.1
+## 4 mercury       13.2</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="ggplot-visualization.html#cb67-1"></a><span class="kw">theme_set</span>(<span class="kw">theme_bw</span>())</span>
+<span id="cb67-2"><a href="ggplot-visualization.html#cb67-2"></a></span>
+<span id="cb67-3"><a href="ggplot-visualization.html#cb67-3"></a><span class="co"># 그래프 그리기</span></span>
+<span id="cb67-4"><a href="ggplot-visualization.html#cb67-4"></a><span class="kw">ggplot</span>(cty_mpg, <span class="kw">aes</span>(<span class="dt">x=</span>make, <span class="dt">y=</span>mileage)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb67-5"><a href="ggplot-visualization.html#cb67-5"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">width=</span>.<span class="dv">5</span>, <span class="dt">fill=</span><span class="st">&quot;tomato3&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb67-6"><a href="ggplot-visualization.html#cb67-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Ordered Bar Chart&quot;</span>, </span>
+<span id="cb67-7"><a href="ggplot-visualization.html#cb67-7"></a>       <span class="dt">subtitle=</span><span class="st">&quot;Make Vs Avg. Mileage&quot;</span>, </span>
+<span id="cb67-8"><a href="ggplot-visualization.html#cb67-8"></a>       <span class="dt">caption=</span><span class="st">&quot;source: mpg&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb67-9"><a href="ggplot-visualization.html#cb67-9"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">65</span>, <span class="dt">vjust=</span><span class="fl">0.6</span>))</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<ul>
+<li>reorder 함수를 사용해서 정렬 하는 경우</li>
+</ul>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="ggplot-visualization.html#cb68-1"></a>cty_mpg &lt;-<span class="st"> </span>mpg <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb68-2"><a href="ggplot-visualization.html#cb68-2"></a><span class="st">  </span><span class="kw">group_by</span>(manufacturer) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># 제조사별 그룹핑</span></span>
+<span id="cb68-3"><a href="ggplot-visualization.html#cb68-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">delay =</span> <span class="kw">mean</span>(cty,<span class="dt">na.rm=</span><span class="ot">TRUE</span>)) <span class="co"># 평균 시내주행 연비 계산</span></span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="ggplot-visualization.html#cb70-1"></a><span class="kw">colnames</span>(cty_mpg) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;make&quot;</span>, <span class="st">&quot;mileage&quot;</span>)  <span class="co"># 컬럼 이름 변경</span></span>
+<span id="cb70-2"><a href="ggplot-visualization.html#cb70-2"></a></span>
+<span id="cb70-3"><a href="ggplot-visualization.html#cb70-3"></a>cty_mpg<span class="op">$</span>make &lt;-<span class="st"> </span><span class="kw">factor</span>(cty_mpg<span class="op">$</span>make, <span class="dt">levels =</span> cty_mpg<span class="op">$</span>make)  <span class="co"># 정렬하지 않고 factor 지정</span></span>
+<span id="cb70-4"><a href="ggplot-visualization.html#cb70-4"></a></span>
+<span id="cb70-5"><a href="ggplot-visualization.html#cb70-5"></a><span class="co"># reorder 함수를 사용해서 정렬 (mileage 앞에 &#39;-&#39; 를 붙이면 어덯게 될까요?)</span></span>
+<span id="cb70-6"><a href="ggplot-visualization.html#cb70-6"></a><span class="kw">ggplot</span>(cty_mpg, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(make, mileage), <span class="dt">y=</span>mileage)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb70-7"><a href="ggplot-visualization.html#cb70-7"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">width=</span>.<span class="dv">5</span>, <span class="dt">fill=</span><span class="st">&quot;tomato3&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb70-8"><a href="ggplot-visualization.html#cb70-8"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Ordered Bar Chart&quot;</span>, </span>
+<span id="cb70-9"><a href="ggplot-visualization.html#cb70-9"></a>       <span class="dt">subtitle=</span><span class="st">&quot;Make Vs Avg. Mileage&quot;</span>, </span>
+<span id="cb70-10"><a href="ggplot-visualization.html#cb70-10"></a>       <span class="dt">caption=</span><span class="st">&quot;source: mpg&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb70-11"><a href="ggplot-visualization.html#cb70-11"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">65</span>, <span class="dt">vjust=</span><span class="fl">0.6</span>))</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+</div>
+<div id="stacked-bar-plot-누적-막대-그래프" class="section level3">
+<h3><span class="header-section-number">9.1.27</span> Stacked Bar Plot (누적 막대 그래프)</h3>
+<ul>
+<li>aes 에 별도로 stat 함수를 선언하지 않으면, 자동으로 빈도수(count) 가 stat 함수가 됩니다.</li>
+<li>aes 의 fill 파라메터에 할당한 컬럼명이 누적 대상이 됩니다.</li>
+</ul>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="ggplot-visualization.html#cb71-1"></a>g &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(<span class="dt">x =</span> manufacturer)) <span class="co"># x 축만 선언하게 되면 y 는 빈도수 (자동차 회사 이름 등장 횟수)</span></span>
+<span id="cb71-2"><a href="ggplot-visualization.html#cb71-2"></a> g <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill=</span>class), <span class="dt">width =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st">  </span><span class="co"># fill 에 할당한 컬럼명이 누적 막대그래프의 누적 대상이 됩니다.</span></span>
+<span id="cb71-3"><a href="ggplot-visualization.html#cb71-3"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">65</span>, <span class="dt">vjust=</span><span class="fl">0.6</span>)) <span class="op">+</span><span class="st"> </span><span class="co"># 텍스트 각도 지정</span></span>
+<span id="cb71-4"><a href="ggplot-visualization.html#cb71-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Categorywise Bar Chart&quot;</span>, </span>
+<span id="cb71-5"><a href="ggplot-visualization.html#cb71-5"></a>       <span class="dt">subtitle=</span><span class="st">&quot;Manufacturer of vehicles&quot;</span>, </span>
+<span id="cb71-6"><a href="ggplot-visualization.html#cb71-6"></a>       <span class="dt">caption=</span><span class="st">&quot;Source: Manufacturers from &#39;mpg&#39; dataset&quot;</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+</div>
+<div id="facet" class="section level3">
+<h3><span class="header-section-number">9.1.28</span> Facet</h3>
+<ul>
+<li>2개 변수의 상관관계 에 더해 데이터를 그룹 으로 묶어 데이터 분포를 확인하고 싶을때 사용합니다.</li>
+</ul>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="ggplot-visualization.html#cb72-1"></a><span class="kw">theme_set</span>(<span class="kw">theme_bw</span>())</span>
+<span id="cb72-2"><a href="ggplot-visualization.html#cb72-2"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb72-3"><a href="ggplot-visualization.html#cb72-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb72-4"><a href="ggplot-visualization.html#cb72-4"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>class, <span class="dt">nrow =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="ggplot-visualization.html#cb73-1"></a><span class="kw">theme_set</span>(<span class="kw">theme_bw</span>())</span>
+<span id="cb73-2"><a href="ggplot-visualization.html#cb73-2"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb73-3"><a href="ggplot-visualization.html#cb73-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb73-4"><a href="ggplot-visualization.html#cb73-4"></a><span class="st">  </span><span class="kw">facet_grid</span>(drv <span class="op">~</span><span class="st"> </span>cyl)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+</div>
+<div id="classID9-25" class="section level3">
+<h3><span class="header-section-number">9.1.29</span> Position 조정</h3>
+<ul>
+<li>colour 와 fill 을 사용해서 심미성 조정</li>
+</ul>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="ggplot-visualization.html#cb74-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb74-2"><a href="ggplot-visualization.html#cb74-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">colour =</span> cut))</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="ggplot-visualization.html#cb75-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb75-2"><a href="ggplot-visualization.html#cb75-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">fill =</span> cut) )</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-35-2.png" width="672" /></p>
+<ul>
+<li>fill 인자에 x 축에서 사용하는 변수가 아닌 다른 변수를 넣어주면 두변수를 조합해서 보여 줍니다.</li>
+</ul>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="ggplot-visualization.html#cb76-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb76-2"><a href="ggplot-visualization.html#cb76-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">fill =</span> clarity))</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="ggplot-visualization.html#cb77-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">fill =</span> clarity)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb77-2"><a href="ggplot-visualization.html#cb77-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">alpha =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">5</span>, <span class="dt">position =</span> <span class="st">&quot;identity&quot;</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="ggplot-visualization.html#cb78-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">colour =</span> clarity)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb78-2"><a href="ggplot-visualization.html#cb78-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">fill =</span> <span class="ot">NA</span>, <span class="dt">position =</span> <span class="st">&quot;identity&quot;</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="ggplot-visualization.html#cb79-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb79-2"><a href="ggplot-visualization.html#cb79-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">fill =</span> clarity), <span class="dt">position =</span> <span class="st">&quot;fill&quot;</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="ggplot-visualization.html#cb80-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb80-2"><a href="ggplot-visualization.html#cb80-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">fill =</span> clarity), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+</div>
+<div id="classID9-26" class="section level3">
+<h3><span class="header-section-number">9.1.30</span> Pie 차트</h3>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="ggplot-visualization.html#cb81-1"></a><span class="kw">theme_set</span>(<span class="kw">theme_bw</span>())  </span>
+<span id="cb81-2"><a href="ggplot-visualization.html#cb81-2"></a></span>
+<span id="cb81-3"><a href="ggplot-visualization.html#cb81-3"></a>df &lt;-<span class="st"> </span>mpg <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(class) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>())</span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="ggplot-visualization.html#cb83-1"></a>df</span></code></pre></div>
+<pre><code>## # A tibble: 7 x 2
+##   class          n
+##   &lt;chr&gt;      &lt;int&gt;
+## 1 2seater        5
+## 2 compact       47
+## 3 midsize       41
+## 4 minivan       11
+## 5 pickup        33
+## 6 subcompact    35
+## 7 suv           62</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="ggplot-visualization.html#cb85-1"></a><span class="kw">colnames</span>(df) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;class&quot;</span>, <span class="st">&quot;freq&quot;</span>)</span>
+<span id="cb85-2"><a href="ggplot-visualization.html#cb85-2"></a>pie &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y=</span>freq, <span class="dt">fill =</span> <span class="kw">factor</span>(class))) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb85-3"><a href="ggplot-visualization.html#cb85-3"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">width =</span> <span class="dv">1</span>, <span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="op">+</span></span>
+<span id="cb85-4"><a href="ggplot-visualization.html#cb85-4"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.line =</span> <span class="kw">element_blank</span>(), </span>
+<span id="cb85-5"><a href="ggplot-visualization.html#cb85-5"></a>        <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust=</span><span class="fl">0.5</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb85-6"><a href="ggplot-visualization.html#cb85-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill=</span><span class="st">&quot;class&quot;</span>, </span>
+<span id="cb85-7"><a href="ggplot-visualization.html#cb85-7"></a>       <span class="dt">x=</span><span class="ot">NULL</span>, </span>
+<span id="cb85-8"><a href="ggplot-visualization.html#cb85-8"></a>       <span class="dt">y=</span><span class="ot">NULL</span>, </span>
+<span id="cb85-9"><a href="ggplot-visualization.html#cb85-9"></a>       <span class="dt">title=</span><span class="st">&quot;Pie Chart of class&quot;</span>, </span>
+<span id="cb85-10"><a href="ggplot-visualization.html#cb85-10"></a>       <span class="dt">caption=</span><span class="st">&quot;Source: mpg&quot;</span>)</span>
+<span id="cb85-11"><a href="ggplot-visualization.html#cb85-11"></a></span>
+<span id="cb85-12"><a href="ggplot-visualization.html#cb85-12"></a>pie <span class="op">+</span><span class="st"> </span><span class="kw">coord_polar</span>(<span class="dt">theta =</span> <span class="st">&quot;y&quot;</span>, <span class="dt">start=</span><span class="dv">0</span>) <span class="op">+</span></span>
+<span id="cb85-13"><a href="ggplot-visualization.html#cb85-13"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> freq<span class="op">/</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">cumsum</span>(freq)[<span class="op">-</span><span class="kw">length</span>(freq)]), </span>
+<span id="cb85-14"><a href="ggplot-visualization.html#cb85-14"></a>                    <span class="dt">label =</span>  <span class="kw">paste0</span>(<span class="kw">round</span>(freq <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(freq) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>, <span class="dv">1</span>), <span class="st">&quot;%&quot;</span>)))</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<div id="classID9-28" class="section level4">
+<h4><span class="header-section-number">9.1.30.1</span> Time Series Data 시각화</h4>
+<ul>
+<li>시간에 따른 실업률을 그래프로 그려 봅시다.</li>
+</ul>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="ggplot-visualization.html#cb86-1"></a><span class="co"># install.packages(&quot;ggfortify&quot;)</span></span>
+<span id="cb86-2"><a href="ggplot-visualization.html#cb86-2"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb86-3"><a href="ggplot-visualization.html#cb86-3"></a><span class="kw">library</span>(ggfortify)</span></code></pre></div>
+<pre><code>## Warning: package &#39;ggfortify&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## Registered S3 method overwritten by &#39;ggfortify&#39;:
+##   method        from 
+##   fortify.table ggalt</code></pre>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="ggplot-visualization.html#cb89-1"></a><span class="kw">theme_set</span>(<span class="kw">theme_classic</span>())</span>
+<span id="cb89-2"><a href="ggplot-visualization.html#cb89-2"></a></span>
+<span id="cb89-3"><a href="ggplot-visualization.html#cb89-3"></a><span class="co"># Plot </span></span>
+<span id="cb89-4"><a href="ggplot-visualization.html#cb89-4"></a><span class="kw">autoplot</span>(AirPassengers) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb89-5"><a href="ggplot-visualization.html#cb89-5"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;AirPassengers&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb89-6"><a href="ggplot-visualization.html#cb89-6"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust=</span><span class="fl">0.5</span>))</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="ggplot-visualization.html#cb90-1"></a>economics</span></code></pre></div>
+<pre><code>## # A tibble: 574 x 6
+##    date         pce    pop psavert uempmed unemploy
+##    &lt;date&gt;     &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+##  1 1967-07-01  507. 198712    12.6     4.5     2944
+##  2 1967-08-01  510. 198911    12.6     4.7     2945
+##  3 1967-09-01  516. 199113    11.9     4.6     2958
+##  4 1967-10-01  512. 199311    12.9     4.9     3143
+##  5 1967-11-01  517. 199498    12.8     4.7     3066
+##  6 1967-12-01  525. 199657    11.8     4.8     3018
+##  7 1968-01-01  531. 199808    11.7     5.1     2878
+##  8 1968-02-01  534. 199920    12.3     4.5     3001
+##  9 1968-03-01  544. 200056    11.7     4.1     2877
+## 10 1968-04-01  544  200208    12.3     4.6     2709
+## # … with 564 more rows</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="ggplot-visualization.html#cb92-1"></a><span class="kw">ggplot</span>(economics, <span class="kw">aes</span>(<span class="dt">x=</span>date)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb92-2"><a href="ggplot-visualization.html#cb92-2"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>unemploy)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb92-3"><a href="ggplot-visualization.html#cb92-3"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Time Series Chart&quot;</span>, </span>
+<span id="cb92-4"><a href="ggplot-visualization.html#cb92-4"></a>       <span class="dt">subtitle=</span><span class="st">&quot;Returns Percentage from &#39;Economics&#39; Dataset&quot;</span>, </span>
+<span id="cb92-5"><a href="ggplot-visualization.html#cb92-5"></a>       <span class="dt">caption=</span><span class="st">&quot;Source: Economics&quot;</span>, </span>
+<span id="cb92-6"><a href="ggplot-visualization.html#cb92-6"></a>       <span class="dt">y=</span><span class="st">&quot;unemploy %&quot;</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-42-2.png" width="672" /></p>
+<ul>
+<li>시즌별 데이터
+<ul>
+<li>nottem 데이터는 1920 년부터 1939년 까지 노팅험 성에서 측정한 평균 기온 입니다.</li>
+<li>AirPassengers 데이터는 1949년 부터 1960년 까지의 월별 항공기 평균 승객수를 기록한 데이터 입니다.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="ggplot-visualization.html#cb93-1"></a><span class="co">#install.packages(&quot;forecast&quot;)</span></span>
+<span id="cb93-2"><a href="ggplot-visualization.html#cb93-2"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb93-3"><a href="ggplot-visualization.html#cb93-3"></a><span class="kw">library</span>(forecast)</span></code></pre></div>
+<pre><code>## Warning: package &#39;forecast&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## Registered S3 method overwritten by &#39;quantmod&#39;:
+##   method            from
+##   as.zoo.data.frame zoo</code></pre>
+<pre><code>## Registered S3 methods overwritten by &#39;forecast&#39;:
+##   method                 from     
+##   autoplot.Arima         ggfortify
+##   autoplot.acf           ggfortify
+##   autoplot.ar            ggfortify
+##   autoplot.bats          ggfortify
+##   autoplot.decomposed.ts ggfortify
+##   autoplot.ets           ggfortify
+##   autoplot.forecast      ggfortify
+##   autoplot.stl           ggfortify
+##   autoplot.ts            ggfortify
+##   fitted.ar              ggfortify
+##   fortify.ts             ggfortify
+##   residuals.ar           ggfortify</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="ggplot-visualization.html#cb97-1"></a><span class="kw">theme_set</span>(<span class="kw">theme_classic</span>())</span>
+<span id="cb97-2"><a href="ggplot-visualization.html#cb97-2"></a><span class="co"># nottem 데이터 확인</span></span>
+<span id="cb97-3"><a href="ggplot-visualization.html#cb97-3"></a>nottem</span></code></pre></div>
+<pre><code>##       Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov  Dec
+## 1920 40.6 40.8 44.4 46.7 54.1 58.5 57.7 56.4 54.3 50.5 42.9 39.8
+## 1921 44.2 39.8 45.1 47.0 54.1 58.7 66.3 59.9 57.0 54.2 39.7 42.8
+## 1922 37.5 38.7 39.5 42.1 55.7 57.8 56.8 54.3 54.3 47.1 41.8 41.7
+## 1923 41.8 40.1 42.9 45.8 49.2 52.7 64.2 59.6 54.4 49.2 36.3 37.6
+## 1924 39.3 37.5 38.3 45.5 53.2 57.7 60.8 58.2 56.4 49.8 44.4 43.6
+## 1925 40.0 40.5 40.8 45.1 53.8 59.4 63.5 61.0 53.0 50.0 38.1 36.3
+## 1926 39.2 43.4 43.4 48.9 50.6 56.8 62.5 62.0 57.5 46.7 41.6 39.8
+## 1927 39.4 38.5 45.3 47.1 51.7 55.0 60.4 60.5 54.7 50.3 42.3 35.2
+## 1928 40.8 41.1 42.8 47.3 50.9 56.4 62.2 60.5 55.4 50.2 43.0 37.3
+## 1929 34.8 31.3 41.0 43.9 53.1 56.9 62.5 60.3 59.8 49.2 42.9 41.9
+## 1930 41.6 37.1 41.2 46.9 51.2 60.4 60.1 61.6 57.0 50.9 43.0 38.8
+## 1931 37.1 38.4 38.4 46.5 53.5 58.4 60.6 58.2 53.8 46.6 45.5 40.6
+## 1932 42.4 38.4 40.3 44.6 50.9 57.0 62.1 63.5 56.3 47.3 43.6 41.8
+## 1933 36.2 39.3 44.5 48.7 54.2 60.8 65.5 64.9 60.1 50.2 42.1 35.8
+## 1934 39.4 38.2 40.4 46.9 53.4 59.6 66.5 60.4 59.2 51.2 42.8 45.8
+## 1935 40.0 42.6 43.5 47.1 50.0 60.5 64.6 64.0 56.8 48.6 44.2 36.4
+## 1936 37.3 35.0 44.0 43.9 52.7 58.6 60.0 61.1 58.1 49.6 41.6 41.3
+## 1937 40.8 41.0 38.4 47.4 54.1 58.6 61.4 61.8 56.3 50.9 41.4 37.1
+## 1938 42.1 41.2 47.3 46.6 52.4 59.0 59.6 60.4 57.0 50.7 47.8 39.2
+## 1939 39.4 40.9 42.4 47.8 52.4 58.0 60.7 61.8 58.2 46.7 46.6 37.8</code></pre>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="ggplot-visualization.html#cb99-1"></a>AirPassengers</span></code></pre></div>
+<pre><code>##      Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
+## 1949 112 118 132 129 121 135 148 148 136 119 104 118
+## 1950 115 126 141 135 125 149 170 170 158 133 114 140
+## 1951 145 150 178 163 172 178 199 199 184 162 146 166
+## 1952 171 180 193 181 183 218 230 242 209 191 172 194
+## 1953 196 196 236 235 229 243 264 272 237 211 180 201
+## 1954 204 188 235 227 234 264 302 293 259 229 203 229
+## 1955 242 233 267 269 270 315 364 347 312 274 237 278
+## 1956 284 277 317 313 318 374 413 405 355 306 271 306
+## 1957 315 301 356 348 355 422 465 467 404 347 305 336
+## 1958 340 318 362 348 363 435 491 505 404 359 310 337
+## 1959 360 342 406 396 420 472 548 559 463 407 362 405
+## 1960 417 391 419 461 472 535 622 606 508 461 390 432</code></pre>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="ggplot-visualization.html#cb101-1"></a><span class="co"># Subset data</span></span>
+<span id="cb101-2"><a href="ggplot-visualization.html#cb101-2"></a>nottem_small &lt;-<span class="st"> </span><span class="kw">window</span>(nottem, <span class="dt">start=</span><span class="kw">c</span>(<span class="dv">1920</span>, <span class="dv">1</span>), <span class="dt">end=</span><span class="kw">c</span>(<span class="dv">1925</span>, <span class="dv">12</span>))  <span class="co"># subset a smaller timewindow</span></span>
+<span id="cb101-3"><a href="ggplot-visualization.html#cb101-3"></a></span>
+<span id="cb101-4"><a href="ggplot-visualization.html#cb101-4"></a><span class="co"># Plot</span></span>
+<span id="cb101-5"><a href="ggplot-visualization.html#cb101-5"></a><span class="kw">ggseasonplot</span>(AirPassengers, <span class="dt">year.labels =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Seasonal plot: International Airline Passengers&quot;</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="ggplot-visualization.html#cb102-1"></a><span class="kw">ggseasonplot</span>(nottem_small) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Seasonal plot: Air temperatures at Nottingham Castle&quot;</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-43-2.png" width="672" /></p>
+</div>
+</div>
+</div>
+<div id="classID9-29" class="section level2">
+<h2><span class="header-section-number">9.2</span> kaggle 데이터를 이용한 EDA 실습</h2>
+<div id="classID9-30" class="section level3">
+<h3><span class="header-section-number">9.2.1</span> bike sharing demand 데이터셋 설명</h3>
+<table>
+<thead>
+<tr class="header">
+<th>feature</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>datetime</td>
+<td>시간 정보</td>
+</tr>
+<tr class="even">
+<td>season</td>
+<td>1:봄, 2:여름, 3:가을, 4: 겨울</td>
+</tr>
+<tr class="odd">
+<td>holiday</td>
+<td>휴일 유무</td>
+</tr>
+<tr class="even">
+<td>workingday</td>
+<td>평일 유무</td>
+</tr>
+<tr class="odd">
+<td>weather</td>
+<td>1: 맑은날, 2:안개가 있거나 습도가 높은날, 3: 눈이나 비 , 4:비나 눈이 심하게 온날</td>
+</tr>
+<tr class="even">
+<td>temp</td>
+<td>온도</td>
+</tr>
+<tr class="odd">
+<td>atemp</td>
+<td>체감온도</td>
+</tr>
+<tr class="even">
+<td>humidity</td>
+<td>습도</td>
+</tr>
+<tr class="odd">
+<td>windspeed</td>
+<td>풍속</td>
+</tr>
+<tr class="even">
+<td>casual</td>
+<td>비회원 렌트 횟수</td>
+</tr>
+<tr class="odd">
+<td>registered</td>
+<td>회원 렌트 횟수</td>
+</tr>
+<tr class="even">
+<td>count</td>
+<td>총렌탈 횟수</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="classID9-31" class="section level3">
+<h3><span class="header-section-number">9.2.2</span> 기본 그래프 생성</h3>
+<ul>
+<li>데이터 불러오기</li>
+</ul>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="ggplot-visualization.html#cb103-1"></a><span class="co">#getwd()</span></span>
+<span id="cb103-2"><a href="ggplot-visualization.html#cb103-2"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb103-3"><a href="ggplot-visualization.html#cb103-3"></a>bike &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;bikeshare.csv&#39;</span>)</span>
+<span id="cb103-4"><a href="ggplot-visualization.html#cb103-4"></a><span class="kw">head</span>(bike)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 12
+##   datetime            season holiday workingday weather  temp atemp humidity
+##   &lt;dttm&gt;               &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+## 1 2011-01-01 00:00:00      1       0          0       1  9.84  14.4       81
+## 2 2011-01-01 01:00:00      1       0          0       1  9.02  13.6       80
+## 3 2011-01-01 02:00:00      1       0          0       1  9.02  13.6       80
+## 4 2011-01-01 03:00:00      1       0          0       1  9.84  14.4       75
+## 5 2011-01-01 04:00:00      1       0          0       1  9.84  14.4       75
+## 6 2011-01-01 05:00:00      1       0          0       2  9.84  12.9       75
+## # … with 4 more variables: windspeed &lt;dbl&gt;, casual &lt;dbl&gt;, registered &lt;dbl&gt;,
+## #   count &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="ggplot-visualization.html#cb105-1"></a><span class="kw">ggplot</span>(bike, <span class="kw">aes</span>(temp, count)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb105-2"><a href="ggplot-visualization.html#cb105-2"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="ggplot-visualization.html#cb106-1"></a><span class="kw">ggplot</span>(bike, <span class="kw">aes</span>(temp, count)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb106-2"><a href="ggplot-visualization.html#cb106-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span><span class="fl">0.3</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-45-2.png" width="672" /></p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="ggplot-visualization.html#cb107-1"></a><span class="kw">ggplot</span>(bike, <span class="kw">aes</span>(temp, count)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb107-2"><a href="ggplot-visualization.html#cb107-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span><span class="fl">0.3</span>, <span class="kw">aes</span>(<span class="dt">color=</span>temp)) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-45-3.png" width="672" /></p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="ggplot-visualization.html#cb108-1"></a>pl &lt;-<span class="st"> </span><span class="kw">ggplot</span>(bike, <span class="kw">aes</span>(datetime, count)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb108-2"><a href="ggplot-visualization.html#cb108-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>temp), <span class="dt">alpha=</span><span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</span>
+<span id="cb108-3"><a href="ggplot-visualization.html#cb108-3"></a></span>
+<span id="cb108-4"><a href="ggplot-visualization.html#cb108-4"></a>pl <span class="op">+</span><span class="st"> </span><span class="kw">scale_color_continuous</span>(<span class="dt">low=</span><span class="st">&#39;#55D8CE&#39;</span>, <span class="dt">high=</span><span class="st">&#39;#FF6E2E&#39;</span>) <span class="op">+</span></span>
+<span id="cb108-5"><a href="ggplot-visualization.html#cb108-5"></a><span class="st">  </span><span class="kw">theme_bw</span>()</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-45-4.png" width="672" /></p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="ggplot-visualization.html#cb109-1"></a><span class="kw">cor</span>(bike[,<span class="kw">c</span>(<span class="st">&#39;temp&#39;</span>, <span class="st">&#39;count&#39;</span>)])</span></code></pre></div>
+<pre><code>##            temp     count
+## temp  1.0000000 0.3944536
+## count 0.3944536 1.0000000</code></pre>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="ggplot-visualization.html#cb111-1"></a><span class="kw">ggplot</span>(bike, <span class="kw">aes</span>(<span class="kw">factor</span>(season), count)) <span class="op">+</span></span>
+<span id="cb111-2"><a href="ggplot-visualization.html#cb111-2"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="kw">aes</span>(<span class="dt">color =</span> <span class="kw">factor</span>(season)))</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-45-5.png" width="672" /></p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="ggplot-visualization.html#cb112-1"></a>bike &lt;-<span class="st"> </span>bike <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">hour=</span><span class="kw">format</span>(datetime,<span class="st">&quot;%H&quot;</span>) )</span>
+<span id="cb112-2"><a href="ggplot-visualization.html#cb112-2"></a>bike</span></code></pre></div>
+<pre><code>## # A tibble: 10,886 x 13
+##    datetime            season holiday workingday weather  temp atemp humidity
+##    &lt;dttm&gt;               &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+##  1 2011-01-01 00:00:00      1       0          0       1  9.84  14.4       81
+##  2 2011-01-01 01:00:00      1       0          0       1  9.02  13.6       80
+##  3 2011-01-01 02:00:00      1       0          0       1  9.02  13.6       80
+##  4 2011-01-01 03:00:00      1       0          0       1  9.84  14.4       75
+##  5 2011-01-01 04:00:00      1       0          0       1  9.84  14.4       75
+##  6 2011-01-01 05:00:00      1       0          0       2  9.84  12.9       75
+##  7 2011-01-01 06:00:00      1       0          0       1  9.02  13.6       80
+##  8 2011-01-01 07:00:00      1       0          0       1  8.2   12.9       86
+##  9 2011-01-01 08:00:00      1       0          0       1  9.84  14.4       75
+## 10 2011-01-01 09:00:00      1       0          0       1 13.1   17.4       76
+## # … with 10,876 more rows, and 5 more variables: windspeed &lt;dbl&gt;, casual &lt;dbl&gt;,
+## #   registered &lt;dbl&gt;, count &lt;dbl&gt;, hour &lt;chr&gt;</code></pre>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="ggplot-visualization.html#cb114-1"></a><span class="co">## feature eng</span></span>
+<span id="cb114-2"><a href="ggplot-visualization.html#cb114-2"></a></span>
+<span id="cb114-3"><a href="ggplot-visualization.html#cb114-3"></a>pl &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">filter</span>(bike, workingday<span class="op">==</span><span class="dv">1</span>), <span class="kw">aes</span>(hour,count)) </span>
+<span id="cb114-4"><a href="ggplot-visualization.html#cb114-4"></a></span>
+<span id="cb114-5"><a href="ggplot-visualization.html#cb114-5"></a>pl &lt;-<span class="st"> </span>pl <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</span>
+<span id="cb114-6"><a href="ggplot-visualization.html#cb114-6"></a><span class="kw">print</span>(pl)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-45-6.png" width="672" /></p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="ggplot-visualization.html#cb115-1"></a><span class="co">#</span></span>
+<span id="cb115-2"><a href="ggplot-visualization.html#cb115-2"></a><span class="co">#pl &lt;- pl + scale_color_gradientn(colours = c(&quot;dark blue&quot;, &quot;blue&quot;,&quot;light blue&quot;, &quot;light green&quot;, &quot;yellow&quot;,&quot;orange&quot;,&quot;red&quot;))</span></span>
+<span id="cb115-3"><a href="ggplot-visualization.html#cb115-3"></a><span class="co">#pl &lt;- pl + scale_color_gradientn(colours = terrain.colors(10))</span></span>
+<span id="cb115-4"><a href="ggplot-visualization.html#cb115-4"></a><span class="co">#print(pl)</span></span></code></pre></div>
+</div>
+<div id="classID9-32" class="section level3">
+<h3><span class="header-section-number">9.2.3</span> ggthemr 적용하기</h3>
+<ul>
+<li><p><a href="https://github.com/jrnold/ggthemes">ggthemes</a> 또는 <a href="https://github.com/cttobin/ggthemr">ggthmr</a> 패키지를 추가 적용하여 그래프 테마를 설정 할 수 있습니다.</p></li>
+<li><p>ggthmr 사용법을 알아 보겠습니다.</p></li>
+</ul>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="ggplot-visualization.html#cb116-1"></a><span class="co">#devtools::install_github(&#39;cttobin/ggthemr&#39;) #라이브러리 설치</span></span>
+<span id="cb116-2"><a href="ggplot-visualization.html#cb116-2"></a><span class="co">#library(ggthemr)</span></span>
+<span id="cb116-3"><a href="ggplot-visualization.html#cb116-3"></a><span class="co">#ggthemr(&quot;dust&quot;) # 테마를 세션에 설정</span></span>
+<span id="cb116-4"><a href="ggplot-visualization.html#cb116-4"></a></span>
+<span id="cb116-5"><a href="ggplot-visualization.html#cb116-5"></a><span class="co">#midwest %&gt;% ggplot(aes(x=area, y=poptotal)) + </span></span>
+<span id="cb116-6"><a href="ggplot-visualization.html#cb116-6"></a><span class="co">#  geom_point(aes(col=state), size=3) +</span></span>
+<span id="cb116-7"><a href="ggplot-visualization.html#cb116-7"></a><span class="co">#  geom_smooth(method=&quot;lm&quot;, col=&quot;firebrick&quot;, size=2) + </span></span>
+<span id="cb116-8"><a href="ggplot-visualization.html#cb116-8"></a><span class="co">#  coord_cartesian(xlim=c(0, 0.1), ylim=c(0, 1000000)) + </span></span>
+<span id="cb116-9"><a href="ggplot-visualization.html#cb116-9"></a><span class="co">#  labs(title=&quot;Area Vs Population&quot;, subtitle=&quot;From midwest dataset&quot;, y=&quot;Population&quot;, x=&quot;Area&quot;, caption=&quot;Midwest Demographics&quot;) </span></span>
+<span id="cb116-10"><a href="ggplot-visualization.html#cb116-10"></a></span>
+<span id="cb116-11"><a href="ggplot-visualization.html#cb116-11"></a><span class="co">#ggthemr_reset() # ggthemr 의 테마 삭제</span></span></code></pre></div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-transpormation-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="classID9-33.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["dsWithR.pdf", "dsWithR.epub"],
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true,
+"fontsettings": null,
+"theme": "white",
+"family": "sans",
+"size": 1
+}
+});
+});
+</script>
+
+</body>
+
+</html>

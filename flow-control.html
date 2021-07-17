@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Flow-control | R로 배우는 데이터과학</title>
+  <meta name="description" content="Chapter 3 Flow-control | R로 배우는 데이터과학" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Flow-control | R로 배우는 데이터과학" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Flow-control | R로 배우는 데이터과학" />
+  
+  
+  
+
+<meta name="author" content="Dangtnog Byun" />
+
+
+<meta name="date" content="2021-03-28" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-type-and-structure.html"/>
+<link rel="next" href="function.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="fontawesome.min.css" type="text/css" />
+<link rel="stylesheet" href="bigdata.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R로 배우는 데이터과학</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Index</a></li>
+<li class="chapter" data-level="2" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html"><i class="fa fa-check"></i><b>2</b> Data Type and Structure</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-0"><i class="fa fa-check"></i><b>2.1</b> R을 사용하기 위한 기본 지식 정리</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-0-1"><i class="fa fa-check"></i><b>2.1.1</b> 작업디렉토리 설정</a></li>
+<li class="chapter" data-level="2.1.2" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-0-2"><i class="fa fa-check"></i><b>2.1.2</b> 패키지 설치 및 사용</a></li>
+<li class="chapter" data-level="2.1.3" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-0-3"><i class="fa fa-check"></i><b>2.1.3</b> 도움말 사용</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-1"><i class="fa fa-check"></i><b>2.2</b> 변수(Variable)</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-2"><i class="fa fa-check"></i><b>2.2.1</b> 숫자(Numeric)</a></li>
+<li class="chapter" data-level="2.2.2" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-3"><i class="fa fa-check"></i><b>2.2.2</b> 문자()</a></li>
+<li class="chapter" data-level="2.2.3" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-4"><i class="fa fa-check"></i><b>2.2.3</b> 팩터 (factor)</a></li>
+<li class="chapter" data-level="2.2.4" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-5"><i class="fa fa-check"></i><b>2.2.4</b> 논리형(Logical)</a></li>
+<li class="chapter" data-level="2.2.5" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-6"><i class="fa fa-check"></i><b>2.2.5</b> 날짜타입(Date and Datetime)</a></li>
+<li class="chapter" data-level="2.2.6" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-7"><i class="fa fa-check"></i><b>2.2.6</b> NA/NaN/Inf 확인 및 처리</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-8"><i class="fa fa-check"></i><b>2.3</b> 데이터 구조(Data Structure)</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-9"><i class="fa fa-check"></i><b>2.3.1</b> 벡터 (Vector)</a></li>
+<li class="chapter" data-level="2.3.2" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-10"><i class="fa fa-check"></i><b>2.3.2</b> 리스트(List)</a></li>
+<li class="chapter" data-level="2.3.3" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-11"><i class="fa fa-check"></i><b>2.3.3</b> 행렬(Matrix)</a></li>
+<li class="chapter" data-level="2.3.4" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-12"><i class="fa fa-check"></i><b>2.3.4</b> 데이타프레임(Data Frame)</a></li>
+<li class="chapter" data-level="2.3.5" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-14"><i class="fa fa-check"></i><b>2.3.5</b> 데이터 변환</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="flow-control.html"><a href="flow-control.html"><i class="fa fa-check"></i><b>3</b> Flow-control</a><ul>
+<li class="chapter" data-level="3.1" data-path="flow-control.html"><a href="flow-control.html#ClassID2-2"><i class="fa fa-check"></i><b>3.1</b> 흐름제어</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="flow-control.html"><a href="flow-control.html#ClassID2-3"><i class="fa fa-check"></i><b>3.1.1</b> if문</a></li>
+<li class="chapter" data-level="3.1.2" data-path="flow-control.html"><a href="flow-control.html#ClassID2-4"><i class="fa fa-check"></i><b>3.1.2</b> ifelse문</a></li>
+<li class="chapter" data-level="3.1.3" data-path="flow-control.html"><a href="flow-control.html#ClassID2-5"><i class="fa fa-check"></i><b>3.1.3</b> else if문</a></li>
+<li class="chapter" data-level="3.1.4" data-path="flow-control.html"><a href="flow-control.html#ClassID2-6"><i class="fa fa-check"></i><b>3.1.4</b> 연습문제</a></li>
+<li class="chapter" data-level="3.1.5" data-path="flow-control.html"><a href="flow-control.html#for문"><i class="fa fa-check"></i><b>3.1.5</b> for문</a></li>
+<li class="chapter" data-level="3.1.6" data-path="flow-control.html"><a href="flow-control.html#ClassID2-7"><i class="fa fa-check"></i><b>3.1.6</b> while 문</a></li>
+<li class="chapter" data-level="3.1.7" data-path="flow-control.html"><a href="flow-control.html#ClassID2-8"><i class="fa fa-check"></i><b>3.1.7</b> while-next 문</a></li>
+<li class="chapter" data-level="3.1.8" data-path="flow-control.html"><a href="flow-control.html#ClassID2-9"><i class="fa fa-check"></i><b>3.1.8</b> repeat 문</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="flow-control.html"><a href="flow-control.html#ClassID2-10"><i class="fa fa-check"></i><b>3.2</b> 연산자</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="function.html"><a href="function.html"><i class="fa fa-check"></i><b>4</b> Function</a><ul>
+<li class="chapter" data-level="4.1" data-path="function.html"><a href="function.html#classID3-1"><i class="fa fa-check"></i><b>4.1</b> 함수</a></li>
+<li class="chapter" data-level="4.2" data-path="function.html"><a href="function.html#classID30-2"><i class="fa fa-check"></i><b>4.2</b> 함수의 호출 특성</a></li>
+<li class="chapter" data-level="4.3" data-path="function.html"><a href="function.html#classID30-3"><i class="fa fa-check"></i><b>4.3</b> 변수의 스코프(Scope)</a></li>
+<li class="chapter" data-level="4.4" data-path="function.html"><a href="function.html#연습문제-2"><i class="fa fa-check"></i><b>4.4</b> [연습문제 #2]</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="classID4-1.html"><a href="classID4-1.html"><i class="fa fa-check"></i><b>5</b> Input and Output</a><ul>
+<li class="chapter" data-level="5.1" data-path="classID4-1.html"><a href="classID4-1.html#classID4-2"><i class="fa fa-check"></i><b>5.1</b> Excel 파일 다루기</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="classID4-1.html"><a href="classID4-1.html#classID4-3"><i class="fa fa-check"></i><b>5.1.1</b> Excel 읽기</a></li>
+<li class="chapter" data-level="5.1.2" data-path="classID4-1.html"><a href="classID4-1.html#classID4-4"><i class="fa fa-check"></i><b>5.1.2</b> Excel Sheet 지정 하여 읽기</a></li>
+<li class="chapter" data-level="5.1.3" data-path="classID4-1.html"><a href="classID4-1.html#classID4-5"><i class="fa fa-check"></i><b>5.1.3</b> Excel 의 다양한 읽기 형태</a></li>
+<li class="chapter" data-level="5.1.4" data-path="classID4-1.html"><a href="classID4-1.html#classID4-6"><i class="fa fa-check"></i><b>5.1.4</b> CSV, TEXT 파일 읽기</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="classID5-1.html"><a href="classID5-1.html"><i class="fa fa-check"></i><b>6</b> Basic Statistics</a><ul>
+<li class="chapter" data-level="6.1" data-path="classID5-1.html"><a href="classID5-1.html#classID5-2"><i class="fa fa-check"></i><b>6.1</b> 정형화된 데이터의 종류</a></li>
+<li class="chapter" data-level="6.2" data-path="classID5-1.html"><a href="classID5-1.html#classID5-3"><i class="fa fa-check"></i><b>6.2</b> 위치 추정</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="classID5-1.html"><a href="classID5-1.html#classID5-4"><i class="fa fa-check"></i><b>6.2.1</b> 평균</a></li>
+<li class="chapter" data-level="6.2.2" data-path="classID5-1.html"><a href="classID5-1.html#classID5-5"><i class="fa fa-check"></i><b>6.2.2</b> 절사평균</a></li>
+<li class="chapter" data-level="6.2.3" data-path="classID5-1.html"><a href="classID5-1.html#classID5-6"><i class="fa fa-check"></i><b>6.2.3</b> 중앙값</a></li>
+<li class="chapter" data-level="6.2.4" data-path="classID5-1.html"><a href="classID5-1.html#classID5-7"><i class="fa fa-check"></i><b>6.2.4</b> 가중평균</a></li>
+<li class="chapter" data-level="6.2.5" data-path="classID5-1.html"><a href="classID5-1.html#classID5-8"><i class="fa fa-check"></i><b>6.2.5</b> 가중 중앙값</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="classID5-1.html"><a href="classID5-1.html#classID5-9"><i class="fa fa-check"></i><b>6.3</b> 변위 추정</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="classID5-1.html"><a href="classID5-1.html#classID5-10"><i class="fa fa-check"></i><b>6.3.1</b> 표준편차(Standard Deviation)</a></li>
+<li class="chapter" data-level="6.3.2" data-path="classID5-1.html"><a href="classID5-1.html#classID5-11"><i class="fa fa-check"></i><b>6.3.2</b> 사분위범위(IRQ)</a></li>
+<li class="chapter" data-level="6.3.3" data-path="classID5-1.html"><a href="classID5-1.html#classID5-12"><i class="fa fa-check"></i><b>6.3.3</b> 중위절대편차(MAD)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="classID5-1.html"><a href="classID5-1.html#classID5-13"><i class="fa fa-check"></i><b>6.4</b> 데이터분포</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="classID5-1.html"><a href="classID5-1.html#classID5-14"><i class="fa fa-check"></i><b>6.4.1</b> 사분위수(Quantile)</a></li>
+<li class="chapter" data-level="6.4.2" data-path="classID5-1.html"><a href="classID5-1.html#classID5-15"><i class="fa fa-check"></i><b>6.4.2</b> 상자그림(Boxplot)</a></li>
+<li class="chapter" data-level="6.4.3" data-path="classID5-1.html"><a href="classID5-1.html#classID5-16"><i class="fa fa-check"></i><b>6.4.3</b> 도수 분포표(Frequency Table)</a></li>
+<li class="chapter" data-level="6.4.4" data-path="classID5-1.html"><a href="classID5-1.html#classID5-17"><i class="fa fa-check"></i><b>6.4.4</b> 히스토 그램</a></li>
+<li class="chapter" data-level="6.4.5" data-path="classID5-1.html"><a href="classID5-1.html#classID5-18"><i class="fa fa-check"></i><b>6.4.5</b> 밀도추정(부드러운 히스토그램)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="data-transformation-1.html"><a href="data-transformation-1.html"><i class="fa fa-check"></i><b>7</b> Data transformation 1</a><ul>
+<li class="chapter" data-level="7.1" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-1"><i class="fa fa-check"></i><b>7.1</b> plyr 패키지와 dplyr 패키지 성능 차이</a></li>
+<li class="chapter" data-level="7.2" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-2"><i class="fa fa-check"></i><b>7.2</b> Data 변환 전에</a></li>
+<li class="chapter" data-level="7.3" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-3"><i class="fa fa-check"></i><b>7.3</b> apply 계열의 함수들</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-4"><i class="fa fa-check"></i><b>7.3.1</b> apply( )</a></li>
+<li class="chapter" data-level="7.3.2" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-5"><i class="fa fa-check"></i><b>7.3.2</b> 행 또는 열의 합 또는 평균 계산 함수</a></li>
+<li class="chapter" data-level="7.3.3" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-6"><i class="fa fa-check"></i><b>7.3.3</b> lapply( )함수</a></li>
+<li class="chapter" data-level="7.3.4" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-7"><i class="fa fa-check"></i><b>7.3.4</b> unlist 함수</a></li>
+<li class="chapter" data-level="7.3.5" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-8"><i class="fa fa-check"></i><b>7.3.5</b> do.call 함수</a></li>
+<li class="chapter" data-level="7.3.6" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-9"><i class="fa fa-check"></i><b>7.3.6</b> sapply 함수</a></li>
+<li class="chapter" data-level="7.3.7" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-10"><i class="fa fa-check"></i><b>7.3.7</b> tapply 함수</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-11"><i class="fa fa-check"></i><b>7.4</b> dplyr 패키지</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-12"><i class="fa fa-check"></i><b>7.4.1</b> flights 데이터셋의 간략한 설명</a></li>
+<li class="chapter" data-level="7.4.2" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-13"><i class="fa fa-check"></i><b>7.4.2</b> Filter 사용하기</a></li>
+<li class="chapter" data-level="7.4.3" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-14"><i class="fa fa-check"></i><b>7.4.3</b> Logical 연산자</a></li>
+<li class="chapter" data-level="7.4.4" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-15"><i class="fa fa-check"></i><b>7.4.4</b> arrange 를 이용한 정렬</a></li>
+<li class="chapter" data-level="7.4.5" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-17"><i class="fa fa-check"></i><b>7.4.5</b> select 를 이용한 데이터 선택</a></li>
+<li class="chapter" data-level="7.4.6" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-19"><i class="fa fa-check"></i><b>7.4.6</b> year 와 day 사이에 있는 컬럼 제외</a></li>
+<li class="chapter" data-level="7.4.7" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-20"><i class="fa fa-check"></i><b>7.4.7</b> mutate 로 데이터 생성 및 수정</a></li>
+<li class="chapter" data-level="7.4.8" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-25"><i class="fa fa-check"></i><b>7.4.8</b> summarize 로 집계 하기</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-26"><i class="fa fa-check"></i><b>7.5</b> SQL 이용한 관계형 데이터 처리</a></li>
+<li class="chapter" data-level="7.6" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-27"><i class="fa fa-check"></i><b>7.6</b> mutating 조인을 이용한 관계형 데이터 처리</a><ul>
+<li class="chapter" data-level="7.6.1" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-28"><i class="fa fa-check"></i><b>7.6.1</b> 데이터 살펴보기</a></li>
+<li class="chapter" data-level="7.6.2" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-29"><i class="fa fa-check"></i><b>7.6.2</b> Key</a></li>
+<li class="chapter" data-level="7.6.3" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-30"><i class="fa fa-check"></i><b>7.6.3</b> 조인 실습을 위한 작은 데이터셋 만들기</a></li>
+<li class="chapter" data-level="7.6.4" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-31"><i class="fa fa-check"></i><b>7.6.4</b> Mutating Join ? 왜?</a></li>
+<li class="chapter" data-level="7.6.5" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-33"><i class="fa fa-check"></i><b>7.6.5</b> Join 이해하기</a></li>
+<li class="chapter" data-level="7.6.6" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-34"><i class="fa fa-check"></i><b>7.6.6</b> Inner Join (내부조인)</a></li>
+<li class="chapter" data-level="7.6.7" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-35"><i class="fa fa-check"></i><b>7.6.7</b> Outer Join (외부조인)</a></li>
+<li class="chapter" data-level="7.6.8" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-36"><i class="fa fa-check"></i><b>7.6.8</b> 중복키</a></li>
+<li class="chapter" data-level="7.6.9" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-37"><i class="fa fa-check"></i><b>7.6.9</b> Join키 정의 하기</a></li>
+<li class="chapter" data-level="7.6.10" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-38"><i class="fa fa-check"></i><b>7.6.10</b> flights 테이블 조인 실습 하기1</a></li>
+<li class="chapter" data-level="7.6.11" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-39"><i class="fa fa-check"></i><b>7.6.11</b> 필터링 조인 (세미조인 &amp; 안티조인)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html"><i class="fa fa-check"></i><b>8</b> Data Transpormation 2</a><ul>
+<li class="chapter" data-level="8.1" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-1"><i class="fa fa-check"></i><b>8.1</b> tidy 데이터</a></li>
+<li class="chapter" data-level="8.2" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-2"><i class="fa fa-check"></i><b>8.2</b> gather 로 데이터 모으기</a></li>
+<li class="chapter" data-level="8.3" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-3"><i class="fa fa-check"></i><b>8.3</b> spread 로 데이터 펼치기</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-4"><i class="fa fa-check"></i><b>8.3.1</b> gather 와 spread 가 조금 다른 이유</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-5"><i class="fa fa-check"></i><b>8.4</b> Seperate와 Unite</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-6"><i class="fa fa-check"></i><b>8.4.1</b> seperate 로 나누기</a></li>
+<li class="chapter" data-level="8.4.2" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-7"><i class="fa fa-check"></i><b>8.4.2</b> unite 로 합치기</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-9"><i class="fa fa-check"></i><b>8.5</b> NA(결측값) 처리하기</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-10"><i class="fa fa-check"></i><b>8.5.1</b> 결측 처리 기본</a></li>
+<li class="chapter" data-level="8.5.2" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-11"><i class="fa fa-check"></i><b>8.5.2</b> NA(결측) 처리 자동화</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-13"><i class="fa fa-check"></i><b>8.6</b> 공공데이터 포털 가입 하고 API 키 얻기</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-14"><i class="fa fa-check"></i><b>8.6.1</b> 회원 가입</a></li>
+<li class="chapter" data-level="8.6.2" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-15"><i class="fa fa-check"></i><b>8.6.2</b> 일반회원으로 가입</a></li>
+<li class="chapter" data-level="8.6.3" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-16"><i class="fa fa-check"></i><b>8.6.3</b> 회원가입을 위한 정보 입력</a></li>
+<li class="chapter" data-level="8.6.4" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-17"><i class="fa fa-check"></i><b>8.6.4</b> 이용약관 동의</a></li>
+<li class="chapter" data-level="8.6.5" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-18"><i class="fa fa-check"></i><b>8.6.5</b> 정보입력</a></li>
+<li class="chapter" data-level="8.6.6" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-19"><i class="fa fa-check"></i><b>8.6.6</b> 회원가입 완료</a></li>
+<li class="chapter" data-level="8.6.7" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-20"><i class="fa fa-check"></i><b>8.6.7</b> “국토부 실거래가”" 로 API 검색</a></li>
+<li class="chapter" data-level="8.6.8" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-21"><i class="fa fa-check"></i><b>8.6.8</b> “아파트매매 실거래 상세 자료” -&gt; 활용신청</a></li>
+<li class="chapter" data-level="8.6.9" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-22"><i class="fa fa-check"></i><b>8.6.9</b> 활용신청 상세</a></li>
+<li class="chapter" data-level="8.6.10" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-23"><i class="fa fa-check"></i><b>8.6.10</b> 신청현황 / 결과</a></li>
+<li class="chapter" data-level="8.6.11" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-24"><i class="fa fa-check"></i><b>8.6.11</b> API 정보 확인</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-25"><i class="fa fa-check"></i><b>8.7</b> API를 이용해 국토부 아파트매매 실거래가 가져오기</a><ul>
+<li class="chapter" data-level="8.7.1" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-26"><i class="fa fa-check"></i><b>8.7.1</b> 전체 코드</a></li>
+</ul></li>
+<li class="chapter" data-level="8.8" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-28"><i class="fa fa-check"></i><b>8.8</b> shiny</a></li>
+<li class="chapter" data-level="8.9" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-29"><i class="fa fa-check"></i><b>8.9</b> API를 이용한 국토부 실거래가 조회2</a><ul>
+<li class="chapter" data-level="8.9.1" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-30"><i class="fa fa-check"></i><b>8.9.1</b> 파일 불러오기</a></li>
+<li class="chapter" data-level="8.9.2" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-31"><i class="fa fa-check"></i><b>8.9.2</b> 특정 구의 시군구 코드 알아내기</a></li>
+<li class="chapter" data-level="8.9.3" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-32"><i class="fa fa-check"></i><b>8.9.3</b> 구군 명을 넣으면 구군코드를 반환하는 함수 만들기</a></li>
+</ul></li>
+<li class="chapter" data-level="8.10" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#google-지도를-이용한-부동산-정보-시각화"><i class="fa fa-check"></i><b>8.10</b> Google 지도를 이용한 부동산 정보 시각화</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html"><i class="fa fa-check"></i><b>9</b> ggplot visualization</a><ul>
+<li class="chapter" data-level="9.1" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#ggplot-옵션-익히기"><i class="fa fa-check"></i><b>9.1</b> ggplot 옵션 익히기</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#mpg-데이터"><i class="fa fa-check"></i><b>9.1.1</b> mpg 데이터</a></li>
+<li class="chapter" data-level="9.1.2" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#ClassID"><i class="fa fa-check"></i><b>9.1.2</b> 기본 그래프 생성 문법</a></li>
+<li class="chapter" data-level="9.1.3" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-2"><i class="fa fa-check"></i><b>9.1.3</b> ggplot 문법 기본</a></li>
+<li class="chapter" data-level="9.1.4" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-3"><i class="fa fa-check"></i><b>9.1.4</b> 간단한 그래프 그리기</a></li>
+<li class="chapter" data-level="9.1.5" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-4"><i class="fa fa-check"></i><b>9.1.5</b> 선그래프 추가하기</a></li>
+<li class="chapter" data-level="9.1.6" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-5"><i class="fa fa-check"></i><b>9.1.6</b> X, Y 각 축에 값 제한 하기</a></li>
+<li class="chapter" data-level="9.1.7" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-6"><i class="fa fa-check"></i><b>9.1.7</b> 그래프 확대 하기</a></li>
+<li class="chapter" data-level="9.1.8" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-8"><i class="fa fa-check"></i><b>9.1.8</b> 타이틀 및 축라벨 변경</a></li>
+<li class="chapter" data-level="9.1.9" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-9"><i class="fa fa-check"></i><b>9.1.9</b> 색상과 점의 크기 조정</a></li>
+<li class="chapter" data-level="9.1.10" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-10"><i class="fa fa-check"></i><b>9.1.10</b> 조건기반 색상 표시</a></li>
+<li class="chapter" data-level="9.1.11" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-11"><i class="fa fa-check"></i><b>9.1.11</b> 그룹별로 색상 표시하기</a></li>
+<li class="chapter" data-level="9.1.12" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-12"><i class="fa fa-check"></i><b>9.1.12</b> col 인자에 명기 하는 경우</a></li>
+<li class="chapter" data-level="9.1.13" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-14"><i class="fa fa-check"></i><b>9.1.13</b> Mark 의 모양 변경</a></li>
+<li class="chapter" data-level="9.1.14" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-15"><i class="fa fa-check"></i><b>9.1.14</b> Legend 없애기</a></li>
+<li class="chapter" data-level="9.1.15" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-16"><i class="fa fa-check"></i><b>9.1.15</b> Legend 테마 변경하기</a></li>
+<li class="chapter" data-level="9.1.16" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-17"><i class="fa fa-check"></i><b>9.1.16</b> 색상 팔레트 종류</a></li>
+<li class="chapter" data-level="9.1.17" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-18"><i class="fa fa-check"></i><b>9.1.17</b> 축간격 조정 하기</a></li>
+<li class="chapter" data-level="9.1.18" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-19"><i class="fa fa-check"></i><b>9.1.18</b> X축 역변환 하기</a></li>
+<li class="chapter" data-level="9.1.19" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-20"><i class="fa fa-check"></i><b>9.1.19</b> 축라벨에 커스터마이징</a></li>
+<li class="chapter" data-level="9.1.20" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-21"><i class="fa fa-check"></i><b>9.1.20</b> 테마를 사용해서 한번에 변경</a></li>
+<li class="chapter" data-level="9.1.21" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#scatter-plot산점도"><i class="fa fa-check"></i><b>9.1.21</b> Scatter Plot(산점도)</a></li>
+<li class="chapter" data-level="9.1.22" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#jitter-plot"><i class="fa fa-check"></i><b>9.1.22</b> jitter plot</a></li>
+<li class="chapter" data-level="9.1.23" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#count-plot"><i class="fa fa-check"></i><b>9.1.23</b> Count Plot</a></li>
+<li class="chapter" data-level="9.1.24" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-22"><i class="fa fa-check"></i><b>9.1.24</b> 가장자리 분포 그래프 추가</a></li>
+<li class="chapter" data-level="9.1.25" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#correlogram"><i class="fa fa-check"></i><b>9.1.25</b> Correlogram</a></li>
+<li class="chapter" data-level="9.1.26" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-23"><i class="fa fa-check"></i><b>9.1.26</b> Bar 그래프</a></li>
+<li class="chapter" data-level="9.1.27" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#stacked-bar-plot-누적-막대-그래프"><i class="fa fa-check"></i><b>9.1.27</b> Stacked Bar Plot (누적 막대 그래프)</a></li>
+<li class="chapter" data-level="9.1.28" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#facet"><i class="fa fa-check"></i><b>9.1.28</b> Facet</a></li>
+<li class="chapter" data-level="9.1.29" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-25"><i class="fa fa-check"></i><b>9.1.29</b> Position 조정</a></li>
+<li class="chapter" data-level="9.1.30" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-26"><i class="fa fa-check"></i><b>9.1.30</b> Pie 차트</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-29"><i class="fa fa-check"></i><b>9.2</b> kaggle 데이터를 이용한 EDA 실습</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-30"><i class="fa fa-check"></i><b>9.2.1</b> bike sharing demand 데이터셋 설명</a></li>
+<li class="chapter" data-level="9.2.2" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-31"><i class="fa fa-check"></i><b>9.2.2</b> 기본 그래프 생성</a></li>
+<li class="chapter" data-level="9.2.3" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-32"><i class="fa fa-check"></i><b>9.2.3</b> ggthemr 적용하기</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-34"><i class="fa fa-check"></i><b>9.3</b> correlation 그래프 생성</a></li>
+<li class="chapter" data-level="9.4" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-35"><i class="fa fa-check"></i><b>9.4</b> plot.ly 이용해서 interactive 그래프 그리기</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="modeling.html"><a href="modeling.html"><i class="fa fa-check"></i><b>10</b> Modeling</a><ul>
+<li class="chapter" data-level="10.1" data-path="modeling.html"><a href="modeling.html#ClassID10-1"><i class="fa fa-check"></i><b>10.1</b> Regression Model (회귀모형)</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="modeling.html"><a href="modeling.html#ClassID10-2"><i class="fa fa-check"></i><b>10.1.1</b> Univariate Linear Regression (단변량 선형회기모형)</a></li>
+<li class="chapter" data-level="10.1.2" data-path="modeling.html"><a href="modeling.html#ClassID10-3"><i class="fa fa-check"></i><b>10.1.2</b> Multivariate Linear Regression (다변량 선형회기모형)</a></li>
+<li class="chapter" data-level="10.1.3" data-path="modeling.html"><a href="modeling.html#ClassID10-4"><i class="fa fa-check"></i><b>10.1.3</b> Polynomial Regression (다항 선형회기모형)</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="modeling.html"><a href="modeling.html#ClassID10-9"><i class="fa fa-check"></i><b>10.2</b> Classification Model (분류모형)</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="modeling.html"><a href="modeling.html#ClassID10-10"><i class="fa fa-check"></i><b>10.2.1</b> Logistic Regression</a></li>
+<li class="chapter" data-level="10.2.2" data-path="modeling.html"><a href="modeling.html#ClassID10-17"><i class="fa fa-check"></i><b>10.2.2</b> K-Nearest Neighbors(K-NN)</a></li>
+<li class="chapter" data-level="10.2.3" data-path="modeling.html"><a href="modeling.html#ClassID10-25"><i class="fa fa-check"></i><b>10.2.3</b> Support Vector Machine(SVM)</a></li>
+<li class="chapter" data-level="10.2.4" data-path="modeling.html"><a href="modeling.html#ClassID10-32"><i class="fa fa-check"></i><b>10.2.4</b> Decision Tree Classification</a></li>
+<li class="chapter" data-level="10.2.5" data-path="modeling.html"><a href="modeling.html#ClassID10-36"><i class="fa fa-check"></i><b>10.2.5</b> Random Forrest Classfication</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="modeling.html"><a href="modeling.html#ClassID10-40"><i class="fa fa-check"></i><b>10.3</b> Clustering 군집 모델</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="modeling.html"><a href="modeling.html#ClassID10-41"><i class="fa fa-check"></i><b>10.3.1</b> K-Means Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="modeling.html"><a href="modeling.html#ClassID10-43"><i class="fa fa-check"></i><b>10.4</b> Gradient Boosting 실습</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="modeling.html"><a href="modeling.html#ClassID10-44"><i class="fa fa-check"></i><b>10.4.1</b> 데이터 및 패키지 로딩</a></li>
+<li class="chapter" data-level="10.4.2" data-path="modeling.html"><a href="modeling.html#ClassID10-45"><i class="fa fa-check"></i><b>10.4.2</b> 레이블 변환</a></li>
+<li class="chapter" data-level="10.4.3" data-path="modeling.html"><a href="modeling.html#ClassID10-46"><i class="fa fa-check"></i><b>10.4.3</b> 훈련 및 테스트 데이터 분할</a></li>
+<li class="chapter" data-level="10.4.4" data-path="modeling.html"><a href="modeling.html#ClassID10-47"><i class="fa fa-check"></i><b>10.4.4</b> xgb.DMatrix 오브젝트로 변환</a></li>
+<li class="chapter" data-level="10.4.5" data-path="modeling.html"><a href="modeling.html#ClassID10-48"><i class="fa fa-check"></i><b>10.4.5</b> 주요 파라메터 설정</a></li>
+<li class="chapter" data-level="10.4.6" data-path="modeling.html"><a href="modeling.html#ClassID10-49"><i class="fa fa-check"></i><b>10.4.6</b> 모델 훈련 시키기</a></li>
+<li class="chapter" data-level="10.4.7" data-path="modeling.html"><a href="modeling.html#ClassID10-50"><i class="fa fa-check"></i><b>10.4.7</b> 테스트 데이터로 스코어링</a></li>
+<li class="chapter" data-level="10.4.8" data-path="modeling.html"><a href="modeling.html#ClassID10-51"><i class="fa fa-check"></i><b>10.4.8</b> Identify the class with the highest probability for each prediction</a></li>
+<li class="chapter" data-level="10.4.9" data-path="modeling.html"><a href="modeling.html#ClassID10-52"><i class="fa fa-check"></i><b>10.4.9</b> 모델 성능 측정</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/dangtong76" target="blank">Dangtong Github Pages</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R로 배우는 데이터과학</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="flow-control" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Flow-control</h1>
+<div id="ClassID2-2" class="section level2">
+<h2><span class="header-section-number">3.1</span> 흐름제어</h2>
+<script>
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('left', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<div id="ClassID2-3" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> if문</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="flow-control.html#cb1-1"></a><span class="cf">if</span> (<span class="dv">3</span> <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span>) {</span>
+<span id="cb1-2"><a href="flow-control.html#cb1-2"></a>  <span class="kw">print</span>(<span class="st">&quot;TRUE&quot;</span>)</span>
+<span id="cb1-3"><a href="flow-control.html#cb1-3"></a>  <span class="kw">print</span>(<span class="st">&quot;3은 10보다 작습니다.&quot;</span>)</span>
+<span id="cb1-4"><a href="flow-control.html#cb1-4"></a>} <span class="cf">else</span> {</span>
+<span id="cb1-5"><a href="flow-control.html#cb1-5"></a>  <span class="kw">print</span>(<span class="st">&quot;FALSE&quot;</span>)</span>
+<span id="cb1-6"><a href="flow-control.html#cb1-6"></a>  <span class="kw">print</span>(<span class="st">&quot;설마 그럴 리가요&quot;</span>)</span>
+<span id="cb1-7"><a href="flow-control.html#cb1-7"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;TRUE&quot;
+## [1] &quot;3은 10보다 작습니다.&quot;</code></pre>
+</div>
+<div id="ClassID2-4" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> ifelse문</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="flow-control.html#cb3-1"></a>x1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">12</span>,<span class="dv">13</span>,<span class="dv">14</span>)</span>
+<span id="cb3-2"><a href="flow-control.html#cb3-2"></a><span class="kw">ifelse</span> ( x1 <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;짝수&quot;</span>, <span class="st">&quot;홀수&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;짝수&quot; &quot;홀수&quot; &quot;짝수&quot; &quot;홀수&quot; &quot;짝수&quot;</code></pre>
+</div>
+<div id="ClassID2-5" class="section level3">
+<h3><span class="header-section-number">3.1.3</span> else if문</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="flow-control.html#cb5-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</span>
+<span id="cb5-2"><a href="flow-control.html#cb5-2"></a>{</span>
+<span id="cb5-3"><a href="flow-control.html#cb5-3"></a>  <span class="cf">if</span>(i<span class="op">==</span><span class="dv">1</span>) {<span class="kw">print</span>(<span class="st">&#39;하나&#39;</span>)}</span>
+<span id="cb5-4"><a href="flow-control.html#cb5-4"></a>  <span class="cf">else</span> <span class="cf">if</span>(i<span class="op">==</span><span class="dv">2</span>) {<span class="kw">print</span>(<span class="st">&#39;둘&#39;</span>)}</span>
+<span id="cb5-5"><a href="flow-control.html#cb5-5"></a>  <span class="cf">else</span> <span class="cf">if</span>(i<span class="op">==</span><span class="dv">3</span>) {<span class="kw">print</span>(<span class="st">&#39;셋&#39;</span>)}</span>
+<span id="cb5-6"><a href="flow-control.html#cb5-6"></a>  <span class="cf">else</span> {<span class="kw">print</span>(<span class="st">&#39;넷&#39;</span>)}</span>
+<span id="cb5-7"><a href="flow-control.html#cb5-7"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;하나&quot;
+## [1] &quot;둘&quot;
+## [1] &quot;셋&quot;
+## [1] &quot;넷&quot;</code></pre>
+</div>
+<div id="ClassID2-6" class="section level3">
+<h3><span class="header-section-number">3.1.4</span> 연습문제</h3>
+<p>아래 테이블 과 같은 형태로 데이터 프레임을 만들고 grade 컬럼을 추가하세요</p>
+<p>(grade는 <strong>200이상</strong>일때는 A, <strong>100이상</strong>일때는 B, <strong>100미만</strong>일때는 C)</p>
+<pre><code>## Warning: package &#39;knitr&#39; was built under R version 4.0.2</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-6">Table 3.1: </span>연습문제 테이블</caption>
+<thead>
+<tr class="header">
+<th align="right">no</th>
+<th align="left">name</th>
+<th align="right">pay</th>
+<th align="left">grade</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">김재진</td>
+<td align="right">110</td>
+<td align="left">B</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">구영후</td>
+<td align="right">150</td>
+<td align="left">B</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">김반장</td>
+<td align="right">80</td>
+<td align="left">C</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="left">지소윤</td>
+<td align="right">210</td>
+<td align="left">A</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="flow-control.html#cb8-1"></a>no &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</span>
+<span id="cb8-2"><a href="flow-control.html#cb8-2"></a>name &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;김재진&quot;</span>,<span class="st">&quot;구영후&quot;</span>,<span class="st">&quot;김반장&quot;</span>,<span class="st">&quot;지소윤&quot;</span>)</span>
+<span id="cb8-3"><a href="flow-control.html#cb8-3"></a>pay &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">110</span>,<span class="dv">150</span>,<span class="dv">80</span>,<span class="dv">210</span>)</span>
+<span id="cb8-4"><a href="flow-control.html#cb8-4"></a>test_table &lt;-<span class="st"> </span><span class="kw">data.frame</span>(no,name,pay)</span>
+<span id="cb8-5"><a href="flow-control.html#cb8-5"></a></span>
+<span id="cb8-6"><a href="flow-control.html#cb8-6"></a>test_table<span class="op">$</span>grade &lt;-<span class="st"> </span><span class="kw">ifelse</span>(test_table<span class="op">$</span>pay <span class="op">&gt;=</span><span class="st"> </span><span class="dv">200</span>, <span class="st">&quot;A&quot;</span> , <span class="kw">ifelse</span>(test_table<span class="op">$</span>pay <span class="op">&gt;=</span><span class="st"> </span><span class="dv">100</span>, <span class="st">&quot;B&quot;</span>,  <span class="st">&quot;C&quot;</span>))</span>
+<span id="cb8-7"><a href="flow-control.html#cb8-7"></a></span>
+<span id="cb8-8"><a href="flow-control.html#cb8-8"></a>test_table</span></code></pre></div>
+<pre><code>##   no   name pay grade
+## 1  1 김재진 110     B
+## 2  2 구영후 150     B
+## 3  3 김반장  80     C
+## 4  4 지소윤 210     A</code></pre>
+</div>
+<div id="for문" class="section level3">
+<h3><span class="header-section-number">3.1.5</span> for문</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="flow-control.html#cb10-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>){</span>
+<span id="cb10-2"><a href="flow-control.html#cb10-2"></a>  <span class="kw">print</span>(i)</span>
+<span id="cb10-3"><a href="flow-control.html#cb10-3"></a>}</span></code></pre></div>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5
+## [1] 6
+## [1] 7
+## [1] 8
+## [1] 9
+## [1] 10</code></pre>
+</div>
+<div id="ClassID2-7" class="section level3">
+<h3><span class="header-section-number">3.1.6</span> while 문</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="flow-control.html#cb12-1"></a>i &lt;-<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb12-2"><a href="flow-control.html#cb12-2"></a><span class="cf">while</span>(i <span class="op">&lt;=</span><span class="st"> </span><span class="dv">10</span>){</span>
+<span id="cb12-3"><a href="flow-control.html#cb12-3"></a>  <span class="kw">print</span>(i)</span>
+<span id="cb12-4"><a href="flow-control.html#cb12-4"></a>  i &lt;-<span class="st"> </span>i <span class="op">+</span><span class="dv">1</span></span>
+<span id="cb12-5"><a href="flow-control.html#cb12-5"></a>}</span></code></pre></div>
+<pre><code>## [1] 0
+## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5
+## [1] 6
+## [1] 7
+## [1] 8
+## [1] 9
+## [1] 10</code></pre>
+</div>
+<div id="ClassID2-8" class="section level3">
+<h3><span class="header-section-number">3.1.7</span> while-next 문</h3>
+<p>짝수만 출력</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="flow-control.html#cb14-1"></a>i &lt;-<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb14-2"><a href="flow-control.html#cb14-2"></a><span class="cf">while</span>(i<span class="op">&lt;=</span><span class="dv">9</span>){</span>
+<span id="cb14-3"><a href="flow-control.html#cb14-3"></a>  i &lt;-<span class="st"> </span>i<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb14-4"><a href="flow-control.html#cb14-4"></a>  <span class="cf">if</span>(i <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">!=</span><span class="dv">0</span>){</span>
+<span id="cb14-5"><a href="flow-control.html#cb14-5"></a>    <span class="cf">next</span> <span class="co"># print() 를 수행하지 않고 while 문의 처음으로 감</span></span>
+<span id="cb14-6"><a href="flow-control.html#cb14-6"></a>  }</span>
+<span id="cb14-7"><a href="flow-control.html#cb14-7"></a>  <span class="kw">print</span>(i)</span>
+<span id="cb14-8"><a href="flow-control.html#cb14-8"></a>}</span></code></pre></div>
+<pre><code>## [1] 2
+## [1] 4
+## [1] 6
+## [1] 8
+## [1] 10</code></pre>
+</div>
+<div id="ClassID2-9" class="section level3">
+<h3><span class="header-section-number">3.1.8</span> repeat 문</h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="flow-control.html#cb16-1"></a>i &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb16-2"><a href="flow-control.html#cb16-2"></a><span class="cf">repeat</span>{</span>
+<span id="cb16-3"><a href="flow-control.html#cb16-3"></a>  <span class="kw">print</span>(i)</span>
+<span id="cb16-4"><a href="flow-control.html#cb16-4"></a>  <span class="cf">if</span>(i <span class="op">&gt;=</span><span class="st"> </span><span class="dv">10</span>){</span>
+<span id="cb16-5"><a href="flow-control.html#cb16-5"></a>    <span class="cf">break</span></span>
+<span id="cb16-6"><a href="flow-control.html#cb16-6"></a>  }</span>
+<span id="cb16-7"><a href="flow-control.html#cb16-7"></a>  i &lt;-<span class="st"> </span>i<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb16-8"><a href="flow-control.html#cb16-8"></a>}</span></code></pre></div>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5
+## [1] 6
+## [1] 7
+## [1] 8
+## [1] 9
+## [1] 10</code></pre>
+</div>
+</div>
+<div id="ClassID2-10" class="section level2">
+<h2><span class="header-section-number">3.2</span> 연산자</h2>
+<p>나머지 연산</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="flow-control.html#cb18-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">13</span>, <span class="dv">3</span>)</span>
+<span id="cb18-2"><a href="flow-control.html#cb18-2"></a>x <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="co"># 나머지연산</span></span></code></pre></div>
+<pre><code>## [1] 1 0 1 1</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="flow-control.html#cb20-1"></a>x<span class="op">%/%</span><span class="st"> </span><span class="dv">3</span> <span class="co"># 정수나누기의 몫</span></span></code></pre></div>
+<pre><code>## [1] 0 3 4 1</code></pre>
+<p>부등식/부정</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="flow-control.html#cb22-1"></a>x <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>  <span class="co"># 부등식 </span></span></code></pre></div>
+<pre><code>## [1] FALSE  TRUE  TRUE FALSE</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="flow-control.html#cb24-1"></a>y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb24-2"><a href="flow-control.html#cb24-2"></a>x <span class="op">&gt;</span><span class="st"> </span>y    <span class="co"># 부등식 - 벡터간 비교 </span></span></code></pre></div>
+<pre><code>## [1] FALSE  TRUE  TRUE  TRUE</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="flow-control.html#cb26-1"></a>z &lt;-<span class="st"> </span><span class="ot">TRUE</span></span>
+<span id="cb26-2"><a href="flow-control.html#cb26-2"></a><span class="op">!</span>z      <span class="co"># Not</span></span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>논리 연산</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="flow-control.html#cb28-1"></a>x1 &lt;-<span class="st"> </span><span class="kw">c</span>(T, T, F, F)</span>
+<span id="cb28-2"><a href="flow-control.html#cb28-2"></a>y1 &lt;-<span class="st"> </span><span class="kw">c</span>(F, F, T, F)</span>
+<span id="cb28-3"><a href="flow-control.html#cb28-3"></a>x1 <span class="op">|</span><span class="st"> </span>y1  <span class="co"># or 벡터연산 </span></span></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE  TRUE FALSE</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="flow-control.html#cb30-1"></a>T <span class="op">||</span><span class="st"> </span>F   <span class="co"># 처음 값만 비교: 단일값 </span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="flow-control.html#cb32-1"></a>x1 <span class="op">&amp;</span><span class="st">  </span>y1  <span class="co"># and 벡터연산 </span></span></code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE FALSE</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="flow-control.html#cb34-1"></a>x1 <span class="op">&amp;&amp;</span><span class="st"> </span>y1  <span class="co"># 처음 값만 비교: 단일값</span></span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>##내장함수 {#ClassID2-11}</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="flow-control.html#cb36-1"></a>a &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></span>
+<span id="cb36-2"><a href="flow-control.html#cb36-2"></a><span class="kw">sqrt</span>(a) <span class="co">#제곱근</span></span></code></pre></div>
+<pre><code>## [1] 1.000000 1.414214 1.732051 2.000000 2.236068</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="flow-control.html#cb38-1"></a><span class="kw">exp</span>(a) <span class="co">#지수함수</span></span></code></pre></div>
+<pre><code>## [1]   2.718282   7.389056  20.085537  54.598150 148.413159</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="flow-control.html#cb40-1"></a>out &lt;-<span class="st"> </span>(a <span class="op">+</span><span class="st"> </span><span class="kw">sqrt</span>(a))<span class="op">/</span>(<span class="kw">exp</span>(<span class="dv">2</span>)<span class="op">+</span><span class="dv">1</span>); out</span></code></pre></div>
+<pre><code>## [1] 0.2384058 0.4069842 0.5640743 0.7152175 0.8625604</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="flow-control.html#cb42-1"></a>x1 &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">4</span>, <span class="dt">by =</span> <span class="fl">.5</span>); x1 </span></code></pre></div>
+<pre><code>##  [1] -2.0 -1.5 -1.0 -0.5  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5  4.0</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="flow-control.html#cb44-1"></a><span class="kw">floor</span>(x1) <span class="co">#내림</span></span></code></pre></div>
+<pre><code>##  [1] -2 -2 -1 -1  0  0  1  1  2  2  3  3  4</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="flow-control.html#cb46-1"></a><span class="kw">trunc</span>(x1) <span class="co">#소수점 제거</span></span></code></pre></div>
+<pre><code>##  [1] -2 -1 -1  0  0  0  1  1  2  2  3  3  4</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="flow-control.html#cb48-1"></a>a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="op">-</span><span class="dv">2</span>,<span class="dv">3</span>,<span class="op">-</span><span class="dv">4</span>)</span>
+<span id="cb48-2"><a href="flow-control.html#cb48-2"></a>b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="op">-</span><span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb48-3"><a href="flow-control.html#cb48-3"></a><span class="kw">min</span>(a,b) <span class="co"># 전체 벡터에서 최소값만 반환</span></span></code></pre></div>
+<pre><code>## [1] -4</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="flow-control.html#cb50-1"></a><span class="kw">pmin</span>(a,b) <span class="co"># 벡터 요소별로 비교하여 최소값만 반환</span></span></code></pre></div>
+<pre><code>## [1] -1 -2 -3 -4</code></pre>
+<p>print: 객체의 값을 화면에 출력</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="flow-control.html#cb52-1"></a>a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">4</span>)</span>
+<span id="cb52-2"><a href="flow-control.html#cb52-2"></a><span class="kw">print</span>(a)</span></code></pre></div>
+<pre><code>## [1] 5 3 6 2 4</code></pre>
+<p>cat: 문자열 및 연산결과를 동시에 출력 화면에 프린트</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="flow-control.html#cb54-1"></a><span class="kw">cat</span>(<span class="st">&quot;mean of a is &quot;</span>,<span class="kw">mean</span>(a), <span class="st">&quot;variance of a is &quot;</span>, <span class="kw">var</span>(a),<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## mean of a is  4 variance of a is  2.5</code></pre>
+<p>substr(x, start, stop): 문자열에서 일부 추출</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="flow-control.html#cb56-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;강감찬&quot;</span>,<span class="st">&quot;이순신&quot;</span>, <span class="st">&quot;계백&quot;</span>, <span class="st">&quot;손흥민&quot;</span>) </span>
+<span id="cb56-2"><a href="flow-control.html#cb56-2"></a><span class="kw">substr</span>(x, <span class="dv">1</span>, <span class="dv">2</span>) </span></code></pre></div>
+<pre><code>## [1] &quot;강감&quot; &quot;이순&quot; &quot;계백&quot; &quot;손흥&quot;</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-type-and-structure.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="function.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["dsWithR.pdf", "dsWithR.epub"],
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true,
+"fontsettings": null,
+"theme": "white",
+"family": "sans",
+"size": 1
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 10 Modeling | R로 배우는 데이터과학</title>
+  <meta name="description" content="Chapter 10 Modeling | R로 배우는 데이터과학" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 10 Modeling | R로 배우는 데이터과학" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 10 Modeling | R로 배우는 데이터과학" />
+  
+  
+  
+
+<meta name="author" content="Dangtnog Byun" />
+
+
+<meta name="date" content="2021-01-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="ggplot-visualization.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="fontawesome.min.css" type="text/css" />
+<link rel="stylesheet" href="bigdata.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R로 배우는 데이터과학</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Index</a></li>
+<li class="chapter" data-level="2" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html"><i class="fa fa-check"></i><b>2</b> Data Type and Structure</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-0"><i class="fa fa-check"></i><b>2.1</b> R을 사용하기 위한 기본 지식 정리</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-0-1"><i class="fa fa-check"></i><b>2.1.1</b> 작업디렉토리 설정</a></li>
+<li class="chapter" data-level="2.1.2" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-0-2"><i class="fa fa-check"></i><b>2.1.2</b> 패키지 설치 및 사용</a></li>
+<li class="chapter" data-level="2.1.3" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-0-3"><i class="fa fa-check"></i><b>2.1.3</b> 도움말 사용</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-1"><i class="fa fa-check"></i><b>2.2</b> 변수(Variable)</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-2"><i class="fa fa-check"></i><b>2.2.1</b> 숫자(Numeric)</a></li>
+<li class="chapter" data-level="2.2.2" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-3"><i class="fa fa-check"></i><b>2.2.2</b> 문자()</a></li>
+<li class="chapter" data-level="2.2.3" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-4"><i class="fa fa-check"></i><b>2.2.3</b> 팩터 (factor)</a></li>
+<li class="chapter" data-level="2.2.4" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-5"><i class="fa fa-check"></i><b>2.2.4</b> 논리형(Logical)</a></li>
+<li class="chapter" data-level="2.2.5" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-6"><i class="fa fa-check"></i><b>2.2.5</b> 날짜타입(Date and Datetime)</a></li>
+<li class="chapter" data-level="2.2.6" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-7"><i class="fa fa-check"></i><b>2.2.6</b> NA/NaN/Inf 확인 및 처리</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-8"><i class="fa fa-check"></i><b>2.3</b> 데이터 구조(Data Structure)</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-9"><i class="fa fa-check"></i><b>2.3.1</b> 벡터 (Vector)</a></li>
+<li class="chapter" data-level="2.3.2" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-10"><i class="fa fa-check"></i><b>2.3.2</b> 리스트(List)</a></li>
+<li class="chapter" data-level="2.3.3" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-11"><i class="fa fa-check"></i><b>2.3.3</b> 행렬(Matrix)</a></li>
+<li class="chapter" data-level="2.3.4" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-12"><i class="fa fa-check"></i><b>2.3.4</b> 데이타프레임(Data Frame)</a></li>
+<li class="chapter" data-level="2.3.5" data-path="data-type-and-structure.html"><a href="data-type-and-structure.html#ClassID1-14"><i class="fa fa-check"></i><b>2.3.5</b> 데이터 변환</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="flow-control.html"><a href="flow-control.html"><i class="fa fa-check"></i><b>3</b> Flow-control</a><ul>
+<li class="chapter" data-level="3.1" data-path="flow-control.html"><a href="flow-control.html#ClassID2-2"><i class="fa fa-check"></i><b>3.1</b> 흐름제어</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="flow-control.html"><a href="flow-control.html#ClassID2-3"><i class="fa fa-check"></i><b>3.1.1</b> if문</a></li>
+<li class="chapter" data-level="3.1.2" data-path="flow-control.html"><a href="flow-control.html#ClassID2-4"><i class="fa fa-check"></i><b>3.1.2</b> ifelse문</a></li>
+<li class="chapter" data-level="3.1.3" data-path="flow-control.html"><a href="flow-control.html#ClassID2-5"><i class="fa fa-check"></i><b>3.1.3</b> else if문</a></li>
+<li class="chapter" data-level="3.1.4" data-path="flow-control.html"><a href="flow-control.html#ClassID2-6"><i class="fa fa-check"></i><b>3.1.4</b> 연습문제</a></li>
+<li class="chapter" data-level="3.1.5" data-path="flow-control.html"><a href="flow-control.html#for문"><i class="fa fa-check"></i><b>3.1.5</b> for문</a></li>
+<li class="chapter" data-level="3.1.6" data-path="flow-control.html"><a href="flow-control.html#ClassID2-7"><i class="fa fa-check"></i><b>3.1.6</b> while 문</a></li>
+<li class="chapter" data-level="3.1.7" data-path="flow-control.html"><a href="flow-control.html#ClassID2-8"><i class="fa fa-check"></i><b>3.1.7</b> while-next 문</a></li>
+<li class="chapter" data-level="3.1.8" data-path="flow-control.html"><a href="flow-control.html#ClassID2-9"><i class="fa fa-check"></i><b>3.1.8</b> repeat 문</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="flow-control.html"><a href="flow-control.html#ClassID2-10"><i class="fa fa-check"></i><b>3.2</b> 연산자</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="function.html"><a href="function.html"><i class="fa fa-check"></i><b>4</b> Function</a><ul>
+<li class="chapter" data-level="4.1" data-path="function.html"><a href="function.html#classID3-1"><i class="fa fa-check"></i><b>4.1</b> 함수</a></li>
+<li class="chapter" data-level="4.2" data-path="function.html"><a href="function.html#classID3-2"><i class="fa fa-check"></i><b>4.2</b> 함수의 호출 특성</a></li>
+<li class="chapter" data-level="4.3" data-path="function.html"><a href="function.html#classID3-3"><i class="fa fa-check"></i><b>4.3</b> 변수의 스코프(Scope)</a></li>
+<li class="chapter" data-level="4.4" data-path="function.html"><a href="function.html#연습문제-2"><i class="fa fa-check"></i><b>4.4</b> [연습문제 #2]</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="classID4-1.html"><a href="classID4-1.html"><i class="fa fa-check"></i><b>5</b> Input and Output</a><ul>
+<li class="chapter" data-level="5.1" data-path="classID4-1.html"><a href="classID4-1.html#classID4-2"><i class="fa fa-check"></i><b>5.1</b> Excel 파일 다루기</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="classID4-1.html"><a href="classID4-1.html#classID4-3"><i class="fa fa-check"></i><b>5.1.1</b> Excel 읽기</a></li>
+<li class="chapter" data-level="5.1.2" data-path="classID4-1.html"><a href="classID4-1.html#classID4-4"><i class="fa fa-check"></i><b>5.1.2</b> Excel Sheet 지정 하여 읽기</a></li>
+<li class="chapter" data-level="5.1.3" data-path="classID4-1.html"><a href="classID4-1.html#classID4-5"><i class="fa fa-check"></i><b>5.1.3</b> Excel 의 다양한 읽기 형태</a></li>
+<li class="chapter" data-level="5.1.4" data-path="classID4-1.html"><a href="classID4-1.html#classID4-6"><i class="fa fa-check"></i><b>5.1.4</b> CSV, TEXT 파일 읽기</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="classID5-1.html"><a href="classID5-1.html"><i class="fa fa-check"></i><b>6</b> 기초 통계량</a><ul>
+<li class="chapter" data-level="6.1" data-path="classID5-1.html"><a href="classID5-1.html#classID5-2"><i class="fa fa-check"></i><b>6.1</b> 정형화된 데이터의 종류</a></li>
+<li class="chapter" data-level="6.2" data-path="classID5-1.html"><a href="classID5-1.html#classID5-3"><i class="fa fa-check"></i><b>6.2</b> 위치 추정</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="classID5-1.html"><a href="classID5-1.html#classID5-4"><i class="fa fa-check"></i><b>6.2.1</b> 평균</a></li>
+<li class="chapter" data-level="6.2.2" data-path="classID5-1.html"><a href="classID5-1.html#classID5-5"><i class="fa fa-check"></i><b>6.2.2</b> 절사평균</a></li>
+<li class="chapter" data-level="6.2.3" data-path="classID5-1.html"><a href="classID5-1.html#classID5-6"><i class="fa fa-check"></i><b>6.2.3</b> 중앙값</a></li>
+<li class="chapter" data-level="6.2.4" data-path="classID5-1.html"><a href="classID5-1.html#classID5-7"><i class="fa fa-check"></i><b>6.2.4</b> 가중평균</a></li>
+<li class="chapter" data-level="6.2.5" data-path="classID5-1.html"><a href="classID5-1.html#classID5-8"><i class="fa fa-check"></i><b>6.2.5</b> 가중 중앙값</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="classID5-1.html"><a href="classID5-1.html#classID5-9"><i class="fa fa-check"></i><b>6.3</b> 변위 추정</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="classID5-1.html"><a href="classID5-1.html#classID5-10"><i class="fa fa-check"></i><b>6.3.1</b> 표준편차(Standard Deviation)</a></li>
+<li class="chapter" data-level="6.3.2" data-path="classID5-1.html"><a href="classID5-1.html#classID5-11"><i class="fa fa-check"></i><b>6.3.2</b> 사분위범위(IRQ)</a></li>
+<li class="chapter" data-level="6.3.3" data-path="classID5-1.html"><a href="classID5-1.html#classID5-12"><i class="fa fa-check"></i><b>6.3.3</b> 중위절대편차(MAD)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="classID5-1.html"><a href="classID5-1.html#classID5-13"><i class="fa fa-check"></i><b>6.4</b> 데이터분포</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="classID5-1.html"><a href="classID5-1.html#classID5-14"><i class="fa fa-check"></i><b>6.4.1</b> 사분위수(Quantile)</a></li>
+<li class="chapter" data-level="6.4.2" data-path="classID5-1.html"><a href="classID5-1.html#classID5-15"><i class="fa fa-check"></i><b>6.4.2</b> 상자그림(Boxplot)</a></li>
+<li class="chapter" data-level="6.4.3" data-path="classID5-1.html"><a href="classID5-1.html#classID5-16"><i class="fa fa-check"></i><b>6.4.3</b> 도수 분포표(Frequency Table)</a></li>
+<li class="chapter" data-level="6.4.4" data-path="classID5-1.html"><a href="classID5-1.html#classID5-17"><i class="fa fa-check"></i><b>6.4.4</b> 히스토 그램</a></li>
+<li class="chapter" data-level="6.4.5" data-path="classID5-1.html"><a href="classID5-1.html#classID5-18"><i class="fa fa-check"></i><b>6.4.5</b> 밀도추정(부드러운 히스토그램)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="data-transformation-1.html"><a href="data-transformation-1.html"><i class="fa fa-check"></i><b>7</b> Data transformation 1</a><ul>
+<li class="chapter" data-level="7.1" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-1"><i class="fa fa-check"></i><b>7.1</b> plyr 패키지와 dplyr 패키지 성능 차이</a></li>
+<li class="chapter" data-level="7.2" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-2"><i class="fa fa-check"></i><b>7.2</b> Data 변환 전에</a></li>
+<li class="chapter" data-level="7.3" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-3"><i class="fa fa-check"></i><b>7.3</b> apply 계열의 함수들</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-4"><i class="fa fa-check"></i><b>7.3.1</b> apply( )</a></li>
+<li class="chapter" data-level="7.3.2" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-5"><i class="fa fa-check"></i><b>7.3.2</b> 행 또는 열의 합 또는 평균 계산 함수</a></li>
+<li class="chapter" data-level="7.3.3" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-6"><i class="fa fa-check"></i><b>7.3.3</b> lapply( )함수</a></li>
+<li class="chapter" data-level="7.3.4" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-7"><i class="fa fa-check"></i><b>7.3.4</b> unlist 함수</a></li>
+<li class="chapter" data-level="7.3.5" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-8"><i class="fa fa-check"></i><b>7.3.5</b> do.call 함수</a></li>
+<li class="chapter" data-level="7.3.6" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-9"><i class="fa fa-check"></i><b>7.3.6</b> sapply 함수</a></li>
+<li class="chapter" data-level="7.3.7" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-10"><i class="fa fa-check"></i><b>7.3.7</b> tapply 함수</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-11"><i class="fa fa-check"></i><b>7.4</b> dplyr 패키지</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-12"><i class="fa fa-check"></i><b>7.4.1</b> flights 데이터셋의 간략한 설명</a></li>
+<li class="chapter" data-level="7.4.2" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-13"><i class="fa fa-check"></i><b>7.4.2</b> Filter 사용하기</a></li>
+<li class="chapter" data-level="7.4.3" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-14"><i class="fa fa-check"></i><b>7.4.3</b> Logical 연산자</a></li>
+<li class="chapter" data-level="7.4.4" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-15"><i class="fa fa-check"></i><b>7.4.4</b> arrange 를 이용한 정렬</a></li>
+<li class="chapter" data-level="7.4.5" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-17"><i class="fa fa-check"></i><b>7.4.5</b> select 를 이용한 데이터 선택</a></li>
+<li class="chapter" data-level="7.4.6" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-19"><i class="fa fa-check"></i><b>7.4.6</b> year 와 day 사이에 있는 컬럼 제외</a></li>
+<li class="chapter" data-level="7.4.7" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-20"><i class="fa fa-check"></i><b>7.4.7</b> mutate 로 데이터 생성 및 수정</a></li>
+<li class="chapter" data-level="7.4.8" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-25"><i class="fa fa-check"></i><b>7.4.8</b> summarize 로 집계 하기</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-26"><i class="fa fa-check"></i><b>7.5</b> SQL 이용한 관계형 데이터 처리</a></li>
+<li class="chapter" data-level="7.6" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-27"><i class="fa fa-check"></i><b>7.6</b> mutating 조인을 이용한 관계형 데이터 처리</a><ul>
+<li class="chapter" data-level="7.6.1" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-28"><i class="fa fa-check"></i><b>7.6.1</b> 데이터 살펴보기</a></li>
+<li class="chapter" data-level="7.6.2" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-29"><i class="fa fa-check"></i><b>7.6.2</b> Key</a></li>
+<li class="chapter" data-level="7.6.3" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-30"><i class="fa fa-check"></i><b>7.6.3</b> 조인 실습을 위한 작은 데이터셋 만들기</a></li>
+<li class="chapter" data-level="7.6.4" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-31"><i class="fa fa-check"></i><b>7.6.4</b> Mutating Join ? 왜?</a></li>
+<li class="chapter" data-level="7.6.5" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-33"><i class="fa fa-check"></i><b>7.6.5</b> Join 이해하기</a></li>
+<li class="chapter" data-level="7.6.6" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-34"><i class="fa fa-check"></i><b>7.6.6</b> Inner Join (내부조인)</a></li>
+<li class="chapter" data-level="7.6.7" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-35"><i class="fa fa-check"></i><b>7.6.7</b> Outer Join (외부조인)</a></li>
+<li class="chapter" data-level="7.6.8" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-36"><i class="fa fa-check"></i><b>7.6.8</b> 중복키</a></li>
+<li class="chapter" data-level="7.6.9" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-37"><i class="fa fa-check"></i><b>7.6.9</b> Join키 정의 하기</a></li>
+<li class="chapter" data-level="7.6.10" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-38"><i class="fa fa-check"></i><b>7.6.10</b> flights 테이블 조인 실습 하기1</a></li>
+<li class="chapter" data-level="7.6.11" data-path="data-transformation-1.html"><a href="data-transformation-1.html#classID6-39"><i class="fa fa-check"></i><b>7.6.11</b> 필터링 조인 (세미조인 &amp; 안티조인)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html"><i class="fa fa-check"></i><b>8</b> Data Transpormation 2</a><ul>
+<li class="chapter" data-level="8.1" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-1"><i class="fa fa-check"></i><b>8.1</b> tidy 데이터</a></li>
+<li class="chapter" data-level="8.2" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-2"><i class="fa fa-check"></i><b>8.2</b> gather 로 데이터 모으기</a></li>
+<li class="chapter" data-level="8.3" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-3"><i class="fa fa-check"></i><b>8.3</b> spread 로 데이터 펼치기</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-4"><i class="fa fa-check"></i><b>8.3.1</b> gather 와 spread 가 조금 다른 이유</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-5"><i class="fa fa-check"></i><b>8.4</b> Seperate와 Unite</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-6"><i class="fa fa-check"></i><b>8.4.1</b> seperate 로 나누기</a></li>
+<li class="chapter" data-level="8.4.2" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-7"><i class="fa fa-check"></i><b>8.4.2</b> unite 로 합치기</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-9"><i class="fa fa-check"></i><b>8.5</b> NA(결측값) 처리하기</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-10"><i class="fa fa-check"></i><b>8.5.1</b> 결측 처리 기본</a></li>
+<li class="chapter" data-level="8.5.2" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-11"><i class="fa fa-check"></i><b>8.5.2</b> NA(결측) 처리 자동화</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-13"><i class="fa fa-check"></i><b>8.6</b> 공공데이터 포털 가입 하고 API 키 얻기</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-14"><i class="fa fa-check"></i><b>8.6.1</b> 회원 가입</a></li>
+<li class="chapter" data-level="8.6.2" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-15"><i class="fa fa-check"></i><b>8.6.2</b> 일반회원으로 가입</a></li>
+<li class="chapter" data-level="8.6.3" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-16"><i class="fa fa-check"></i><b>8.6.3</b> 회원가입을 위한 정보 입력</a></li>
+<li class="chapter" data-level="8.6.4" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-17"><i class="fa fa-check"></i><b>8.6.4</b> 이용약관 동의</a></li>
+<li class="chapter" data-level="8.6.5" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-18"><i class="fa fa-check"></i><b>8.6.5</b> 정보입력</a></li>
+<li class="chapter" data-level="8.6.6" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-19"><i class="fa fa-check"></i><b>8.6.6</b> 회원가입 완료</a></li>
+<li class="chapter" data-level="8.6.7" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-20"><i class="fa fa-check"></i><b>8.6.7</b> “국토부 실거래가”" 로 API 검색</a></li>
+<li class="chapter" data-level="8.6.8" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-21"><i class="fa fa-check"></i><b>8.6.8</b> “아파트매매 실거래 상세 자료” -&gt; 활용신청</a></li>
+<li class="chapter" data-level="8.6.9" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-22"><i class="fa fa-check"></i><b>8.6.9</b> 활용신청 상세</a></li>
+<li class="chapter" data-level="8.6.10" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-23"><i class="fa fa-check"></i><b>8.6.10</b> 신청현황 / 결과</a></li>
+<li class="chapter" data-level="8.6.11" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-24"><i class="fa fa-check"></i><b>8.6.11</b> API 정보 확인</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-25"><i class="fa fa-check"></i><b>8.7</b> API를 이용해 국토부 아파트매매 실거래가 가져오기</a><ul>
+<li class="chapter" data-level="8.7.1" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-26"><i class="fa fa-check"></i><b>8.7.1</b> 전체 코드</a></li>
+</ul></li>
+<li class="chapter" data-level="8.8" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-28"><i class="fa fa-check"></i><b>8.8</b> shiny</a></li>
+<li class="chapter" data-level="8.9" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-29"><i class="fa fa-check"></i><b>8.9</b> API를 이용한 국토부 실거래가 조회2</a><ul>
+<li class="chapter" data-level="8.9.1" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-30"><i class="fa fa-check"></i><b>8.9.1</b> 파일 불러오기</a></li>
+<li class="chapter" data-level="8.9.2" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-31"><i class="fa fa-check"></i><b>8.9.2</b> 특정 구의 시군구 코드 알아내기</a></li>
+<li class="chapter" data-level="8.9.3" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#classID7-32"><i class="fa fa-check"></i><b>8.9.3</b> 구군 명을 넣으면 구군코드를 반환하는 함수 만들기</a></li>
+</ul></li>
+<li class="chapter" data-level="8.10" data-path="data-transpormation-2.html"><a href="data-transpormation-2.html#google-지도를-이용한-부동산-정보-시각화"><i class="fa fa-check"></i><b>8.10</b> Google 지도를 이용한 부동산 정보 시각화</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html"><i class="fa fa-check"></i><b>9</b> ggplot visualization</a><ul>
+<li class="chapter" data-level="9.1" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#ggplot-옵션-익히기"><i class="fa fa-check"></i><b>9.1</b> ggplot 옵션 익히기</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#mpg-데이터"><i class="fa fa-check"></i><b>9.1.1</b> mpg 데이터</a></li>
+<li class="chapter" data-level="9.1.2" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#ClassID"><i class="fa fa-check"></i><b>9.1.2</b> 기본 그래프 생성 문법</a></li>
+<li class="chapter" data-level="9.1.3" data-path="function.html"><a href="function.html#classID3-2"><i class="fa fa-check"></i><b>9.1.3</b> ggplot 문법 기본</a></li>
+<li class="chapter" data-level="9.1.4" data-path="function.html"><a href="function.html#classID3-3"><i class="fa fa-check"></i><b>9.1.4</b> 간단한 그래프 그리기</a></li>
+<li class="chapter" data-level="9.1.5" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-4"><i class="fa fa-check"></i><b>9.1.5</b> 선그래프 추가하기</a></li>
+<li class="chapter" data-level="9.1.6" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-5"><i class="fa fa-check"></i><b>9.1.6</b> X, Y 각 축에 값 제한 하기</a></li>
+<li class="chapter" data-level="9.1.7" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-6"><i class="fa fa-check"></i><b>9.1.7</b> 그래프 확대 하기</a></li>
+<li class="chapter" data-level="9.1.8" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-8"><i class="fa fa-check"></i><b>9.1.8</b> 타이틀 및 축라벨 변경</a></li>
+<li class="chapter" data-level="9.1.9" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-9"><i class="fa fa-check"></i><b>9.1.9</b> 색상과 점의 크기 조정</a></li>
+<li class="chapter" data-level="9.1.10" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-10"><i class="fa fa-check"></i><b>9.1.10</b> 조건기반 색상 표시</a></li>
+<li class="chapter" data-level="9.1.11" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-11"><i class="fa fa-check"></i><b>9.1.11</b> 그룹별로 색상 표시하기</a></li>
+<li class="chapter" data-level="9.1.12" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID3-12"><i class="fa fa-check"></i><b>9.1.12</b> col 인자에 명기 하는 경우</a></li>
+<li class="chapter" data-level="9.1.13" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-14"><i class="fa fa-check"></i><b>9.1.13</b> Mark 의 모양 변경</a></li>
+<li class="chapter" data-level="9.1.14" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-15"><i class="fa fa-check"></i><b>9.1.14</b> Legend 없애기</a></li>
+<li class="chapter" data-level="9.1.15" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-16"><i class="fa fa-check"></i><b>9.1.15</b> Legend 테마 변경하기</a></li>
+<li class="chapter" data-level="9.1.16" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-17"><i class="fa fa-check"></i><b>9.1.16</b> 색상 팔레트 종류</a></li>
+<li class="chapter" data-level="9.1.17" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-18"><i class="fa fa-check"></i><b>9.1.17</b> 축간격 조정 하기</a></li>
+<li class="chapter" data-level="9.1.18" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-19"><i class="fa fa-check"></i><b>9.1.18</b> X축 역변환 하기</a></li>
+<li class="chapter" data-level="9.1.19" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-20"><i class="fa fa-check"></i><b>9.1.19</b> 축라벨에 커스터마이징</a></li>
+<li class="chapter" data-level="9.1.20" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-21"><i class="fa fa-check"></i><b>9.1.20</b> 테마를 사용해서 한번에 변경</a></li>
+<li class="chapter" data-level="9.1.21" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#scatter-plot산점도"><i class="fa fa-check"></i><b>9.1.21</b> Scatter Plot(산점도)</a></li>
+<li class="chapter" data-level="9.1.22" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#jitter-plot"><i class="fa fa-check"></i><b>9.1.22</b> jitter plot</a></li>
+<li class="chapter" data-level="9.1.23" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#count-plot"><i class="fa fa-check"></i><b>9.1.23</b> Count Plot</a></li>
+<li class="chapter" data-level="9.1.24" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-22"><i class="fa fa-check"></i><b>9.1.24</b> 가장자리 분포 그래프 추가</a></li>
+<li class="chapter" data-level="9.1.25" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#correlogram"><i class="fa fa-check"></i><b>9.1.25</b> Correlogram</a></li>
+<li class="chapter" data-level="9.1.26" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-23"><i class="fa fa-check"></i><b>9.1.26</b> Bar 그래프</a></li>
+<li class="chapter" data-level="9.1.27" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#stacked-bar-plot-누적-막대-그래프"><i class="fa fa-check"></i><b>9.1.27</b> Stacked Bar Plot (누적 막대 그래프)</a></li>
+<li class="chapter" data-level="9.1.28" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#facet"><i class="fa fa-check"></i><b>9.1.28</b> Facet</a></li>
+<li class="chapter" data-level="9.1.29" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-25"><i class="fa fa-check"></i><b>9.1.29</b> Position 조정</a></li>
+<li class="chapter" data-level="9.1.30" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-26"><i class="fa fa-check"></i><b>9.1.30</b> Pie 차트</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-29"><i class="fa fa-check"></i><b>9.2</b> kaggle 데이터를 이용한 EDA 실습</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-30"><i class="fa fa-check"></i><b>9.2.1</b> bike sharing demand 데이터셋 설명</a></li>
+<li class="chapter" data-level="9.2.2" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-31"><i class="fa fa-check"></i><b>9.2.2</b> 기본 그래프 생성</a></li>
+<li class="chapter" data-level="9.2.3" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-32"><i class="fa fa-check"></i><b>9.2.3</b> ggthemr 적용하기</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-34"><i class="fa fa-check"></i><b>9.3</b> correlation 그래프 생성</a></li>
+<li class="chapter" data-level="9.4" data-path="ggplot-visualization.html"><a href="ggplot-visualization.html#classID9-35"><i class="fa fa-check"></i><b>9.4</b> plot.ly 이용해서 interactive 그래프 그리기</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="modeling.html"><a href="modeling.html"><i class="fa fa-check"></i><b>10</b> Modeling</a><ul>
+<li class="chapter" data-level="10.1" data-path="modeling.html"><a href="modeling.html#ClassID10-1"><i class="fa fa-check"></i><b>10.1</b> Regression Model (회귀모형)</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="modeling.html"><a href="modeling.html#ClassID10-2"><i class="fa fa-check"></i><b>10.1.1</b> Univariate Linear Regression (단변량 선형회기모형)</a></li>
+<li class="chapter" data-level="10.1.2" data-path="modeling.html"><a href="modeling.html#ClassID10-3"><i class="fa fa-check"></i><b>10.1.2</b> Multivariate Linear Regression (다변량 선형회기모형)</a></li>
+<li class="chapter" data-level="10.1.3" data-path="modeling.html"><a href="modeling.html#ClassID10-4"><i class="fa fa-check"></i><b>10.1.3</b> Polynomial Regression (다항 선형회기모형)</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="modeling.html"><a href="modeling.html#ClassID10-9"><i class="fa fa-check"></i><b>10.2</b> Classification Model (분류모형)</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="modeling.html"><a href="modeling.html#ClassID10-10"><i class="fa fa-check"></i><b>10.2.1</b> Logistic Regression</a></li>
+<li class="chapter" data-level="10.2.2" data-path="modeling.html"><a href="modeling.html#ClassID10-17"><i class="fa fa-check"></i><b>10.2.2</b> K-Nearest Neighbors(K-NN)</a></li>
+<li class="chapter" data-level="10.2.3" data-path="modeling.html"><a href="modeling.html#ClassID10-25"><i class="fa fa-check"></i><b>10.2.3</b> Support Vector Machine(SVM)</a></li>
+<li class="chapter" data-level="10.2.4" data-path="modeling.html"><a href="modeling.html#ClassID10-32"><i class="fa fa-check"></i><b>10.2.4</b> Decision Tree Classification</a></li>
+<li class="chapter" data-level="10.2.5" data-path="modeling.html"><a href="modeling.html#ClassID10-36"><i class="fa fa-check"></i><b>10.2.5</b> Random Forrest Classfication</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="modeling.html"><a href="modeling.html#ClassID10-40"><i class="fa fa-check"></i><b>10.3</b> Clustering 군집 모델</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="modeling.html"><a href="modeling.html#ClassID10-41"><i class="fa fa-check"></i><b>10.3.1</b> K-Means Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="modeling.html"><a href="modeling.html#ClassID10-43"><i class="fa fa-check"></i><b>10.4</b> Gradient Boosting 실습</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="modeling.html"><a href="modeling.html#ClassID10-44"><i class="fa fa-check"></i><b>10.4.1</b> 데이터 및 패키지 로딩</a></li>
+<li class="chapter" data-level="10.4.2" data-path="modeling.html"><a href="modeling.html#ClassID10-45"><i class="fa fa-check"></i><b>10.4.2</b> 레이블 변환</a></li>
+<li class="chapter" data-level="10.4.3" data-path="modeling.html"><a href="modeling.html#ClassID10-46"><i class="fa fa-check"></i><b>10.4.3</b> 훈련 및 테스트 데이터 분할</a></li>
+<li class="chapter" data-level="10.4.4" data-path="modeling.html"><a href="modeling.html#ClassID10-47"><i class="fa fa-check"></i><b>10.4.4</b> xgb.DMatrix 오브젝트로 변환</a></li>
+<li class="chapter" data-level="10.4.5" data-path="modeling.html"><a href="modeling.html#ClassID10-48"><i class="fa fa-check"></i><b>10.4.5</b> 주요 파라메터 설정</a></li>
+<li class="chapter" data-level="10.4.6" data-path="modeling.html"><a href="modeling.html#ClassID10-49"><i class="fa fa-check"></i><b>10.4.6</b> 모델 훈련 시키기</a></li>
+<li class="chapter" data-level="10.4.7" data-path="modeling.html"><a href="modeling.html#ClassID10-50"><i class="fa fa-check"></i><b>10.4.7</b> 테스트 데이터로 스코어링</a></li>
+<li class="chapter" data-level="10.4.8" data-path="modeling.html"><a href="modeling.html#ClassID10-51"><i class="fa fa-check"></i><b>10.4.8</b> Identify the class with the highest probability for each prediction</a></li>
+<li class="chapter" data-level="10.4.9" data-path="modeling.html"><a href="modeling.html#ClassID10-52"><i class="fa fa-check"></i><b>10.4.9</b> 모델 성능 측정</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/dangtong76" target="blank">Dangtong Github Pages</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R로 배우는 데이터과학</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="modeling" class="section level1">
+<h1><span class="header-section-number">Chapter 10</span> Modeling</h1>
+<script>
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('left', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<div id="ClassID10-1" class="section level2">
+<h2><span class="header-section-number">10.1</span> Regression Model (회귀모형)</h2>
+<div id="ClassID10-2" class="section level3">
+<h3><span class="header-section-number">10.1.1</span> Univariate Linear Regression (단변량 선형회기모형)</h3>
+<ul>
+<li><p>변수가 하나일때의 선형회귀를 단변량 선형 회귀 라고 합니다.</p></li>
+<li><p>데이터을 가져오고 , 훈련데이터 및 테스트 데이터로 분할</p></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="modeling.html#cb1-1"></a><span class="co"># Univariate Linear Regression (단변량 선형회기모형)</span></span>
+<span id="cb1-2"><a href="modeling.html#cb1-2"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="modeling.html#cb1-3"></a></span>
+<span id="cb1-4"><a href="modeling.html#cb1-4"></a></span>
+<span id="cb1-5"><a href="modeling.html#cb1-5"></a><span class="co"># 데이터셋 읽기</span></span>
+<span id="cb1-6"><a href="modeling.html#cb1-6"></a>dataset =<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;Salary_Data.csv&#39;</span>)</span>
+<span id="cb1-7"><a href="modeling.html#cb1-7"></a></span>
+<span id="cb1-8"><a href="modeling.html#cb1-8"></a><span class="co"># 데이터셋을 Training set 과 Test set 으로 분할 합니다.</span></span>
+<span id="cb1-9"><a href="modeling.html#cb1-9"></a><span class="co"># install.packages(&#39;caTools&#39;)</span></span>
+<span id="cb1-10"><a href="modeling.html#cb1-10"></a><span class="kw">library</span>(caTools)</span>
+<span id="cb1-11"><a href="modeling.html#cb1-11"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-12"><a href="modeling.html#cb1-12"></a>split =<span class="st"> </span><span class="kw">sample.split</span>(dataset<span class="op">$</span>Salary, <span class="dt">SplitRatio =</span> <span class="dv">2</span><span class="op">/</span><span class="dv">3</span>)</span>
+<span id="cb1-13"><a href="modeling.html#cb1-13"></a>training_set =<span class="st"> </span><span class="kw">subset</span>(dataset, split <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>)</span>
+<span id="cb1-14"><a href="modeling.html#cb1-14"></a>test_set =<span class="st"> </span><span class="kw">subset</span>(dataset, split <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>)</span></code></pre></div>
+<ul>
+<li>feature 스케일링 및 모델 핏팅</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="modeling.html#cb2-1"></a><span class="co"># Feature 스케일링</span></span>
+<span id="cb2-2"><a href="modeling.html#cb2-2"></a><span class="co"># training_set = scale(training_set)</span></span>
+<span id="cb2-3"><a href="modeling.html#cb2-3"></a><span class="co"># test_set = scale(test_set)</span></span>
+<span id="cb2-4"><a href="modeling.html#cb2-4"></a></span>
+<span id="cb2-5"><a href="modeling.html#cb2-5"></a><span class="co"># Training 데이터를 단변량 선형회기 함수에 핏팅 합니다.</span></span>
+<span id="cb2-6"><a href="modeling.html#cb2-6"></a>regressor =<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> Salary <span class="op">~</span><span class="st"> </span>YearsExperience,</span>
+<span id="cb2-7"><a href="modeling.html#cb2-7"></a>               <span class="dt">data =</span> training_set)</span></code></pre></div>
+<ul>
+<li>모델에 대한 정보를 보기 위해 summary 함수를 호출하면 모델에 대한 다양한 통계 정보를 확인 할수 있습니다.</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>항목</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Residuals(잔차)</td>
+<td>예측과 실측 사이의 잔차에 대한 분포를 보여 줍니다</td>
+</tr>
+<tr class="even">
+<td>Coefficients(계수)</td>
+<td>각각의 변수에 대한 P value 정보를 보여 줍니다. * 가 많으면 통계적으로 유의</td>
+</tr>
+<tr class="odd">
+<td>Signif</td>
+<td>P Value 에 따른 Significant Levle 구간을 표시 합니다.</td>
+</tr>
+<tr class="even">
+<td>R-Squard</td>
+<td>만들어진 모델이 얼마나 데이터를 잘 설명하는지를 보여주는 지표</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="modeling.html#cb3-1"></a><span class="kw">summary</span>(regressor)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Salary ~ YearsExperience, data = training_set)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -7325.1 -3814.4   427.7  3559.7  8884.6 
+## 
+## Coefficients:
+##                 Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)        25592       2646   9.672 1.49e-08 ***
+## YearsExperience     9365        421  22.245 1.52e-14 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 5391 on 18 degrees of freedom
+## Multiple R-squared:  0.9649, Adjusted R-squared:  0.963 
+## F-statistic: 494.8 on 1 and 18 DF,  p-value: 1.524e-14</code></pre>
+<ul>
+<li>테스트 데이터를 모델에 넣어서 scoring 수행</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="modeling.html#cb5-1"></a>y_pred =<span class="st"> </span><span class="kw">predict</span>(regressor, <span class="dt">newdata =</span> test_set)</span>
+<span id="cb5-2"><a href="modeling.html#cb5-2"></a>y_pred</span></code></pre></div>
+<pre><code>##         1         2         3         4         5         6         7         8 
+##  37766.77  44322.33  46195.35  55560.43  62115.99  71481.07  81782.66  89274.72 
+##         9        10 
+## 102385.84 109877.90</code></pre>
+<ul>
+<li>훈련 데이터 데이터에 대해 모델 그려보기</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="modeling.html#cb7-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb7-2"><a href="modeling.html#cb7-2"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb7-3"><a href="modeling.html#cb7-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> training_set<span class="op">$</span>YearsExperience, <span class="dt">y =</span> training_set<span class="op">$</span>Salary),</span>
+<span id="cb7-4"><a href="modeling.html#cb7-4"></a>             <span class="dt">colour =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span></span>
+<span id="cb7-5"><a href="modeling.html#cb7-5"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> training_set<span class="op">$</span>YearsExperience, <span class="dt">y =</span> <span class="kw">predict</span>(regressor, <span class="dt">newdata =</span> training_set)),</span>
+<span id="cb7-6"><a href="modeling.html#cb7-6"></a>            <span class="dt">colour =</span> <span class="st">&#39;blue&#39;</span>) <span class="op">+</span></span>
+<span id="cb7-7"><a href="modeling.html#cb7-7"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&#39;Salary vs Experience (Training set)&#39;</span>) <span class="op">+</span></span>
+<span id="cb7-8"><a href="modeling.html#cb7-8"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;Years of experience&#39;</span>) <span class="op">+</span></span>
+<span id="cb7-9"><a href="modeling.html#cb7-9"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;Salary&#39;</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<ul>
+<li>테스트 데이터에 대해 모델 그려보기
+<ul>
+<li>산점도(데이터)는 test_set 으로 선그래프(model)는 training_set 으로 그립니다.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="modeling.html#cb8-1"></a><span class="co"># 테스트 데이터에 대해 모델 그려보기</span></span>
+<span id="cb8-2"><a href="modeling.html#cb8-2"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb8-3"><a href="modeling.html#cb8-3"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb8-4"><a href="modeling.html#cb8-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> test_set<span class="op">$</span>YearsExperience, <span class="dt">y =</span> test_set<span class="op">$</span>Salary),</span>
+<span id="cb8-5"><a href="modeling.html#cb8-5"></a>             <span class="dt">colour =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span></span>
+<span id="cb8-6"><a href="modeling.html#cb8-6"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> training_set<span class="op">$</span>YearsExperience, <span class="dt">y =</span> <span class="kw">predict</span>(regressor, <span class="dt">newdata =</span> training_set)),</span>
+<span id="cb8-7"><a href="modeling.html#cb8-7"></a>            <span class="dt">colour =</span> <span class="st">&#39;blue&#39;</span>) <span class="op">+</span></span>
+<span id="cb8-8"><a href="modeling.html#cb8-8"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&#39;Salary vs Experience (Test set)&#39;</span>) <span class="op">+</span></span>
+<span id="cb8-9"><a href="modeling.html#cb8-9"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;Years of experience&#39;</span>) <span class="op">+</span></span>
+<span id="cb8-10"><a href="modeling.html#cb8-10"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;Salary&#39;</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+<div id="ClassID10-3" class="section level3">
+<h3><span class="header-section-number">10.1.2</span> Multivariate Linear Regression (다변량 선형회기모형)</h3>
+<ul>
+<li>여러개의 X 변수에 대한 회귀를 다변량 선형 회귀 라고 합니다.</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="modeling.html#cb9-1"></a><span class="co"># Multivariate Linear Regression (다변량 선형회기모형)</span></span>
+<span id="cb9-2"><a href="modeling.html#cb9-2"></a></span>
+<span id="cb9-3"><a href="modeling.html#cb9-3"></a><span class="co"># 데이터셋 읽기</span></span>
+<span id="cb9-4"><a href="modeling.html#cb9-4"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb9-5"><a href="modeling.html#cb9-5"></a>dataset =<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;50_Startups.csv&#39;</span>)</span>
+<span id="cb9-6"><a href="modeling.html#cb9-6"></a></span>
+<span id="cb9-7"><a href="modeling.html#cb9-7"></a><span class="co"># 범주형 데이터에 대해 원핫인코딩 합니다.</span></span>
+<span id="cb9-8"><a href="modeling.html#cb9-8"></a>dataset<span class="op">$</span>State =<span class="st"> </span><span class="kw">factor</span>(dataset<span class="op">$</span>State,</span>
+<span id="cb9-9"><a href="modeling.html#cb9-9"></a>                       <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&#39;New York&#39;</span>, <span class="st">&#39;California&#39;</span>, <span class="st">&#39;Florida&#39;</span>),</span>
+<span id="cb9-10"><a href="modeling.html#cb9-10"></a>                       <span class="dt">labels =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span>
+<span id="cb9-11"><a href="modeling.html#cb9-11"></a></span>
+<span id="cb9-12"><a href="modeling.html#cb9-12"></a><span class="co"># 데이터셋을 Training set 과 Test set 으로 분할 합니다.</span></span>
+<span id="cb9-13"><a href="modeling.html#cb9-13"></a><span class="co"># install.packages(&#39;caTools&#39;)</span></span>
+<span id="cb9-14"><a href="modeling.html#cb9-14"></a><span class="kw">library</span>(caTools)</span>
+<span id="cb9-15"><a href="modeling.html#cb9-15"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb9-16"><a href="modeling.html#cb9-16"></a>split =<span class="st"> </span><span class="kw">sample.split</span>(dataset<span class="op">$</span>Profit, <span class="dt">SplitRatio =</span> <span class="fl">0.8</span>)</span>
+<span id="cb9-17"><a href="modeling.html#cb9-17"></a>training_set =<span class="st"> </span><span class="kw">subset</span>(dataset, split <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>)</span>
+<span id="cb9-18"><a href="modeling.html#cb9-18"></a>test_set =<span class="st"> </span><span class="kw">subset</span>(dataset, split <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>)</span>
+<span id="cb9-19"><a href="modeling.html#cb9-19"></a></span>
+<span id="cb9-20"><a href="modeling.html#cb9-20"></a><span class="co"># Feature 스케일링</span></span>
+<span id="cb9-21"><a href="modeling.html#cb9-21"></a><span class="co"># training_set = scale(training_set)</span></span>
+<span id="cb9-22"><a href="modeling.html#cb9-22"></a><span class="co"># test_set = scale(test_set)</span></span>
+<span id="cb9-23"><a href="modeling.html#cb9-23"></a></span>
+<span id="cb9-24"><a href="modeling.html#cb9-24"></a><span class="co"># 훈련 데이터를 다변량 회귀에 핏팅 합니다.</span></span>
+<span id="cb9-25"><a href="modeling.html#cb9-25"></a>regressor =<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> Profit <span class="op">~</span><span class="st"> </span>.,</span>
+<span id="cb9-26"><a href="modeling.html#cb9-26"></a>               <span class="dt">data =</span> training_set)</span>
+<span id="cb9-27"><a href="modeling.html#cb9-27"></a></span>
+<span id="cb9-28"><a href="modeling.html#cb9-28"></a><span class="kw">summary</span>(regressor)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Profit ~ ., data = training_set)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -33128  -4865      5   6098  18065 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)        4.965e+04  7.637e+03   6.501 1.94e-07 ***
+## `R&amp;D Spend`        7.986e-01  5.604e-02  14.251 6.70e-16 ***
+## Administration    -2.942e-02  5.828e-02  -0.505    0.617    
+## `Marketing Spend`  3.268e-02  2.127e-02   1.537    0.134    
+## State2             1.213e+02  3.751e+03   0.032    0.974    
+## State3             2.376e+02  4.127e+03   0.058    0.954    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 9908 on 34 degrees of freedom
+## Multiple R-squared:  0.9499, Adjusted R-squared:  0.9425 
+## F-statistic:   129 on 5 and 34 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="modeling.html#cb11-1"></a><span class="co"># 만들어진 모델을 이용해 테스트 데이터에 대해 스코어링 수행</span></span>
+<span id="cb11-2"><a href="modeling.html#cb11-2"></a>y_pred =<span class="st"> </span><span class="kw">predict</span>(regressor, <span class="dt">newdata =</span> test_set)</span>
+<span id="cb11-3"><a href="modeling.html#cb11-3"></a></span>
+<span id="cb11-4"><a href="modeling.html#cb11-4"></a><span class="kw">head</span>(y_pred)</span></code></pre></div>
+<pre><code>##        1        2        3        4        5        6 
+## 173981.1 172655.6 160250.0 135513.9 146059.4 114151.0</code></pre>
+</div>
+<div id="ClassID10-4" class="section level3">
+<h3><span class="header-section-number">10.1.3</span> Polynomial Regression (다항 선형회기모형)</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="modeling.html#cb13-1"></a><span class="co"># Polynomial Regression (다항 선형회기모형)</span></span>
+<span id="cb13-2"><a href="modeling.html#cb13-2"></a></span>
+<span id="cb13-3"><a href="modeling.html#cb13-3"></a><span class="co"># 데이터 읽기</span></span>
+<span id="cb13-4"><a href="modeling.html#cb13-4"></a>dataset =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;Position_Salaries.csv&#39;</span>)</span>
+<span id="cb13-5"><a href="modeling.html#cb13-5"></a></span>
+<span id="cb13-6"><a href="modeling.html#cb13-6"></a>dataset =<span class="st"> </span>dataset[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>] </span>
+<span id="cb13-7"><a href="modeling.html#cb13-7"></a></span>
+<span id="cb13-8"><a href="modeling.html#cb13-8"></a><span class="co"># 선형회귀 모델 만들기</span></span>
+<span id="cb13-9"><a href="modeling.html#cb13-9"></a>lin_reg =<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> Salary <span class="op">~</span><span class="st"> </span>.,</span>
+<span id="cb13-10"><a href="modeling.html#cb13-10"></a>             <span class="dt">data =</span> dataset)</span>
+<span id="cb13-11"><a href="modeling.html#cb13-11"></a></span>
+<span id="cb13-12"><a href="modeling.html#cb13-12"></a><span class="co"># 데이터를 다항회귀에 맞게 변경 </span></span>
+<span id="cb13-13"><a href="modeling.html#cb13-13"></a>lin_reg</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Salary ~ ., data = dataset)
+## 
+## Coefficients:
+## (Intercept)        Level  
+##     -195333        80879</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="modeling.html#cb15-1"></a>dataset<span class="op">$</span>Level2 =<span class="st"> </span>dataset<span class="op">$</span>Level<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb15-2"><a href="modeling.html#cb15-2"></a>dataset<span class="op">$</span>Level3 =<span class="st"> </span>dataset<span class="op">$</span>Level<span class="op">^</span><span class="dv">3</span></span>
+<span id="cb15-3"><a href="modeling.html#cb15-3"></a>dataset<span class="op">$</span>Level4 =<span class="st"> </span>dataset<span class="op">$</span>Level<span class="op">^</span><span class="dv">4</span></span>
+<span id="cb15-4"><a href="modeling.html#cb15-4"></a></span>
+<span id="cb15-5"><a href="modeling.html#cb15-5"></a>poly_reg =<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> Salary <span class="op">~</span><span class="st"> </span>.,</span>
+<span id="cb15-6"><a href="modeling.html#cb15-6"></a>              <span class="dt">data =</span> dataset)</span>
+<span id="cb15-7"><a href="modeling.html#cb15-7"></a></span>
+<span id="cb15-8"><a href="modeling.html#cb15-8"></a><span class="co"># 모델 시각화</span></span>
+<span id="cb15-9"><a href="modeling.html#cb15-9"></a><span class="co"># install.packages(&#39;ggplot2&#39;)</span></span>
+<span id="cb15-10"><a href="modeling.html#cb15-10"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb15-11"><a href="modeling.html#cb15-11"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb15-12"><a href="modeling.html#cb15-12"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> dataset<span class="op">$</span>Level, <span class="dt">y =</span> dataset<span class="op">$</span>Salary),</span>
+<span id="cb15-13"><a href="modeling.html#cb15-13"></a>             <span class="dt">colour =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span></span>
+<span id="cb15-14"><a href="modeling.html#cb15-14"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> dataset<span class="op">$</span>Level, <span class="dt">y =</span> <span class="kw">predict</span>(lin_reg, <span class="dt">newdata =</span> dataset)),</span>
+<span id="cb15-15"><a href="modeling.html#cb15-15"></a>            <span class="dt">colour =</span> <span class="st">&#39;blue&#39;</span>) <span class="op">+</span></span>
+<span id="cb15-16"><a href="modeling.html#cb15-16"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&#39;Truth or Bluff (Linear Regression)&#39;</span>) <span class="op">+</span></span>
+<span id="cb15-17"><a href="modeling.html#cb15-17"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;Level&#39;</span>) <span class="op">+</span></span>
+<span id="cb15-18"><a href="modeling.html#cb15-18"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;Salary&#39;</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="modeling.html#cb16-1"></a><span class="co"># install.packages(&#39;ggplot2&#39;)</span></span>
+<span id="cb16-2"><a href="modeling.html#cb16-2"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb16-3"><a href="modeling.html#cb16-3"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb16-4"><a href="modeling.html#cb16-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> dataset<span class="op">$</span>Level, <span class="dt">y =</span> dataset<span class="op">$</span>Salary),</span>
+<span id="cb16-5"><a href="modeling.html#cb16-5"></a>             <span class="dt">colour =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span></span>
+<span id="cb16-6"><a href="modeling.html#cb16-6"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> dataset<span class="op">$</span>Level, <span class="dt">y =</span> <span class="kw">predict</span>(poly_reg, <span class="dt">newdata =</span> dataset)),</span>
+<span id="cb16-7"><a href="modeling.html#cb16-7"></a>            <span class="dt">colour =</span> <span class="st">&#39;blue&#39;</span>) <span class="op">+</span></span>
+<span id="cb16-8"><a href="modeling.html#cb16-8"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&#39;Truth or Bluff (Polynomial Regression)&#39;</span>) <span class="op">+</span></span>
+<span id="cb16-9"><a href="modeling.html#cb16-9"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;Level&#39;</span>) <span class="op">+</span></span>
+<span id="cb16-10"><a href="modeling.html#cb16-10"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;Salary&#39;</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="modeling.html#cb17-1"></a><span class="co"># 좀더 예쁘게 시각화</span></span>
+<span id="cb17-2"><a href="modeling.html#cb17-2"></a><span class="co"># install.packages(&#39;ggplot2&#39;)</span></span>
+<span id="cb17-3"><a href="modeling.html#cb17-3"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb17-4"><a href="modeling.html#cb17-4"></a>x_grid =<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(dataset<span class="op">$</span>Level), <span class="kw">max</span>(dataset<span class="op">$</span>Level), <span class="fl">0.1</span>)</span>
+<span id="cb17-5"><a href="modeling.html#cb17-5"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb17-6"><a href="modeling.html#cb17-6"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> dataset<span class="op">$</span>Level, <span class="dt">y =</span> dataset<span class="op">$</span>Salary),</span>
+<span id="cb17-7"><a href="modeling.html#cb17-7"></a>             <span class="dt">colour =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span></span>
+<span id="cb17-8"><a href="modeling.html#cb17-8"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x_grid, <span class="dt">y =</span> <span class="kw">predict</span>(poly_reg,</span>
+<span id="cb17-9"><a href="modeling.html#cb17-9"></a>                                        <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">Level =</span> x_grid,</span>
+<span id="cb17-10"><a href="modeling.html#cb17-10"></a>                                                             <span class="dt">Level2 =</span> x_grid<span class="op">^</span><span class="dv">2</span>,</span>
+<span id="cb17-11"><a href="modeling.html#cb17-11"></a>                                                             <span class="dt">Level3 =</span> x_grid<span class="op">^</span><span class="dv">3</span>,</span>
+<span id="cb17-12"><a href="modeling.html#cb17-12"></a>                                                             <span class="dt">Level4 =</span> x_grid<span class="op">^</span><span class="dv">4</span>))),</span>
+<span id="cb17-13"><a href="modeling.html#cb17-13"></a>            <span class="dt">colour =</span> <span class="st">&#39;blue&#39;</span>) <span class="op">+</span></span>
+<span id="cb17-14"><a href="modeling.html#cb17-14"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&#39;Truth or Bluff (Polynomial Regression)&#39;</span>) <span class="op">+</span></span>
+<span id="cb17-15"><a href="modeling.html#cb17-15"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;Level&#39;</span>) <span class="op">+</span></span>
+<span id="cb17-16"><a href="modeling.html#cb17-16"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;Salary&#39;</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-11-3.png" width="672" /></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="modeling.html#cb18-1"></a><span class="co"># linear regression 예측</span></span>
+<span id="cb18-2"><a href="modeling.html#cb18-2"></a>pred1 &lt;-<span class="st"> </span><span class="kw">predict</span>(lin_reg, <span class="kw">data.frame</span>(<span class="dt">Level =</span> <span class="fl">6.5</span>))</span>
+<span id="cb18-3"><a href="modeling.html#cb18-3"></a></span>
+<span id="cb18-4"><a href="modeling.html#cb18-4"></a><span class="kw">head</span>(pred1)</span></code></pre></div>
+<pre><code>##        1 
+## 330378.8</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="modeling.html#cb20-1"></a><span class="co"># Polynomial regression 예측</span></span>
+<span id="cb20-2"><a href="modeling.html#cb20-2"></a>pred2 &lt;-<span class="st"> </span><span class="kw">predict</span>(poly_reg, <span class="kw">data.frame</span>(<span class="dt">Level =</span> <span class="fl">6.5</span>,</span>
+<span id="cb20-3"><a href="modeling.html#cb20-3"></a>                             <span class="dt">Level2 =</span> <span class="fl">6.5</span><span class="op">^</span><span class="dv">2</span>,</span>
+<span id="cb20-4"><a href="modeling.html#cb20-4"></a>                             <span class="dt">Level3 =</span> <span class="fl">6.5</span><span class="op">^</span><span class="dv">3</span>,</span>
+<span id="cb20-5"><a href="modeling.html#cb20-5"></a>                             <span class="dt">Level4 =</span> <span class="fl">6.5</span><span class="op">^</span><span class="dv">4</span>))</span>
+<span id="cb20-6"><a href="modeling.html#cb20-6"></a></span>
+<span id="cb20-7"><a href="modeling.html#cb20-7"></a><span class="kw">head</span>(pred2)</span></code></pre></div>
+<pre><code>##        1 
+## 158862.5</code></pre>
+</div>
+</div>
+<div id="ClassID10-9" class="section level2">
+<h2><span class="header-section-number">10.2</span> Classification Model (분류모형)</h2>
+<div id="ClassID10-10" class="section level3">
+<h3><span class="header-section-number">10.2.1</span> Logistic Regression</h3>
+<ul>
+<li><p>Logistic Regression 실습에서는 <a href="https://www.kaggle.com/c/titanic">Kagge 타이타닉 데이터</a> 로 모델 실습을 하겠습니다. 승객 들의 여러가지 정보를 바탕으로 Logistic Regression 을 바탕으로 생존 예측을 해보도록 하겠습니다.</p></li>
+<li><p>데이터 불러오기</p></li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="modeling.html#cb22-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb22-2"><a href="modeling.html#cb22-2"></a>df.train &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;titanic_train.csv&#39;</span>)</span></code></pre></div>
+<div id="ClassID10-11" class="section level4">
+<h4><span class="header-section-number">10.2.1.1</span> Amelia 패키지를 이용한 결측치 시각화</h4>
+<p>현재 타이타닉 데이터 셋의 age(나이) 컬럼은 NA 값이 존재 합니다. 얼마나 존재 하는 지 확인하기 위해 Amelias 패키지를 통해 NA 값을 시각화 합니다.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="modeling.html#cb23-1"></a><span class="co"># is.na(df.train) # is.na 합수는 전체 데이터에 대해 TRUE FALSE 로 보여 주기 때문에 한번에 알아보기가 힘듭니다.</span></span>
+<span id="cb23-2"><a href="modeling.html#cb23-2"></a></span>
+<span id="cb23-3"><a href="modeling.html#cb23-3"></a><span class="co"># install.packages(&quot;Amelia&quot;)</span></span>
+<span id="cb23-4"><a href="modeling.html#cb23-4"></a><span class="kw">library</span>(Amelia)</span>
+<span id="cb23-5"><a href="modeling.html#cb23-5"></a><span class="kw">missmap</span>(df.train, <span class="dt">main=</span><span class="st">&quot;Titanic Training Data - NA&quot;</span>, </span>
+<span id="cb23-6"><a href="modeling.html#cb23-6"></a>        <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;yellow&quot;</span>, <span class="st">&quot;black&quot;</span>), <span class="dt">legend=</span><span class="ot">FALSE</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<ul>
+<li>Cabin(선실), Age(나이) 값들에 NA 가 존재 합니다. Age 데이터의 경우 약 20% 정도가 결측(NA) 가 있습니다. 일단 NA 값이 어떠한 분포로 얼마나 많이 있는지 시각화를 했습니다. 이후 과정에서 결측(NA)치 를 처리 할 것입니다.</li>
+</ul>
+</div>
+<div id="ClassID10-12" class="section level4">
+<h4><span class="header-section-number">10.2.1.2</span> ggplot2 를 이용한 데이터 시각화</h4>
+<ul>
+<li>생존/사망의 비율을 시각화 해봅니다.</li>
+</ul>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="modeling.html#cb24-1"></a><span class="kw">ggplot</span>(df.train,<span class="kw">aes</span>(<span class="dt">x=</span>Survived)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb24-2"><a href="modeling.html#cb24-2"></a><span class="st">  </span><span class="kw">geom_bar</span>()</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<ul>
+<li>승객 Pclass(등급) 별로 몇명이 있는지 확인 해봅니다.</li>
+</ul>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="modeling.html#cb25-1"></a>df.train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Pclass)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill=</span><span class="kw">factor</span>(Pclass)),<span class="dt">alpha=</span><span class="fl">0.5</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<ul>
+<li>승객의 성(Sex) 비율이 어덯게 되는지 봅니다.</li>
+</ul>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="modeling.html#cb26-1"></a>df.train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Sex)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill=</span><span class="kw">factor</span>(Sex)),<span class="dt">alpha=</span><span class="fl">0.5</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<ul>
+<li></li>
+</ul>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="modeling.html#cb27-1"></a>df.train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Age)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>(<span class="dt">fill=</span><span class="st">&#39;blue&#39;</span>,<span class="dt">bins=</span><span class="dv">20</span>,<span class="dt">alpha=</span><span class="fl">0.5</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<ul>
+<li>SibSp(동승자)가 몇명이나 되는지 확인 합시다.</li>
+</ul>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="modeling.html#cb28-1"></a>df.train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(SibSp)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>(<span class="dt">fill=</span><span class="st">&#39;green&#39;</span>,<span class="dt">color=</span><span class="st">&#39;black&#39;</span>,<span class="dt">alpha=</span><span class="fl">0.5</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+</div>
+<div id="ClassID10-13" class="section level4">
+<h4><span class="header-section-number">10.2.1.3</span> 데이터 클린징</h4>
+<ul>
+<li>앞서 age 데이터에 결측(NA) 값이 20% 정도 발견이 되었습니다.</li>
+<li>직관적으로 승객의 나이가 생존 여부와 상관이 있을것 같기 때문에 age 변수를 없애거나 입의이 값으로 대체 해야 합니다.</li>
+<li>결측된 age 컬럼을 가진 관측치를 없애기에는 데이터가 조금(20%) 많습니다.</li>
+<li>Age 값을 전체 데이터의 평균 값으로 넣어도 되지만, 좀더 모델을 성능을 높이기 위해 Age 와 상관 있는 변수가 무엇인지 고민해 보면 Pclass(승객등급) 별로 나이가 다를 것 같습니다. 일단 그려 봅니다.</li>
+</ul>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="modeling.html#cb29-1"></a>df.train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Pclass,Age)) <span class="op">+</span></span>
+<span id="cb29-2"><a href="modeling.html#cb29-2"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="kw">aes</span>(<span class="dt">group=</span>Pclass,<span class="dt">fill=</span><span class="kw">factor</span>(Pclass),<span class="dt">alpha=</span><span class="fl">0.4</span>))  <span class="op">+</span><span class="st"> </span></span>
+<span id="cb29-3"><a href="modeling.html#cb29-3"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="kw">min</span>(<span class="dv">0</span>), <span class="kw">max</span>(<span class="dv">80</span>), <span class="dt">by =</span> <span class="dv">2</span>))</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<ul>
+<li><p>그래프를 확인해보면 객실 등급별로 전체 적인 평균 나이가 차이가 납니다.</p></li>
+<li><p>Age(나이)에 대한 결측치를 Pclass(승객등급) 의 평균 나이로 설정하면 좀더 정확한 모델을 만들수 있습니다.</p></li>
+<li><p>아래 함수는 결측치가 있을 경우 해당하는 사람의 승객등급을 확인하고 앞서 확인한 승객 등급별 평균 나이를 반환하는 함수 입니다.</p></li>
+<li></li>
+</ul>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="modeling.html#cb30-1"></a>returunPclassAge &lt;-<span class="st"> </span><span class="cf">function</span>(age,class){</span>
+<span id="cb30-2"><a href="modeling.html#cb30-2"></a>    out &lt;-<span class="st"> </span>age</span>
+<span id="cb30-3"><a href="modeling.html#cb30-3"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(age)){</span>
+<span id="cb30-4"><a href="modeling.html#cb30-4"></a>        </span>
+<span id="cb30-5"><a href="modeling.html#cb30-5"></a>        <span class="cf">if</span> (<span class="kw">is.na</span>(age[i])){</span>
+<span id="cb30-6"><a href="modeling.html#cb30-6"></a></span>
+<span id="cb30-7"><a href="modeling.html#cb30-7"></a>            <span class="cf">if</span> (class[i] <span class="op">==</span><span class="st"> </span><span class="dv">1</span>){</span>
+<span id="cb30-8"><a href="modeling.html#cb30-8"></a>                out[i] &lt;-<span class="st"> </span><span class="dv">37</span></span>
+<span id="cb30-9"><a href="modeling.html#cb30-9"></a></span>
+<span id="cb30-10"><a href="modeling.html#cb30-10"></a>            }<span class="cf">else</span> <span class="cf">if</span> (class[i] <span class="op">==</span><span class="st"> </span><span class="dv">2</span>){</span>
+<span id="cb30-11"><a href="modeling.html#cb30-11"></a>                out[i] &lt;-<span class="st"> </span><span class="dv">29</span></span>
+<span id="cb30-12"><a href="modeling.html#cb30-12"></a></span>
+<span id="cb30-13"><a href="modeling.html#cb30-13"></a>            }<span class="cf">else</span>{</span>
+<span id="cb30-14"><a href="modeling.html#cb30-14"></a>                out[i] &lt;-<span class="st"> </span><span class="dv">24</span></span>
+<span id="cb30-15"><a href="modeling.html#cb30-15"></a>            }</span>
+<span id="cb30-16"><a href="modeling.html#cb30-16"></a>        }<span class="cf">else</span>{</span>
+<span id="cb30-17"><a href="modeling.html#cb30-17"></a>            out[i]&lt;-age[i]</span>
+<span id="cb30-18"><a href="modeling.html#cb30-18"></a>        }</span>
+<span id="cb30-19"><a href="modeling.html#cb30-19"></a>    }</span>
+<span id="cb30-20"><a href="modeling.html#cb30-20"></a>    <span class="kw">return</span>(out)</span>
+<span id="cb30-21"><a href="modeling.html#cb30-21"></a>}</span></code></pre></div>
+<ul>
+<li></li>
+</ul>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="modeling.html#cb31-1"></a>df.train &lt;-<span class="st"> </span>df.train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Age =</span> <span class="kw">returunPclassAge</span>(Age, Pclass))</span></code></pre></div>
+<ul>
+<li>다시 Amelia 패키지의 missmap 한수를 돌려 결측치를 확인합니다.</li>
+</ul>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="modeling.html#cb32-1"></a><span class="kw">missmap</span>(df.train, <span class="dt">main=</span><span class="st">&quot;Titanic Training Data - NA&quot;</span>, </span>
+<span id="cb32-2"><a href="modeling.html#cb32-2"></a>        <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;yellow&quot;</span>, <span class="st">&quot;black&quot;</span>), <span class="dt">legend=</span><span class="ot">FALSE</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<ul>
+<li>Age 변수의 결측(NA) 들을 Pclass(승객등급) 별 평균 나이로 설정 하여 결측치를 제거 하였습니다.</li>
+</ul>
+</div>
+<div id="ClassID10-14" class="section level4">
+<h4><span class="header-section-number">10.2.1.4</span> 모델 학습을 위한 데이터 전처리</h4>
+<ul>
+<li>불필요한 변수를 제거 합니다. 물론, 제거 하지 않고 p value 를 확인해서 나중에 fitting 과정에서 제거 해도 됩니다.</li>
+</ul>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="modeling.html#cb33-1"></a><span class="kw">str</span>(df.train)</span></code></pre></div>
+<pre><code>## tibble [891 × 12] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ PassengerId: num [1:891] 1 2 3 4 5 6 7 8 9 10 ...
+##  $ Survived   : num [1:891] 0 1 1 1 0 0 0 0 1 1 ...
+##  $ Pclass     : num [1:891] 3 1 3 1 3 3 1 3 3 2 ...
+##  $ Name       : chr [1:891] &quot;Braund, Mr. Owen Harris&quot; &quot;Cumings, Mrs. John Bradley (Florence Briggs Thayer)&quot; &quot;Heikkinen, Miss. Laina&quot; &quot;Futrelle, Mrs. Jacques Heath (Lily May Peel)&quot; ...
+##  $ Sex        : chr [1:891] &quot;male&quot; &quot;female&quot; &quot;female&quot; &quot;female&quot; ...
+##  $ Age        : num [1:891] 22 38 26 35 35 24 54 2 27 14 ...
+##  $ SibSp      : num [1:891] 1 1 0 1 0 0 0 3 0 1 ...
+##  $ Parch      : num [1:891] 0 0 0 0 0 0 0 1 2 0 ...
+##  $ Ticket     : chr [1:891] &quot;A/5 21171&quot; &quot;PC 17599&quot; &quot;STON/O2. 3101282&quot; &quot;113803&quot; ...
+##  $ Fare       : num [1:891] 7.25 71.28 7.92 53.1 8.05 ...
+##  $ Cabin      : chr [1:891] NA &quot;C85&quot; NA &quot;C123&quot; ...
+##  $ Embarked   : chr [1:891] &quot;S&quot; &quot;C&quot; &quot;S&quot; &quot;S&quot; ...
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   PassengerId = col_double(),
+##   ..   Survived = col_double(),
+##   ..   Pclass = col_double(),
+##   ..   Name = col_character(),
+##   ..   Sex = col_character(),
+##   ..   Age = col_double(),
+##   ..   SibSp = col_double(),
+##   ..   Parch = col_double(),
+##   ..   Ticket = col_character(),
+##   ..   Fare = col_double(),
+##   ..   Cabin = col_character(),
+##   ..   Embarked = col_character()
+##   .. )</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="modeling.html#cb35-1"></a><span class="kw">head</span>(df.train,<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 3 x 12
+##   PassengerId Survived Pclass Name  Sex     Age SibSp Parch Ticket  Fare Cabin
+##         &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;
+## 1           1        0      3 Brau… male     22     1     0 A/5 2…  7.25 &lt;NA&gt; 
+## 2           2        1      1 Cumi… fema…    38     1     0 PC 17… 71.3  C85  
+## 3           3        1      3 Heik… fema…    26     0     0 STON/…  7.92 &lt;NA&gt; 
+## # … with 1 more variable: Embarked &lt;chr&gt;</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="modeling.html#cb37-1"></a><span class="co"># 데이터 셋에서 PassengerId, Name, Ticket, Cabin 컬럼을 제거 합니다.</span></span>
+<span id="cb37-2"><a href="modeling.html#cb37-2"></a>df.train &lt;-<span class="st"> </span>df.train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>PassengerId,<span class="op">-</span>Name,<span class="op">-</span>Ticket,<span class="op">-</span>Cabin)</span>
+<span id="cb37-3"><a href="modeling.html#cb37-3"></a><span class="kw">head</span>(df.train,<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 3 x 8
+##   Survived Pclass Sex      Age SibSp Parch  Fare Embarked
+##      &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   
+## 1        0      3 male      22     1     0  7.25 S       
+## 2        1      1 female    38     1     0 71.3  C       
+## 3        1      3 female    26     0     0  7.92 S</code></pre>
+<ul>
+<li>문자현 변수들에 대해 범주형으로 바꿔 줍니다. 범주형 변수(Factor) 로 바꿔주면 Level이 생기고 나중에 Pvalue 값를 확인할때 Level 에 대한 Pvalue 를 자동으로 만들어 줍니다.</li>
+<li>Survived, Pclass, Parch, SibSp 문자형 변수에 대해 Factor 로 변환 합니다.</li>
+</ul>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="modeling.html#cb39-1"></a><span class="kw">str</span>(df.train)</span></code></pre></div>
+<pre><code>## tibble [891 × 8] (S3: tbl_df/tbl/data.frame)
+##  $ Survived: num [1:891] 0 1 1 1 0 0 0 0 1 1 ...
+##  $ Pclass  : num [1:891] 3 1 3 1 3 3 1 3 3 2 ...
+##  $ Sex     : chr [1:891] &quot;male&quot; &quot;female&quot; &quot;female&quot; &quot;female&quot; ...
+##  $ Age     : num [1:891] 22 38 26 35 35 24 54 2 27 14 ...
+##  $ SibSp   : num [1:891] 1 1 0 1 0 0 0 3 0 1 ...
+##  $ Parch   : num [1:891] 0 0 0 0 0 0 0 1 2 0 ...
+##  $ Fare    : num [1:891] 7.25 71.28 7.92 53.1 8.05 ...
+##  $ Embarked: chr [1:891] &quot;S&quot; &quot;C&quot; &quot;S&quot; &quot;S&quot; ...</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="modeling.html#cb41-1"></a>df.train<span class="op">$</span>Survived &lt;-<span class="st"> </span><span class="kw">factor</span>(df.train<span class="op">$</span>Survived)</span>
+<span id="cb41-2"><a href="modeling.html#cb41-2"></a>df.train<span class="op">$</span>Pclass &lt;-<span class="st"> </span><span class="kw">factor</span>(df.train<span class="op">$</span>Pclass)</span>
+<span id="cb41-3"><a href="modeling.html#cb41-3"></a>df.train<span class="op">$</span>Parch &lt;-<span class="st"> </span><span class="kw">factor</span>(df.train<span class="op">$</span>Parch)</span>
+<span id="cb41-4"><a href="modeling.html#cb41-4"></a>df.train<span class="op">$</span>SibSp &lt;-<span class="st"> </span><span class="kw">factor</span>(df.train<span class="op">$</span>SibSp)</span></code></pre></div>
+</div>
+<div id="ClassID10-15" class="section level4">
+<h4><span class="header-section-number">10.2.1.5</span> 훈련데이터와 테스트 데이터 나누기</h4>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="modeling.html#cb42-1"></a><span class="kw">library</span>(caTools)</span>
+<span id="cb42-2"><a href="modeling.html#cb42-2"></a><span class="kw">set.seed</span>(<span class="dv">101</span>)</span>
+<span id="cb42-3"><a href="modeling.html#cb42-3"></a></span>
+<span id="cb42-4"><a href="modeling.html#cb42-4"></a>split =<span class="st"> </span><span class="kw">sample.split</span>(df.train<span class="op">$</span>Survived, <span class="dt">SplitRatio =</span> <span class="fl">0.70</span>)</span>
+<span id="cb42-5"><a href="modeling.html#cb42-5"></a></span>
+<span id="cb42-6"><a href="modeling.html#cb42-6"></a>final.train =<span class="st"> </span><span class="kw">subset</span>(df.train, split <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>)</span>
+<span id="cb42-7"><a href="modeling.html#cb42-7"></a>final.test =<span class="st"> </span><span class="kw">subset</span>(df.train, split <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="modeling.html#cb43-1"></a>final.log.model1 &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="dt">formula=</span>Survived <span class="op">~</span><span class="st"> </span>. , <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link=</span><span class="st">&#39;logit&#39;</span>),<span class="dt">data =</span> final.train)</span>
+<span id="cb43-2"><a href="modeling.html#cb43-2"></a><span class="kw">summary</span>(final.log.model1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = Survived ~ ., family = binomial(link = &quot;logit&quot;), 
+##     data = final.train)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.8315  -0.5604  -0.4093   0.6175   2.4904  
+## 
+## Coefficients:
+##               Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)  3.804e+00  6.208e-01   6.128 8.89e-10 ***
+## Pclass2     -1.236e+00  3.812e-01  -3.243 0.001183 ** 
+## Pclass3     -2.166e+00  3.839e-01  -5.642 1.68e-08 ***
+## Sexmale     -2.666e+00  2.465e-01 -10.814  &lt; 2e-16 ***
+## Age         -3.836e-02  1.035e-02  -3.708 0.000209 ***
+## SibSp1      -2.380e-02  2.756e-01  -0.086 0.931185    
+## SibSp2      -4.016e-01  6.466e-01  -0.621 0.534536    
+## SibSp3      -2.329e+00  9.000e-01  -2.588 0.009649 ** 
+## SibSp4      -1.196e+00  8.305e-01  -1.440 0.149805    
+## SibSp5      -1.603e+01  9.589e+02  -0.017 0.986662    
+## SibSp8      -1.633e+01  1.003e+03  -0.016 0.987012    
+## Parch1       7.287e-01  3.548e-01   2.054 0.040007 *  
+## Parch2       1.368e-01  4.506e-01   0.304 0.761476    
+## Parch3       7.904e-01  1.229e+00   0.643 0.520061    
+## Parch4      -1.498e+01  1.551e+03  -0.010 0.992294    
+## Parch5      -1.221e-02  1.379e+00  -0.009 0.992935    
+## Parch6      -1.635e+01  2.400e+03  -0.007 0.994563    
+## Fare         3.145e-03  3.097e-03   1.015 0.309957    
+## EmbarkedQ    1.019e-01  4.509e-01   0.226 0.821153    
+## EmbarkedS   -3.269e-01  2.905e-01  -1.125 0.260600    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 829.60  on 622  degrees of freedom
+## Residual deviance: 530.82  on 603  degrees of freedom
+## AIC: 570.82
+## 
+## Number of Fisher Scoring iterations: 15</code></pre>
+<ul>
+<li>테스트 데이터로 스코어링 수행</li>
+</ul>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="modeling.html#cb45-1"></a>fitted.probabilities1 &lt;-<span class="st"> </span><span class="kw">predict</span>(final.log.model1,<span class="dt">newdata=</span>final.test,<span class="dt">type=</span><span class="st">&#39;response&#39;</span>)</span></code></pre></div>
+<ul>
+<li>스코어링 결과에서 0.5 가 넘는 것(생존)은 1, 0.5 이하(사망)은 0 으로</li>
+</ul>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="modeling.html#cb46-1"></a>fitted.results1 &lt;-<span class="st"> </span><span class="kw">ifelse</span>(fitted.probabilities1 <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span></code></pre></div>
+<ul>
+<li>스코어링 결과 와 테스트 데이터의 라벨을 비교해서 <strong>오분류율</strong>을 구하고 1에서 오분류 율을 빼서 <strong>정답율</strong> 을 구합니다.</li>
+</ul>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="modeling.html#cb47-1"></a>misClasificError &lt;-<span class="st"> </span><span class="kw">mean</span>(fitted.results1 <span class="op">!=</span><span class="st"> </span>final.test<span class="op">$</span>Survived)</span>
+<span id="cb47-2"><a href="modeling.html#cb47-2"></a></span>
+<span id="cb47-3"><a href="modeling.html#cb47-3"></a></span>
+<span id="cb47-4"><a href="modeling.html#cb47-4"></a><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&#39;Accuracy&#39;</span>,<span class="dv">1</span><span class="op">-</span>misClasificError))</span></code></pre></div>
+<pre><code>## [1] &quot;Accuracy 0.798507462686567&quot;</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="modeling.html#cb49-1"></a>final.test<span class="op">$</span>Survived</span></code></pre></div>
+<pre><code>##   [1] 1 0 1 0 1 1 0 0 0 1 0 1 0 0 1 0 0 1 1 1 0 0 0 0 1 0 1 0 0 0 1 1 0 0 0 0 1
+##  [38] 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 1 0 0 1 1 0 1 0 1 0
+##  [75] 0 0 0 0 1 0 0 1 0 0 0 1 1 0 0 0 0 0 0 1 1 1 1 0 1 1 0 1 1 1 1 1 0 0 0 0 1
+## [112] 0 1 1 1 1 1 0 0 0 1 1 0 0 1 1 0 1 1 0 0 1 1 1 1 0 0 0 1 1 0 0 1 0 1 1 1 0
+## [149] 0 0 0 0 0 0 1 1 0 0 1 1 0 1 0 0 0 0 1 1 0 1 1 1 0 0 0 0 1 1 1 0 1 1 0 1 0
+## [186] 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 1 1 0 0 0 0 0 0 1 0 1 0 0
+## [223] 0 1 1 1 0 0 0 0 0 0 1 0 1 1 1 0 0 0 0 1 0 0 0 0 0 1 1 1 1 0 0 1 1 1 0 0 0
+## [260] 0 1 0 1 0 0 1 0 1
+## Levels: 0 1</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="modeling.html#cb51-1"></a><span class="kw">table</span>(final.test<span class="op">$</span>Survived, fitted.probabilities1 <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>)</span></code></pre></div>
+<pre><code>##    
+##     FALSE TRUE
+##   0   140   25
+##   1    29   74</code></pre>
+</div>
+<div id="ClassID10-16" class="section level4">
+<h4><span class="header-section-number">10.2.1.6</span> 모델 평가</h4>
+<ul>
+<li>모델평가를 테스트로 하기 휘해서 Logistic Regression 에서 특정 변수만 넣어서서 모델을 하나 더 만들고 기존 모델과 성능을 평가해 보도록 하겠습니다.</li>
+</ul>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="modeling.html#cb53-1"></a><span class="co">#install.packages(&quot;ROCR&quot;)</span></span>
+<span id="cb53-2"><a href="modeling.html#cb53-2"></a><span class="kw">library</span>(ROCR) <span class="co"># ROC 커브를 그리기 위한 패키지</span></span>
+<span id="cb53-3"><a href="modeling.html#cb53-3"></a><span class="co"># 두번째 모델을 훈련 시킵니다.</span></span>
+<span id="cb53-4"><a href="modeling.html#cb53-4"></a>final.log.model2 &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="dt">formula=</span>Survived <span class="op">~</span><span class="st"> </span>Pclass  <span class="op">+</span><span class="st"> </span>Fare  , <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link=</span><span class="st">&#39;logit&#39;</span>),<span class="dt">data =</span> final.train)</span>
+<span id="cb53-5"><a href="modeling.html#cb53-5"></a><span class="co"># 테스트 데이터로 동일하게 스코어링 수행</span></span>
+<span id="cb53-6"><a href="modeling.html#cb53-6"></a>fitted.probabilities2 &lt;-<span class="st"> </span><span class="kw">predict</span>(final.log.model2,<span class="dt">newdata=</span>final.test,<span class="dt">type=</span><span class="st">&#39;response&#39;</span>)</span></code></pre></div>
+<ul>
+<li>이제부터는 prediction 함수를 이용해서 라벨(정답) 값에 대한 예측정확도를 구합니다.</li>
+<li>첫번째 모델과 두번째 모델을 모두 구합니다.</li>
+</ul>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="modeling.html#cb54-1"></a>predict1 &lt;-<span class="st"> </span><span class="kw">prediction</span>(fitted.probabilities1 , final.test<span class="op">$</span>Survived )</span>
+<span id="cb54-2"><a href="modeling.html#cb54-2"></a>predict2 &lt;-<span class="st"> </span><span class="kw">prediction</span>(fitted.probabilities2 , final.test<span class="op">$</span>Survived )</span></code></pre></div>
+<ul>
+<li>정확도를 이용해서 Performance 함수를 이용해서 모델의 성능을 구합니다. 여기서 말하는 성능은 Confusion Matrix 에서 TPR(민감도) FPR(특이도) 을 반환 합니다.</li>
+</ul>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="modeling.html#cb55-1"></a><span class="co"># 첫번째 모델에 대한 ROC 커브를 그립니다. </span></span>
+<span id="cb55-2"><a href="modeling.html#cb55-2"></a></span>
+<span id="cb55-3"><a href="modeling.html#cb55-3"></a>perf1 &lt;-<span class="st"> </span><span class="kw">performance</span>(predict1, <span class="st">&quot;tpr&quot;</span>, <span class="st">&quot;fpr&quot;</span>) </span>
+<span id="cb55-4"><a href="modeling.html#cb55-4"></a></span>
+<span id="cb55-5"><a href="modeling.html#cb55-5"></a>perf2 &lt;-<span class="st"> </span><span class="kw">performance</span>(predict2, <span class="st">&quot;tpr&quot;</span>, <span class="st">&quot;fpr&quot;</span>) </span>
+<span id="cb55-6"><a href="modeling.html#cb55-6"></a></span>
+<span id="cb55-7"><a href="modeling.html#cb55-7"></a><span class="co"># 2개의 ROC 곡선을 하나의 차트에 그립니다.</span></span>
+<span id="cb55-8"><a href="modeling.html#cb55-8"></a><span class="kw">plot</span>(perf1, <span class="dt">col=</span><span class="dv">1</span>) </span>
+<span id="cb55-9"><a href="modeling.html#cb55-9"></a><span class="kw">par</span>(<span class="dt">new=</span>T) <span class="co"># 첫번째 차트에 추가 해도됨.(같이 겹쳐그리기 위해)</span></span>
+<span id="cb55-10"><a href="modeling.html#cb55-10"></a><span class="kw">plot</span>(perf2, <span class="dt">col=</span><span class="dv">2</span>) </span>
+<span id="cb55-11"><a href="modeling.html#cb55-11"></a><span class="kw">legend</span>(<span class="fl">0.6</span>,<span class="fl">0.6</span>, <span class="kw">c</span>(<span class="st">&quot;model1&quot;</span>, <span class="st">&quot;model2&quot;</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="modeling.html#cb56-1"></a><span class="co"># ggplot 으로 그릴 경우</span></span>
+<span id="cb56-2"><a href="modeling.html#cb56-2"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb56-3"><a href="modeling.html#cb56-3"></a>df1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">modelNo=</span><span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="st">&quot;model1&quot;</span>, <span class="dt">each=</span><span class="kw">length</span>(perf1<span class="op">@</span>x.values[[<span class="dv">1</span>]]))),</span>
+<span id="cb56-4"><a href="modeling.html#cb56-4"></a>                  <span class="dt">FalsePositive=</span><span class="kw">c</span>(perf1<span class="op">@</span>x.values[[<span class="dv">1</span>]]),</span>
+<span id="cb56-5"><a href="modeling.html#cb56-5"></a>                  <span class="dt">TruePositive=</span><span class="kw">c</span>(perf1<span class="op">@</span>y.values[[<span class="dv">1</span>]])</span>
+<span id="cb56-6"><a href="modeling.html#cb56-6"></a>)</span>
+<span id="cb56-7"><a href="modeling.html#cb56-7"></a></span>
+<span id="cb56-8"><a href="modeling.html#cb56-8"></a>df2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">modelNo=</span><span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="st">&quot;model2&quot;</span>, <span class="dt">each=</span><span class="kw">length</span>(perf2<span class="op">@</span>x.values[[<span class="dv">1</span>]]))),</span>
+<span id="cb56-9"><a href="modeling.html#cb56-9"></a>                  <span class="dt">FalsePositive=</span><span class="kw">c</span>(perf2<span class="op">@</span>x.values[[<span class="dv">1</span>]]),</span>
+<span id="cb56-10"><a href="modeling.html#cb56-10"></a>                  <span class="dt">TruePositive=</span><span class="kw">c</span>(perf2<span class="op">@</span>y.values[[<span class="dv">1</span>]])</span>
+<span id="cb56-11"><a href="modeling.html#cb56-11"></a>)</span>
+<span id="cb56-12"><a href="modeling.html#cb56-12"></a>df =<span class="st"> </span><span class="kw">rbind</span>(df1,df2)</span>
+<span id="cb56-13"><a href="modeling.html#cb56-13"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>df, <span class="kw">aes</span>(<span class="dt">x=</span>FalsePositive, <span class="dt">y=</span>TruePositive, <span class="dt">color=</span>modelNo, <span class="dt">group=</span>modelNo)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb56-14"><a href="modeling.html#cb56-14"></a><span class="st">  </span><span class="kw">geom_line</span>() </span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-33-2.png" width="672" /></p>
+<ul>
+<li>실제 model 2 오분류 율을 확인해 봅니다.</li>
+</ul>
+</div>
+</div>
+<div id="ClassID10-17" class="section level3">
+<h3><span class="header-section-number">10.2.2</span> K-Nearest Neighbors(K-NN)</h3>
+<ul>
+<li>KNN 을 적용하여 수집된 정보를 바탕으로 고객이 Caraban 을 살것인지 말것인지를 예측하는 실습 을 해보겠습니다.</li>
+</ul>
+<div id="ClassID10-18" class="section level4">
+<h4><span class="header-section-number">10.2.2.1</span> 데이터 다운로드</h4>
+<ul>
+<li>데이터는 ISLR 패키지에 있습니다. 설치 하고 library 함수를 이용해 불러옵니다.</li>
+</ul>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="modeling.html#cb57-1"></a><span class="kw">install.packages</span>(<span class="st">&#39;ISLR&#39;</span>,<span class="dt">repos =</span> <span class="st">&#39;http://cran.us.r-project.org&#39;</span>)</span></code></pre></div>
+<pre><code>## 
+## The downloaded binary packages are in
+##  /var/folders/_s/qv4lpf3j145_26xj17248kgc0000gn/T//RtmptuqYIF/downloaded_packages</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="modeling.html#cb59-1"></a><span class="kw">library</span>(ISLR)</span></code></pre></div>
+</div>
+<div id="ClassID10-19" class="section level4">
+<h4><span class="header-section-number">10.2.2.2</span> 데이터 정규화(Scaling)</h4>
+<ul>
+<li>KNN 은 가까운 이웃간의 공간 거리로 분류를 하는 모델이기 때문에 데이터 표준화가 매우 중요합니다.</li>
+<li>첫번째, 두번째 데이터의 분포(Variance) 를 확인해보면 차이가 큽니다.</li>
+</ul>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="modeling.html#cb60-1"></a><span class="co"># 첫번때 Feature 와 두번째 Feature 의 데이터 분포를 확인 합니다.</span></span>
+<span id="cb60-2"><a href="modeling.html#cb60-2"></a><span class="kw">var</span>(Caravan[,<span class="dv">1</span>]) <span class="co"># 데이터 분포(Variance) 를 확인합니다.</span></span></code></pre></div>
+<pre><code>## [1] 165.0378</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="modeling.html#cb62-1"></a><span class="kw">var</span>(Caravan[,<span class="dv">2</span>]) <span class="co"># 데이터 분포(Variance) 를 확인합니다.</span></span></code></pre></div>
+<pre><code>## [1] 0.1647078</code></pre>
+<ul>
+<li>레이블(정답) 데이터를 제외함 모든 데이터에 대해 정규화를 수행합니다.</li>
+</ul>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="modeling.html#cb64-1"></a><span class="co"># 레이블 컬럼을 따로 저장 해둡니다.</span></span>
+<span id="cb64-2"><a href="modeling.html#cb64-2"></a>stdCaraban &lt;-<span class="st"> </span>Caravan <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(<span class="op">-</span>Purchase), scale)</span>
+<span id="cb64-3"><a href="modeling.html#cb64-3"></a><span class="kw">var</span>(stdCaraban[,<span class="dv">1</span>])</span></code></pre></div>
+<pre><code>##      [,1]
+## [1,]    1</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="modeling.html#cb66-1"></a><span class="kw">var</span>(stdCaraban[,<span class="dv">2</span>])</span></code></pre></div>
+<pre><code>##      [,1]
+## [1,]    1</code></pre>
+</div>
+<div id="ClassID10-20" class="section level4">
+<h4><span class="header-section-number">10.2.2.3</span> 훈련데이터와 테스트 데이터 나누기</h4>
+<ul>
+<li>knn 모델 함수는 인자로 훈련데이터, 테스트 데이터, 훈련데이터 레이블 을 받습니다.</li>
+<li>일반적인 머신러닝 함수들은 훈련데이터에 레이블을 포함해서 받지만, knn 함수는 따로 분리해서 인자를 받기 때문에 <strong>데이터셋을 나룰때 레이블도 같이 나누어 주어야</strong> 합니다.</li>
+</ul>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="modeling.html#cb68-1"></a><span class="kw">library</span>(caTools)</span>
+<span id="cb68-2"><a href="modeling.html#cb68-2"></a><span class="kw">set.seed</span>(<span class="dv">101</span>)</span>
+<span id="cb68-3"><a href="modeling.html#cb68-3"></a></span>
+<span id="cb68-4"><a href="modeling.html#cb68-4"></a>split =<span class="st"> </span><span class="kw">sample.split</span>(stdCaraban<span class="op">$</span>Purchase, <span class="dt">SplitRatio =</span> <span class="fl">0.70</span>)</span>
+<span id="cb68-5"><a href="modeling.html#cb68-5"></a></span>
+<span id="cb68-6"><a href="modeling.html#cb68-6"></a></span>
+<span id="cb68-7"><a href="modeling.html#cb68-7"></a>knn.train.data &lt;-<span class="st">  </span><span class="kw">subset</span>(stdCaraban, split <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>)  <span class="co"># 훈련데이터  수집</span></span>
+<span id="cb68-8"><a href="modeling.html#cb68-8"></a>knn.train.purchase &lt;-<span class="st"> </span>knn.train.data<span class="op">$</span>Purchase    <span class="co"># 훈련데이터 레이블 따로 저장</span></span>
+<span id="cb68-9"><a href="modeling.html#cb68-9"></a>knn.train.data &lt;-<span class="st"> </span>knn.train.data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select_at</span>(<span class="kw">vars</span>(<span class="op">-</span>Purchase)) <span class="co"># 훈련데이터 에서 레이블 제거</span></span>
+<span id="cb68-10"><a href="modeling.html#cb68-10"></a></span>
+<span id="cb68-11"><a href="modeling.html#cb68-11"></a></span>
+<span id="cb68-12"><a href="modeling.html#cb68-12"></a>knn.test.data &lt;-<span class="st">  </span><span class="kw">subset</span>(stdCaraban, split <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>)  <span class="co"># 테스트데이터  수집</span></span>
+<span id="cb68-13"><a href="modeling.html#cb68-13"></a>knn.test.purchase &lt;-<span class="st"> </span>knn.test.data<span class="op">$</span>Purchase     <span class="co"># 테스트데이터 레이블 따로 저장</span></span>
+<span id="cb68-14"><a href="modeling.html#cb68-14"></a>knn.test.data &lt;-<span class="st"> </span>knn.test.data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select_at</span>(<span class="kw">vars</span>(<span class="op">-</span>Purchase)) <span class="co"># 테스트데이터 에서 레이블 제거</span></span></code></pre></div>
+</div>
+<div id="ClassID10-21" class="section level4">
+<h4><span class="header-section-number">10.2.2.4</span> KNN 모델 만들기</h4>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="modeling.html#cb69-1"></a><span class="kw">library</span>(class)</span>
+<span id="cb69-2"><a href="modeling.html#cb69-2"></a></span>
+<span id="cb69-3"><a href="modeling.html#cb69-3"></a>knn.predicted.purchase1 &lt;-<span class="st"> </span><span class="kw">knn</span>(knn.train.data, knn.test.data, knn.train.purchase,<span class="dt">k=</span><span class="dv">1</span>)</span>
+<span id="cb69-4"><a href="modeling.html#cb69-4"></a><span class="kw">head</span>(knn.predicted.purchase1)</span></code></pre></div>
+<pre><code>## [1] No  No  No  Yes No  No 
+## Levels: No Yes</code></pre>
+<ul>
+<li>오분류 퍼센트를 알아봅니다.</li>
+</ul>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="modeling.html#cb71-1"></a><span class="kw">mean</span>(knn.test.purchase <span class="op">!=</span><span class="st"> </span>knn.predicted.purchase1)</span></code></pre></div>
+<pre><code>## [1] 0.1134021</code></pre>
+</div>
+<div id="ClassID10-22" class="section level4">
+<h4><span class="header-section-number">10.2.2.5</span> 적당한 K 값찾기</h4>
+<ul>
+<li>k 값을 3으로 주었을때</li>
+</ul>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="modeling.html#cb73-1"></a>knn.predicted.purchase3 &lt;-<span class="st"> </span><span class="kw">knn</span>(knn.train.data, knn.test.data, knn.train.purchase,<span class="dt">k=</span><span class="dv">3</span>)</span>
+<span id="cb73-2"><a href="modeling.html#cb73-2"></a><span class="kw">mean</span>(knn.test.purchase <span class="op">!=</span><span class="st"> </span>knn.predicted.purchase3)</span></code></pre></div>
+<pre><code>## [1] 0.07216495</code></pre>
+<ul>
+<li>k 값을 5로 주었을때</li>
+</ul>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="modeling.html#cb75-1"></a>knn.predicted.purchase5 &lt;-<span class="st"> </span><span class="kw">knn</span>(knn.train.data, knn.test.data, knn.train.purchase,<span class="dt">k=</span><span class="dv">5</span>)</span>
+<span id="cb75-2"><a href="modeling.html#cb75-2"></a><span class="kw">mean</span>(knn.test.purchase <span class="op">!=</span><span class="st"> </span>knn.predicted.purchase5)</span></code></pre></div>
+<pre><code>## [1] 0.06414662</code></pre>
+</div>
+<div id="ClassID10-23" class="section level4">
+<h4><span class="header-section-number">10.2.2.6</span> k 값 자동으로 찾기</h4>
+<p>우리가 1주차에 배운 for 루프를 써서 k 값을 자동으로 찾아 봅시다</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="modeling.html#cb77-1"></a>knn.predicted.purchase =<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb77-2"><a href="modeling.html#cb77-2"></a>error.rate =<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb77-3"><a href="modeling.html#cb77-3"></a></span>
+<span id="cb77-4"><a href="modeling.html#cb77-4"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>){</span>
+<span id="cb77-5"><a href="modeling.html#cb77-5"></a>    knn.predicted.purchase =<span class="st"> </span><span class="kw">knn</span>(knn.train.data, knn.test.data, knn.train.purchase,<span class="dt">k=</span>i)</span>
+<span id="cb77-6"><a href="modeling.html#cb77-6"></a>    error.rate[i] =<span class="st"> </span><span class="kw">mean</span>(knn.test.purchase <span class="op">!=</span><span class="st"> </span>knn.predicted.purchase)</span>
+<span id="cb77-7"><a href="modeling.html#cb77-7"></a>}</span>
+<span id="cb77-8"><a href="modeling.html#cb77-8"></a></span>
+<span id="cb77-9"><a href="modeling.html#cb77-9"></a><span class="kw">print</span>(error.rate)</span></code></pre></div>
+<pre><code>##  [1] 0.11340206 0.10710195 0.07331042 0.07159221 0.06357388 0.06357388
+##  [7] 0.06071019 0.06071019 0.06071019 0.06128293 0.05956472 0.05956472
+## [13] 0.05899198 0.05899198 0.05899198 0.05899198 0.05956472 0.05956472
+## [19] 0.05956472 0.05956472</code></pre>
+</div>
+<div id="ClassID10-24" class="section level4">
+<h4><span class="header-section-number">10.2.2.7</span> Elbow 방법을 통한 k 값찾기</h4>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="modeling.html#cb79-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb79-2"><a href="modeling.html#cb79-2"></a>k.values &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">20</span></span>
+<span id="cb79-3"><a href="modeling.html#cb79-3"></a>error.df &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(error.rate,k.values)</span>
+<span id="cb79-4"><a href="modeling.html#cb79-4"></a></span>
+<span id="cb79-5"><a href="modeling.html#cb79-5"></a>error.df</span></code></pre></div>
+<pre><code>## # A tibble: 20 x 1
+##     value
+##     &lt;dbl&gt;
+##  1 0.113 
+##  2 0.107 
+##  3 0.0733
+##  4 0.0716
+##  5 0.0636
+##  6 0.0636
+##  7 0.0607
+##  8 0.0607
+##  9 0.0607
+## 10 0.0613
+## 11 0.0596
+## 12 0.0596
+## 13 0.0590
+## 14 0.0590
+## 15 0.0590
+## 16 0.0590
+## 17 0.0596
+## 18 0.0596
+## 19 0.0596
+## 20 0.0596</code></pre>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="modeling.html#cb81-1"></a>error.df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>k.values,<span class="dt">y=</span>error.rate)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb81-2"><a href="modeling.html#cb81-2"></a><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>(<span class="dt">color=</span><span class="st">&#39;red&#39;</span>) <span class="op">+</span></span>
+<span id="cb81-3"><a href="modeling.html#cb81-3"></a><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">20</span>, <span class="dv">1</span>))</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+</div>
+</div>
+<div id="ClassID10-25" class="section level3">
+<h3><span class="header-section-number">10.2.3</span> Support Vector Machine(SVM)</h3>
+<ul>
+<li>support vector Machine 을 이용해서 소셜광고 후에 나이와 연봉을 수집해서 제품을 구매 할 고객인지 아닌지 예측 하는 모델을 만들어 보겠습니다.</li>
+</ul>
+<div id="ClassID10-26" class="section level4">
+<h4><span class="header-section-number">10.2.3.1</span> 데이터셋 가져와서 테스트데이터와 훈련데이터 나누기</h4>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="modeling.html#cb82-1"></a><span class="co"># Support Vector Machine (SVM)</span></span>
+<span id="cb82-2"><a href="modeling.html#cb82-2"></a></span>
+<span id="cb82-3"><a href="modeling.html#cb82-3"></a><span class="co"># Importing the dataset</span></span>
+<span id="cb82-4"><a href="modeling.html#cb82-4"></a>dataset =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;Social_Network_Ads.csv&#39;</span>)</span>
+<span id="cb82-5"><a href="modeling.html#cb82-5"></a><span class="co">#dataset</span></span>
+<span id="cb82-6"><a href="modeling.html#cb82-6"></a>dataset =<span class="st"> </span>dataset[<span class="dv">3</span><span class="op">:</span><span class="dv">5</span>]</span>
+<span id="cb82-7"><a href="modeling.html#cb82-7"></a></span>
+<span id="cb82-8"><a href="modeling.html#cb82-8"></a><span class="co"># 레이블을 factor형으로 변형 합니다.</span></span>
+<span id="cb82-9"><a href="modeling.html#cb82-9"></a>dataset<span class="op">$</span>Purchased =<span class="st"> </span><span class="kw">factor</span>(dataset<span class="op">$</span>Purchased, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb82-10"><a href="modeling.html#cb82-10"></a></span>
+<span id="cb82-11"><a href="modeling.html#cb82-11"></a><span class="co"># 훈련데이터 와 테스트 데이터로 나누기</span></span>
+<span id="cb82-12"><a href="modeling.html#cb82-12"></a><span class="co"># install.packages(&#39;caTools&#39;)</span></span>
+<span id="cb82-13"><a href="modeling.html#cb82-13"></a><span class="kw">library</span>(caTools)</span>
+<span id="cb82-14"><a href="modeling.html#cb82-14"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb82-15"><a href="modeling.html#cb82-15"></a>split =<span class="st"> </span><span class="kw">sample.split</span>(dataset<span class="op">$</span>Purchased, <span class="dt">SplitRatio =</span> <span class="fl">0.75</span>) <span class="co"># 이번에는 0.75 로 나눠 봅니다.</span></span>
+<span id="cb82-16"><a href="modeling.html#cb82-16"></a>svm.train.data =<span class="st"> </span><span class="kw">subset</span>(dataset, split <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>)</span>
+<span id="cb82-17"><a href="modeling.html#cb82-17"></a>svm.test.data =<span class="st"> </span><span class="kw">subset</span>(dataset, split <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>)</span></code></pre></div>
+</div>
+<div id="ClassID10-27" class="section level4">
+<h4><span class="header-section-number">10.2.3.2</span> 데이터 전처리</h4>
+<ul>
+<li>svm 동일 하나의 공간에서 Support Vector 를 이용해서 구분하기 때문에 Feature 에 대한 Scale이 필요합니다.</li>
+</ul>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="modeling.html#cb83-1"></a><span class="co"># Feature 스케일링 : 이번에는 mutate 함수를 사용하지 않고 더간단한게 scale 함수를 적용합니다.</span></span>
+<span id="cb83-2"><a href="modeling.html#cb83-2"></a>svm.train.data[<span class="op">-</span><span class="dv">3</span>] =<span class="st"> </span><span class="kw">scale</span>(svm.train.data[<span class="op">-</span><span class="dv">3</span>]) </span>
+<span id="cb83-3"><a href="modeling.html#cb83-3"></a>svm.test.data[<span class="op">-</span><span class="dv">3</span>] =<span class="st"> </span><span class="kw">scale</span>(svm.test.data[<span class="op">-</span><span class="dv">3</span>])</span>
+<span id="cb83-4"><a href="modeling.html#cb83-4"></a></span>
+<span id="cb83-5"><a href="modeling.html#cb83-5"></a><span class="co"># Fitting SVM to the Training set</span></span>
+<span id="cb83-6"><a href="modeling.html#cb83-6"></a><span class="co"># install.packages(&#39;e1071&#39;)</span></span></code></pre></div>
+</div>
+<div id="ClassID10-28" class="section level4">
+<h4><span class="header-section-number">10.2.3.3</span> SVM(linear) 함수를 이용해서 모델 만들고 fitting 하기</h4>
+<ul>
+<li>r 에서 제공하는 svm type 은 크게 4가지 종류가 있으며 <a href="http://www.statsoft.com/Textbook/Support-Vector-Machines#Classification%20SVM">svm-type</a> 을 참조면 됩니다.</li>
+<li>kernel 함수를 linear 를 사용해서 고차원 커널 트릭을 사용하지 않는 것으로 모델을 만들어 봅니다.</li>
+</ul>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="modeling.html#cb84-1"></a><span class="co">#install.packages(&quot;e1071&quot;)</span></span>
+<span id="cb84-2"><a href="modeling.html#cb84-2"></a><span class="kw">library</span>(e1071)</span>
+<span id="cb84-3"><a href="modeling.html#cb84-3"></a>svm.fitted.model1 =<span class="st"> </span><span class="kw">svm</span>(<span class="dt">formula =</span> Purchased <span class="op">~</span><span class="st"> </span>.,</span>
+<span id="cb84-4"><a href="modeling.html#cb84-4"></a>                 <span class="dt">data =</span> svm.train.data,</span>
+<span id="cb84-5"><a href="modeling.html#cb84-5"></a>                 <span class="dt">type =</span> <span class="st">&#39;C-classification&#39;</span>,</span>
+<span id="cb84-6"><a href="modeling.html#cb84-6"></a>                 <span class="dt">kernel =</span> <span class="st">&#39;linear&#39;</span>,</span>
+<span id="cb84-7"><a href="modeling.html#cb84-7"></a>                 <span class="dt">probability=</span><span class="ot">TRUE</span>)</span>
+<span id="cb84-8"><a href="modeling.html#cb84-8"></a></span>
+<span id="cb84-9"><a href="modeling.html#cb84-9"></a></span>
+<span id="cb84-10"><a href="modeling.html#cb84-10"></a><span class="co"># 테스트 데이터로 스코어링</span></span>
+<span id="cb84-11"><a href="modeling.html#cb84-11"></a>svm.predicted.purchase1 =<span class="st"> </span><span class="kw">predict</span>(svm.fitted.model1, <span class="dt">newdata =</span> svm.test.data[<span class="op">-</span><span class="dv">3</span>],<span class="dt">decision.values=</span><span class="ot">TRUE</span>)</span></code></pre></div>
+</div>
+<div id="ClassID10-29" class="section level4">
+<h4><span class="header-section-number">10.2.3.4</span> 예측 결과 테이블 확인</h4>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="modeling.html#cb85-1"></a><span class="co"># Making the Confusion Matrix</span></span>
+<span id="cb85-2"><a href="modeling.html#cb85-2"></a>cm1 =<span class="st"> </span><span class="kw">table</span>(svm.test.data<span class="op">$</span>Purchased, svm.predicted.purchase1)</span>
+<span id="cb85-3"><a href="modeling.html#cb85-3"></a>cm1</span></code></pre></div>
+<pre><code>##    svm.predicted.purchase1
+##      0  1
+##   0 57  7
+##   1 13 23</code></pre>
+</div>
+<div id="ClassID10-30" class="section level4">
+<h4><span class="header-section-number">10.2.3.5</span> SVM(RBF) 함수를 이용해서 모델 만들고 fitting 하기</h4>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="modeling.html#cb87-1"></a><span class="kw">library</span>(e1071)</span>
+<span id="cb87-2"><a href="modeling.html#cb87-2"></a>svm.fitted.model2=<span class="st"> </span><span class="kw">svm</span>(<span class="dt">formula =</span> Purchased <span class="op">~</span><span class="st"> </span>.,</span>
+<span id="cb87-3"><a href="modeling.html#cb87-3"></a>                 <span class="dt">data =</span> svm.train.data,</span>
+<span id="cb87-4"><a href="modeling.html#cb87-4"></a>                 <span class="dt">type =</span> <span class="st">&#39;C-classification&#39;</span>,</span>
+<span id="cb87-5"><a href="modeling.html#cb87-5"></a>                 <span class="dt">kernel =</span> <span class="st">&#39;radial&#39;</span>, <span class="co"># RBF 커널 적용</span></span>
+<span id="cb87-6"><a href="modeling.html#cb87-6"></a>                 <span class="dt">probability=</span><span class="ot">TRUE</span>) </span>
+<span id="cb87-7"><a href="modeling.html#cb87-7"></a></span>
+<span id="cb87-8"><a href="modeling.html#cb87-8"></a></span>
+<span id="cb87-9"><a href="modeling.html#cb87-9"></a><span class="co"># 두번째 모델 테스트 데이터로 스코어링</span></span>
+<span id="cb87-10"><a href="modeling.html#cb87-10"></a>svm.predicted.purchase2  =<span class="st"> </span><span class="kw">predict</span>(svm.fitted.model2, <span class="dt">newdata =</span> svm.test.data[<span class="op">-</span><span class="dv">3</span>], <span class="dt">decision.values=</span><span class="ot">TRUE</span>)</span>
+<span id="cb87-11"><a href="modeling.html#cb87-11"></a></span>
+<span id="cb87-12"><a href="modeling.html#cb87-12"></a>cm2=<span class="st"> </span><span class="kw">table</span>(svm.test.data<span class="op">$</span>Purchased, svm.predicted.purchase2)</span>
+<span id="cb87-13"><a href="modeling.html#cb87-13"></a>cm2</span></code></pre></div>
+<pre><code>##    svm.predicted.purchase2
+##      0  1
+##   0 58  6
+##   1  4 32</code></pre>
+</div>
+<div id="ClassID10-31" class="section level4">
+<h4><span class="header-section-number">10.2.3.6</span> ROC 커브그리기</h4>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="modeling.html#cb89-1"></a><span class="co">#install.packages(&quot;ROCR&quot;)</span></span>
+<span id="cb89-2"><a href="modeling.html#cb89-2"></a><span class="kw">library</span>(ROCR) <span class="co"># ROC 커브를 그리기 위한 패키지</span></span>
+<span id="cb89-3"><a href="modeling.html#cb89-3"></a></span>
+<span id="cb89-4"><a href="modeling.html#cb89-4"></a><span class="co"># </span></span>
+<span id="cb89-5"><a href="modeling.html#cb89-5"></a>svm.prob1&lt;-<span class="kw">attr</span>(svm.predicted.purchase1,<span class="st">&quot;decision.values&quot;</span>)</span>
+<span id="cb89-6"><a href="modeling.html#cb89-6"></a>svm.prob2&lt;-<span class="kw">attr</span>(svm.predicted.purchase2,<span class="st">&quot;decision.values&quot;</span>)</span>
+<span id="cb89-7"><a href="modeling.html#cb89-7"></a></span>
+<span id="cb89-8"><a href="modeling.html#cb89-8"></a>predict1 &lt;-<span class="st"> </span><span class="kw">prediction</span>(svm.prob1 , svm.test.data<span class="op">$</span>Purchased )</span>
+<span id="cb89-9"><a href="modeling.html#cb89-9"></a>predict2 &lt;-<span class="st"> </span><span class="kw">prediction</span>(svm.prob2 , svm.test.data<span class="op">$</span>Purchased )</span>
+<span id="cb89-10"><a href="modeling.html#cb89-10"></a></span>
+<span id="cb89-11"><a href="modeling.html#cb89-11"></a></span>
+<span id="cb89-12"><a href="modeling.html#cb89-12"></a><span class="co"># 각각의 모델의 대한 TRP/ FPR 은 구합니다. </span></span>
+<span id="cb89-13"><a href="modeling.html#cb89-13"></a>perf1 &lt;-<span class="st"> </span><span class="kw">performance</span>(predict1, <span class="st">&quot;fpr&quot;</span>, <span class="st">&quot;tpr&quot;</span>) </span>
+<span id="cb89-14"><a href="modeling.html#cb89-14"></a>perf2 &lt;-<span class="st"> </span><span class="kw">performance</span>(predict2, <span class="st">&quot;fpr&quot;</span>, <span class="st">&quot;tpr&quot;</span>) </span>
+<span id="cb89-15"><a href="modeling.html#cb89-15"></a><span class="co"># 2개의 ROC 곡선을 하나의 차트에 그립니다.</span></span>
+<span id="cb89-16"><a href="modeling.html#cb89-16"></a><span class="kw">plot</span>(perf1, <span class="dt">col=</span><span class="dv">1</span>) </span>
+<span id="cb89-17"><a href="modeling.html#cb89-17"></a><span class="kw">par</span>(<span class="dt">new=</span>T) <span class="co"># 첫번째 차트에 추가 해도됨.(같이 겹쳐그리기 위해)</span></span>
+<span id="cb89-18"><a href="modeling.html#cb89-18"></a><span class="kw">plot</span>(perf2, <span class="dt">col=</span><span class="dv">2</span>) </span>
+<span id="cb89-19"><a href="modeling.html#cb89-19"></a><span class="kw">legend</span>(<span class="fl">0.6</span>,<span class="fl">0.6</span>, <span class="kw">c</span>(<span class="st">&quot;svm.linear&quot;</span>, <span class="st">&quot;svm.rbf&quot;</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+</div>
+</div>
+<div id="ClassID10-32" class="section level3">
+<h3><span class="header-section-number">10.2.4</span> Decision Tree Classification</h3>
+<ul>
+<li>Decision Tree 모델을 학습기위해 미국 대학교 정보를 바탕으로 사립 학교 인지 공립 하교 인지 맟추는 모델을 만들어 보겠습니다.</li>
+<li>college 데이터를 불러오기 위해 ISRL 라이브러리를 인스톨 하고 불러옵니다.</li>
+</ul>
+<div id="ClassID10-33" class="section level4">
+<h4><span class="header-section-number">10.2.4.1</span> 데이터셋 설명</h4>
+<ul>
+<li>데이터셋 설명</li>
+</ul>
+<pre><code>Private A factor with levels No and Yes indicating private or public university
+Apps Number of applications received
+Accept Number of applications accepted
+Enroll Number of new students enrolled
+Top10perc Pct. new students from top 10% of H.S. class
+Top25perc Pct. new students from top 25% of H.S. class
+F.Undergrad Number of fulltime undergraduates
+P.Undergrad Number of parttime undergraduates
+Outstate Out-of-state tuition
+Room.Board Room and board costs
+Books Estimated book costs
+Personal Estimated personal spending
+PhD Pct. of faculty with Ph.D.’s
+Terminal Pct. of faculty with terminal degree
+S.F.Ratio Student/faculty ratio
+perc.alumni Pct. alumni who donate
+Expend Instructional expenditure per student
+Grad.Rate Graduation rate</code></pre>
+</div>
+<div id="ClassID10-34" class="section level4">
+<h4><span class="header-section-number">10.2.4.2</span> 데이터 불러오고 EDA 수행하기</h4>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="modeling.html#cb91-1"></a><span class="co">#install.packages(&quot;ISRL&quot;)</span></span>
+<span id="cb91-2"><a href="modeling.html#cb91-2"></a><span class="kw">library</span>(ISLR)</span>
+<span id="cb91-3"><a href="modeling.html#cb91-3"></a><span class="kw">head</span>(College)</span></code></pre></div>
+<pre><code>##                              Private Apps Accept Enroll Top10perc Top25perc
+## Abilene Christian University     Yes 1660   1232    721        23        52
+## Adelphi University               Yes 2186   1924    512        16        29
+## Adrian College                   Yes 1428   1097    336        22        50
+## Agnes Scott College              Yes  417    349    137        60        89
+## Alaska Pacific University        Yes  193    146     55        16        44
+## Albertson College                Yes  587    479    158        38        62
+##                              F.Undergrad P.Undergrad Outstate Room.Board Books
+## Abilene Christian University        2885         537     7440       3300   450
+## Adelphi University                  2683        1227    12280       6450   750
+## Adrian College                      1036          99    11250       3750   400
+## Agnes Scott College                  510          63    12960       5450   450
+## Alaska Pacific University            249         869     7560       4120   800
+## Albertson College                    678          41    13500       3335   500
+##                              Personal PhD Terminal S.F.Ratio perc.alumni Expend
+## Abilene Christian University     2200  70       78      18.1          12   7041
+## Adelphi University               1500  29       30      12.2          16  10527
+## Adrian College                   1165  53       66      12.9          30   8735
+## Agnes Scott College               875  92       97       7.7          37  19016
+## Alaska Pacific University        1500  76       72      11.9           2  10922
+## Albertson College                 675  67       73       9.4          11   9727
+##                              Grad.Rate
+## Abilene Christian University        60
+## Adelphi University                  56
+## Adrian College                      54
+## Agnes Scott College                 59
+## Alaska Pacific University           15
+## Albertson College                   55</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="modeling.html#cb93-1"></a>df &lt;-<span class="st"> </span>College</span></code></pre></div>
+<ul>
+<li>데이터 분포를 표시해보고, 숙식비용 과 졸업 비율을 이용해 사립학교와 공립학교를 구분 해봅니다.</li>
+</ul>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="modeling.html#cb94-1"></a><span class="co">#install.packages(&quot;psych&quot;)</span></span>
+<span id="cb94-2"><a href="modeling.html#cb94-2"></a><span class="kw">library</span>(psych)</span>
+<span id="cb94-3"><a href="modeling.html#cb94-3"></a></span>
+<span id="cb94-4"><a href="modeling.html#cb94-4"></a><span class="kw">describe</span>(df) <span class="co"># psych 에서 제공</span></span></code></pre></div>
+<pre><code>##             vars   n     mean      sd median  trimmed     mad    min     max
+## Private*       1 777     1.73    0.45    2.0     1.78    0.00    1.0     2.0
+## Apps           2 777  3001.64 3870.20 1558.0  2193.01 1463.33   81.0 48094.0
+## Accept         3 777  2018.80 2451.11 1110.0  1510.29 1008.17   72.0 26330.0
+## Enroll         4 777   779.97  929.18  434.0   575.95  354.34   35.0  6392.0
+## Top10perc      5 777    27.56   17.64   23.0    25.13   13.34    1.0    96.0
+## Top25perc      6 777    55.80   19.80   54.0    55.12   20.76    9.0   100.0
+## F.Undergrad    7 777  3699.91 4850.42 1707.0  2574.88 1441.09  139.0 31643.0
+## P.Undergrad    8 777   855.30 1522.43  353.0   536.36  449.23    1.0 21836.0
+## Outstate       9 777 10440.67 4023.02 9990.0 10181.66 4121.63 2340.0 21700.0
+## Room.Board    10 777  4357.53 1096.70 4200.0  4301.70 1005.20 1780.0  8124.0
+## Books         11 777   549.38  165.11  500.0   535.22  148.26   96.0  2340.0
+## Personal      12 777  1340.64  677.07 1200.0  1268.35  593.04  250.0  6800.0
+## PhD           13 777    72.66   16.33   75.0    73.92   17.79    8.0   103.0
+## Terminal      14 777    79.70   14.72   82.0    81.10   14.83   24.0   100.0
+## S.F.Ratio     15 777    14.09    3.96   13.6    13.94    3.41    2.5    39.8
+## perc.alumni   16 777    22.74   12.39   21.0    21.86   13.34    0.0    64.0
+## Expend        17 777  9660.17 5221.77 8377.0  8823.70 2730.95 3186.0 56233.0
+## Grad.Rate     18 777    65.46   17.18   65.0    65.60   17.79   10.0   118.0
+##               range  skew kurtosis     se
+## Private*        1.0 -1.02    -0.96   0.02
+## Apps        48013.0  3.71    26.52 138.84
+## Accept      26258.0  3.40    18.75  87.93
+## Enroll       6357.0  2.68     8.74  33.33
+## Top10perc      95.0  1.41     2.17   0.63
+## Top25perc      91.0  0.26    -0.57   0.71
+## F.Undergrad 31504.0  2.60     7.61 174.01
+## P.Undergrad 21835.0  5.67    54.52  54.62
+## Outstate    19360.0  0.51    -0.43 144.32
+## Room.Board   6344.0  0.48    -0.20  39.34
+## Books        2244.0  3.47    28.06   5.92
+## Personal     6550.0  1.74     7.04  24.29
+## PhD            95.0 -0.77     0.54   0.59
+## Terminal       76.0 -0.81     0.22   0.53
+## S.F.Ratio      37.3  0.66     2.52   0.14
+## perc.alumni    64.0  0.60    -0.11   0.44
+## Expend      53047.0  3.45    18.59 187.33
+## Grad.Rate     108.0 -0.11    -0.22   0.62</code></pre>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="modeling.html#cb96-1"></a>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Room.Board,<span class="dt">y=</span>Grad.Rate)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>Private))</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<ul>
+<li>정규과정 재학생의 비율을 사립과 공립을 나누어 histogram 으로 빈도를 보겠습니다.</li>
+</ul>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="modeling.html#cb97-1"></a>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(F.Undergrad)) <span class="op">+</span></span>
+<span id="cb97-2"><a href="modeling.html#cb97-2"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">fill=</span>Private),<span class="dt">color=</span><span class="st">&#39;black&#39;</span>,<span class="dt">bins=</span><span class="dv">50</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<ul>
+<li>졸업율이 100% 가 넘는 학교가 있습니다. 확인해보고 100으로 맞추겠습니다.</li>
+</ul>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="modeling.html#cb98-1"></a>df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Grad.Rate =</span> <span class="kw">if_else</span>(Grad.Rate <span class="op">&gt;</span><span class="st"> </span><span class="dv">100</span>, <span class="dv">100</span>,Grad.Rate ))</span>
+<span id="cb98-2"><a href="modeling.html#cb98-2"></a><span class="kw">head</span>(df)</span></code></pre></div>
+<pre><code>##   Private Apps Accept Enroll Top10perc Top25perc F.Undergrad P.Undergrad
+## 1     Yes 1660   1232    721        23        52        2885         537
+## 2     Yes 2186   1924    512        16        29        2683        1227
+## 3     Yes 1428   1097    336        22        50        1036          99
+## 4     Yes  417    349    137        60        89         510          63
+## 5     Yes  193    146     55        16        44         249         869
+## 6     Yes  587    479    158        38        62         678          41
+##   Outstate Room.Board Books Personal PhD Terminal S.F.Ratio perc.alumni Expend
+## 1     7440       3300   450     2200  70       78      18.1          12   7041
+## 2    12280       6450   750     1500  29       30      12.2          16  10527
+## 3    11250       3750   400     1165  53       66      12.9          30   8735
+## 4    12960       5450   450      875  92       97       7.7          37  19016
+## 5     7560       4120   800     1500  76       72      11.9           2  10922
+## 6    13500       3335   500      675  67       73       9.4          11   9727
+##   Grad.Rate
+## 1        60
+## 2        56
+## 3        54
+## 4        59
+## 5        15
+## 6        55</code></pre>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="modeling.html#cb100-1"></a><span class="kw">write.csv</span>(</span>
+<span id="cb100-2"><a href="modeling.html#cb100-2"></a>  df,              <span class="co"># 파일에 저장할 데이터 프레임 또는 행렬</span></span>
+<span id="cb100-3"><a href="modeling.html#cb100-3"></a>  <span class="dt">file=</span><span class="st">&quot;/Users/dangtongbyun/Downloads/univ.csv&quot;</span>,        <span class="co"># 데이터를 저장할 파일명</span></span>
+<span id="cb100-4"><a href="modeling.html#cb100-4"></a>  <span class="dt">row.names=</span><span class="ot">TRUE</span>  <span class="co"># TRUE면 행 이름을 CSV 파일에 포함하여 저장한다.</span></span>
+<span id="cb100-5"><a href="modeling.html#cb100-5"></a>)</span></code></pre></div>
+</div>
+<div id="ClassID10-35" class="section level4">
+<h4><span class="header-section-number">10.2.4.3</span> 훈련데이터 테스트 데이터 나누기</h4>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="modeling.html#cb101-1"></a><span class="kw">library</span>(caTools)</span>
+<span id="cb101-2"><a href="modeling.html#cb101-2"></a></span>
+<span id="cb101-3"><a href="modeling.html#cb101-3"></a><span class="kw">set.seed</span>(<span class="dv">101</span>) </span>
+<span id="cb101-4"><a href="modeling.html#cb101-4"></a></span>
+<span id="cb101-5"><a href="modeling.html#cb101-5"></a>sample =<span class="st"> </span><span class="kw">sample.split</span>(df<span class="op">$</span>Private, <span class="dt">SplitRatio =</span> <span class="fl">0.70</span>)</span>
+<span id="cb101-6"><a href="modeling.html#cb101-6"></a>tree.train.data =<span class="st"> </span><span class="kw">subset</span>(df, sample <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>)</span>
+<span id="cb101-7"><a href="modeling.html#cb101-7"></a>tree.test.data =<span class="st"> </span><span class="kw">subset</span>(df, sample <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>)</span></code></pre></div>
+</div>
+<div id="decision-tree-를-이용한-모델-만들기" class="section level4">
+<h4><span class="header-section-number">10.2.4.4</span> Decision Tree 를 이용한 모델 만들기</h4>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="modeling.html#cb102-1"></a><span class="kw">library</span>(rpart)</span>
+<span id="cb102-2"><a href="modeling.html#cb102-2"></a>tree.model &lt;-<span class="st"> </span><span class="kw">rpart</span>(Private <span class="op">~</span>.,<span class="dt">method=</span><span class="st">&#39;class&#39;</span>,<span class="dt">data =</span> tree.train.data)</span>
+<span id="cb102-3"><a href="modeling.html#cb102-3"></a>tree.predict &lt;-<span class="st"> </span><span class="kw">predict</span>(tree.model,tree.test.data )</span>
+<span id="cb102-4"><a href="modeling.html#cb102-4"></a><span class="kw">head</span>(tree.predict)</span></code></pre></div>
+<pre><code>##             No       Yes
+## 3  0.003311258 0.9966887
+## 11 0.003311258 0.9966887
+## 12 0.003311258 0.9966887
+## 13 0.003311258 0.9966887
+## 14 0.003311258 0.9966887
+## 17 0.003311258 0.9966887</code></pre>
+<ul>
+<li>데이터를 보게 되면 사립학교일 확율과 사립학교가 아닐 확율 2가지를 줍니다. 하나로 합쳐 보겠습니다.</li>
+</ul>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="modeling.html#cb104-1"></a>tree.predict &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(tree.predict)</span>
+<span id="cb104-2"><a href="modeling.html#cb104-2"></a></span>
+<span id="cb104-3"><a href="modeling.html#cb104-3"></a>tree.predict &lt;-<span class="st"> </span>tree.predict  <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb104-4"><a href="modeling.html#cb104-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Private =</span> <span class="kw">ifelse</span>(Yes <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.5</span>, <span class="st">&#39;Yes&#39;</span>, <span class="st">&#39;No&#39;</span>))</span>
+<span id="cb104-5"><a href="modeling.html#cb104-5"></a></span>
+<span id="cb104-6"><a href="modeling.html#cb104-6"></a><span class="co"># tree.predict</span></span></code></pre></div>
+<ul>
+<li>오분류 비율을 출력합니다.</li>
+</ul>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="modeling.html#cb105-1"></a><span class="co"># Confusion Matrix 로 구해보기</span></span>
+<span id="cb105-2"><a href="modeling.html#cb105-2"></a><span class="kw">table</span>(tree.predict<span class="op">$</span>Private,tree.test.data<span class="op">$</span>Private)</span></code></pre></div>
+<pre><code>##      
+##        No Yes
+##   No   57   9
+##   Yes   7 160</code></pre>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="modeling.html#cb107-1"></a><span class="co"># 퍼센트로 구해보기 </span></span>
+<span id="cb107-2"><a href="modeling.html#cb107-2"></a>misClasificError &lt;-<span class="st"> </span><span class="kw">mean</span>(tree.predict<span class="op">$</span>Private <span class="op">!=</span><span class="st"> </span>tree.test.data<span class="op">$</span>Private)</span>
+<span id="cb107-3"><a href="modeling.html#cb107-3"></a></span>
+<span id="cb107-4"><a href="modeling.html#cb107-4"></a></span>
+<span id="cb107-5"><a href="modeling.html#cb107-5"></a><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&#39;Accuracy&#39;</span>,<span class="dv">1</span><span class="op">-</span>misClasificError))</span></code></pre></div>
+<pre><code>## [1] &quot;Accuracy 0.931330472103004&quot;</code></pre>
+</div>
+</div>
+<div id="ClassID10-36" class="section level3">
+<h3><span class="header-section-number">10.2.5</span> Random Forrest Classfication</h3>
+<ul>
+<li>동일한 데이터셋을 사용해서 Random Forrest 모델을 만들어 봅니다.</li>
+</ul>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="modeling.html#cb109-1"></a><span class="co">#install.packages(&quot;randomForest&quot;)</span></span>
+<span id="cb109-2"><a href="modeling.html#cb109-2"></a><span class="kw">library</span>(randomForest)</span>
+<span id="cb109-3"><a href="modeling.html#cb109-3"></a></span>
+<span id="cb109-4"><a href="modeling.html#cb109-4"></a><span class="co"># Decision Tree 와 비교해보세요 </span></span>
+<span id="cb109-5"><a href="modeling.html#cb109-5"></a><span class="co"># tree.model &lt;- rpart(Private ~.,method=&#39;class&#39;,data = tree.train.data)</span></span>
+<span id="cb109-6"><a href="modeling.html#cb109-6"></a>randomf.model &lt;-<span class="st"> </span><span class="kw">randomForest</span>(Private <span class="op">~</span><span class="st"> </span>. , <span class="dt">data =</span> tree.train.data,<span class="dt">importance =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<ul>
+<li>No, Yes 답이 나오는데 기여한 정도 및 Gini 계수 를 보여 줍니다. Gini 계수가 높을수록 의사 결을을 하는데 있어서 중요한 변수(information gain 이 높다) 라고 보면 됩니다. 높은 수치가 나온 변수를 그래프로 그려보면 확연하게 느낄수 있습니다.</li>
+</ul>
+<div id="ClassID10-38" class="section level4">
+<h4><span class="header-section-number">10.2.5.1</span> 스코어링 해보기</h4>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="modeling.html#cb110-1"></a>randomt.predict &lt;-<span class="st"> </span><span class="kw">predict</span>(randomf.model,tree.test.data)</span>
+<span id="cb110-2"><a href="modeling.html#cb110-2"></a></span>
+<span id="cb110-3"><a href="modeling.html#cb110-3"></a><span class="kw">table</span>(randomt.predict ,tree.test.data<span class="op">$</span>Private)</span></code></pre></div>
+<pre><code>##                
+## randomt.predict  No Yes
+##             No   57   6
+##             Yes   7 163</code></pre>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="modeling.html#cb112-1"></a>randomt.predict</span></code></pre></div>
+<pre><code>##   3  11  12  13  14  17  22  23  25  26  30  31  41  43  45  49  54  55  61  64 
+## Yes Yes Yes Yes Yes Yes  No Yes Yes  No Yes Yes Yes Yes Yes Yes Yes Yes Yes Yes 
+##  69  70  72  73  74  77  78  79  80  82  84  85  90  92  94  95  97 106 107 110 
+## Yes  No Yes Yes Yes Yes Yes  No  No  No Yes Yes Yes Yes Yes Yes Yes Yes Yes Yes 
+## 121 122 126 127 128 132 133 134 135 146 158 161 162 164 167 176 181 182 184 186 
+## Yes Yes  No Yes Yes Yes Yes Yes Yes Yes Yes Yes  No Yes Yes Yes  No  No Yes Yes 
+## 187 189 192 195 201 202 205 206 208 209 210 211 212 214 215 231 235 242 244 246 
+## Yes Yes Yes Yes Yes  No Yes Yes  No Yes Yes Yes Yes Yes Yes Yes Yes Yes Yes  No 
+## 249 256 264 266 267 275 281 285 300 303 305 306 314 318 319 324 325 328 330 343 
+##  No Yes Yes Yes Yes  No  No Yes Yes Yes Yes  No Yes Yes Yes Yes  No Yes Yes Yes 
+## 344 347 350 354 365 366 368 374 377 380 381 395 397 399 400 401 402 410 412 418 
+## Yes Yes Yes Yes Yes  No  No Yes Yes Yes Yes Yes Yes Yes Yes Yes  No Yes  No  No 
+## 419 421 425 426 427 432 440 444 446 453 455 456 458 464 468 469 475 480 488 489 
+##  No  No Yes Yes Yes Yes Yes Yes  No Yes Yes Yes  No Yes Yes Yes Yes Yes Yes Yes 
+## 490 491 497 499 501 503 504 506 511 513 518 519 523 526 527 528 529 530 531 533 
+##  No Yes Yes Yes Yes Yes Yes Yes  No Yes Yes Yes Yes Yes Yes Yes Yes  No  No Yes 
+## 537 540 543 545 546 550 552 558 559 562 563 564 577 578 581 582 583 585 586 588 
+##  No Yes Yes Yes Yes Yes Yes Yes  No  No  No  No Yes Yes Yes  No Yes Yes  No Yes 
+## 591 594 602 604 605 608 614 619 620 631 632 634 636 638 639 640 642 652 653 658 
+## Yes Yes Yes  No  No  No Yes Yes  No Yes Yes  No  No  No  No Yes  No  No  No  No 
+## 660 663 665 667 669 685 688 689 692 694 695 699 711 715 721 724 729 732 733 740 
+##  No  No  No Yes Yes  No Yes Yes  No  No  No  No Yes Yes Yes Yes Yes Yes Yes Yes 
+## 742 744 746 748 749 755 757 761 765 771 773 774 776 
+##  No  No  No  No Yes Yes Yes Yes Yes Yes  No Yes Yes 
+## Levels: No Yes</code></pre>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="modeling.html#cb114-1"></a><span class="co"># 오분류 확율 구하기</span></span>
+<span id="cb114-2"><a href="modeling.html#cb114-2"></a>misClasificError &lt;-<span class="st"> </span><span class="kw">mean</span>(randomt.predict <span class="op">!=</span><span class="st"> </span>tree.test.data<span class="op">$</span>Private)</span>
+<span id="cb114-3"><a href="modeling.html#cb114-3"></a></span>
+<span id="cb114-4"><a href="modeling.html#cb114-4"></a><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&#39;Accuracy&#39;</span>,<span class="dv">1</span><span class="op">-</span>misClasificError))</span></code></pre></div>
+<pre><code>## [1] &quot;Accuracy 0.944206008583691&quot;</code></pre>
+</div>
+</div>
+</div>
+<div id="ClassID10-40" class="section level2">
+<h2><span class="header-section-number">10.3</span> Clustering 군집 모델</h2>
+<div id="ClassID10-41" class="section level3">
+<h3><span class="header-section-number">10.3.1</span> K-Means Clustering</h3>
+<ul>
+<li>kmeans 클러스터링을 학습하기 위해 컴퓨터 스펙을 바탕으로 컴퓨터들을 분류 해보겠습니다.</li>
+</ul>
+<div id="ClassID10-42" class="section level4">
+<h4><span class="header-section-number">10.3.1.1</span> 데이터 수집 및 정규화 (Scaling)</h4>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="modeling.html#cb116-1"></a><span class="co">#install.packages(&quot;animation&quot;)  </span></span>
+<span id="cb116-2"><a href="modeling.html#cb116-2"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb116-3"><a href="modeling.html#cb116-3"></a><span class="kw">library</span>(animation)</span>
+<span id="cb116-4"><a href="modeling.html#cb116-4"></a></span>
+<span id="cb116-5"><a href="modeling.html#cb116-5"></a><span class="co"># 불필요한 데이터는 제거하고 df 에 저장 합니다.</span></span>
+<span id="cb116-6"><a href="modeling.html#cb116-6"></a>computer &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;computers.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb116-7"><a href="modeling.html#cb116-7"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(X1,cd, multi, premium)) </span>
+<span id="cb116-8"><a href="modeling.html#cb116-8"></a></span>
+<span id="cb116-9"><a href="modeling.html#cb116-9"></a></span>
+<span id="cb116-10"><a href="modeling.html#cb116-10"></a>scale.computer.df &lt;-<span class="st"> </span>computer  <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb116-11"><a href="modeling.html#cb116-11"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">price_scal =</span> <span class="kw">scale</span>(price),</span>
+<span id="cb116-12"><a href="modeling.html#cb116-12"></a>         <span class="dt">hd_scal =</span> <span class="kw">scale</span>(hd),</span>
+<span id="cb116-13"><a href="modeling.html#cb116-13"></a>         <span class="dt">ram_scal =</span> <span class="kw">scale</span>(ram),</span>
+<span id="cb116-14"><a href="modeling.html#cb116-14"></a>         <span class="dt">screen_scal =</span> <span class="kw">scale</span>(screen),</span>
+<span id="cb116-15"><a href="modeling.html#cb116-15"></a>         <span class="dt">ads_scal =</span> <span class="kw">scale</span>(ads),</span>
+<span id="cb116-16"><a href="modeling.html#cb116-16"></a>         <span class="dt">trend_scal =</span> <span class="kw">scale</span>(trend))  <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb116-17"><a href="modeling.html#cb116-17"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(price, speed, hd, ram, screen, ads, trend)) <span class="co"># 정규화 한 다음 원래 값을 날립니다.</span></span>
+<span id="cb116-18"><a href="modeling.html#cb116-18"></a></span>
+<span id="cb116-19"><a href="modeling.html#cb116-19"></a>scale.computer.df</span></code></pre></div>
+<pre><code>## # A tibble: 6,259 x 6
+##    price_scal[,1] hd_scal[,1] ram_scal[,1] screen_scal[,1] ads_scal[,1]
+##             &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;           &lt;dbl&gt;        &lt;dbl&gt;
+##  1       -1.24         -1.30       -0.761           -0.673        -1.70
+##  2       -0.731        -1.28       -1.12            -0.673        -1.70
+##  3       -1.08         -0.954      -0.761            0.432        -1.70
+##  4       -0.638        -0.954      -0.0510          -0.673        -1.70
+##  5        1.85         -0.296       1.37            -0.673        -1.70
+##  6        2.54         -0.296       1.37            -0.673        -1.70
+##  7       -0.860        -0.954      -0.761           -0.673        -1.70
+##  8       -0.387        -1.28       -1.12            -0.673        -1.70
+##  9        0.00934      -0.799      -0.0510          -0.673        -1.70
+## 10        0.612        -0.799      -0.761            0.432        -1.70
+## # … with 6,249 more rows, and 1 more variable: trend_scal[,1] &lt;dbl&gt;</code></pre>
+<ul>
+<li>정규화한 데이터로 animation 을 통해 kmeans clustering 이 어덯게 움직이는지 확인해 보겠습니다.</li>
+</ul>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="modeling.html#cb118-1"></a><span class="kw">set.seed</span>(<span class="dv">2345</span>)</span>
+<span id="cb118-2"><a href="modeling.html#cb118-2"></a><span class="kw">kmeans.ani</span>(scale.computer.df[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>], <span class="dv">4</span>)</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-61-1.png" width="672" /><img src="dsWithR_files/figure-html/unnamed-chunk-61-2.png" width="672" /><img src="dsWithR_files/figure-html/unnamed-chunk-61-3.png" width="672" /><img src="dsWithR_files/figure-html/unnamed-chunk-61-4.png" width="672" /><img src="dsWithR_files/figure-html/unnamed-chunk-61-5.png" width="672" /><img src="dsWithR_files/figure-html/unnamed-chunk-61-6.png" width="672" /><img src="dsWithR_files/figure-html/unnamed-chunk-61-7.png" width="672" /><img src="dsWithR_files/figure-html/unnamed-chunk-61-8.png" width="672" /><img src="dsWithR_files/figure-html/unnamed-chunk-61-9.png" width="672" /><img src="dsWithR_files/figure-html/unnamed-chunk-61-10.png" width="672" /></p>
+<ul>
+<li>kmeans 클러스터링 모델을 만들고. 함수의 리턴 속성중에 R스퀘어 합을 가져오는 함수를 만듭니다.</li>
+</ul>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="modeling.html#cb119-1"></a>kmeans.model &lt;-<span class="kw">kmeans</span>(scale.computer.df, <span class="dv">3</span>)</span>
+<span id="cb119-2"><a href="modeling.html#cb119-2"></a></span>
+<span id="cb119-3"><a href="modeling.html#cb119-3"></a>sum.square &lt;-<span class="st"> </span><span class="cf">function</span>(k) {</span>
+<span id="cb119-4"><a href="modeling.html#cb119-4"></a>  cluster &lt;-<span class="st"> </span><span class="kw">kmeans</span>(scale.computer.df, k)</span>
+<span id="cb119-5"><a href="modeling.html#cb119-5"></a>  <span class="kw">return</span> (cluster<span class="op">$</span>tot.withinss)</span>
+<span id="cb119-6"><a href="modeling.html#cb119-6"></a>}</span>
+<span id="cb119-7"><a href="modeling.html#cb119-7"></a><span class="co"># 테스트 해봅니다.</span></span>
+<span id="cb119-8"><a href="modeling.html#cb119-8"></a><span class="kw">sum.square</span>(<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 27087.1</code></pre>
+<ul>
+<li>k 의 최대 개수를 정하고, sum.square 함수를 호출해서 모델 빌드를 반복하면서 withinss 값을 저장합니다.</li>
+</ul>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="modeling.html#cb121-1"></a><span class="co"># k 의 최대 개수를 지정합니다.</span></span>
+<span id="cb121-2"><a href="modeling.html#cb121-2"></a>max.k =<span class="st"> </span><span class="dv">20</span> </span>
+<span id="cb121-3"><a href="modeling.html#cb121-3"></a></span>
+<span id="cb121-4"><a href="modeling.html#cb121-4"></a><span class="co"># 모델을 20번 만들어서 R스퀘어 값을 저장합니다.</span></span>
+<span id="cb121-5"><a href="modeling.html#cb121-5"></a>total.square &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">2</span><span class="op">:</span>max.k, sum.square)</span>
+<span id="cb121-6"><a href="modeling.html#cb121-6"></a></span>
+<span id="cb121-7"><a href="modeling.html#cb121-7"></a><span class="co"># 그래프를 만들 데이터 프레임을 만듭니다.</span></span>
+<span id="cb121-8"><a href="modeling.html#cb121-8"></a>elbow &lt;-<span class="kw">data.frame</span>(<span class="dv">2</span><span class="op">:</span>max.k, total.square)</span>
+<span id="cb121-9"><a href="modeling.html#cb121-9"></a></span>
+<span id="cb121-10"><a href="modeling.html#cb121-10"></a><span class="kw">view</span>(elbow)</span>
+<span id="cb121-11"><a href="modeling.html#cb121-11"></a><span class="co"># Plot the graph with gglop</span></span></code></pre></div>
+<ul>
+<li>최적을 k 값을 찾기 위해 그래프를 그립니다.</li>
+</ul>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="modeling.html#cb122-1"></a><span class="kw">ggplot</span>(elbow, <span class="kw">aes</span>(X2.max.k,total.square)) <span class="op">+</span></span>
+<span id="cb122-2"><a href="modeling.html#cb122-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb122-3"><a href="modeling.html#cb122-3"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
+<span id="cb122-4"><a href="modeling.html#cb122-4"></a><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">20</span>, <span class="dt">by =</span> <span class="dv">1</span>))</span></code></pre></div>
+<p><img src="dsWithR_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
+<ul>
+<li>k 값을 7로 하고 다시 모델을 생성 하고, 생성된 클러스터 별로 군집이 몇개인지 확인 합니다.</li>
+</ul>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="modeling.html#cb123-1"></a>kmeans.model &lt;-<span class="kw">kmeans</span>(scale.computer.df, <span class="dv">7</span>)</span>
+<span id="cb123-2"><a href="modeling.html#cb123-2"></a></span>
+<span id="cb123-3"><a href="modeling.html#cb123-3"></a>kmeans.model<span class="op">$</span>size</span></code></pre></div>
+<pre><code>## [1]  621  897  594 1856  538 1377  376</code></pre>
+</div>
+</div>
+</div>
+<div id="ClassID10-43" class="section level2">
+<h2><span class="header-section-number">10.4</span> Gradient Boosting 실습</h2>
+<div id="ClassID10-44" class="section level3">
+<h3><span class="header-section-number">10.4.1</span> 데이터 및 패키지 로딩</h3>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="modeling.html#cb125-1"></a><span class="co">#install.packages(&quot;xgboost&quot;)</span></span>
+<span id="cb125-2"><a href="modeling.html#cb125-2"></a><span class="kw">library</span>(xgboost)</span>
+<span id="cb125-3"><a href="modeling.html#cb125-3"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb125-4"><a href="modeling.html#cb125-4"></a><span class="kw">data</span>(iris)</span></code></pre></div>
+</div>
+<div id="ClassID10-45" class="section level3">
+<h3><span class="header-section-number">10.4.2</span> 레이블 변환</h3>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="modeling.html#cb126-1"></a><span class="co"># 팩토를 0부터 시작하는 정수로 바꿉니다.</span></span>
+<span id="cb126-2"><a href="modeling.html#cb126-2"></a><span class="co"># 상당히 까다롭지만, XGBoost 가이드 상의 요구 사항 입니다.</span></span>
+<span id="cb126-3"><a href="modeling.html#cb126-3"></a>species =<span class="st"> </span>iris<span class="op">$</span>Species </span>
+<span id="cb126-4"><a href="modeling.html#cb126-4"></a></span>
+<span id="cb126-5"><a href="modeling.html#cb126-5"></a>label =<span class="st"> </span><span class="kw">as.integer</span>(iris<span class="op">$</span>Species)<span class="op">-</span><span class="dv">1</span> <span class="co">#팩토형을 숫자로 변환하면 인덱스번호 숫자로 변경됨</span></span>
+<span id="cb126-6"><a href="modeling.html#cb126-6"></a></span>
+<span id="cb126-7"><a href="modeling.html#cb126-7"></a>iris<span class="op">$</span>Species =<span class="st"> </span><span class="ot">NULL</span></span></code></pre></div>
+</div>
+<div id="ClassID10-46" class="section level3">
+<h3><span class="header-section-number">10.4.3</span> 훈련 및 테스트 데이터 분할</h3>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="modeling.html#cb127-1"></a>n =<span class="st"> </span><span class="kw">nrow</span>(iris)</span>
+<span id="cb127-2"><a href="modeling.html#cb127-2"></a></span>
+<span id="cb127-3"><a href="modeling.html#cb127-3"></a>train.index =<span class="st"> </span><span class="kw">sample</span>(n,<span class="kw">floor</span>(<span class="fl">0.75</span><span class="op">*</span>n))</span>
+<span id="cb127-4"><a href="modeling.html#cb127-4"></a></span>
+<span id="cb127-5"><a href="modeling.html#cb127-5"></a>train.data =<span class="st"> </span><span class="kw">as.matrix</span>(iris[train.index,])</span>
+<span id="cb127-6"><a href="modeling.html#cb127-6"></a>train.label =<span class="st"> </span>label[train.index]</span>
+<span id="cb127-7"><a href="modeling.html#cb127-7"></a>test.data =<span class="st"> </span><span class="kw">as.matrix</span>(iris[<span class="op">-</span>train.index,])</span>
+<span id="cb127-8"><a href="modeling.html#cb127-8"></a>test.label =<span class="st"> </span>label[<span class="op">-</span>train.index]</span></code></pre></div>
+</div>
+<div id="ClassID10-47" class="section level3">
+<h3><span class="header-section-number">10.4.4</span> xgb.DMatrix 오브젝트로 변환</h3>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="modeling.html#cb128-1"></a><span class="co"># Transform the two data sets into xgb.Matrix</span></span>
+<span id="cb128-2"><a href="modeling.html#cb128-2"></a>xgb.train =<span class="st"> </span><span class="kw">xgb.DMatrix</span>(<span class="dt">data=</span>train.data,<span class="dt">label=</span>train.label)</span>
+<span id="cb128-3"><a href="modeling.html#cb128-3"></a>xgb.test =<span class="st"> </span><span class="kw">xgb.DMatrix</span>(<span class="dt">data=</span>test.data,<span class="dt">label=</span>test.label)</span></code></pre></div>
+</div>
+<div id="ClassID10-48" class="section level3">
+<h3><span class="header-section-number">10.4.5</span> 주요 파라메터 설정</h3>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="modeling.html#cb129-1"></a><span class="co"># Define the parameters for multinomial classification</span></span>
+<span id="cb129-2"><a href="modeling.html#cb129-2"></a>num_class =<span class="st"> </span><span class="kw">length</span>(<span class="kw">levels</span>(species))</span>
+<span id="cb129-3"><a href="modeling.html#cb129-3"></a>params =<span class="st"> </span><span class="kw">list</span>(</span>
+<span id="cb129-4"><a href="modeling.html#cb129-4"></a>  <span class="dt">booster=</span><span class="st">&quot;gbtree&quot;</span>,</span>
+<span id="cb129-5"><a href="modeling.html#cb129-5"></a>  <span class="dt">eta=</span><span class="fl">0.001</span>, <span class="co">#learning rate</span></span>
+<span id="cb129-6"><a href="modeling.html#cb129-6"></a>  <span class="dt">max_depth=</span><span class="dv">5</span>,</span>
+<span id="cb129-7"><a href="modeling.html#cb129-7"></a>  <span class="dt">gamma=</span><span class="dv">3</span>,<span class="co">#  코스트 펑션 결과 가감율 쓰레드 홀드 ()</span></span>
+<span id="cb129-8"><a href="modeling.html#cb129-8"></a>  <span class="dt">subsample=</span><span class="fl">0.75</span>,</span>
+<span id="cb129-9"><a href="modeling.html#cb129-9"></a>  <span class="dt">colsample_bytree=</span><span class="dv">1</span>, <span class="co"># 트리만들때 마다 모든 변수를 다고려한다., 어짜피 depth 5 이기 때문에 상관 없음</span></span>
+<span id="cb129-10"><a href="modeling.html#cb129-10"></a>  <span class="dt">objective=</span><span class="st">&quot;multi:softprob&quot;</span>, <span class="co"># 다중클래스, 확율까지</span></span>
+<span id="cb129-11"><a href="modeling.html#cb129-11"></a>  <span class="dt">eval_metric=</span><span class="st">&quot;mlogloss&quot;</span>, <span class="co"># 코드트 펑션</span></span>
+<span id="cb129-12"><a href="modeling.html#cb129-12"></a>  <span class="dt">num_class=</span>num_class</span>
+<span id="cb129-13"><a href="modeling.html#cb129-13"></a>)</span></code></pre></div>
+</div>
+<div id="ClassID10-49" class="section level3">
+<h3><span class="header-section-number">10.4.6</span> 모델 훈련 시키기</h3>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="modeling.html#cb130-1"></a><span class="co"># Train the XGBoost classifer</span></span>
+<span id="cb130-2"><a href="modeling.html#cb130-2"></a>xgb.fit=<span class="kw">xgb.train</span>(</span>
+<span id="cb130-3"><a href="modeling.html#cb130-3"></a>  <span class="dt">params=</span>params,</span>
+<span id="cb130-4"><a href="modeling.html#cb130-4"></a>  <span class="dt">data=</span>xgb.train,</span>
+<span id="cb130-5"><a href="modeling.html#cb130-5"></a>  <span class="dt">nrounds=</span><span class="dv">10000</span>,</span>
+<span id="cb130-6"><a href="modeling.html#cb130-6"></a>  <span class="dt">nthreads=</span><span class="dv">1</span>,</span>
+<span id="cb130-7"><a href="modeling.html#cb130-7"></a>  <span class="dt">early_stopping_rounds=</span><span class="dv">10</span>, <span class="co"># 성능이 향상이 10번연속 없으면 멈춤</span></span>
+<span id="cb130-8"><a href="modeling.html#cb130-8"></a>  <span class="dt">watchlist=</span><span class="kw">list</span>(<span class="dt">val1=</span>xgb.train,<span class="dt">val2=</span>xgb.test), <span class="co"># validation set 을 지정함</span></span>
+<span id="cb130-9"><a href="modeling.html#cb130-9"></a>  <span class="dt">verbose=</span><span class="dv">0</span> <span class="co"># 출력 자세하게 하지마라</span></span>
+<span id="cb130-10"><a href="modeling.html#cb130-10"></a>)</span></code></pre></div>
+<pre><code>## [22:41:06] WARNING: amalgamation/../src/learner.cc:516: 
+## Parameters: { nthreads } might not be used.
+## 
+##   This may not be accurate due to some parameters are only used in language bindings but
+##   passed down to XGBoost core.  Or some parameters are not used but slip through this
+##   verification. Please open an issue if you find above cases.</code></pre>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="modeling.html#cb132-1"></a><span class="co"># Review the final model and results</span></span>
+<span id="cb132-2"><a href="modeling.html#cb132-2"></a>xgb.fit</span></code></pre></div>
+<pre><code>## ##### xgb.Booster
+## raw: 3.2 Mb 
+## call:
+##   xgb.train(params = params, data = xgb.train, nrounds = 10000, 
+##     watchlist = list(val1 = xgb.train, val2 = xgb.test), verbose = 0, 
+##     early_stopping_rounds = 10, nthreads = 1)
+## params (as set within xgb.train):
+##   booster = &quot;gbtree&quot;, eta = &quot;0.001&quot;, max_depth = &quot;5&quot;, gamma = &quot;3&quot;, subsample = &quot;0.75&quot;, colsample_bytree = &quot;1&quot;, objective = &quot;multi:softprob&quot;, eval_metric = &quot;mlogloss&quot;, num_class = &quot;3&quot;, nthreads = &quot;1&quot;, validate_parameters = &quot;TRUE&quot;
+## xgb.attributes:
+##   best_iteration, best_msg, best_ntreelimit, best_score, niter
+## callbacks:
+##   cb.evaluation.log()
+##   cb.early.stop(stopping_rounds = early_stopping_rounds, maximize = maximize, 
+##     verbose = verbose)
+## # of features: 4 
+## niter: 3002
+## best_iteration : 2992 
+## best_ntreelimit : 2992 
+## best_score : 0.20084 
+## best_msg : [2992]    val1-mlogloss:0.179304  val2-mlogloss:0.200840 
+## nfeatures : 4 
+## evaluation_log:
+##     iter val1_mlogloss val2_mlogloss
+##        1      1.097392      1.097398
+##        2      1.096155      1.096161
+## ---                                 
+##     3001      0.179303      0.200845
+##     3002      0.179303      0.200844</code></pre>
+</div>
+<div id="ClassID10-50" class="section level3">
+<h3><span class="header-section-number">10.4.7</span> 테스트 데이터로 스코어링</h3>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="modeling.html#cb134-1"></a>xgb.pred =<span class="st"> </span><span class="kw">predict</span>(xgb.fit,test.data,<span class="dt">reshape=</span>T)</span>
+<span id="cb134-2"><a href="modeling.html#cb134-2"></a>xgb.pred =<span class="st"> </span><span class="kw">as_tibble</span>(xgb.pred)</span>
+<span id="cb134-3"><a href="modeling.html#cb134-3"></a><span class="co">#xgb.pred = as.data.frame(xgb.pred)</span></span>
+<span id="cb134-4"><a href="modeling.html#cb134-4"></a><span class="kw">colnames</span>(xgb.pred) =<span class="st"> </span><span class="kw">levels</span>(species)</span>
+<span id="cb134-5"><a href="modeling.html#cb134-5"></a>xgb.pred</span></code></pre></div>
+<pre><code>## # A tibble: 38 x 3
+##    setosa versicolor virginica
+##     &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
+##  1  0.896     0.0607    0.0432
+##  2  0.896     0.0607    0.0432
+##  3  0.896     0.0607    0.0432
+##  4  0.896     0.0607    0.0432
+##  5  0.896     0.0609    0.0432
+##  6  0.896     0.0607    0.0432
+##  7  0.896     0.0607    0.0432
+##  8  0.896     0.0607    0.0432
+##  9  0.896     0.0607    0.0432
+## 10  0.896     0.0609    0.0432
+## # … with 28 more rows</code></pre>
+</div>
+<div id="ClassID10-51" class="section level3">
+<h3><span class="header-section-number">10.4.8</span> Identify the class with the highest probability for each prediction</h3>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="modeling.html#cb136-1"></a>xgb.pred<span class="op">$</span>prediction =<span class="st"> </span><span class="kw">apply</span>(xgb.pred,<span class="dv">1</span>,<span class="cf">function</span>(x) <span class="kw">colnames</span>(xgb.pred)[<span class="kw">which.max</span>(x)])</span>
+<span id="cb136-2"><a href="modeling.html#cb136-2"></a>test.label</span></code></pre></div>
+<pre><code>##  [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2</code></pre>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="modeling.html#cb138-1"></a>xgb.pred<span class="op">$</span>label =<span class="st"> </span><span class="kw">levels</span>(species)[test.label<span class="op">+</span><span class="dv">1</span>] <span class="co"># levels(species) 가 1부터 시작</span></span>
+<span id="cb138-2"><a href="modeling.html#cb138-2"></a></span>
+<span id="cb138-3"><a href="modeling.html#cb138-3"></a>xgb.pred</span></code></pre></div>
+<pre><code>## # A tibble: 38 x 5
+##    setosa versicolor virginica prediction label 
+##     &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt; 
+##  1  0.896     0.0607    0.0432 setosa     setosa
+##  2  0.896     0.0607    0.0432 setosa     setosa
+##  3  0.896     0.0607    0.0432 setosa     setosa
+##  4  0.896     0.0607    0.0432 setosa     setosa
+##  5  0.896     0.0609    0.0432 setosa     setosa
+##  6  0.896     0.0607    0.0432 setosa     setosa
+##  7  0.896     0.0607    0.0432 setosa     setosa
+##  8  0.896     0.0607    0.0432 setosa     setosa
+##  9  0.896     0.0607    0.0432 setosa     setosa
+## 10  0.896     0.0609    0.0432 setosa     setosa
+## # … with 28 more rows</code></pre>
+</div>
+<div id="ClassID10-52" class="section level3">
+<h3><span class="header-section-number">10.4.9</span> 모델 성능 측정</h3>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="modeling.html#cb140-1"></a>result =<span class="st"> </span><span class="kw">sum</span>(xgb.pred<span class="op">$</span>prediction<span class="op">==</span>xgb.pred<span class="op">$</span>label)<span class="op">/</span><span class="kw">nrow</span>(xgb.pred)</span>
+<span id="cb140-2"><a href="modeling.html#cb140-2"></a><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;Final Accuracy =&quot;</span>,<span class="kw">sprintf</span>(<span class="st">&quot;%.2f%%&quot;</span>, <span class="dv">100</span><span class="op">*</span>result)))</span></code></pre></div>
+<pre><code>## [1] &quot;Final Accuracy = 94.74%&quot;</code></pre>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ggplot-visualization.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["dsWithR.pdf", "dsWithR.epub"],
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true,
+"fontsettings": null,
+"theme": "white",
+"family": "sans",
+"size": 1
+}
+});
+});
+</script>
+
+</body>
+
+</html>
